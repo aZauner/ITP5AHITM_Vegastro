@@ -12,12 +12,13 @@
 - Professor Rager
 
 ## Projektbezeichnung
-Restaurant-App um das passende Restaurant für Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) zu finden
+Restaurant-App um das passende Restaurant für Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) zu finden, und dies zu erleichtern.
 
 Name: VeggieGast
 
 ## Ausgangssituation
-### Problem
+
+### Problemstellung
 Es ist nicht auf den ersten Blick ersichtlich ob die Speisekarte eines Restaurant für die jeweiligen Essgewohnheiten abgestimmt ist.
 Vor dem Besuch eines Restaurants muss zu erst die Speisekarte angesehen werden, ob es geeignet für die eigene Essgewohnheit ist.
 
