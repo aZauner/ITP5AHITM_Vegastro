@@ -13,6 +13,7 @@
 
 ## Projektbezeichnung
 Restaurant-App um das passende Restaurant für Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) zu finden
+
 Name: VeggieGast
 
 ## Ausgangssituation
