@@ -6,10 +6,10 @@
 - Ana Paripovic
 
 ## Projektauftraggeber
-- Professor Reder
-- Professor Landoigt
-- Professor Schrammel
-- Professor Rager
+- Herr Professor Reder
+- Herr Professor Landoigt
+- Herr Professor Schrammel
+- Herr Professor Rager
 
 ## Projektbezeichnung
 Restaurant-App um das passende Restaurant für Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) zu finden, und dies zu erleichtern.
@@ -53,7 +53,8 @@ Eine App die die verschiedensten Restaurants sammelt und diese nach Essgewohnhei
 ## Projektziele
 | # |  Ziel |
 | - | - |
-| 1 | ansprechendes Design | 
+| 1 | ansprechendes Design |
+| 2 | Sortierung von Restaurants nach passenden Essgewohnheiten | 
 
 ## Nicht-Ziele
 | # |  Nicht-Ziel |
