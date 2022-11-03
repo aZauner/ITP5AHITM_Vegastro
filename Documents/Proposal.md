@@ -45,24 +45,26 @@ Eine App die die verschiedensten Restaurants sammelt und diese nach Essgewohnhei
 | Phase | Meilenstein / Ergebnis | Soll - Termin | Ist - Termin |
 | ----- | ---------------------- | ------------- | ------------ |
 | 1 | Projektstart | / | / |
-| 2 | Fertigung | / | / |
-| 3 | Evtl. Erweiterungen | / | / |
-| 4 | Bugfixes | / | / | 
-| 5 | Projektende | / | / |
+| 2 | GUI designed | / | / |
+| 3 | GUI erstellt | / | / |
+| 4 | Backend designed | / | / | 
+| 5 | Backend erstellt | / | / |
+| 6 | Bugfixes | / | / | 
+| 7 | Projektende | / | / |
 
 ## Projektziele
-| # |  Ziel |
-| - | - |
-| 1 | ansprechendes Design |
-| 2 | Sortierung von Restaurants nach passenden Essgewohnheiten | 
+### Ziele
+- ansprechendes Design 
+- Sortierung von Restaurants nach passenden Essgewohnheiten 
+- Bewertungssystem für Restaurants
 
-## Nicht-Ziele
-| # |  Nicht-Ziel |
-| - | - |
-| 1 | Keine reine App für Vegan/Vegetarische Restaurants, sondern für alle Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) |
+### Nicht-Ziele
+- Keine reine Anwendungen für Vegan/Vegetarische Restaurants, sondern für alle Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...)
+- Fokus nicht aufs reservieren 
 
 ## Projektendergebnis
 ### Welches Ergebnis soll am Projektende vorliegen?
 Eine App, die leicht bedienbar ist und einem erleichtert passende Restaurants für indivduelle Bedürfnisse zu finden.
 ### Welche messbaren Eigenschaften hat das Endergebnis, damit von einem Projekterfolg gesprochen werden kann?
-Einwandfreie Funktion
+- Nutzerzahlen
+- Zahlen der Bewertungen
