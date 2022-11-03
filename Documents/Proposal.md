@@ -15,13 +15,20 @@
 Restaurant-App um das passende Restaurant für Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) zu finden, und dies zu erleichtern.
 
 ## Ausgangssituation
+Die meisten Menschen haben viel Freude an gutem und hochwertigem Essen, aus diesem Grund genießen viele davon ihre Lieblingspeisen auch in Gastronomiebetriebne verschiedenster Arten. Dabei werden diese Restaurants auch teils alleine aber auch in gmeinsamen Gruppen besucht. 
 
 ### Problemstellung
 Es ist nicht auf den ersten Blick ersichtlich ob die Speisekarte eines Restaurant für die jeweiligen Essgewohnheiten abgestimmt ist.
-Vor dem Besuch eines Restaurants muss zuerst die Speisekarte angesehen werden,um festzustellen, ob es geeignet für die eigene Essgewohnheit ist.
+Vor dem Besuch eines Restaurants muss zuerst die Speisekarte angesehen werden,um festzustellen, ob es geeignet für die eigene Essgewohnheit ist. Auch in Gruppen hat man oftmals das Problem, dass nicht alle Essgewohnheiten jedes Gruppenmittglieds bedient wird.
+Dabei kann oft viel Zeit vergehen um wirklich ein passendes Restaurant für alle zu finden die auch etwas essen wollen. 
+Ein weiteres Problem ist es, dass viele Restaurants behaupten bestimmte Essgewohnheiten zu bedienen, dies ist jedoch nicht immer der Fall, oder es gibt nur wenig auswahl.
+
+
 
 ### Lösung
-Eine App die die verschiedensten Restaurants sammelt und diese nach Essgewohnheiten kategorisiert. Dadurch kann man diese Filtern und findet schneller sein gewünschtes Restaurant.
+Eine App die die verschiedensten Restaurants sammelt und diese nach Essgewohnheiten kategorisiert. Dadurch kann man diese filtern und findet schneller sein gewünschtes Restaurant. Auch nach mehreren Essgewohnheiten soll gefiltert werden können um auch immer das passende Restaurant für Gruppen finden zu können.
+Um zeit zu spraren und auch Restaurants in der Nähe zu finden soll man mittels einer Karte Restaurants in der Nähe finden können.
+Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben der Restaurants auch wirklich stimmen. ( Werden die angegeben Essgewohnheiten auch wirklich bedient, wie viel Auswahl gibt es , .....)
 
 ## Generelle Richtlinien
 - Wir arbeiten mit Scrum
@@ -53,10 +60,9 @@ Eine App die die verschiedensten Restaurants sammelt und diese nach Essgewohnhei
 | 7 | Projektende | / | / |
 
 ## Projektziele
-### Ziele
-- ansprechendes Design 
+### Ziele 
 - Sortierung von Restaurants nach passenden Essgewohnheiten 
-- Bewertungssystem für Restaurants
+- Bewertungssystem für Restaurants im bezug auf Auswahl,
 
 ### Nicht-Ziele
 - Keine reine Anwendungen für Vegan/Vegetarische Restaurants, sondern für alle Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...)
