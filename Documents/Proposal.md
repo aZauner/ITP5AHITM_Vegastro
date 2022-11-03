@@ -72,6 +72,13 @@ Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben 
 ### Nicht-Ziele
 - Keine reine Anwendungen für Vegan/Vegetarische Restaurants, sondern für alle Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) 
 
+## Stakeholder
+- Gastronomiebertriebe
+- Menschen welche nach bestimmten Essgewohnheiten essen
+- Gruppen mit unterschiedlichen Essbedürfnissen
+- Projektauftraggeber
+
+
 ## Projektendergebnis
 ### Welches Ergebnis soll am Projektende vorliegen?
 Eine App, die leicht bedienbar ist und einem erleichtert passende Restaurants für indivduelle Bedürfnisse zu finden.
