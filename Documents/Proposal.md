@@ -61,12 +61,14 @@ Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben 
 
 ## Projektziele
 ### Ziele 
-- Sortierung von Restaurants nach passenden Essgewohnheiten 
-- Bewertungssystem für Restaurants im bezug auf Auswahl,
+- Sortierung von Restaurants nach passenden Essgewohnheiten ,
+- Bewertungssystem für Restaurants im bezug auf Auswahl der Essgewohnheiten,
+- Bewertungen des Essens,
+- Restaurantsuche in der Nähe,
+- Auswahl auf einer Karte
 
 ### Nicht-Ziele
-- Keine reine Anwendungen für Vegan/Vegetarische Restaurants, sondern für alle Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...)
-- Fokus nicht aufs reservieren 
+- Keine reine Anwendungen für Vegan/Vegetarische Restaurants, sondern für alle Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) 
 
 ## Projektendergebnis
 ### Welches Ergebnis soll am Projektende vorliegen?
