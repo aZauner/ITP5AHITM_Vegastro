@@ -82,6 +82,7 @@ Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben 
 ## Projektendergebnis
 ### Welches Ergebnis soll am Projektende vorliegen?
 Eine App, die leicht bedienbar ist und einem erleichtert passende Restaurants für indivduelle Bedürfnisse zu finden.
+Weiters soll es Gastronomiebetrieben die Möglichkeit bieten, neue Kunden zu gewinnen und auf ihre unter umständen besonderen Gerichte aufmerksam zu machen.
 ### Welche messbaren Eigenschaften hat das Endergebnis, damit von einem Projekterfolg gesprochen werden kann?
 - Nutzerzahlen
 - Zahlen der Bewertungen
