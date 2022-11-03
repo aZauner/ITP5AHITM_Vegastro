@@ -22,6 +22,7 @@ Es ist nicht auf den ersten Blick ersichtlich ob die Speisekarte eines Restauran
 Vor dem Besuch eines Restaurants muss zuerst die Speisekarte angesehen werden,um festzustellen, ob es geeignet für die eigene Essgewohnheit ist. Auch in Gruppen hat man oftmals das Problem, dass nicht alle Essgewohnheiten jedes Gruppenmittglieds bedient wird.
 Dabei kann oft viel Zeit vergehen um wirklich ein passendes Restaurant für alle zu finden die auch etwas essen wollen. 
 Ein weiteres Problem ist es, dass viele Restaurants behaupten bestimmte Essgewohnheiten zu bedienen, dies ist jedoch nicht immer der Fall, oder es gibt nur wenig auswahl.
+Weiters haben auch Gastronome das Problem, dass sie nicht so leicht gefunden werden, obwohl sie etwa auf eine bestimmte Essgewohnheit spezialisiert werden (z.B. Vegan)
 
 
 
@@ -65,7 +66,8 @@ Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben 
 - Bewertungssystem für Restaurants im bezug auf Auswahl der Essgewohnheiten,
 - Bewertungen des Essens,
 - Restaurantsuche in der Nähe,
-- Auswahl auf einer Karte
+- Auswahl auf einer Karte,
+- Restaurants können sich selber präsentiren
 
 ### Nicht-Ziele
 - Keine reine Anwendungen für Vegan/Vegetarische Restaurants, sondern für alle Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) 
