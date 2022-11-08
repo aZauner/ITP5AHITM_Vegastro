@@ -63,7 +63,7 @@ Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben 
 ## Projektziele
 ### Ziele 
 - Sortierung von Restaurants nach passenden Essgewohnheiten ,
-- Bewertungssystem für Restaurants im bezug auf Auswahl der Essgewohnheiten,
+- Bewertungssystem für Restaurants im Bezug auf Auswahl der Essgewohnheiten,
 - Bewertungen des Essens,
 - Restaurantsuche in der Nähe,
 - Auswahl auf einer Karte,
