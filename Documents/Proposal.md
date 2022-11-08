@@ -78,8 +78,11 @@ Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben 
 
 ## Stakeholder
 - Gastronomiebertriebe
-- Menschen welche nach bestimmten Essgewohnheiten essen
-- Gruppen mit unterschiedlichen Essbedürfnissen
+- Einzelne Menschen welche nach bestimmten Essgewohnheiten essen
+- Private Gruppen mit unterschiedlichen Essbedürfnissen (z.B. Veganer, Fleischesser in einer Gruppe)
+- Communities mit Essensgewohnheiten (z.B. Vegane Gesellschaft Östereich)
+- OpenSteetMap
+- Mitbewerber (z.B. HappyCow)
 - Projektauftraggeber
 
 
