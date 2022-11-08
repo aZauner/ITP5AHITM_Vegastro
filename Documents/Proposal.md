@@ -70,7 +70,11 @@ Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben 
 - Restaurants können sich selber präsentiren
 
 ### Nicht-Ziele
-- Keine reine Anwendungen für Vegan/Vegetarische Restaurants, sondern für alle Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) 
+- Keine reine Anwendungen für Vegan/Vegetarische Restaurants, sondern für alle Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...)
+
+### Nice-to-have
+ - Reservierungssystem
+ - Gruppen von Personen erstellen, um vorschläge für Rsstaurants teilen zu können
 
 ## Stakeholder
 - Gastronomiebertriebe
