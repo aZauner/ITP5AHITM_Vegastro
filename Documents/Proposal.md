@@ -75,6 +75,7 @@ Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben 
 ### Nice-to-have
  - Reservierungssystem
  - Gruppen von Personen erstellen, um vorschläge für Rsstaurants teilen zu können
+ - Addresse zu Koordinaten Konverten im Programm
 
 ## Stakeholder
 - Gastronomiebertriebe
