@@ -60,9 +60,9 @@ Mögliche Lösung gegen Manipulation wäre: Die Nutzer müssen sich mit einer Te
 | 3 | GUI designed (Clickdummy) | 25.12.22 | / |
 | 4 | Infoplakat erstellt | 28.1.22 | / |
 | 5 | Video Abgabe | 29.1.22 | / |
-| 5 | Backend erstellt | __.__.23 | / |
-| 6 | Bugfixes | __.__.23 | / | 
-| 7 | Projektende | __.__.23 | / |
+| 5 | Backend erstellt | 2023 | / |
+| 6 | Bugfixes | 2023 | / | 
+| 7 | Projektende | 2023 | / |
 
 ## Projektziele
 ### Ziele 
