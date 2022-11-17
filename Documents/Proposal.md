@@ -1,4 +1,22 @@
 # Projektantrag: vegastro
+## Inhalt
+- [Team](#team)
+- [Projektauftraggeber](#projektauftraggeber)
+- [Projektbezeichnung](#projektbezeichnung)
+- [Ausgangssituation](#ausgangssituation)
+	- [Problemstellung](#problemstellung)
+	- [Lösung](#lösung)
+- [Generelle Richtlinien](#richtlinien)
+- [Erfahrung der Teammitglieder](#erfahrung)
+- [Projektphasen / Meilensteine](#meilensteine)
+- [Projektziele](#projektziele)
+  - [Ziele](#ziele)
+	- [Nicht Ziele](#nichtZiele)
+	- [Nice-to-have](#nice)
+- [Stakeholder](#stakeholder)
+- [Projektendergebnis](#projektendergebnis)
+  - [Welches Ergebnis soll am Projektende vorliegen?](#ergebnis)
+  - [Messbare Eigenschaften](#messbar)
 ## Team
 - Alexander Zauner
 - Tobias Stadler
@@ -34,11 +52,13 @@ Durch ein Bewertungssystem soll sichergestellt werden , dass die Angaben der Res
 Die Nutzer sollen die Angaben der Gastronomen, sowie die Auswahl und Qualität mit Sternen bewerten. 
 Mögliche Lösung gegen Manipulation wäre: Die Nutzer müssen sich mit einer Telefonnummer anmelden um bewerten zu können 
 
+<a name="richtlinien"></a>
 ## Generelle Richtlinien
 - Wir arbeiten mit Scrum
 - Github und Discord für Versionsverwaltung und Kommunikation
 - Fertigstellung des Projekt bis Ende nächsten Schuljahres 2023/24
 
+<a name="erfahrung"></a>
 ### Erfahrung der Teammitglieder
 - Team
   - JavaScript
@@ -52,6 +72,7 @@ Mögliche Lösung gegen Manipulation wäre: Die Nutzer müssen sich mit einer Te
   - Typescript
   - Angular
 
+<a name="meilensteine"></a>
 ## Projektphasen / Meilensteine
 | Phase | Meilenstein / Ergebnis | Soll - Termin | Ist - Termin |
 | ----- | ---------------------- | ------------- | ------------ |
@@ -73,9 +94,11 @@ Mögliche Lösung gegen Manipulation wäre: Die Nutzer müssen sich mit einer Te
 - Auswahl auf einer Karte,
 - Restaurants können sich selbst präsentieren
 
+<a name="nichtZiele"></a>
 ### Nicht-Ziele
 - Keine reine Anwendungen für Vegan/Vegetarische Restaurants, sondern für alle Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...)
 
+<a name="nice"></a>
 ### Nice-to-have
  - Reservierungssystem
  - Gruppen von Personen erstellen, um Vorschläge für Restaurants teilen zu können
@@ -93,9 +116,11 @@ Mögliche Lösung gegen Manipulation wäre: Die Nutzer müssen sich mit einer Te
 
 
 ## Projektendergebnis
+<a name="ergebnis"></a>
 ### Welches Ergebnis soll am Projektende vorliegen?
 Eine App, die leicht bedienbar ist und einem erleichtert passende Restaurants für individuelle Bedürfnisse oder Bedürfnisse einer größeren Gruppe zu finden.
 Weiters soll es Gastronomiebetrieben die Möglichkeit bieten, neue Kunden zu gewinnen und auf ihre unter umständen besonderen Gerichte aufmerksam zu machen.
+<a name="messbar"></a>
 ### Welche messbaren Eigenschaften hat das Endergebnis, damit von einem Projekterfolg gesprochen werden kann?
 - Nutzerzahlen
 - Zahlen der Bewertungen
