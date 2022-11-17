@@ -7,7 +7,7 @@
 
 ## Projektauftraggeber
 - Herr Professor Reder
-- Herr Professor Landoigt
+- Herr Professor Landvoigt
 - Herr Professor Schrammel
 - Herr Professor Rager
 
