@@ -71,22 +71,22 @@ Mögliche Lösung gegen Manipulation wäre: Die Nutzer müssen sich mit einer Te
 - Bewertungen des Essens,
 - Restaurantsuche in der Nähe,
 - Auswahl auf einer Karte,
-- Restaurants können sich selber präsentiren
+- Restaurants können sich selbst präsentieren
 
 ### Nicht-Ziele
 - Keine reine Anwendungen für Vegan/Vegetarische Restaurants, sondern für alle Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...)
 
 ### Nice-to-have
  - Reservierungssystem
- - Gruppen von Personen erstellen, um vorschläge für Rsstaurants teilen zu können
- - Addresse zu Koordinaten Konverten im Programm
+ - Gruppen von Personen erstellen, um Vorschläge für Restaurants teilen zu können
+ - Adresse zu Koordinaten konverten im Programm
  - Allergene mit in die Kategorien
 
 ## Stakeholder
-- Gastronomiebertriebe
+- Gastronomiebetriebe
 - Einzelne Menschen welche nach bestimmten Essgewohnheiten essen
 - Private Gruppen mit unterschiedlichen Essbedürfnissen (z.B. Veganer, Fleischesser in einer Gruppe)
-- Communities mit Essensgewohnheiten (z.B. Vegane Gesellschaft Östereich)
+- Communities mit Essensgewohnheiten (z.B. Vegane Gesellschaft Österreich)
 - OpenSteetMap
 - Mitbewerber (z.B. HappyCow)
 - Projektauftraggeber
@@ -94,7 +94,7 @@ Mögliche Lösung gegen Manipulation wäre: Die Nutzer müssen sich mit einer Te
 
 ## Projektendergebnis
 ### Welches Ergebnis soll am Projektende vorliegen?
-Eine App, die leicht bedienbar ist und einem erleichtert passende Restaurants für indivduelle Bedürfnisse oder Bedürfnisse einer größeren Gruppe zu finden.
+Eine App, die leicht bedienbar ist und einem erleichtert passende Restaurants für individuelle Bedürfnisse oder Bedürfnisse einer größeren Gruppe zu finden.
 Weiters soll es Gastronomiebetrieben die Möglichkeit bieten, neue Kunden zu gewinnen und auf ihre unter umständen besonderen Gerichte aufmerksam zu machen.
 ### Welche messbaren Eigenschaften hat das Endergebnis, damit von einem Projekterfolg gesprochen werden kann?
 - Nutzerzahlen
