@@ -12,10 +12,10 @@
 - Herr Professor Rager
 
 ## Projektbezeichnung
-Restaurant-App um das passende Restaurant für Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) zu finden, und dies zu erleichtern.
+Eine Restaurant-App um das passende Restaurant für Essgewohnheiten(Vegan, Vegetarisch, Fleisch,...) zu finden, und dies zu erleichtern.
 
 ## Ausgangssituation
-Die meisten Menschen haben viel Freude an gutem und hochwertigem Essen, aus diesem Grund genießen viele davon ihre Lieblingspeisen auch in Gastronomiebetriebne verschiedenster Arten. Dabei werden diese Restaurants auch teils alleine aber auch in gmeinsamen Gruppen besucht. 
+Die meisten Menschen haben viel Freude an gutem und hochwertigem Essen. Aus diesem Grund genießen viele davon ihre Lieblingspeisen auch in Gastronomiebetriebne verschiedenster Arten. Dabei werden diese Restaurants auch teils alleine aber auch in gemeinsamen Gruppen besucht.
 
 ### Problemstellung
 Es ist nicht auf den ersten Blick ersichtlich ob die Speisekarte eines Restaurant für die jeweiligen Essgewohnheiten abgestimmt ist.
@@ -27,9 +27,12 @@ Weiters haben auch Gastronome das Problem, dass sie nicht so leicht gefunden wer
 
 
 ### Lösung
-Eine App die die verschiedensten Restaurants sammelt und diese nach Essgewohnheiten kategorisiert. Dadurch kann man diese filtern und findet schneller sein gewünschtes Restaurant. Auch nach mehreren Essgewohnheiten soll gefiltert werden können um auch immer das passende Restaurant für Gruppen finden zu können.
+Eine App die die verschiedensten Restaurants sammelt und diese nach Essgewohnheiten kategorisiert. Dadurch kann man diese filtern und findet schneller sein gewünschtes Restaurant. Auch nach mehreren Essgewohnheiten gleichzeitig soll gefiltert werden können, um auch immer das passende Restaurant für Gruppen finden zu können.
 Um zeit zu spraren und auch Restaurants in der Nähe zu finden soll man mittels einer Karte Restaurants in der Nähe finden können.
-Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben der Restaurants auch wirklich stimmen. ( Werden die angegeben Essgewohnheiten auch wirklich bedient, wie viel Auswahl gibt es , .....)
+Durch ein Bewertungssystem soll sichergestellt werden , dass die Angaben der Restaurants auch wirklich stimmen. ( Werden die angegeben Essgewohnheiten auch wirklich bedient, wie viel Auswahl gibt es , überzeugt die Qualität, wie sind die jeweiligen Anteile an den Gerichten, .....)
+
+Die Nutzer sollen die Angaben der Gastronomen, sowie die Auswahl und Qualität mit Sternen bewerten. 
+Mögliche Lösung gegen Manipulation wäre: Die Nutzer müssen sich mit einer Telefonnummer anmelden um bewerten zu können 
 
 ## Generelle Richtlinien
 - Wir arbeiten mit Scrum
@@ -77,6 +80,7 @@ Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben 
  - Reservierungssystem
  - Gruppen von Personen erstellen, um vorschläge für Rsstaurants teilen zu können
  - Addresse zu Koordinaten Konverten im Programm
+ - Allergene mit in die Kategorien
 
 ## Stakeholder
 - Gastronomiebertriebe
