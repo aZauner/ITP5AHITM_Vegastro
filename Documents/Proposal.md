@@ -53,12 +53,13 @@ Durch ein Bewertungssystem soll sichergestellt werden können, dass die angaben 
 | Phase | Meilenstein / Ergebnis | Soll - Termin | Ist - Termin |
 | ----- | ---------------------- | ------------- | ------------ |
 | 1 | Projektstart erfolgt | 17.11.22 | 10.11.22 |
-| 2 | GUI designed (Clickdummy) | 1.12.22 | / |
-| 3 | GUI erstellt | 15.12.22 | / |
-| 4 | Backend Konzeptioniert | 22.12.22 | / | 
-| 5 | Backend erstellt | / | / |
-| 6 | Bugfixes | / | / | 
-| 7 | Projektende | / | / |
+| 2 | Backend Konzeptioniert | 22.12.22 | / | 
+| 3 | GUI designed (Clickdummy) | 25.12.22 | / |
+| 4 | Infoplakat erstellt | 28.1.22 | / |
+| 5 | Video Abgabe | 29.1.22 | / |
+| 5 | Backend erstellt | __.__.23 | / |
+| 6 | Bugfixes | __.__.23 | / | 
+| 7 | Projektende | __.__.23 | / |
 
 ## Projektziele
 ### Ziele 
