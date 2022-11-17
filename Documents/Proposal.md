@@ -1,4 +1,4 @@
-# Projektauftrag: VeggieGast
+# Projektauftrag: vegastro
 ## Team
 - Alexander Zauner
 - Tobias Stadler
