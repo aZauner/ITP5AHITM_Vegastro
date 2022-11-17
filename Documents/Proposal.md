@@ -1,4 +1,4 @@
-# Projektauftrag: vegastro
+# Projektantrag: vegastro
 ## Team
 - Alexander Zauner
 - Tobias Stadler
