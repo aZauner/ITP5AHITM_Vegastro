@@ -81,9 +81,9 @@ Mögliche Lösung gegen Manipulation wäre: Die Nutzer müssen sich mit einer Te
 | 3 | GUI designed (Clickdummy) | 25.12.22 | / |
 | 4 | Infoplakat erstellt | 28.1.22 | / |
 | 5 | Video Abgabe | 29.1.22 | / |
-| 5 | Backend erstellt | 2023 | / |
-| 6 | Bugfixes und Erweiterungen abgeschlossen| 2023 | / | 
-| 7 | Projektende | 2023 | / |
+| 6 | Backend erstellt | 2023 | / |
+| 7 | Bugfixes und Erweiterungen abgeschlossen| 2023 | / | 
+| 8 | Projektende | 2023 | / |
 
 ## Projektziele
 ### Ziele 
@@ -113,6 +113,7 @@ Mögliche Lösung gegen Manipulation wäre: Die Nutzer müssen sich mit einer Te
 - OpenSteetMap
 - Mitbewerber (z.B. HappyCow)
 - Projektauftraggeber
+- Förderungen
 
 
 ## Projektendergebnis
@@ -122,5 +123,6 @@ Eine App, die leicht bedienbar ist und einem erleichtert passende Restaurants f�
 Weiters soll es Gastronomiebetrieben die Möglichkeit bieten, neue Kunden zu gewinnen und auf ihre unter umständen besonderen Gerichte aufmerksam zu machen.
 <a name="messbar"></a>
 ### Welche messbaren Eigenschaften hat das Endergebnis, damit von einem Projekterfolg gesprochen werden kann?
+- Umfragewerte bezüglich potentieller Kunden
 - Nutzerzahlen
 - Zahlen der Bewertungen
