@@ -1,0 +1,145 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserType {
+  regularUser
+  restaurantUser
+}
+
+model User {
+  userId         Int             @id @default(autoincrement())
+  type           UserType
+  username       String          @db.VarChar(50)
+  mail           String
+  password       String
+  firstname      String          @db.VarChar(50)
+  lastname       String          @db.VarChar(50)
+  regularUser    RegularUser?
+  restaurantUser RestaurantUser?
+}
+
+model RegularUser {
+  user           User      @relation(fields: [userId], references: [userId])
+  userId         Int       @id
+  telefoneNumber String    @db.VarChar(20)
+  raiting        Raiting[]
+}
+
+model RestaurantUser {
+  user        User         @relation(fields: [userId], references: [userId])
+  userId      Int          @id
+  companyName String
+  Restaurant  Restaurant[]
+}
+
+model Raiting {
+  raitingId    Int         @id @default(autoincrement())
+  userId       Int
+  selection    Int
+  taste        Int
+  date         DateTime
+  user         RegularUser @relation(fields: [userId], references: [userId])
+  restaurantId Int
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [restaurantId])
+  Comment      Comment?
+}
+
+model Comment {
+  commentId Int     @id @default(autoincrement())
+  title     String  @db.VarChar(100)
+  text      String
+  raitingId Int     @unique
+  raiting   Raiting @relation(fields: [raitingId], references: [raitingId])
+}
+
+model Restaurant {
+  restaurantId Int                       @id @default(autoincrement())
+  userId       Int
+  user         RestaurantUser            @relation(fields: [userId], references: [userId])
+  Raiting      Raiting[]
+  locationId   Int                       @unique
+  location     Location                  @relation(fields: [locationId], references: [locationId])
+  Menu         Menu?
+  image        Image[]
+  categories   CategoriesOnRestaurants[]
+}
+
+model Location {
+  locationId  Int         @id @default(autoincrement())
+  street      String      @db.VarChar(100)
+  houseNumber Int
+  city        String      @db.VarChar(100)
+  PLZ         String      @db.VarChar(4)
+  floor       Int
+  doorNumber  Int
+  restaurant  Restaurant?
+}
+
+model Menu {
+  menuId       Int        @id @default(autoincrement())
+  restaurantId Int        @unique
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [restaurantId])
+  Meal         Meal[]
+}
+
+model Image {
+  imageId      Int         @id @default(autoincrement())
+  path         String
+  date         DateTime
+  restaurantId Int?
+  restaurant   Restaurant? @relation(fields: [restaurantId], references: [restaurantId])
+  mealId       Int?
+  meal         Meal?       @relation(fields: [mealId], references: [mealId])
+}
+
+model Meal {
+  mealId      Int                  @id @default(autoincrement())
+  title       String
+  description String
+  image       Image[]
+  menuId      Int
+  menu        Menu                 @relation(fields: [menuId], references: [menuId])
+  categoryId  Int                  @unique
+  category    Category             @relation(fields: [categoryId], references: [categoryId])
+  allergenics AllergenicsOnMeals[]
+}
+
+model Category {
+  categoryId  Int                       @id @default(autoincrement())
+  name        String
+  restaurants CategoriesOnRestaurants[]
+  meal        Meal?
+}
+
+model CategoriesOnRestaurants {
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [restaurantId])
+  restaurantId Int
+  category     Category   @relation(fields: [categoryId], references: [categoryId])
+  categoryId   Int
+
+  @@id([restaurantId, categoryId])
+}
+
+model Allergenic {
+  allergenicId Int                  @id @default(autoincrement())
+  name         String
+  meals        AllergenicsOnMeals[]
+}
+
+model AllergenicsOnMeals {
+  meal         Meal       @relation(fields: [mealId], references: [mealId])
+  mealId       Int
+  allergenic   Allergenic @relation(fields: [allergenicId], references: [allergenicId])
+  allergenicId Int
+
+  @@id([mealId, allergenicId])
+}
