@@ -1,0 +1,7 @@
+{
+  "name": "vegastro",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
