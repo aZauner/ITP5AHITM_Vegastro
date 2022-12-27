@@ -12,6 +12,7 @@ import { AbstractFormGroupDirective } from '@angular/forms';
 })
 export class Tab1Page {
   address: string = "";
+  userMarker!: L.CircleMarker;
   map!: L.Map;
   greenIcon: L.Icon = L.icon({
     iconUrl: '../../assets/icon/zipfel.png',
@@ -33,7 +34,7 @@ export class Tab1Page {
         zoom: 12,
         renderer: L.canvas(),
       });
-      L.circleMarker([resp.coords.latitude, resp.coords.longitude]).addTo(this.map);
+      this.userMarker = L.circleMarker([resp.coords.latitude, resp.coords.longitude]).addTo(this.map);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© Vegastro',
@@ -55,7 +56,7 @@ export class Tab1Page {
       .getCurrentPosition()
       .then((resp) => {
         this.map.panTo([resp.coords.latitude, resp.coords.longitude]);
-        L.circleMarker([resp.coords.latitude, resp.coords.longitude]).addTo(this.map)
+        this.userMarker.setLatLng([resp.coords.latitude, resp.coords.longitude]);
       })
       .catch((error) => {
         console.log('Error getting location', error);
@@ -67,26 +68,48 @@ export class Tab1Page {
   }
 
   addressSearch(enter: Boolean, index?: number) {
+    if(document.getElementById("searchbarResultList") != null) {
+      document.getElementById("searchbarResultList")?.remove();
+    } 
+    if(document.getElementById("noDataFound") != null) {
+      document.getElementById("noDataFound")?.remove();
+    } 
+    if(document.getElementById("searchbarLoading") != null) {
+      document.getElementById("searchbarLoading")?.remove();
+    } 
+    
+    let loadingBar = document.createElement("ion-spinner");
+    loadingBar.setAttribute("id", "searchbarLoading");
+    loadingBar.style.zIndex = "100";
+    loadingBar.style.margin = "0 0 1vh 50vw";
+    loadingBar.style.transform = "translateX(-50%)";
+    document.getElementById("searchbar")?.appendChild(loadingBar);
+    
     setTimeout(()=>{
+      
       this.addrSearch((data: any) => {
-        if(document.getElementById("searchbarResultList") != null) {
-          document.getElementById("searchbarResultList")?.remove();
-        }      
+        if(document.getElementById("searchbarLoading") != null) {
+          document.getElementById("searchbarLoading")?.remove();
+        }
+        
         if (data.length > 0) {
           if(enter) {
             this.map.panTo([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
           } else if (index != undefined && index != null) {
             this.map.panTo([parseFloat(data[index].lat),parseFloat(data[index].lon)]);
           } else {
+            if(document.getElementById("searchbarResultList") != null) {
+              document.getElementById("searchbarResultList")?.remove();
+            } 
             let list = document.createElement("ion-list");
             for(let i = 0; i < data.length; i++) {
               let item = document.createElement("ion-item");
               let label = document.createElement("p");
               let text = data[i].display_name;
-              if(text <= 30) {
+              if(text.length <= 40) {
                 label.innerText = text;
               } else {
-                label.innerText = text.slice(0,30) + "...";
+                label.innerText = text.slice(0,40) + "...";
               }
               item.appendChild(label);
               item.addEventListener('click', ()=>{this.addressSearch(true,i)});
@@ -95,6 +118,19 @@ export class Tab1Page {
             list.id = "searchbarResultList";
             document.getElementById("searchbar")?.appendChild(list);
           }
+        } else if (this.address != ""){
+          if(document.getElementById("noDataFound") != null) {
+            document.getElementById("noDataFound")?.remove();
+          } 
+          let item = document.createElement("ion-item");
+          let label1 = document.createElement("ion-label");
+          label1.innerText = "Keine Treffer gefunden";
+          item.appendChild(label1);
+          item.id = "noDataFound";
+          item.style.margin = "0 0 1vh 0";
+          item.style.width = "100%";
+          item.style.textAlign = "center";
+          document.getElementById("searchbar")?.appendChild(item);
         }
       }, this.address);
     }, 250);

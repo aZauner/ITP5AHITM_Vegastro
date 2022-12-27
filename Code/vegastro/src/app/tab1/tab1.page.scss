@@ -2,37 +2,46 @@
     font-family: 'Comfortaa';
 }
 
-#map{
+#map {
     width: 100%;
-    height: 100%; 
-    z-index: 0;   
+    height: 100%;
+    z-index: 0;
     position: relative;
+    padding: 0;
 }
 
-p{
+
+p {
     text-align: center;
 }
 
-#menu{
+#menu {
     --background: #48A734;
     --background-activated: #4fbf38;
     z-index: 99;
     position: absolute;
     top: 90%;
     margin: 0 50vw 0 50vw;
-    transform: translateX(-50%); 
+    transform: translateX(-50%);
     --color: white;
 }
 
-#location{
+#location {
     --background: #009dff;
     z-index: 99;
     position: absolute;
     top: 89%;
     left: 100%;
-    transform: translateX(-130%); 
+    transform: translateX(-130%);
     --border-radius: 100vw;
     width: 7vh;
     height: 7vh;
     --color: white;
+}
+
+#searchbarLoading, ion-spinner {
+    margin-left: 50vw;
+    transform: translateX(-50%);    
+    z-index: 100;
+    margin-bottom: 1vh;
 }

@@ -2,28 +2,16 @@
 
 <div id="searchbar">
   <ion-searchbar [(ngModel)]="address" (ionChange)="addressSearch(false)" (keydown.enter)="addressSearch(true)" placeholder="Stadt..."  slot="top"></ion-searchbar>
+  <!-- <ion-spinner id="searchbarLoading"></ion-spinner> -->
 </div>
 
 <ion-content [fullscreen]="true">
-  
-
-
   <div id="map"></div>
-
-  <!-- <div slot="bottom" class="bottom-div">
-    <ion-button [routerLink]="['/tabs','tab2']" color="primary">
-      (17) Treffer
-    </ion-button>
-  </div> -->
-  <!-- <ion-button id="menu" expand="block" [routerLink]="['/tabs','tab2']">
-    17 Treffer
-  </ion-button> -->
-
 </ion-content>
 
 <ion-button id="menu" expand="block" [routerLink]="['/tabs','tab2']">
   17 Treffer
 </ion-button>
 <ion-button id="location" expand="block"  (click)="setMapToUserLocation()">
-  <ion-icon slot="icon-only" (click)="setMapToUserLocation()" name="location"></ion-icon>
+  <ion-icon slot="icon-only" (click)="setMapToUserLocation()" name="locate"></ion-icon>
 </ion-button>

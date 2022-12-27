@@ -5,7 +5,7 @@ ion-tab-bar{
     border: none;
 }
 .tab-bar-top{
-    height: 7vh;
+    height: 8vh;
     color: green;
 }
 .bottom-div{
@@ -15,4 +15,22 @@ ion-tab-bar{
 }
 ion-searchbar{
     background:none;
+}
+
+#logoIcon {
+    font-size: 4vh;
+}
+
+#logoName {
+    margin-left: 2vw;
+    font-size: 4vh;
+}
+
+#logoNameFirst {
+    color: #48A734;
+}
+
+#logoNameSecond {
+    color: black;
+    
 }
