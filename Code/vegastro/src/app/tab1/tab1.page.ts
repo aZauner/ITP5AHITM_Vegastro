@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import * as L from 'leaflet';
 import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Platform } from '@ionic/angular';
-import { Coordinates } from '@awesome-cordova-plugins/geolocation';
-import { AbstractFormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-tab1',
@@ -14,19 +12,13 @@ export class Tab1Page {
   address: string = "";
   userMarker!: L.CircleMarker;
   map!: L.Map;
-  greenIcon: L.Icon = L.icon({
-    iconUrl: '../../assets/icon/zipfel.png',
-
+  defaultMarker: L.Icon = L.icon({
+    iconUrl: '../../assets/MarkerWhite.svg',
     iconSize: [50, 50], // size of the icon
   });
-  // langitude: number = 0;
-  // altitude: number = 0;
   constructor(protected platform: Platform, private geolocation: Geolocation) {
   }
   ngOnInit() {
-    //Define Icon
-
-
     //Generate Start map
     this.geolocation.getCurrentPosition().then((resp) => {
       this.map = L.map('map', {
@@ -43,11 +35,8 @@ export class Tab1Page {
       setTimeout(() => {
         this.map.invalidateSize();
       }, 0);
-      this.addMarker(48.0349017, 13.7643518, this.greenIcon);
+      this.addMarker(48.0349017, 13.7643518, this.defaultMarker);
     });
-    //Get Position of User
-    //this.setMapToUserLocation();
-
   }
 
   // //Get Location of User
@@ -86,12 +75,10 @@ export class Tab1Page {
     document.getElementById("searchbar")?.appendChild(loadingBar);
     
     setTimeout(()=>{
-      
       this.addrSearch((data: any) => {
         if(document.getElementById("searchbarLoading") != null) {
           document.getElementById("searchbarLoading")?.remove();
         }
-        
         if (data.length > 0) {
           if(enter) {
             this.map.panTo([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
@@ -101,19 +88,38 @@ export class Tab1Page {
             if(document.getElementById("searchbarResultList") != null) {
               document.getElementById("searchbarResultList")?.remove();
             } 
+            if(document.getElementById("noDataFound") != null) {
+              document.getElementById("noDataFound")?.remove();
+            } 
             let list = document.createElement("ion-list");
             for(let i = 0; i < data.length; i++) {
-              let item = document.createElement("ion-item");
-              let label = document.createElement("p");
-              let text = data[i].display_name;
-              if(text.length <= 40) {
-                label.innerText = text;
-              } else {
-                label.innerText = text.slice(0,40) + "...";
+              if(data[i].class != "boundary") {
+                let item = document.createElement("ion-item");
+                let label = document.createElement("p");
+                let text = data[i].display_name;
+                if(text.length <= 40) {
+                  label.innerText = text;
+                } else {
+                  label.innerText = text.slice(0,40) + "...";
+                }
+                item.appendChild(label);
+                item.addEventListener('click', ()=>{this.addressSearch(true,i)});
+                list?.appendChild(item);
               }
-              item.appendChild(label);
-              item.addEventListener('click', ()=>{this.addressSearch(true,i)});
-              list?.appendChild(item);
+            }
+            if(list.innerHTML == "") {
+              if(document.getElementById("noDataFound") != null) {
+                document.getElementById("noDataFound")?.remove();
+              } 
+              let item = document.createElement("ion-item");
+              let label1 = document.createElement("ion-label");
+              label1.innerText = "Keine Treffer gefunden";
+              item.appendChild(label1);
+              item.id = "noDataFound";
+              item.style.margin = "0 0 1vh 0";
+              item.style.width = "100%";
+              item.style.textAlign = "center";
+              document.getElementById("searchbar")?.appendChild(item)
             }
             list.id = "searchbarResultList";
             document.getElementById("searchbar")?.appendChild(list);

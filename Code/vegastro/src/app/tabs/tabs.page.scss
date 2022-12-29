@@ -1,18 +1,16 @@
+@import "../../theme/variables.scss";
 
 ion-tab-bar{
     height: 10vh;
-    background-color: white;
     border: none;
 }
-.tab-bar-top{
-    height: 8vh;
-    color: green;
-}
+
 .bottom-div{
     text-align: center;
     padding-bottom: 4vh;
     background: none;
 }
+
 ion-searchbar{
     background:none;
 }
@@ -31,6 +29,5 @@ ion-searchbar{
 }
 
 #logoNameSecond {
-    color: black;
-    
+    color: var(--ion-text-color);
 }
