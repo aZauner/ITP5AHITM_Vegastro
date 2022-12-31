@@ -1,17 +1,18 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
 
+
 <div id="searchbar">
-  <ion-searchbar [(ngModel)]="address" (ionChange)="addressSearch(false)" (keydown.enter)="addressSearch(true)" placeholder="Stadt..."  slot="top"></ion-searchbar>
-  <!-- <ion-spinner id="searchbarLoading"></ion-spinner> -->
+  <ion-searchbar [(ngModel)]="address" (ionChange)="addressSearch(false)" (keydown.enter)="addressSearch(true)"
+    placeholder="Gib einen Ort ein" slot="top"></ion-searchbar>
 </div>
 
-<ion-content [fullscreen]="true">
-  <div id="map"></div>
-</ion-content>
+
+<div id="map"></div>
+
 
 <ion-button id="menu" expand="block" [routerLink]="['/tabs','tab2']">
   17 Treffer
 </ion-button>
-<ion-button id="location" expand="block"  (click)="setMapToUserLocation()">
+<ion-button id="location" expand="block" (click)="setMapToUserLocation()">
   <ion-icon slot="icon-only" name="locate" (click)="setMapToUserLocation()"></ion-icon>
 </ion-button>

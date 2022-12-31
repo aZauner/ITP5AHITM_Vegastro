@@ -13,8 +13,8 @@ export class Tab1Page {
   userMarker!: L.CircleMarker;
   map!: L.Map;
   defaultMarker: L.Icon = L.icon({
-    iconUrl: '../../assets/MarkerWhite.svg',
-    iconSize: [50, 50], // size of the icon
+    iconUrl: '../../assets/MarkerPoint3.svg',
+    iconSize: [22, 22], // size of the icon
   });
   constructor(protected platform: Platform, private geolocation: Geolocation) {
   }
@@ -83,7 +83,7 @@ export class Tab1Page {
           if(enter) {
             this.map.panTo([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
           } else if (index != undefined && index != null) {
-            this.map.panTo([parseFloat(data[index].lat),parseFloat(data[index].lon)]);
+            this.addMarker(parseFloat(data[index].lat), parseFloat(data[index].lon), this.defaultMarker);
           } else {
             if(document.getElementById("searchbarResultList") != null) {
               document.getElementById("searchbarResultList")?.remove();

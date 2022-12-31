@@ -79,7 +79,8 @@
 
 @media (prefers-color-scheme: light) {
   * {
-    --ion-text-color: #000000;
+    --ion-text-color: #000;
+    --ion-background-color: #fff;
   }
 }
 

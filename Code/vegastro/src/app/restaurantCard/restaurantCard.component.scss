@@ -1,0 +1,45 @@
+@import "../../theme/variables.scss";
+
+ion-card{
+    height: auto;
+    border-radius: 1.7vh;
+}
+
+img {
+    height: 18vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+.typeIcon {
+    font-size: 3.5vh;
+    margin: 0 1vh 0 0.5vh;
+    padding-bottom: 0.5vh;
+}
+
+ion-card-title {
+    font-size: 3vh;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2vh;
+    flex-wrap: nowrap;
+}
+
+.starOff {
+    font-size: 2vh;
+    color: rgb(215, 215, 215);
+    margin: 0.2vh;
+}
+
+.starOn {
+    font-size: 2vh;
+    color: rgb(240, 240, 0);
+    margin: 0.2vh;
+}
+
+.restaurantStars {
+    background-color: rgb(17, 17, 17);
+    width: fit-content;
+    border-radius: 1.7vh;
+    padding: 1vh 1.2vh 1vh 1.2vh;
+}

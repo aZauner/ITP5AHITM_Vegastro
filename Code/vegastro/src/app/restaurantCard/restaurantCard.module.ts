@@ -2,19 +2,18 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab3Page } from './tab3.page';
+import { RestaurantCard } from './restaurantCard.component';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { Tab3PageRoutingModule } from './tab3-routing.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
-    Tab3PageRoutingModule
+    ExploreContainerComponentModule
   ],
-  declarations: [Tab3Page]
+  exports: [RestaurantCard],
+  declarations: [RestaurantCard]
 })
-export class Tab3PageModule {}
+export class RestaurantCardModule { }

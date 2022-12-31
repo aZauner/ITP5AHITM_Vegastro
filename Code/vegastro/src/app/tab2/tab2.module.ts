@@ -6,6 +6,9 @@ import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { RestaurantCardModule } from '../restaurantCard/restaurantCard.module';
+import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
+import { RestaurantCard } from '../restaurantCard/restaurantCard.component';
 
 @NgModule({
   imports: [
@@ -13,8 +16,15 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule
+    Tab2PageRoutingModule,
+    RestaurantCardModule
   ],
-  declarations: [Tab2Page]
+  declarations: [
+    Tab2Page
+  ],
+  providers: [RestaurantCardService],
+  entryComponents: [RestaurantCard]
 })
-export class Tab2PageModule {}
+export class Tab2PageModule {
+
+}
