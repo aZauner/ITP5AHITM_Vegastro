@@ -2,12 +2,12 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab2Page } from './tab2.page';
+import { RestaurantsPage } from './restaurants.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { RestaurantsRoutingModule } from './restaurants-routing.module';
 import { RestaurantCardModule } from '../restaurantCard/restaurantCard.module';
-import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
+import { RestaurantCardService } from '../restaurantCard/restaurantCardService';
 import { RestaurantCard } from '../restaurantCard/restaurantCard.component';
 
 @NgModule({
@@ -16,15 +16,14 @@ import { RestaurantCard } from '../restaurantCard/restaurantCard.component';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule,
+    RestaurantsRoutingModule,
     RestaurantCardModule
   ],
-  declarations: [
-    Tab2Page
-  ],
+  declarations: [RestaurantsPage],
   providers: [RestaurantCardService],
   entryComponents: [RestaurantCard]
 })
-export class Tab2PageModule {
+
+export class RestaurantsModule {
 
 }

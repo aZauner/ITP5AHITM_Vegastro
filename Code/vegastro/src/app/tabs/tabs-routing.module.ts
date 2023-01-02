@@ -9,11 +9,15 @@ const routes: Routes = [
     children: [
       {
         path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        loadChildren: () => import('../map/map.module').then(m => m.MapPageModule)
       },
       {
         path: 'tab2',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+        loadChildren: () => import('../restaurants/restaurants.module').then(m => m.RestaurantsModule)
+      },
+      {
+        path: 'restaurantDetail',
+        loadChildren: () => import('../restaurantCardDetail/restaurantCardDetail.module').then(m => m.RestaurantCardDetailModule)
       },
       {
         path: '',

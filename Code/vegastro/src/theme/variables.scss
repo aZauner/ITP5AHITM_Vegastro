@@ -3,6 +3,7 @@
 
 /** Ionic CSS Variables **/
 :root {
+  --ion-app-color: #48A734;
   /** primary **/
   --ion-color-primary: #168d26;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -81,11 +82,15 @@
   * {
     --ion-text-color: #000;
     --ion-background-color: #fff;
+    --ion-underline-color: rgb(214, 214, 214);
   }
 }
 
 
 @media (prefers-color-scheme: dark) {
+  * {
+    --ion-underline-color: rgb(62, 62, 62);
+  }
   /*
    * Dark Colors
    * -------------------------------------------

@@ -1,0 +1,69 @@
+* {
+    font-family: 'Comfortaa';
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    position: relative;
+    padding: 0;
+}
+
+
+p {
+    text-align: center;
+}
+
+#menu {
+    // --color: #44a630;
+    font-weight: bold;
+    font-size: 3vh;
+    height: fit-content;
+    padding-top: 0.5vh;
+}
+
+#menu ion-icon {
+    padding-bottom: 0.5vh;
+}
+
+
+#locate {
+    color: var(--ion-background-color);
+    background-color: var(--ion-text-color);
+    border-radius: 100vw;
+    width: 3.5vh;
+    height: 3.5vh;
+    padding: 1.5vh;
+}
+
+
+#searchbarLoading,
+ion-spinner {
+    margin-left: 50vw;
+    transform: translateX(-50%);
+    z-index: 100;
+    margin-bottom: 1vh;
+}
+
+#search {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+ion-buttons {
+    padding-right: 1vh;
+}
+
+ion-menu-button {
+    color: var(--ion-text-color);
+    font-size: 5vh;
+}
+
+ion-footer ion-toolbar div {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1vh 1.5vh 1vh 0;
+}

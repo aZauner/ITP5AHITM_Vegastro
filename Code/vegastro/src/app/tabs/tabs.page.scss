@@ -2,7 +2,13 @@
 
 ion-tab-bar{
     height: 10vh;
-    border: none;
+    border-color: var(--ion-tab-bar-background, var(--ion-color-step-50, #f7f7f7));
+    padding: 4vh 2vh 0 2vh;
+    justify-content: space-between;
+}
+
+ion-tabs {
+    justify-content: flex-start;
 }
 
 .bottom-div{
@@ -16,7 +22,7 @@ ion-searchbar{
 }
 
 #logoIcon {
-    font-size: 5vh;
+    font-size: 6vh;
 }
 
 #logoName {
@@ -31,3 +37,4 @@ ion-searchbar{
 #logoNameSecond {
     color: var(--ion-text-color);
 }
+

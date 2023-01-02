@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card (click)="openDetails()">
   <div style="width:100%;text-align: center;">
     <img alt="Silhouette of mountains" src="../../assets/{{inputs.image}}" />
   </div>
@@ -45,6 +45,6 @@
   </ion-card-header>
 
   <ion-card-content>
-    {{inputs.description}}
+    {{inputs.preDescr}}
   </ion-card-content>
 </ion-card>

@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+
+<ion-menu contentId="searchbar">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Filter</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">This is the menu content.</ion-content>
+</ion-menu>
+<div id="searchbar">
+  <div id="search">
+    <ion-searchbar [(ngModel)]="address" (ionChange)="addressSearch(false)" (keydown.enter)="addressSearch(true)"
+      placeholder="Gib einen Ort ein" slot="top"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<ion-footer>
+  <ion-toolbar>
+    <div>
+      <ion-button fill="clear" id="menu" expand="block" [routerLink]="['/tabs','tab2']">
+        Treffer
+        <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+      <ion-icon slot="icon-only" id="locate" name="locate" (click)="setMapToUserLocation()"></ion-icon>
+    </div>
+  </ion-toolbar>
+</ion-footer>

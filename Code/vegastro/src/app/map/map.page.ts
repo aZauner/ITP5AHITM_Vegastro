@@ -4,11 +4,11 @@ import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation/n
 import { Platform } from '@ionic/angular';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss'],
+  selector: 'map',
+  templateUrl: 'map.page.html',
+  styleUrls: ['map.page.scss'],
 })
-export class Tab1Page {
+export class MapPage {
   address: string = "";
   userMarker!: L.CircleMarker;
   map!: L.Map;

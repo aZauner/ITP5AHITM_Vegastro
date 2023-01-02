@@ -4,16 +4,16 @@ import {
     Injector,
     ApplicationRef
 } from '@angular/core'
-import { RestaurantCard, RestaurantCardInputs } from './restaurantCard.component'
+import { Meal, MealInputs } from './meal.component'
 @Injectable()
-export class RestaurantCardService {
+export class MealService {
     constructor(private resolver: ComponentFactoryResolver, private injector: Injector, private app: ApplicationRef) {
     }
 
-    addDynamicComponent(inputs: RestaurantCardInputs) {
-        const factory = this.resolver.resolveComponentFactory(RestaurantCard);
+    addDynamicComponent(inputs: MealInputs) {
+        const factory = this.resolver.resolveComponentFactory(Meal);
         const div = document.createElement("div");
-        document.getElementById("restaurantCards")!.appendChild(div);
+        document.getElementById("meals")!.appendChild(div);
         const component = factory.create(this.injector, [], div);
         switch (inputs.type) {
             case "meat":
@@ -25,11 +25,6 @@ export class RestaurantCardService {
             case "vegan":
                 inputs.type = "VeganIcon.svg";
                 break;
-        }
-        if(inputs.description.length > 150) {
-            inputs.preDescr = inputs.description.slice(0,150) + " ...";
-        } else {
-            inputs.preDescr = inputs.description;
         }
         component.instance.inputs = inputs;
         this.app.attachView(component.hostView);
