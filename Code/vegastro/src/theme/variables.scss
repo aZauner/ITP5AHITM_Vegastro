@@ -81,6 +81,7 @@
 @media (prefers-color-scheme: light) {
   * {
     --ion-text-color: #000;
+    --ion-activated-button-color: #6c6c6c;
     --ion-background-color: #fff;
     --ion-underline-color: rgb(214, 214, 214);
   }
@@ -90,6 +91,7 @@
 @media (prefers-color-scheme: dark) {
   * {
     --ion-underline-color: rgb(62, 62, 62);
+    --ion-activated-button-color: #d4d4d4;
   }
   /*
    * Dark Colors

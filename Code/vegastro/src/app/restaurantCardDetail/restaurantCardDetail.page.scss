@@ -49,6 +49,7 @@ main {
     flex-wrap: nowrap;
     background-color: var(--ion-background-color);
     height: 8vh;
+    box-shadow: 0 -0.1vh var(--ion-background-color);
 }
 
 #restaurantName ion-back-button {

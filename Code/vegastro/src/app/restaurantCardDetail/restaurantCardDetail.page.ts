@@ -40,7 +40,7 @@ export class RestaurantCardDetail {
     this.service.addDynamicComponent({ id: 1, name: "Pizza Diavolo", price: parseFloat((Math.random() * 16 + 4).toFixed(2)), type: "vegetarian", descr: "Tomaten, Käse, Salami, Schinken, Pfefferoni" });
     this.service.addDynamicComponent({ id: 1, name: "Pizza Diavolo", price:parseFloat((Math.random() * 16 + 4).toFixed(2)), type: "meat", descr: "Tomaten, Käse, Salami, Schinken, Pfefferoni" });
     for(let i = 0; i < 20; i++) {
-      this.service.addDynamicComponent({ id: 1, name: "Pizza Diavolo", price: parseFloat((Math.random() * 16 + 4).toFixed(2)), type: "meat" });
+      this.service.addDynamicComponent({ id: 1, name: "Pizza Diavolo", price: parseFloat((Math.random() * 16 + 4).toFixed(2)), type: "vegetarian" });
     }
   }
 

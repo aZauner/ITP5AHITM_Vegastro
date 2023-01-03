@@ -1,29 +1,25 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
 
-<ion-menu contentId="searchbar">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Filter</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content class="ion-padding">This is the menu content.</ion-content>
-</ion-menu>
 <div id="searchbar">
   <div id="search">
     <ion-searchbar [(ngModel)]="address" (ionChange)="addressSearch(false)" (keydown.enter)="addressSearch(true)"
       placeholder="Gib einen Ort ein" slot="top"></ion-searchbar>
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+    <ion-button id="filterBtn" (click)="openFilter()" slot="end">
+      <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+    </ion-button>
   </div>
 </div>
 
-<div id="map"></div>
+<div id="map">
+  <div id="filter" style="visibility: hidden;">
+    <h1>K A T E G O R I E N</h1>
+  </div>
+</div>
 
 <ion-footer>
   <ion-toolbar>
     <div>
-      <ion-button fill="clear" id="menu" expand="block" [routerLink]="['/tabs','tab2']">
+      <ion-button fill="clear" id="hits" expand="block" [routerLink]="['/tabs','tab2']">
         Treffer
         <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
       </ion-button>
