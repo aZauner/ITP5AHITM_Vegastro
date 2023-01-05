@@ -25,7 +25,7 @@ export class MapPage {
       this.userLocation = { lat: resp.coords.latitude, lon: resp.coords.longitude };
       this.map = L.map('map', {
         center: [resp.coords.latitude, resp.coords.longitude],
-        zoom: 12,
+        zoom: 15,
         renderer: L.canvas(),
       });
       this.userMarker = L.circleMarker([resp.coords.latitude, resp.coords.longitude]).addTo(this.map);
@@ -49,11 +49,11 @@ export class MapPage {
 
   // //Get Location of User
   setMapToUserLocation() {
-    this.map.panTo([this.userLocation.lat, this.userLocation.lon]);
+    this.map.setView([this.userLocation.lat, this.userLocation.lon], 15);
     this.geolocation
       .getCurrentPosition()
       .then((resp) => {
-        this.map.panTo([resp.coords.latitude, resp.coords.longitude]);
+        this.map.setView([resp.coords.latitude, resp.coords.longitude], 15);
         this.userMarker.setLatLng([resp.coords.latitude, resp.coords.longitude]);
       })
       .catch((error) => {
@@ -90,9 +90,9 @@ export class MapPage {
         }
         if (data.length > 0) {
           if (enter) {
-            this.map.panTo([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
+            this.map.setView([parseFloat(data[0].lat), parseFloat(data[0].lon)], 14);
           } else if (index != undefined && index != null) {
-            this.addMarker(parseFloat(data[index].lat), parseFloat(data[index].lon), this.defaultMarker);
+            this.map.setView([parseFloat(data[index].lat), parseFloat(data[index].lon)], 14);
           } else {
             if (document.getElementById("searchbarResultList") != null) {
               document.getElementById("searchbarResultList")?.remove();
@@ -112,7 +112,7 @@ export class MapPage {
                   label.innerText = text.slice(0, 40) + "...";
                 }
                 item.appendChild(label);
-                item.addEventListener('click', () => { this.addressSearch(true, i) });
+                item.addEventListener('click', () => { this.addressSearch(false, i) });
                 list?.appendChild(item);
               }
             }

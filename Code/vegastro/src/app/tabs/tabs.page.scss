@@ -1,9 +1,9 @@
 @import "../../theme/variables.scss";
 
 ion-tab-bar{
-    height: 10vh;
+    height: 7vh;
     border-color: var(--ion-tab-bar-background, var(--ion-color-step-50, #f7f7f7));
-    padding: 4vh 2vh 0 2vh;
+    padding: 0 2vh 0 2vh;
     justify-content: space-between;
 }
 
@@ -22,12 +22,12 @@ ion-searchbar{
 }
 
 #logoIcon {
-    font-size: 6vh;
+    font-size: 5vh;
 }
 
 #logoName {
     margin-left: 2vw;
-    font-size: 5vh;
+    font-size: 4vh;
 }
 
 #logoNameFirst {

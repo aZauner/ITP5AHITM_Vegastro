@@ -1,6 +1,6 @@
 <div class="meal">
   <div class="item">
-    <ng-template [ngIf]="inputs.type != 'meat' && inputs.type != 'MeatIcon.svg'">
+    <ng-template [ngIf]="inputs.type !== 'meat' && inputs.type !== 'MeatIcon.svg'">
       <ion-icon class="typeIcon" src="../../assets/icon/{{inputs.type}}"></ion-icon>
     </ng-template>
     <p>{{inputs.name}}</p>
@@ -8,7 +8,7 @@
       <ion-badge>{{inputs.price}} €</ion-badge>
     </div>
   </div>
-  <ng-template [ngIf]="inputs.descr != undefined">
+  <ng-template [ngIf]="inputs.descr !== undefined">
     <p>{{inputs.descr}}</p>
   </ng-template>
 </div>
