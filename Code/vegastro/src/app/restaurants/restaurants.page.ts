@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RestaurantCardService } from '../restaurantCard/restaurantCardService';
+import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
 
 @Component({
   selector: 'restaurants',

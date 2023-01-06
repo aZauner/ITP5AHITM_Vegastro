@@ -7,7 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { RestaurantsRoutingModule } from './restaurants-routing.module';
 import { RestaurantCardModule } from '../restaurantCard/restaurantCard.module';
-import { RestaurantCardService } from '../restaurantCard/restaurantCardService';
+import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
 import { RestaurantCard } from '../restaurantCard/restaurantCard.component';
 
 @NgModule({
