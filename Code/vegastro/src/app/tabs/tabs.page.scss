@@ -1,9 +1,7 @@
-@import "../../theme/variables.scss";
-
 ion-tab-bar{
     height: 7vh;
     border-color: var(--ion-tab-bar-background, var(--ion-color-step-50, #f7f7f7));
-    padding: 0 2vh 0 2vh;
+    padding: 5vh 2vh 0 2vh;
     justify-content: space-between;
 }
 

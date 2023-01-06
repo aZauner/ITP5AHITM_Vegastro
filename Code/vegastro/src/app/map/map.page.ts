@@ -44,7 +44,7 @@ export class MapPage {
       this.geolocation.getCurrentPosition().then((resp) => {
         this.userLocation = { lat: resp.coords.latitude, lon: resp.coords.longitude };
       });
-    }, 5000);
+    }, 20000);
   }
 
   // //Get Location of User
