@@ -4,6 +4,7 @@
     z-index: 0;
     position: relative;
     padding: 0;
+    font-family: 'AppFont';
 }
 
 
@@ -59,12 +60,9 @@ ion-spinner {
     --padding-start: 0;
 }
 
-
 #filterBtn ion-icon {
-    font-size: 5.5vh;
+    font-size: 4.5vh;
 }
-
-
 
 ion-footer ion-toolbar div {
     display: flex;

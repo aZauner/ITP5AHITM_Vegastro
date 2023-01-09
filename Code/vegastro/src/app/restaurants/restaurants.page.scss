@@ -9,7 +9,15 @@ ion-toolbar div {
 }
 
 ion-button {
-    height: 2vh;
+    height: 4vh;
+    font-size: 2.2vh;
+    --padding-start: 1.5vh !important;
+}
+
+ion-button ion-icon {
+    padding-bottom: 0.3vh;
+    padding-right: 1vh;
+    font-size: 3vh;
 }
 
 h1 {

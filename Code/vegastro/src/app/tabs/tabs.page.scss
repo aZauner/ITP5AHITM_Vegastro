@@ -1,18 +1,21 @@
 ion-tab-bar{
     height: 7vh;
     border-color: var(--ion-tab-bar-background, var(--ion-color-step-50, #f7f7f7));
-    padding: 5vh 2vh 0 2vh;
+    padding: 0 2vh 0 1vh;
+    padding-top: 50px;
     justify-content: space-between;
 }
+
 
 ion-tabs {
     justify-content: flex-start;
 }
 
-.bottom-div{
-    text-align: center;
-    padding-bottom: 4vh;
-    background: none;
+ion-menu-button {
+    width: fit-content;
+    height: fit-content;
+    font-size: 5.5vh;
+    color: #48A734;
 }
 
 ion-searchbar{
@@ -21,11 +24,15 @@ ion-searchbar{
 
 #logoIcon {
     font-size: 5vh;
+    color: #48A734;
+    padding-left: 1vh;
 }
 
 #logoName {
     margin-left: 2vw;
     font-size: 4vh;
+    display: flex;
+    align-items: center;
 }
 
 #logoNameFirst {

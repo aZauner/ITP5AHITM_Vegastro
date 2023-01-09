@@ -1,9 +1,21 @@
 <ion-tabs>
   <ion-tab-bar slot="top">
+    <ion-menu-button>
+      <ion-icon name="menu-outline"></ion-icon>
+    </ion-menu-button>
     <div id="logoName">
       <ion-label id="logoNameFirst">veg</ion-label>
       <ion-label id="logoNameSecond">astro</ion-label>
+      <ion-icon id="logoIcon" src="../../../assets/Logo.svg"></ion-icon>
     </div>
-    <ion-icon id="logoIcon" src="../../../assets/Logo.svg"></ion-icon>
   </ion-tab-bar>
 </ion-tabs>
+
+<ion-menu contentId="logoIcon">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu Content</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">This is the menu content.</ion-content>
+</ion-menu>
