@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../restaurantCardDetail/restaurantCardDetail.module').then(m => m.RestaurantCardDetailModule)
       },
       {
+        path: 'restaurantRegistration',
+        loadChildren: () => import('../restaurantRegistration/restaurantRegistration.module').then(m => m.RestaurantsRegistrationModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
