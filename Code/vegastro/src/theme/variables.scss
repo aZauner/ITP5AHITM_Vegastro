@@ -93,6 +93,14 @@
     --ion-background-color: #fff;
     --ion-underline-color: rgb(214, 214, 214);
   }
+
+  .ios body {
+    --ion-notch-size: 50px;
+  }
+
+  .md body {
+    --ion-notch-size: 0px;
+  }
 }
 
 
@@ -178,6 +186,7 @@
    */
 
   .ios body {
+    --ion-notch-size: 50px;
     --ion-background-color: #000000;
     --ion-background-color-rgb: 0, 0, 0;
 
@@ -222,6 +231,7 @@
    */
 
   .md body {
+    --ion-notch-size: 0px;
     --ion-background-color: #121212;
     --ion-background-color-rgb: 18, 18, 18;
 
