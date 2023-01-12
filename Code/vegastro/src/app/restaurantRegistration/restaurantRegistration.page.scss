@@ -1,27 +1,117 @@
-#restaurantCards {
-    overflow: scroll;
+ion-tab-bar{
+    height: 7vh;
+    border-color: var(--ion-tab-bar-background, var(--ion-color-step-50, #f7f7f7));
+    padding: 0 2vh 0 1vh;
+    padding-top: var(--ion-notch-size);
+    justify-content: space-between;    
+    right: 0;
 }
 
-ion-toolbar div {
-    width: 100%;
-    display: flex;
+
+ion-tabs {
     justify-content: flex-start;
 }
 
+ion-menu-button {
+    width: fit-content;
+    height: fit-content;
+    font-size: 5.5vh;
+    color: #48A734;
+}
+
+ion-searchbar{
+    background:none;
+}
+
+ion-breadcrumbs{
+    width: 100vw;
+}
+
 ion-button {
-    height: 4vh;
-    font-size: 2.2vh;
-    --padding-start: 1.5vh !important;
+    margin-left: 4vw;
+    --background: #48A734;
 }
 
-ion-button ion-icon {
-    padding-bottom: 0.3vh;
-    padding-right: 1vh;
-    font-size: 3vh;
+#logoIcon {
+    font-size: 5vh;
+    color: #48A734;
+    padding-left: 1vh;
+    width: 5.5vh;
 }
 
-h1 {
+#logoName {
+    margin-left: 2vw;
     font-size: 4vh;
-    margin: 3.5vh 16px 0 16px;
-    text-align: center;
+    display: flex;
+    align-items: center;    
 }
+
+#logoNameFirst {
+    color: #48A734;
+}
+
+#logoNameSecond {
+    color: var(--ion-text-color);
+}
+
+.inputwrapper{
+    position: relative;
+    margin-top: 0;
+}
+
+.inputblock{
+    position: absolute;
+    width: 100vw;       
+}
+
+.breadcrumbWrapper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;  
+    margin-top: 2vh;  
+}
+
+.breadcrumbActive{
+    font-size: larger;
+}
+
+ion-avatar{
+    background-color: #546351;
+    display: flex;
+    align-items: center;
+    justify-items: center; 
+    pointer-events: none;   
+}
+
+
+.active{
+    background-color: #48A734;  
+    pointer-events:all;   
+}
+
+ion-icon{
+    margin-left: auto;
+    margin-right: auto;    
+}
+
+.crumbleNum{
+    margin-left: auto;
+    margin-right: auto;    
+}
+
+.crumbleText{
+    margin-top: 1vh;
+    margin-bottom: 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+hr{
+    border-color: white;
+    background-color: white;  
+    width: 10vw;
+    height: 0.2vw; 
+    margin-left: 0%;
+    margin-right: 0%;
+}
+

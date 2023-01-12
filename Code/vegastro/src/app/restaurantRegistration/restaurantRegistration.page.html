@@ -1,12 +1,128 @@
-<ion-toolbar>
-  <div>
-    <ion-button [routerLink]="['/tabs']" id="backToMap" fill="clear">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-      <p>Zurück zur Karte</p>
-    </ion-button>
-  </div>
-</ion-toolbar>
 
-<ion-list id="restaurantCards">
-  <h1>T R E F F E R</h1>
-</ion-list>
+  <ion-tab-bar slot="top">  
+    <div id="logoName">
+      <ion-label id="logoNameFirst">veg</ion-label>
+      <ion-label id="logoNameSecond">astro</ion-label>
+      <ion-icon id="logoIcon" src="../../../assets/Logo.svg"></ion-icon>
+    </div>
+  </ion-tab-bar>
+
+  
+  <div class="breadcrumbWrapper">
+    <div >
+      <ion-avatar (click) = "showElement('input1')" id="bred1" class="active">
+        <p class="crumbleNum">1</p>
+      </ion-avatar>
+      <p class="crumbleText">User</p>
+    </div>
+      
+    <hr>
+
+    <div>
+      <ion-avatar (click) = "showElement('input2')" id="bred2">
+        <p class="crumbleNum">2</p>
+      </ion-avatar>
+      <p class="crumbleText">User</p>
+    </div>
+
+    <hr>
+
+    <div>
+      <ion-avatar (click) = "showElement('input3')" id="bred3">
+        <p class="crumbleNum">3</p>
+        <!-- <ion-icon name="checkmark-outline"></ion-icon> -->
+      </ion-avatar>
+      <p class="crumbleText">User</p> 
+    </div>  
+    
+    <hr>
+
+    <div>
+      <ion-avatar (click) = "showElement('input4')" id="bred4">
+        <p class="crumbleNum">4</p>
+        <!-- <ion-icon name="checkmark-outline"></ion-icon> -->
+      </ion-avatar>
+      <p class="crumbleText">User</p> 
+    </div> 
+  </div>
+
+  <!-- <ion-breadcrumbs>
+    <ion-breadcrumb (click) = "showElement('userInfo')" id="userInfoBred"  >User </ion-breadcrumb>
+    <ion-breadcrumb (click) = "showElement('restaurantInfo')" >restaurant</ion-breadcrumb>
+    <ion-breadcrumb class="test" >Cameras</ion-breadcrumb>    
+  </ion-breadcrumbs> -->
+
+  <div class="inputwrapper">
+    <div id="input1" class="inputblock" style="visibility: visible;">
+      <ion-item counter="true" >
+        <ion-label position="floating">Vorname</ion-label>
+        <ion-input maxlength="20"></ion-input>
+      </ion-item>
+
+      <ion-item counter="true">
+        <ion-label position="floating">Nachname</ion-label>
+        <ion-input maxlength="20"></ion-input>
+      </ion-item>
+
+      <ion-item counter="true" >
+        <ion-label position="floating">Geburtsdatum</ion-label>
+        <ion-input maxlength="20"></ion-input>
+      </ion-item>
+
+      <ion-item counter="true">
+        <ion-label position="floating">Ort</ion-label>
+        <ion-input maxlength="20"></ion-input>
+      </ion-item>
+
+      <ion-item counter="true">
+        <ion-label position="floating">Straße</ion-label>
+        <ion-input maxlength="20"></ion-input>
+      </ion-item>
+
+      <ion-button (click) = "nextElem()">weiter</ion-button>
+    </div>
+
+    <div id="input2" class="inputblock" style="visibility: hidden;">
+      <ion-item counter="true">
+        <ion-label position="floating">fdsf</ion-label>
+        <ion-input maxlength="20"></ion-input>
+      </ion-item>
+
+      <ion-item counter="true">
+        <ion-label position="floating">Nafdsfsdchname</ion-label>
+        <ion-input maxlength="20"></ion-input>
+      </ion-item>
+      <ion-button (click) = "nextElem()">weiter</ion-button>
+    </div>
+
+    <div id="input3" class="inputblock" style="visibility: hidden;">
+      <ion-item counter="true">
+        <ion-label position="floating">fdsf</ion-label>
+        <ion-input maxlength="20"></ion-input>
+      </ion-item>
+
+      <ion-item counter="true">
+        <ion-label position="floating">Nafdsfsdchname</ion-label>
+        <ion-input maxlength="20"></ion-input>
+      </ion-item>
+      <ion-button (click) = "nextElem()">weiter</ion-button>
+    </div>
+
+    <div id="input4" class="inputblock" style="visibility: hidden;">
+      <ion-item counter="true">
+        <ion-label position="floating">fdsf</ion-label>
+        <ion-input maxlength="20"></ion-input>
+      </ion-item>
+
+      <ion-item counter="true">
+        <ion-label position="floating">Nafdsfsdchname</ion-label>
+        <ion-input maxlength="20"></ion-input>
+      </ion-item>
+      <ion-button >Fertig</ion-button>
+    </div>
+  </div>
+
+  <!-- <ion-item id="custom-item" counter="true" [counterFormatter]="customCounterFormatter">
+    <ion-label position="floating">Custom Counter Format</ion-label>
+    <ion-input maxlength="20"></ion-input>
+  </ion-item> -->
