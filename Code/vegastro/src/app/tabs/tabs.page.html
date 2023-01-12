@@ -17,5 +17,29 @@
       <ion-title>Menu Content</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">This is the menu content.</ion-content>
+  <ion-content class="ion-padding">
+
+
+    <ion-menu-toggle>
+      <ion-button fill="clear" [routerLink]="'tab1'">
+        <ion-icon name="map-outline"></ion-icon>      
+        Karte                                         
+      </ion-button>                                   
+    </ion-menu-toggle>                                    
+
+    <ion-menu-toggle>                                 
+      <ion-button fill="clear" [routerLink]="'tab2'">
+        <ion-icon name="restaurant-outline"></ion-icon>
+        Restaurant
+      </ion-button>
+    </ion-menu-toggle>
+
+    <ion-menu-toggle>
+      <ion-button fill="clear" [routerLink]="">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        Profil
+      </ion-button>
+    </ion-menu-toggle>
+
+  </ion-content>
 </ion-menu>
