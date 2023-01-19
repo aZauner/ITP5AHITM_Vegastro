@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
 
 <div id="searchbar">
@@ -14,16 +15,21 @@
   <div id="filter" style="visibility: hidden;">
     <h1>K A T E G O R I E N</h1>
   </div>
-</div>
 
+  <div id="btnDivBox">
+  <ion-button id="hitBtn" fill="clear"  expand="block" [routerLink]="['/tabs','tab2']">
+    Treffer
+
+  </ion-button>
+  <ion-icon slot="icon-only" id="locate" name="locate" (click)="setMapToUserLocation()"></ion-icon>
+
+</div>
+</div>
+<!--
 <ion-footer>
   <ion-toolbar>
     <div>
-      <ion-button fill="clear" id="hits" expand="block" [routerLink]="['/tabs','tab2']">
-        Treffer
-        <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-      </ion-button>
-      <ion-icon slot="icon-only" id="locate" name="locate" (click)="setMapToUserLocation()"></ion-icon>
+      
     </div>
   </ion-toolbar>
-</ion-footer>
+</ion-footer>-->

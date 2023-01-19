@@ -12,13 +12,32 @@ p {
     text-align: center;
 }
 
-#hits {
+
+
+#btnDivBox {
+    z-index: 10000;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+}
+#hitBtn{
+    border-radius: 20px;
     --color: var(--ion-text-color);
     font-weight: bold;
-    font-size: 3vh;
     height: fit-content;
-    padding-top: 0.5vh;
+    font-size: 3vh;
+    padding: 1vh;
+    margin-right: 2vh;
+    padding-top: 1.5vh;
+    background: rgb(74,215,57);
+    background: radial-gradient(circle, rgba(74,215,57,1) 0%, rgba(70,220,52,1) 100%); 
+    -webkit-box-shadow: 1px 1px 18px 2px rgba(0,0,0,0.28); 
+    box-shadow: 1px 1px 18px 2px rgba(0,0,0,0.28);
 }
+
+
 
 #hits ion-icon {
     padding-bottom: 0.5vh;
@@ -86,7 +105,7 @@ ion-footer ion-toolbar div {
 
 #filter h1 {
     font-size: 3.5vh;
-    color: rgba(var(--ion-text-color-rgb,0,0,0),0.5);
+    color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);
     margin: 0;
     padding: 2vh;
 }
