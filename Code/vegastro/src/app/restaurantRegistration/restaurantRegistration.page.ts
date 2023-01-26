@@ -33,12 +33,15 @@ export class RestaurantsRegistrationPage {
   nextElem(){    
     let elem = document.getElementById('bred' + this.position)!;
     document.getElementById('bred' + (this.position + 1))?.classList.add('active');
+    document.getElementById('hr' + this.position)?.classList.add('active');
     elem.removeChild(elem.firstChild!)
     let icon = document.createElement('ion-icon');
     icon.name = 'checkmark-outline'
     icon.style.margin = "auto auto"
+    icon.style.fontSize = "3vh"
     elem.appendChild(icon)
     this.position++;
     this.showElement('input' + this.position)    
   }
+
 }

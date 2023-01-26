@@ -18,7 +18,12 @@ const routes: Routes = [
       {
         path: 'restaurantDetail',
         loadChildren: () => import('../restaurantCardDetail/restaurantCardDetail.module').then(m => m.RestaurantCardDetailModule)
-      },      
+      },  
+      {    
+        path: 'restaurantRegistration',
+        redirectTo: '/restaurantRegistration',
+        pathMatch: 'full'
+      },    
       {
         path: '',
         redirectTo: '/tabs/tab1',

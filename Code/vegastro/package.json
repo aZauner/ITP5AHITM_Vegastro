@@ -34,6 +34,7 @@
     "@capacitor/status-bar": "4.1.0",
     "@ionic/angular": "^6.1.9",
     "@ionic/pwa-elements": "^3.1.1",
+    "axios": "^1.2.3",
     "ionicons": "^6.0.4",
     "leaflet": "^1.9.3",
     "rxjs": "~7.5.0",

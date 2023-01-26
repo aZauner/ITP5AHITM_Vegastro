@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as L from 'leaflet';
 import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Platform } from '@ionic/angular';
+import axios from 'axios';
 
 @Component({
   selector: 'map',
@@ -45,6 +46,16 @@ export class MapPage {
         this.userLocation = { lat: resp.coords.latitude, lon: resp.coords.longitude };
       });
     }, 20000);
+
+    axios.post('http://localhost:3000/auth/login', {
+      "email": "LinuxLover69@phppro.org",
+      "password": "1234"
+    }).then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   // //Get Location of User

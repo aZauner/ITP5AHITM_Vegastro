@@ -3,10 +3,15 @@ ion-tab-bar{
     border-color: var(--ion-tab-bar-background, var(--ion-color-step-50, #f7f7f7));
     padding: 0 2vh 0 1vh;
     padding-top: var(--ion-notch-size);
-    justify-content: space-between;    
+    justify-content: flex-end;    
     right: 0;
 }
 
+
+
+ion-content {
+    --overflow: hidden;
+}
 
 ion-tabs {
     justify-content: flex-start;
@@ -43,7 +48,8 @@ ion-button {
     margin-left: 2vw;
     font-size: 4vh;
     display: flex;
-    align-items: center;    
+    align-items: center;
+    
 }
 
 #logoNameFirst {
@@ -67,8 +73,11 @@ ion-button {
 .breadcrumbWrapper{
     display: flex;
     justify-content: space-around;
-    align-items: center;  
-    margin-top: 2vh;  
+    align-items: flex-start;  
+    margin-top: 2vh;
+    width: 90vw;  
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .breadcrumbActive{
@@ -76,7 +85,7 @@ ion-button {
 }
 
 ion-avatar{
-    background-color: #546351;
+    background-color: #9f9f9f;
     display: flex;
     align-items: center;
     justify-items: center; 
@@ -91,12 +100,13 @@ ion-avatar{
 
 ion-icon{
     margin-left: auto;
-    margin-right: auto;    
+    margin-right: auto;
 }
 
 .crumbleNum{
     margin-left: auto;
     margin-right: auto;    
+    color: white;
 }
 
 .crumbleText{
@@ -107,11 +117,12 @@ ion-icon{
 }
 
 hr{
-    border-color: white;
-    background-color: white;  
+    background-color: rgb(132, 132, 132);  
     width: 10vw;
-    height: 0.2vw; 
+    height: 0.8vw; 
     margin-left: 0%;
     margin-right: 0%;
+    border-radius: 10vh;
+    margin-top: 2.7vh;
 }
 
