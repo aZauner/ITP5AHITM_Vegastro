@@ -17,4 +17,9 @@ export class RestaurantController {
   create(@Body() restaurant: CreateRestaurantDto): Promise<RestaurantDocument | null> {
     return this.restaurantService.create(restaurant);
   }
+
+  @Get('getNearPosition/:northLat/:northLon/:southLat/:southLon')
+  findRestaqurantsNearPosition(@Param('northLat') northLat: number , @Param('northLon') northLon: number, @Param('southLat') southLat: number , @Param('southLon') southLon: number): Promise<RestaurantDetails[] | null> {
+    return this.restaurantService.findRestaurantsNearPosion(northLat, northLon, southLat , southLon);
+  }
 }
