@@ -1,11 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Restaurant, RestaurantDocument } from 'src/schema/restaurant.schema';
-import { User, UserDocument } from '../schema/user.schema';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { RestaurantDetails } from './entities/restaurant.entity';
-import {getConnection, getRepository} from "typeorm"; 
 
 @Injectable()
 export class RestaurantService {
@@ -20,9 +18,9 @@ export class RestaurantService {
     northLon: number,
     southLat: number,
     southLon: number,
-  ): Promise<RestaurantDetails[]> {
-    let restaurants = await this.restaurantModel.find({latitude: {$lt: northLat, $gt: southLat}, longitude: {$gt: northLon, $lt: southLon}}).exec();    
-    if (!restaurants) return null;
+  ): Promise<RestaurantDetails[] | HttpException> {
+    let restaurants = await this.restaurantModel.find({latitude: {$lt: northLat, $gt: southLat}, longitude: {$lt: northLon, $gt: southLon}}).exec();    
+    if (!restaurants || restaurants.length == 0) return new HttpException('Keine Restaurants gefunden', HttpStatus.NOT_FOUND);
     let rest: RestaurantDetails[] = []
     restaurants.forEach(element => {
       rest.push(this._getRestaurantDetails(element))
@@ -37,6 +35,7 @@ export class RestaurantService {
       restaurantName: restaurant.restaurantName,
       latitude: restaurant.latitude,
       longitude: restaurant.longitude,
+      // owner: restaurant.owner
     };
   }
 

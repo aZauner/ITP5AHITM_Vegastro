@@ -39,6 +39,12 @@ export class MapPage {
         this.map.invalidateSize();
       }, 0);
       this.addMarker(48.0349017, 13.7643518, this.defaultMarker);
+
+      const bounds = this.map.getBounds();
+
+      axios.get('http://localhost:3000/restaurant/getNearPosition/' + bounds.getNorthEast().lat + '/' + bounds.getNorthEast().lng + '/' + bounds.getSouthWest().lat + '/' + bounds.getSouthWest().lng).then((response) => {
+        console.log(response);
+      })
     });
 
     setInterval(() => {
@@ -49,27 +55,13 @@ export class MapPage {
 
 
     setInterval(() => {
-         console.log(this.map.getBounds());          
+      console.log(this.map.getBounds());
     }, 2000);
 
-    // axios.post('http://localhost:3000/auth/login', {
-    //   "email": "LinuxLover69@phppro.org",
-    //   "password": "1234"
-    // }).then(function (response) {
-    //   console.log(response);
+
+    // axios.get('http://localhost:3000/restaurant/restaurant2').then( (response)=>{
+    //   console.log(response);      
     // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
-
-    let bounds = this.map.getBounds();
-    axios.get('http://localhost:3000/restaurant/getNearPosition/' + bounds.getNorthEast().lat + '/' + bounds.getNorthEast().lng + '/'+ bounds.getSouthWest().lat + '/' + bounds.getSouthWest().lng).then( (response)=>{
-      console.log(response);      
-    })
-
-    axios.get('http://localhost:3000/restaurant/restaurant2').then( (response)=>{
-      console.log(response);      
-    })
   }
 
   // //Get Location of User
@@ -173,9 +165,9 @@ export class MapPage {
           document.getElementById("searchbar")?.appendChild(item);
         }
       }, this.address);
-    }, 250); 
+    }, 250);
 
-    
+
 
   }
 
