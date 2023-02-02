@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('../restaurants/restaurants.module').then(m => m.RestaurantsModule)
       },
       {
+        path: 'usertab',
+        loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule)
+      },
+      {
         path: 'restaurantDetail',
         loadChildren: () => import('../restaurantCardDetail/restaurantCardDetail.module').then(m => m.RestaurantCardDetailModule)
       },  

@@ -12,29 +12,39 @@ p {
     text-align: center;
 }
 
-
+#locate {
+    background: (--ion-background-color)
+}
 
 #btnDivBox {
-    z-index: 10000;
-    position: absolute;
+    z-index: 12000;
     display: flex;
+    position: absolute;
+    bottom: 3vh;
     flex-direction: row;
     justify-content: center;
-    width: 100vw;
+    width: auto;
+    padding: 1.3vh 2vh;
+    border-radius: 3.5vw;
+
+    -webkit-box-shadow: 5px 5px 13px 0px rgba(163, 163, 163, 1);
+    -moz-box-shadow: 5px 5px 13px 0px rgba(163, 163, 163, 1);
+    box-shadow: 5px 5px 13px 0px rgba(163, 163, 163, 1);
+    background-color: var(--ion-background-color);
 }
-#hitBtn{
-    border-radius: 20px;
-    --color: var(--ion-text-color);
+
+#hitBtn {
+    border-radius: 2vw;
+    color: white;
     font-weight: bold;
     height: fit-content;
     font-size: 3vh;
     padding: 1vh;
     margin-right: 2vh;
     padding-top: 1.5vh;
-    background: rgb(74,215,57);
-    background: radial-gradient(circle, rgba(74,215,57,1) 0%, rgba(70,220,52,1) 100%); 
-    -webkit-box-shadow: 1px 1px 18px 2px rgba(0,0,0,0.28); 
-    box-shadow: 1px 1px 18px 2px rgba(0,0,0,0.28);
+    background: rgb(74, 215, 57);
+    background: radial-gradient(circle, rgba(74, 215, 57, 1) 0%, rgba(70, 220, 52, 1) 100%);
+
 }
 
 
