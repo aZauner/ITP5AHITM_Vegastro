@@ -8,7 +8,6 @@ import { RestaurantDetails } from './entities/restaurant.entity';
 @Injectable()
 export class RestaurantService {
   constructor(
-    
     @InjectModel(Restaurant.name)
     private readonly restaurantModel: Model<RestaurantDocument>,
   ) {}
@@ -19,12 +18,30 @@ export class RestaurantService {
     southLat: number,
     southLon: number,
   ): Promise<RestaurantDetails[] | HttpException> {
-    let restaurants = await this.restaurantModel.find({latitude: {$lt: northLat, $gt: southLat}, longitude: {$lt: northLon, $gt: southLon}}).exec();    
-    if (!restaurants || restaurants.length == 0) return new HttpException('Keine Restaurants gefunden', HttpStatus.NOT_FOUND);
-    let rest: RestaurantDetails[] = []
-    restaurants.forEach(element => {
-      rest.push(this._getRestaurantDetails(element))
-    });
+    let restaurants = await this.restaurantModel
+      .find({
+        latitude: { $lt: northLat, $gt: southLat },
+        longitude: { $lt: northLon, $gt: southLon },
+      })
+      .exec();
+
+    if (restaurants.length == 0) {
+      return new HttpException(
+        'Keine Restaurants gefunden',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    let rest: RestaurantDetails[] = [];
+
+    if (restaurants.length <= 20) {
+      restaurants.forEach((element) => {
+        rest.push(this._getRestaurantDetails(element));
+      });
+    }else{
+      for (let i = 0; i < 20; i++) {
+        rest.push(this._getRestaurantDetails(restaurants[Math.floor(Math.random() * restaurants.length)]));
+      }
+    }
 
     return rest;
   }
