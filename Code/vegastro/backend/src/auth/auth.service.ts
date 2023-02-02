@@ -16,13 +16,13 @@ export class AuthService {
   }
 
   async register(user: Readonly<CreateUserDto>): Promise <UserDetails | any>{
-    const { firstname, lastname, email, password} = user;
+    const { firstname, lastname, username, email, password} = user;
 
     const existingUser = await this.userService.findByMail(email);
     if(existingUser) return new HttpException('User exists already', HttpStatus.FORBIDDEN)
 
     const hashedPassword = await this.hashPassword(password);
-    const newUser = await this.userService.create(firstname, lastname, email, hashedPassword);
+    const newUser = await this.userService.create(firstname, lastname, username, email, hashedPassword);
     return this.userService._getUserDetails(newUser);
   }
 

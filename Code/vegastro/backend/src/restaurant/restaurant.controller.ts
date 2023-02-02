@@ -14,7 +14,7 @@ export class RestaurantController {
   }
 
   @Post('create')
-  create(@Body() restaurant: CreateRestaurantDto): Promise<RestaurantDocument | null> {
+  create(@Body() restaurant: CreateRestaurantDto): Promise<RestaurantDocument | HttpException> {
     return this.restaurantService.create(restaurant);
   }
 

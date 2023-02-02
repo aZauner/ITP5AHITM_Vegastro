@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
-import { UserDetails } from 'src/user/entities/user.entity';
 import { User } from './user.schema';
 @Schema()
 export class Restaurant {
@@ -12,6 +11,9 @@ export class Restaurant {
   
   @Prop({required:true})
   longitude: number;
+
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true})
+  owner: User
 }
 
 export type RestaurantDocument = Restaurant & Document;

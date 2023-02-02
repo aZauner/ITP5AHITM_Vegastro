@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Restaurant, RestaurantDocument } from 'src/schema/restaurant.schema';
+import { User, UserDocument } from 'src/schema/user.schema';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { RestaurantDetails } from './entities/restaurant.entity';
 
@@ -9,7 +10,9 @@ import { RestaurantDetails } from './entities/restaurant.entity';
 export class RestaurantService {
   constructor(
     @InjectModel(Restaurant.name)
-    private readonly restaurantModel: Model<RestaurantDocument>,
+    private readonly restaurantModel: Model<RestaurantDocument>, 
+    @InjectModel(User.name)
+    private readonly userModel: Model<UserDocument>
   ) {}
 
   async findRestaurantsNearPosion(
@@ -52,19 +55,24 @@ export class RestaurantService {
       restaurantName: restaurant.restaurantName,
       latitude: restaurant.latitude,
       longitude: restaurant.longitude,
-      // owner: restaurant.owner
+      owner: restaurant.owner
     };
   }
 
   async findByName(name: string): Promise<RestaurantDetails | null> {
     const restaurant = await this.restaurantModel
-      .findOne({ restaurantName: name })
+      .findOne({ restaurantName: name }).populate('owner', '', this.userModel)
       .exec();
     if (!restaurant) return null;
     return this._getRestaurantDetails(restaurant);
   }
 
-  async create(restaurant: CreateRestaurantDto): Promise<RestaurantDocument> {
+  async create(restaurant: CreateRestaurantDto): Promise<RestaurantDocument | HttpException> {
+    const owner = await this.userModel.findOne({username: restaurant.owner}).exec();
+
+    if (!owner) return new HttpException('Es existiert kein User mit diesem Username',HttpStatus.NOT_FOUND);
+
+    restaurant.owner = owner;
     const newRestaurant = new this.restaurantModel(restaurant);
     return newRestaurant.save();
   }

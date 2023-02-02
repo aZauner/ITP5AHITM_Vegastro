@@ -13,6 +13,7 @@ export class UserService {
       id: user._id,
       firstname: user.firstname,
       lastname: user.lastname,
+      username: user.username,
       email: user.email
     };  
   }
@@ -27,11 +28,12 @@ export class UserService {
     return this.userModel.findOne({email}).exec();
   }
 
-  async create(firstname: string, lastname:string, email:string, hashedPassword: string): Promise<UserDocument>{
+  async create(firstname: string, lastname:string, username: string, email:string, hashedPassword: string): Promise<UserDocument>{
     const newUser = new this.userModel({
       firstname,
       lastname,
       email,
+      username,
       password:hashedPassword,
     });
     return newUser.save();
