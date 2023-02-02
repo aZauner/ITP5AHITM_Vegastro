@@ -69,9 +69,7 @@ export class UserService {
     favouriteRestaurants.push(restaurant);
     console.log(favouriteRestaurants);
     
-      this.userModel.updateOne({username : username} , {$set : {favouriteRestaurants : favouriteRestaurants}} )
-      .findOne({ restaurantName: restaurantName })
-      .exec();
+      this.userModel.updateOne({username : username} , {$set : {favouriteRestaurants : favouriteRestaurants}} ).exec();
 
       return HttpStatus.OK;
 
