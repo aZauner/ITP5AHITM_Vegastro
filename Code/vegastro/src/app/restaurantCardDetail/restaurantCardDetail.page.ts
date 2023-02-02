@@ -50,10 +50,18 @@ export class RestaurantCardDetail {
   @ViewChild('favouriteStarWrapper') d1!:ElementRef;
   ngAfterViewInit() {
     if(false){
-      this.d1.nativeElement.insertAdjacentHTML('beforeend', '<ion-icon name="star-outline" style="color: grey"></ion-icon>');
+      this.d1.nativeElement.insertAdjacentHTML('beforeend', '<ion-icon name="star-outline" style="color: grey" id="star"></ion-icon>');
     }else{
-      this.d1.nativeElement.insertAdjacentHTML('beforeend', '<ion-icon name="star" style="color: yellow"></ion-icon>');
+      this.d1.nativeElement.insertAdjacentHTML('beforeend', '<ion-icon name="star" style="color: yellow" id="star"></ion-icon>');
     }
+
+    let star = document.getElementById('star');
+
+    star?.addEventListener('click' , ()=>{
+      document.getElementById('favouriteStarWrapper')!.innerHTML = '';  
+      this.d1.nativeElement.insertAdjacentHTML('beforeend', '<ion-icon name="star-outline" style="color: grey" id="star"></ion-icon>');
+      
+    })
    
   }
 }
