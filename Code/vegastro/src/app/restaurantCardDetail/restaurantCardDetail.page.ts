@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MealService } from '../meal/mealService';
 import { RestaurantCardInputs } from '../restaurantCard/restaurantCard.component';
@@ -26,6 +26,8 @@ export class RestaurantCardDetail {
       description: "This is a Mc Donalds"
     };
 
+   
+
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation()?.extras?.state?.['inputs'] != undefined) {
         this.inputs = this.router.getCurrentNavigation()?.extras?.state?.['inputs'];
@@ -44,4 +46,14 @@ export class RestaurantCardDetail {
     }
   }
 
+
+  @ViewChild('favouriteStarWrapper') d1!:ElementRef;
+  ngAfterViewInit() {
+    if(false){
+      this.d1.nativeElement.insertAdjacentHTML('beforeend', '<ion-icon name="star-outline" style="color: grey"></ion-icon>');
+    }else{
+      this.d1.nativeElement.insertAdjacentHTML('beforeend', '<ion-icon name="star" style="color: yellow"></ion-icon>');
+    }
+   
+  }
 }
