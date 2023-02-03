@@ -6,7 +6,7 @@ import { RestaurantService } from './restaurant.service';
 
 @Controller('restaurant')
 export class RestaurantController {
-  constructor(private readonly restaurantService: RestaurantService) {}
+  constructor(private readonly restaurantService: RestaurantService) { }
 
   @Get(':name')
   findOne(@Param('name') name: string): Promise<RestaurantDetails | null> {
@@ -19,12 +19,12 @@ export class RestaurantController {
   }
 
   @Get('getNearPosition/:northLat/:northLon/:southLat/:southLon')
-  findRestaqurantsNearPosition(@Param('northLat') northLat: number , @Param('northLon') northLon: number, @Param('southLat') southLat: number , @Param('southLon') southLon: number): Promise<RestaurantDetails[] | HttpException> {
-    return this.restaurantService.findRestaurantsNearPosion(northLat, northLon, southLat , southLon);
+  findRestaqurantsNearPosition(@Param('northLat') northLat: number, @Param('northLon') northLon: number, @Param('southLat') southLat: number, @Param('southLon') southLon: number): Promise<RestaurantDetails[] | HttpException> {
+    return this.restaurantService.findRestaurantsNearPosion(northLat, northLon, southLat, southLon);
   }
 
   @Get()
-  getAllRestaurants(): Promise<RestaurantDetails[] | HttpException> { 
+  getAllRestaurants(): Promise<RestaurantDetails[] | HttpException> {
     return this.restaurantService.getAllRstaurants();
   }
 }

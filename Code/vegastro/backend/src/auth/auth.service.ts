@@ -35,7 +35,6 @@ export class AuthService {
     const userExist = !!user;
 
     if (!userExist) return null;
-    console.log(user + " " + password);
     
     const doespasswordMatch = await this.passwordMatch(password, user.password)
     if (!doespasswordMatch) return null;

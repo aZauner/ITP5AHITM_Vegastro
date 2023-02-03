@@ -22,4 +22,4 @@ import { UserModule } from 'src/user/user.module';
   providers: [RestaurantService],
   controllers: [RestaurantController],
 })
-export class RestaurantModule {}
+export class RestaurantModule { }
