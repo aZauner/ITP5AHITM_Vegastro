@@ -1,4 +1,4 @@
-import { FoodType } from "src/schema/restaurant.schema";
+import { FoodType, LocationRestaurant } from "src/schema/restaurant.schema";
 import { User } from "src/schema/user.schema";
 
 export interface RestaurantDetails {
@@ -9,4 +9,5 @@ export interface RestaurantDetails {
     owner: User;
     type: FoodType;
     description: string;
+    location: LocationRestaurant;
 }

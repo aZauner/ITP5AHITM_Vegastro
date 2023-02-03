@@ -1,11 +1,20 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
+import mongoose, { Document, PromiseProvider } from 'mongoose';
 import { User } from './user.schema';
 
 export enum FoodType {
   Meat = "meat",
   Vegetarian = "vegetarian",
   Vegan = "vegan"
+}
+
+export interface LocationRestaurant {
+  city: string
+  plz: number
+  street: string
+  housenumber: number
+  floor?: number
+  doornumber?: string
 }
 
 @Schema()
@@ -27,6 +36,9 @@ export class Restaurant {
 
   @Prop({ required: false })
   description: string;
+
+  @Prop({ required: true, type: Object })
+  location: LocationRestaurant
 }
 
 export type RestaurantDocument = Restaurant & Document;

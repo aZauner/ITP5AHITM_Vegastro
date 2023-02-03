@@ -57,7 +57,8 @@ export class RestaurantService {
       longitude: restaurant.longitude,
       owner: restaurant.owner,
       type: restaurant.type,
-      description: restaurant.description
+      description: restaurant.description,
+      location: restaurant.location
     };
   }
 

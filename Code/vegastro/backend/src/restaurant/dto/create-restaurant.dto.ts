@@ -1,4 +1,4 @@
-import { FoodType } from "src/schema/restaurant.schema";
+import { FoodType, LocationRestaurant } from "src/schema/restaurant.schema";
 import { User } from "src/schema/user.schema";
 
 export class CreateRestaurantDto {
@@ -8,4 +8,5 @@ export class CreateRestaurantDto {
     owner: string | User;
     type: FoodType;
     description: string;
+    location: LocationRestaurant;
 }
