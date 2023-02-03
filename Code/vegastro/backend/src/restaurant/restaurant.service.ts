@@ -7,7 +7,7 @@ import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { RestaurantDetails } from './entities/restaurant.entity';
 
 @Injectable()
-export class RestaurantService {
+export class RestaurantService {  
   constructor(
     @InjectModel(Restaurant.name)
     private readonly restaurantModel: Model<RestaurantDocument>, 
@@ -75,5 +75,18 @@ export class RestaurantService {
     restaurant.owner = owner;
     const newRestaurant = new this.restaurantModel(restaurant);
     return newRestaurant.save();
+  }
+
+  async getAllRstaurants(): Promise<HttpException | RestaurantDetails[]> {
+    const restaurants = await this.restaurantModel
+      .find()
+      .exec();
+    if (!restaurants) return new HttpException('keine Restaurants gefunden', HttpStatus.NOT_FOUND);
+
+    let restaurnArry = [];
+    for (const rest of restaurants) { 
+      restaurnArry.push(this._getRestaurantDetails(rest))
+    }
+    return restaurnArry;
   }
 }

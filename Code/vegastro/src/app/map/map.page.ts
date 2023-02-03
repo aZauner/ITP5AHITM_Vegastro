@@ -68,9 +68,7 @@ export class MapPage {
       this.updateMarkers();
     }, 1000);
 
-    // axios.get('http://localhost:3000/restaurant/restaurant2').then( (response)=>{
-    //   console.log(response);
-    // })
+    
   }
 
   updateMarkers() {

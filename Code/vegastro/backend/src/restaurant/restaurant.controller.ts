@@ -22,4 +22,9 @@ export class RestaurantController {
   findRestaqurantsNearPosition(@Param('northLat') northLat: number , @Param('northLon') northLon: number, @Param('southLat') southLat: number , @Param('southLon') southLon: number): Promise<RestaurantDetails[] | HttpException> {
     return this.restaurantService.findRestaurantsNearPosion(northLat, northLon, southLat , southLon);
   }
+
+  @Get()
+  getAllRestaurants(): Promise<RestaurantDetails[] | HttpException> { 
+    return this.restaurantService.getAllRstaurants();
+  }
 }
