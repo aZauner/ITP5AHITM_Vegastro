@@ -12,11 +12,11 @@ import axios from 'axios';
   templateUrl: 'map.page.html',
   styleUrls: ['map.page.scss'],
 })
-export class MapPage {
+export class MapPage {  
   address: string = '';
   userLocation: { lat: number; lon: number } = { lat: 0, lon: 0 };
   userMarker!: L.CircleMarker;
-  map!: L.Map;
+  static map: L.Map;
   defaultMarker: L.Icon = L.icon({
     iconUrl: '../../assets/MarkerPoint3.svg',
     iconSize: [22, 22], // size of the icon
@@ -34,7 +34,7 @@ export class MapPage {
         lat: resp.coords.latitude,
         lon: resp.coords.longitude,
       };
-      this.map = L.map('map', {
+      MapPage.map = L.map('map', {
         center: [resp.coords.latitude, resp.coords.longitude],
         zoom: 15,
         renderer: L.canvas(),
@@ -42,16 +42,15 @@ export class MapPage {
       this.userMarker = L.circleMarker([
         resp.coords.latitude,
         resp.coords.longitude,
-      ]).addTo(this.map);
+      ]).addTo(MapPage.map);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© Vegastro',
-      }).addTo(this.map);
+      }).addTo(MapPage.map);
 
       setTimeout(() => {
-        this.map.invalidateSize();
+        MapPage.map.invalidateSize();
       }, 0);
-      this.addMarker(48.0349017, 13.7643518, this.defaultMarker);
       this.updateMarkers();
     });
 
@@ -72,7 +71,7 @@ export class MapPage {
   }
 
   updateMarkers() {
-    const bounds = this.map.getBounds();
+    const bounds = MapPage.map.getBounds();
     if (
       bounds.getNorthEast().lat != this.currentNorthEastLat ||
       bounds.getNorthEast().lng != this.currentNorthEastLon ||
@@ -95,16 +94,16 @@ export class MapPage {
             bounds.getSouthWest().lng
         )
         .then((response) => {    
-          console.log(response);
+          // console.log(response);
 
           if (response.data.status != 404) {            
             for(const marker of this.activeMarkers){
-              this.map.removeLayer(marker);                          
+              MapPage.map.removeLayer(marker);                          
             }
             this.activeMarkers= [];
 
             for (const restaurant of response.data) {  
-              let marker =  L.marker([restaurant.latitude, restaurant.longitude], { icon: this.defaultMarker }).addTo(this.map); 
+              let marker =  L.marker([restaurant.latitude, restaurant.longitude], { icon: this.defaultMarker }).addTo(MapPage.map); 
               this.activeMarkers.push(marker);
             }
           }
@@ -114,11 +113,11 @@ export class MapPage {
 
   // //Get Location of User
   setMapToUserLocation() {
-    this.map.setView([this.userLocation.lat, this.userLocation.lon], 15);
+    MapPage.map.setView([this.userLocation.lat, this.userLocation.lon], 15);
     this.geolocation
       .getCurrentPosition()
       .then((resp) => {
-        this.map.setView([resp.coords.latitude, resp.coords.longitude], 15);
+        MapPage.map.setView([resp.coords.latitude, resp.coords.longitude], 15);
         this.userMarker.setLatLng([
           resp.coords.latitude,
           resp.coords.longitude,
@@ -130,7 +129,7 @@ export class MapPage {
   }
 
   addMarker(latitude: number, longitude: number, icon: L.Icon) {
-    L.marker([latitude, longitude], { icon: icon }).addTo(this.map);
+    L.marker([latitude, longitude], { icon: icon }).addTo(MapPage.map);
   }
 
   addressSearch(enter: Boolean, index?: number) {
@@ -158,12 +157,12 @@ export class MapPage {
         }
         if (data.length > 0) {
           if (enter) {
-            this.map.setView(
+            MapPage.map.setView(
               [parseFloat(data[0].lat), parseFloat(data[0].lon)],
               14
             );
           } else if (index != undefined && index != null) {
-            this.map.setView(
+            MapPage.map.setView(
               [parseFloat(data[index].lat), parseFloat(data[index].lon)],
               14
             );
@@ -251,4 +250,8 @@ export class MapPage {
       btn.style.visibility = 'hidden';
     }
   }
+
+
+
 }
+
