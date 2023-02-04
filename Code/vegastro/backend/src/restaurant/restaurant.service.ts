@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Meal, MealDocument } from 'src/schema/meal.schema';
 import { Restaurant, RestaurantDocument } from 'src/schema/restaurant.schema';
 import { User, UserDocument } from 'src/schema/user.schema';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
@@ -12,7 +13,9 @@ export class RestaurantService {
     @InjectModel(Restaurant.name)
     private readonly restaurantModel: Model<RestaurantDocument>,
     @InjectModel(User.name)
-    private readonly userModel: Model<UserDocument>
+    private readonly userModel: Model<UserDocument>,
+    @InjectModel(Meal.name)
+    private readonly mealModel: Model<MealDocument>
   ) { }
 
   async findRestaurantsNearPosion(
@@ -58,13 +61,14 @@ export class RestaurantService {
       owner: restaurant.owner,
       type: restaurant.type,
       description: restaurant.description,
-      location: restaurant.location
+      location: restaurant.location,
+      menu: restaurant.menu
     };
   }
 
   async findByName(name: string): Promise<RestaurantDetails | null> {
     const restaurant = await this.restaurantModel
-      .findOne({ restaurantName: name }).populate('owner', '', this.userModel)
+      .findOne({ restaurantName: name }).populate('owner', '', this.userModel).populate('menu', '', this.mealModel)
       .exec();
     if (!restaurant) return null;
     return this._getRestaurantDetails(restaurant);

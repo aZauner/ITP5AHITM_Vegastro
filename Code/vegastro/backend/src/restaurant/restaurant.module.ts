@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Restaurant, RestaurantSchema } from '../schema/restaurant.schema';
 import { User, UserSchema } from 'src/schema/user.schema';
 import { UserModule } from 'src/user/user.module';
+import { Meal, MealSchema } from 'src/schema/meal.schema';
 
 @Module({
   imports: [
@@ -16,6 +17,10 @@ import { UserModule } from 'src/user/user.module';
       {
         name: Restaurant.name,
         schema: RestaurantSchema
+      },
+      {
+        name: Meal.name,
+        schema: MealSchema
       }
     ])
   ],
