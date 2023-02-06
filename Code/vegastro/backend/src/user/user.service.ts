@@ -67,7 +67,6 @@ export class UserService {
     let favouriteRestaurants = await this._getUserDetails(user).favouriteRestaurants
     
     favouriteRestaurants.push(restaurant);
-    console.log(favouriteRestaurants);
     
       this.userModel.updateOne({username : username} , {$set : {favouriteRestaurants : favouriteRestaurants}} ).exec();
 

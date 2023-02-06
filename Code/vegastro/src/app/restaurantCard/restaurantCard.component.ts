@@ -1,14 +1,29 @@
 import { Component, Input } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { RestaurantCardDetail } from '../restaurantCardDetail/restaurantCardDetail.page';
+enum MealType 
+  {
+    Meat = "meat",
+    Vegetarian = "vegetarian",
+    Vegan = "vegan"
+  }
+
+interface MealDto {
+  _id: string;
+  title: string,
+  description?: string,
+  type: MealType
+}
 
 export interface RestaurantCardInputs {
-  id: number,
+  id: string,
   image: string,
   restaurantName: string,
   type: "MeatIcon.svg" | "VegetarianIcon.svg" | "VeganIcon.svg" | "meat" | "vegetarian" | "vegan",
   stars: number,
   description: string,
-  preDescr?: string
+  preDescr?: string,
+  menu?: [MealDto]
 }
 
 
@@ -20,7 +35,7 @@ export interface RestaurantCardInputs {
 
 export class RestaurantCard {
   defaultInputs: RestaurantCardInputs = {
-    id: 1,
+    id: "1",
     image: "pizzaDemo.png",
     restaurantName: "Mc Donalds",
     type: "VegetarianIcon.svg",

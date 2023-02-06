@@ -12,21 +12,23 @@ import axios from 'axios';
   templateUrl: 'map.page.html',
   styleUrls: ['map.page.scss'],
 })
-export class MapPage {  
+export class MapPage {
   address: string = '';
   userLocation: { lat: number; lon: number } = { lat: 0, lon: 0 };
   userMarker!: L.CircleMarker;
   static map: L.Map;
   defaultMarker: L.Icon = L.icon({
     iconUrl: '../../assets/MarkerPoint3.svg',
-    iconSize: [22, 22], // size of the icon
+    iconSize: [22, 22],
   });
   currentNorthEastLat: number = 0;
   currentNorthEastLon: number = 0;
   currentSouthWestLat: number = 0;
   currentSouthWestLon: number = 0;
-  activeMarkers : L.Marker[] = [];
-  constructor(protected platform: Platform, private geolocation: Geolocation) {}
+  activeMarkers: L.Marker[] = [];
+
+  constructor(protected platform: Platform, private geolocation: Geolocation) { }
+
   ngOnInit() {
     //Generate Start map
     this.geolocation.getCurrentPosition().then((resp) => {
@@ -63,11 +65,20 @@ export class MapPage {
       });
     }, 20000);
 
-    setInterval(() => {
-      this.updateMarkers();
-    }, 1000);
-
-    
+    const initInterval = setInterval(()=>{
+      try{
+        MapPage.map.on('drag', (e)=>{
+          this.updateMarkers();
+        });
+        MapPage.map.on('zoom', (e)=>{
+          this.updateMarkers();
+        });
+        MapPage.map.on('move', (e)=>{
+          this.updateMarkers();
+        });
+        clearInterval(initInterval);
+      } catch {}
+    },50)
   }
 
   updateMarkers() {
@@ -85,26 +96,23 @@ export class MapPage {
       axios
         .get(
           'http://localhost:3000/restaurant/getNearPosition/' +
-            bounds.getNorthEast().lat +
-            '/' +
-            bounds.getNorthEast().lng +
-            '/' +
-            bounds.getSouthWest().lat +
-            '/' +
-            bounds.getSouthWest().lng
+          bounds.getNorthEast().lat +
+          '/' +
+          bounds.getNorthEast().lng +
+          '/' +
+          bounds.getSouthWest().lat +
+          '/' +
+          bounds.getSouthWest().lng
         )
-        .then((response) => {    
-          // console.log(response);
-
-          if (response.data.status != 404) {            
-            for(const marker of this.activeMarkers){
-              MapPage.map.removeLayer(marker);                          
+        .then((response) => {
+          if (response.data.status != 404) {
+            for (const marker of this.activeMarkers) {
+              MapPage.map.removeLayer(marker);
             }
-            this.activeMarkers= [];
+            this.activeMarkers = [];
 
-            for (const restaurant of response.data) {  
-              let marker =  L.marker([restaurant.latitude, restaurant.longitude], { icon: this.defaultMarker }).addTo(MapPage.map); 
-              this.activeMarkers.push(marker);
+            for (const restaurant of response.data) {
+              this.addMarker(restaurant.latitude, restaurant.longitude, this.defaultMarker);
             }
           }
         });
@@ -129,7 +137,8 @@ export class MapPage {
   }
 
   addMarker(latitude: number, longitude: number, icon: L.Icon) {
-    L.marker([latitude, longitude], { icon: icon }).addTo(MapPage.map);
+    const marker = L.marker([latitude, longitude], { icon: icon }).addTo(MapPage.map);
+    this.activeMarkers.push(marker);
   }
 
   addressSearch(enter: Boolean, index?: number) {
@@ -250,8 +259,5 @@ export class MapPage {
       btn.style.visibility = 'hidden';
     }
   }
-
-
-
 }
 

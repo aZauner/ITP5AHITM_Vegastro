@@ -17,7 +17,8 @@ export class MealService {
       id: meal._id,
       title: meal.title,
       description: meal.description,
-      type: meal.type
+      type: meal.type,
+      allergic: meal.allergic
     };
   }
 
@@ -38,7 +39,7 @@ export class MealService {
     const meals = await this.mealModel
       .find()
       .exec();
-    if (!meals) return new HttpException('keine Gerichte gefunden', HttpStatus.NOT_FOUND);
+    if (!meals) return new HttpException('Keine Gerichte gefunden', HttpStatus.NOT_FOUND);
 
     let mealArr = [];
     for (const meal of meals) {

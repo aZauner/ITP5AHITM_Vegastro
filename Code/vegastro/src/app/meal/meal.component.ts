@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 export interface MealInputs {
-  id: number,
+  id: string,
   name: string,
   price: number,
   type: "MeatIcon.svg" | "VegetarianIcon.svg" | "VeganIcon.svg" | "meat" | "vegetarian" | "vegan",
@@ -16,7 +16,7 @@ export interface MealInputs {
 
 export class Meal {
   defaultInputs: MealInputs = {
-    id: 1,
+    id: "1",
     name: "Pizza Diavolo",
     price: 12.50,
     type: "VegetarianIcon.svg",

@@ -28,7 +28,7 @@ export class RestaurantService {
       .find({
         latitude: { $lt: northLat, $gt: southLat },
         longitude: { $lt: northLon, $gt: southLon },
-      })
+      }).populate('menu', '', this.mealModel)
       .exec();
 
     if (restaurants.length == 0) {
