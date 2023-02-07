@@ -78,4 +78,10 @@ export class RestaurantCardDetail {
     })
    
   }
+
+  
+ 
+   
+  
+
 }

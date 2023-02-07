@@ -24,7 +24,8 @@ export interface RestaurantCardInputs {
   stars: number,
   description: string,
   preDescr?: string,
-  menu?: [MealDto]
+  menu?: [MealDto],
+  fromMarker?: boolean
 }
 
 

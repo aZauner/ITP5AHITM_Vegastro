@@ -6,6 +6,9 @@ import {
 } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Platform } from '@ionic/angular';
 import axios from 'axios';
+import { RestaurantCard, RestaurantCardInputs } from '../restaurantCard/restaurantCard.component';
+import { RestaurantCardDetail } from '../restaurantCardDetail/restaurantCardDetail.page';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'map',
@@ -27,7 +30,7 @@ export class MapPage {
   currentSouthWestLon: number = 0;
   activeMarkers: L.Marker[] = [];
 
-  constructor(protected platform: Platform, private geolocation: Geolocation) { }
+  constructor(protected platform: Platform, private geolocation: Geolocation , private router: Router) { }
 
   ngOnInit() {
     //Generate Start map
@@ -112,7 +115,7 @@ export class MapPage {
             this.activeMarkers = [];
 
             for (const restaurant of response.data) {
-              this.addMarker(restaurant.latitude, restaurant.longitude, this.defaultMarker);
+              this.addMarker(restaurant);              
             }
           }
         });
@@ -136,8 +139,29 @@ export class MapPage {
       });
   }
 
-  addMarker(latitude: number, longitude: number, icon: L.Icon) {
-    const marker = L.marker([latitude, longitude], { icon: icon }).addTo(MapPage.map);
+  addMarker(restaurant : any) {
+    const marker = L.marker([restaurant.latitude , restaurant.longitude], { icon: this.defaultMarker }).addTo(MapPage.map);
+    marker.addEventListener('click' , ()=>{
+      
+      let inputs = {
+        id: restaurant._id,
+        image: "pizzaDemo.png",
+        restaurantName: restaurant.restaurantName,
+        type: restaurant.type,
+        stars: 4,
+        description: restaurant.description,        
+        menu: restaurant.menu,
+        fromMarker: true
+      }
+
+      let navigationExtras: NavigationExtras = {
+        state: {
+          inputs: inputs
+        }
+      };
+      this.router.navigate(['/tabs','restaurantDetail'], navigationExtras);       
+    })
+    
     this.activeMarkers.push(marker);
   }
 

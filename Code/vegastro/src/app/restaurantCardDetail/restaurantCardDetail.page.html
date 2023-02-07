@@ -2,9 +2,23 @@
     <img src="../../assets/{{inputs.image}}" alt="Restaurant Bild">
     <div class="wrapper outer">
         <div id="restaurantName">
-            <ion-buttons [routerLink]="['/tabs','tab2']" slot="start">
-                <ion-back-button defaultHref="tabs/tab2" text="" icon="arrow-back-outline"></ion-back-button>
-            </ion-buttons>
+
+            <ng-template [ngIf]="inputs.fromMarker" [ngIfElse]="fromListRouter">
+                <ion-buttons [routerLink]="['/tabs','tab1']" slot="start" >
+                    <ion-back-button defaultHref="tabs/tab1" text="" icon="arrow-back-outline"></ion-back-button>
+                </ion-buttons>
+            </ng-template>
+            <ng-template #fromListRouter>
+                <ion-buttons [routerLink]="['/tabs','tab2']" slot="start" #fromResultsRouter>
+                    <ion-back-button defaultHref="tabs/tab2" text="" icon="arrow-back-outline"></ion-back-button>
+                </ion-buttons>
+            </ng-template>
+
+
+            
+
+            
+
             <ion-icon class="typeIcon" src="../../assets/icon/{{inputs.type}}"></ion-icon>
             <h1>{{inputs.restaurantName}}</h1>
             <div id="favouriteStarWrapper" #favouriteStarWrapper >
