@@ -1,28 +1,4 @@
-table{
-    margin-left: 5vw;
-    width: 80vw;
-    margin-top: 2vh;
-}
-.firstColumn{
-    color: #4dcd33;
-    font-weight: bold;
-}
-td{
-    font-size: 1.2rem;
-}
-ion-content{
-}
-.secondColumn{
-    color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);
-    margin-left: 2vw;
-}
-input{
-    background: none;
-    border: none;
-    color: var(--ion-activated-button-color);
-    border-bottom: solid 0.1px white;
-    width: 40vw;
-}
-input:disabled{
-    border-color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);
+ion-avatar{
+    width: 30vw;
+    height: 30vw;
 }
