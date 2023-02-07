@@ -1,0 +1,34 @@
+
+  <ion-tab-bar slot="top">  
+    <div id="logoName">
+      <ion-label id="logoNameFirst">veg</ion-label>
+      <ion-label id="logoNameSecond">astro</ion-label>
+      <ion-icon id="logoIcon" src="../../../assets/Logo.svg"></ion-icon>
+    </div>
+  </ion-tab-bar>
+
+<ion-content>
+
+  <h1>L O G I N</h1>
+
+  <form [formGroup]="login" (ngSubmit)="executeLogin()">
+    
+      <div id="input1" class="inputblock" style="visibility: visible;">
+        <ion-item counter="true" >
+          <ion-label position="floating">Email</ion-label>
+          <ion-input maxlength="20" formControlName="email"  required></ion-input>         
+        </ion-item>
+
+        <ion-item counter="true">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input maxlength="20" formControlName="password"  required></ion-input>
+        </ion-item>
+
+        <ion-button ion-button type="submit" [disabled]="!login.valid">einloggen</ion-button>       
+      </div>   
+  
+  </form>  
+    
+
+</ion-content>
+
