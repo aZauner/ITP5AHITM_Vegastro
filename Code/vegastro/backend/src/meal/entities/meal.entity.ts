@@ -7,5 +7,6 @@ export interface MealDetails {
     title: string;
     description: string;
     type: FoodType;
+    price: number;
     allergic: AllergicType
 }

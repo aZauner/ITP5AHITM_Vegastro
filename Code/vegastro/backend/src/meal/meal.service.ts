@@ -18,6 +18,7 @@ export class MealService {
       title: meal.title,
       description: meal.description,
       type: meal.type,
+      price: meal.price,
       allergic: meal.allergic
     };
   }

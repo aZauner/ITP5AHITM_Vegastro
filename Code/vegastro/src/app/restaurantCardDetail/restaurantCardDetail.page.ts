@@ -50,9 +50,9 @@ export class RestaurantCardDetail {
         
         for (const meal of this.inputs.menu) {
           if(meal.description) {
-            this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: parseFloat((Math.random() * 16 + 4).toFixed(2)), type: meal.type, descr: meal.description });
+            this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: meal.price, type: meal.type, descr: meal.description });
           } else {
-            this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: parseFloat((Math.random() * 16 + 4).toFixed(2)), type: meal.type });
+            this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: meal.price, type: meal.type });
           }
         }
       }

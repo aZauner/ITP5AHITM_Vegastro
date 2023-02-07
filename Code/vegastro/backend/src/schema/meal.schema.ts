@@ -18,8 +18,11 @@ export class Meal {
   @Prop({ required: true, enum: FoodType })
   type: FoodType;
 
+  @Prop({ required: true })
+  price: number;
+
   @Prop({ required: false, enum: AllergicType })
-  allergic: AllergicType
+  allergic: AllergicType;
 }
 
 export type MealDocument = Meal & Document;
