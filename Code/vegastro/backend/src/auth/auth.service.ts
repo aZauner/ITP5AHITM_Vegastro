@@ -46,7 +46,7 @@ export class AuthService {
     const { email , password } = existingUser;
     const user = await this.validateUser(email, password)
 
-    if (!user) return new HttpException('wrong password', HttpStatus.FORBIDDEN);
+    if (!user) return new HttpException('wrong password', HttpStatus.NOT_FOUND);
 
     const jwt = await this.jwtService.signAsync({user})
     return {token: jwt};

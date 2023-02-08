@@ -16,15 +16,24 @@
       <div id="input1" class="inputblock" style="visibility: visible;">
         <ion-item counter="true" >
           <ion-label position="floating">Email</ion-label>
-          <ion-input maxlength="20" formControlName="email"  required></ion-input>         
+          <ion-input maxlength="30" formControlName="email"  required></ion-input>                   
         </ion-item>
-
+        <div class="error" >
+          <p *ngIf="checkMailValidation()">Keine Gültige Mail</p>
+        </div>
+        
         <ion-item counter="true">
           <ion-label position="floating">Password</ion-label>
-          <ion-input maxlength="20" formControlName="password"  required></ion-input>
+          <ion-input maxlength="50" formControlName="password"  required></ion-input>          
         </ion-item>
+        <div class="error" >
+          <p *ngIf="checkPasswordValidation()">keine gültiges Passwort</p>
+        </div>
 
-        <ion-button ion-button type="submit" [disabled]="!login.valid">einloggen</ion-button>       
+        <ion-button ion-button type="submit" [disabled]="!login.valid">einloggen</ion-button>
+        <div class="error" >
+          <p *ngIf="!foundUser">keine User gefunden</p>
+        </div>       
       </div>   
   
   </form>  

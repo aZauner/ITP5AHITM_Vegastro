@@ -33,9 +33,13 @@ ion-breadcrumbs{
 }
 
 ion-button {
+    margin-top: 2vh;
     margin-left: 4vw;
     --background: #48A734;
+    margin-bottom: 2vh;
 }
+
+
 
 #logoIcon {
     font-size: 5vh;
@@ -130,4 +134,18 @@ h1 {
     font-size: 4vh;
     margin: 4vh 16px 0 16px;    
 }
+
+.error{
+    color: red;   
+    margin-left: 6vw;    
+    font-size: 1.3vh;
+    height: 2vh;
+}
+
+p{
+    margin: 0;
+    padding: 0%;
+}
+
+
 
