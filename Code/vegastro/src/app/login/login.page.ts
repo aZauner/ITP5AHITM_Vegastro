@@ -14,9 +14,16 @@ export class LoginPage {
     this.login = this.formBuilder.group({
       email: ['', Validators.email ],      
       password: ['' , Validators.minLength(2)],
-    });    
+    });   
+    
+   
+    
   }
 
+   
+    ngDoCheck(){
+      console.log(this.login.controls["email"].errors);
+    }
   
 
   customCounterFormatter(inputLength: number, maxLength: number) {
