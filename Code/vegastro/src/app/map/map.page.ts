@@ -20,15 +20,13 @@ export class MapPage {
   userLocation: { lat: number; lon: number } = { lat: 0, lon: 0 };
   userMarker!: L.CircleMarker;
   static map: L.Map;
-  
-
-  
-
   currentNorthEastLat: number = 0;
   currentNorthEastLon: number = 0;
   currentSouthWestLat: number = 0;
   currentSouthWestLon: number = 0;
   activeMarkers: L.Marker[] = [];
+  olderZoomLevel = 14;
+  oldZoomLevel = 15;
 
   constructor(protected platform: Platform, private geolocation: Geolocation, private router: Router) { }
 
@@ -39,8 +37,8 @@ export class MapPage {
         lat: resp.coords.latitude,
         lon: resp.coords.longitude,
       };
-      
-      
+
+
       MapPage.map = L.map('map', {
         center: [resp.coords.latitude, resp.coords.longitude],
         zoom: 15,
@@ -87,6 +85,7 @@ export class MapPage {
   }
 
   updateMarkers() {
+
     const bounds = MapPage.map.getBounds();
     if (
       bounds.getNorthEast().lat != this.currentNorthEastLat ||
@@ -119,6 +118,10 @@ export class MapPage {
             for (const restaurant of response.data) {
               this.addMarker(restaurant);
             }
+            if (this.oldZoomLevel != MapPage.map.getZoom() && this.olderZoomLevel != this.oldZoomLevel) {
+              this.olderZoomLevel = this.oldZoomLevel;
+              this.oldZoomLevel = MapPage.map.getZoom()
+            }
           }
         });
     }
@@ -141,39 +144,65 @@ export class MapPage {
       });
   }
 
-  addMarker(restaurant: any) {    
-    let marker;   
+  addMarker(restaurant: any) {
+    let marker;
+    if (MapPage.map.getZoom() == 15 && this.oldZoomLevel < 15) {
+      marker = L.marker([restaurant.latitude, restaurant.longitude], {
+        icon: new L.DivIcon({
+          className: 'my-div-icon',
+          html: '<style>@keyframes fadeInAnimation {0% {opacity: 0;}100% {opacity: 1;}}</style><div style="min-width:fit-content;  transform: translate(-47%,-40%);">' +
+            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>' +
+            '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;' +
+            'animation: fadeInAnimation ease 500ms; animation-iteration-count: 1; animation-fill-mode: forwards;">' + restaurant.restaurantName + '</p>' +
+            '</div>'
+        })
+      })
+    } else if (MapPage.map.getZoom() >= 15) {
+      marker = L.marker([restaurant.latitude, restaurant.longitude], {
+        icon: new L.DivIcon({
+          className: 'my-div-icon',
+          html: '<div style="min-width:fit-content;  transform: translate(-47%,-40%);">' +
+            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>' +
+            '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;">' + restaurant.restaurantName + '</p>' +
+            '</div>'
+        })
+      })
+    } else if (this.oldZoomLevel > 14 && MapPage.map.getZoom() == 14 && this.olderZoomLevel >= 14) {
+      marker = L.marker([restaurant.latitude, restaurant.longitude], {
+        icon: new L.DivIcon({
+          className: 'my-div-icon',
+          html: '<style>@keyframes fadeInAnimation {0%{opacity:1;}100%{opacity:0}}</style>' +
+            '<div style=" min-width:fit-content; min-height: fit-content;  transform: translate(-47%,-40%);">' +
+            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>' +
+            '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;' +
+            'animation: fadeInAnimation ease 500ms; animation-iteration-count: 1; animation-fill-mode: forwards;">' + restaurant.restaurantName + '</p>' +
+            '</div>'
+        })
+      })
+    } else {
+      marker = L.marker([restaurant.latitude, restaurant.longitude], {
+        icon: new L.DivIcon({
+          className: 'my-div-icon',
+          html: '<div style="min-width:fit-content;  transform: translate(-47%,-40%);">' +
+            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>' +
+            '<p style="min-width:fit-content;display:block;color: black; opacity: 0; white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;">' + restaurant.restaurantName + '</p>' +
+            '</div>'
+        })
+      })
+    }
 
-    if(MapPage.map.getZoom()>= 15){
-      marker = L.marker([restaurant.latitude, restaurant.longitude], { icon: new L.DivIcon({
-        className: 'my-div-icon',
-        html: '<div style="min-width:fit-content;  transform: translate(-47%,-40%);">'+
-              '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>'+
-              '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold">' + restaurant.restaurantName +'</p>' +
-              '</div>'
-      }) })
-    }else{
-      marker = L.marker([restaurant.latitude, restaurant.longitude], { icon: new L.DivIcon({
-        className: 'my-div-icon',
-        html: '<div style="min-width:fit-content;  transform: translate(-40%,-70%);">'+
-              '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>'+              
-              '</div>'
-      }) })
-    }       
-    
-    
-    let content = document.createElement('div');
-    content.style.display = "flex";
-    content.style.alignItems = "center";
-    content.style.minWidth = "fit-content";
-    content.style.minHeight = "fit-content";
-    let name = document.createElement('p')
-    name.style.minWidth = "fit-content";
-    name.style.minHeight = "fit-content";
-    name.style.margin = '0 2vh 0 0';
-    name.style.fontSize = '2vh';
-    name.innerText = restaurant.restaurantName
-    content.addEventListener('click', () => {
+    // let content = document.createElement('div');
+    // content.style.display = "flex";
+    // content.style.alignItems = "center";
+    // content.style.minWidth = "fit-content";
+    // content.style.minHeight = "fit-content";
+    // let name = document.createElement('p')
+    // name.style.minWidth = "fit-content";
+    // name.style.minHeight = "fit-content";
+    // name.style.margin = '0 2vh 0 0';
+    // name.style.fontSize = '2vh';
+    // name.innerText = restaurant.restaurantName
+    marker.addEventListener('click', () => {
       let inputs = {
         id: restaurant._id,
         image: "pizzaDemo.png",
@@ -205,28 +234,28 @@ export class MapPage {
       this.router.navigate(['/tabs', 'restaurantDetail'], navigationExtras);
     });
 
-    let foodType;
-    switch (restaurant.type) {
-      case "meat":
-        foodType = "MeatIcon.svg";
-        break;
-      case "vegetarian":
-        foodType = "VegetarianIcon.svg";
-        break;
-      case "vegan":
-        foodType = "VeganIcon.svg";
-        break;
-    }
-    let icon = document.createElement("ion-icon");
-    icon.style.marginRight = "1vh";
-    icon.style.minWidth = "3vh";
-    icon.style.minHeight = "3vh";
-    icon.src = "../../assets/icon/" + foodType;
-    content.appendChild(icon);
-    content.appendChild(name);
-    content.className = "test";
-    let popup = L.popup({ autoClose: false, closeOnEscapeKey: false }).setContent(content);
-    marker.bindPopup(popup);
+    // let foodType;
+    // switch (restaurant.type) {
+    //   case "meat":
+    //     foodType = "MeatIcon.svg";
+    //     break;
+    //   case "vegetarian":
+    //     foodType = "VegetarianIcon.svg";
+    //     break;
+    //   case "vegan":
+    //     foodType = "VeganIcon.svg";
+    //     break;
+    // }
+    // let icon = document.createElement("ion-icon");
+    // icon.style.marginRight = "1vh";
+    // icon.style.minWidth = "3vh";
+    // icon.style.minHeight = "3vh";
+    // icon.src = "../../assets/icon/" + foodType;
+    // content.appendChild(icon);
+    // content.appendChild(name);
+    // content.className = "test";
+    // let popup = L.popup({ autoClose: false, closeOnEscapeKey: false }).setContent(content);
+    // marker.bindPopup(popup);
     marker.addTo(MapPage.map);
     this.activeMarkers.push(marker);
   }
