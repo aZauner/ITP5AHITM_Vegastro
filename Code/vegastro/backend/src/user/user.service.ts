@@ -52,6 +52,8 @@ export class UserService {
       .findOne({token: token})
       .exec();
     if (!user) return null;
+    console.log(user);
+    
     return this.getFavouriteRestaurants(user);
   }
   getFavouriteRestaurants(user: UserDocument): {favouriteRestaurants: [Restaurant]} {
@@ -88,6 +90,10 @@ export class UserService {
     const restaurant = await this.restaurantModel
       .findOne({ restaurantName: restaurantName })
       .exec();
+    console.log(restaurant
+      );
+    
+    if(!restaurant) return new HttpException("des scheiß Restaurant gibts ned oida" , HttpStatus.NOT_FOUND)
 
     let user = await this.userModel.findOne({ username: username }).exec();
 
