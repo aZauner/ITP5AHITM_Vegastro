@@ -6,5 +6,6 @@ export interface UserDetails {
     lastname: string;
     username: string;
     email: string;
-    favouriteRestaurants: [Restaurant]
+    favouriteRestaurants: [Restaurant],
+    token: string;
 }

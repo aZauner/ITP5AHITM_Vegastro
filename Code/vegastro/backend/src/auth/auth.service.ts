@@ -10,22 +10,38 @@ import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class AuthService {
   constructor(private userService: UserService, private jwtService: JwtService) {}
-
+  
   async hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, 12)
   }
-
+  
   async register(user: Readonly<CreateUserDto>): Promise <UserDetails | any>{
     const { firstname, lastname, username, email, password} = user;
-
+    
     const existingUser = await this.userService.findByMail(email);
     if(existingUser) return new HttpException('User exists already', HttpStatus.FORBIDDEN)
-
+    
     const hashedPassword = await this.hashPassword(password);
+    
     const newUser = await this.userService.create(firstname, lastname, username, email, hashedPassword);
-    return this.userService._getUserDetails(newUser);
-  }
 
+    const user1 = this.userService._getUserDetails(newUser)
+    const jwt = await this.jwtService.signAsync({user1})
+
+    this.userService.addToken(user1.id, jwt);
+    return {token: jwt}
+  }
+  
+  async login(existingUser: ExistingUserDto): Promise<{token:string} | any> {
+    const { email , password } = existingUser;
+    const user = await this.validateUser(email, password)
+  
+    if (!user) return new HttpException('wrong password', HttpStatus.NOT_FOUND);
+  
+    
+    return {token: user.token};
+    
+  }
   async passwordMatch(password:string, hashedPassword:string): Promise<boolean>{
     return bcrypt.compare(password, hashedPassword);
   }
@@ -42,14 +58,4 @@ export class AuthService {
     return this.userService._getUserDetails(user);
   }
 
-  async login(existingUser: ExistingUserDto): Promise<{token:string} | any> {
-    const { email , password } = existingUser;
-    const user = await this.validateUser(email, password)
-
-    if (!user) return new HttpException('wrong password', HttpStatus.NOT_FOUND);
-
-    const jwt = await this.jwtService.signAsync({user})
-    return {token: jwt};
-    
-  }
 }

@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import axios from 'axios';
 import { MealService } from '../meal/mealService';
 import { RestaurantCardInputs } from '../restaurantCard/restaurantCard.component';
 
@@ -16,6 +17,7 @@ declare global {
 export class RestaurantCardDetail {
   inputs: RestaurantCardInputs;
   oldInputs: RestaurantCardInputs;
+  favourite = true;
 
   constructor(private route: ActivatedRoute, private router: Router, private service: MealService) {
     this.inputs = {
@@ -42,6 +44,13 @@ export class RestaurantCardDetail {
       }
     });
   }
+
+  ngOnInit() {
+    axios.get('http://localhost:3000/restaurant')
+    .then(function (response) {
+      console.log(response);
+    })
+  }
   
   ngDoCheck() {
     if(this.inputs !== this.oldInputs) {
@@ -59,29 +68,4 @@ export class RestaurantCardDetail {
       this.oldInputs = this.inputs;
     }
   }
-
-
-  @ViewChild('favouriteStarWrapper') d1!:ElementRef;
-  ngAfterViewInit() {
-    if(false){
-      this.d1.nativeElement.insertAdjacentHTML('beforeend', '<ion-icon name="star-outline" style="color: grey" id="star"></ion-icon>');
-    }else{
-      this.d1.nativeElement.insertAdjacentHTML('beforeend', '<ion-icon name="star" style="color: yellow" id="star"></ion-icon>');
-    }
-
-    let star = document.getElementById('star');
-
-    star?.addEventListener('click' , ()=>{
-      document.getElementById('favouriteStarWrapper')!.innerHTML = '';  
-      this.d1.nativeElement.insertAdjacentHTML('beforeend', '<ion-icon name="star-outline" style="color: grey" id="star"></ion-icon>');
-      
-    })
-   
-  }
-
-  
- 
-   
-  
-
 }

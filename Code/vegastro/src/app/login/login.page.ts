@@ -52,7 +52,7 @@ export class LoginPage {
     axios.post('http://localhost:3000/auth/login' , {email: loginData.email , password: loginData.password})
     .then((response) => {
       if (response.data.status != 404) {                
-        sessionStorage.setItem("userToken" , response.data.token)  
+        sessionStorage.setItem("userToken" , response.data.token)  ;
         this.foundUser = true; 
         this.router.navigate(['/tabs/tab1']);   
       }else{

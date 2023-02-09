@@ -20,6 +20,9 @@ export class User {
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Restaurant' }], required: false })
   favouriteRestaurants: [Restaurant];
+
+  @Prop({  required: false })
+  token: string;
 }
 
 export type UserDocument = User & Document;
