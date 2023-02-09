@@ -22,8 +22,11 @@ export class MapPage {
   static map: L.Map;
   defaultMarker: L.Icon = L.icon({
     iconUrl: '../../assets/icon/Marker.svg',
-    iconSize: [40, 40],
+    iconSize: [40, 40],    
   });
+
+  
+
   currentNorthEastLat: number = 0;
   currentNorthEastLon: number = 0;
   currentSouthWestLat: number = 0;
@@ -39,6 +42,8 @@ export class MapPage {
         lat: resp.coords.latitude,
         lon: resp.coords.longitude,
       };
+      console.log(this.userLocation);
+      
       MapPage.map = L.map('map', {
         center: [resp.coords.latitude, resp.coords.longitude],
         zoom: 15,
@@ -140,13 +145,33 @@ export class MapPage {
   }
 
   addMarker(restaurant: any) {
-    const marker = L.marker([restaurant.latitude, restaurant.longitude], { icon: this.defaultMarker })
+    console.log(MapPage.map.getZoom() );
+    let marker;   
+
+    if(MapPage.map.getZoom()>= 14){
+      marker = L.marker([restaurant.latitude, restaurant.longitude], { icon: new L.DivIcon({
+        className: 'my-div-icon',
+        html: '<div style="min-width:fit-content;  transform: translate(-43%,-40%);">'+
+              '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>'+
+              '<p style="min-width:fit-content;color: black;white-space: nowrap">' + restaurant.restaurantName +'</p>' +
+              '</div>'
+      }) })
+    }else{
+      marker = L.marker([restaurant.latitude, restaurant.longitude], { icon: new L.DivIcon({
+        className: 'my-div-icon',
+        html: '<div style="min-width:fit-content;  transform: translate(-35%,-70%);">'+
+              '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>'+              
+              '</div>'
+      }) })
+    }       
+    
+    
     let content = document.createElement('div');
     content.style.display = "flex";
     content.style.alignItems = "center";
     content.style.minWidth = "fit-content";
     content.style.minHeight = "fit-content";
-    let name = document.createElement('p');
+    let name = document.createElement('p')
     name.style.minWidth = "fit-content";
     name.style.minHeight = "fit-content";
     name.style.margin = '0 2vh 0 0';
