@@ -20,10 +20,7 @@ export class MapPage {
   userLocation: { lat: number; lon: number } = { lat: 0, lon: 0 };
   userMarker!: L.CircleMarker;
   static map: L.Map;
-  defaultMarker: L.Icon = L.icon({
-    iconUrl: '../../assets/icon/Marker.svg',
-    iconSize: [40, 40],    
-  });
+  
 
   
 
@@ -42,7 +39,7 @@ export class MapPage {
         lat: resp.coords.latitude,
         lon: resp.coords.longitude,
       };
-      console.log(this.userLocation);
+      
       
       MapPage.map = L.map('map', {
         center: [resp.coords.latitude, resp.coords.longitude],
@@ -148,18 +145,18 @@ export class MapPage {
     console.log(MapPage.map.getZoom() );
     let marker;   
 
-    if(MapPage.map.getZoom()>= 14){
+    if(MapPage.map.getZoom()>= 15){
       marker = L.marker([restaurant.latitude, restaurant.longitude], { icon: new L.DivIcon({
         className: 'my-div-icon',
-        html: '<div style="min-width:fit-content;  transform: translate(-43%,-40%);">'+
+        html: '<div style="min-width:fit-content;  transform: translate(-47%,-40%);">'+
               '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>'+
-              '<p style="min-width:fit-content;color: black;white-space: nowrap">' + restaurant.restaurantName +'</p>' +
+              '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold">' + restaurant.restaurantName +'</p>' +
               '</div>'
       }) })
     }else{
       marker = L.marker([restaurant.latitude, restaurant.longitude], { icon: new L.DivIcon({
         className: 'my-div-icon',
-        html: '<div style="min-width:fit-content;  transform: translate(-35%,-70%);">'+
+        html: '<div style="min-width:fit-content;  transform: translate(-40%,-70%);">'+
               '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>'+              
               '</div>'
       }) })
