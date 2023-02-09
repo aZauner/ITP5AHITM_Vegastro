@@ -6,8 +6,6 @@ import {
 } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Platform } from '@ionic/angular';
 import axios from 'axios';
-import { RestaurantCard, RestaurantCardInputs } from '../restaurantCard/restaurantCard.component';
-import { RestaurantCardDetail } from '../restaurantCardDetail/restaurantCardDetail.page';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -25,8 +23,9 @@ export class MapPage {
   currentSouthWestLat: number = 0;
   currentSouthWestLon: number = 0;
   activeMarkers: L.Marker[] = [];
-  olderZoomLevel = 14;
-  oldZoomLevel = 15;
+  fixZoomLevel= 14;
+  olderZoomLevel = this.fixZoomLevel-1;
+  oldZoomLevel = this.fixZoomLevel;
 
   constructor(protected platform: Platform, private geolocation: Geolocation, private router: Router) { }
 
@@ -146,7 +145,7 @@ export class MapPage {
 
   addMarker(restaurant: any) {
     let marker;
-    if (MapPage.map.getZoom() == 15 && this.oldZoomLevel < 15) {
+    if (MapPage.map.getZoom() == this.fixZoomLevel && this.oldZoomLevel < this.fixZoomLevel) {
       marker = L.marker([restaurant.latitude, restaurant.longitude], {
         icon: new L.DivIcon({
           className: 'my-div-icon',
@@ -157,7 +156,7 @@ export class MapPage {
             '</div>'
         })
       })
-    } else if (MapPage.map.getZoom() >= 15) {
+    } else if (MapPage.map.getZoom() >= this.fixZoomLevel) {
       marker = L.marker([restaurant.latitude, restaurant.longitude], {
         icon: new L.DivIcon({
           className: 'my-div-icon',
@@ -167,7 +166,7 @@ export class MapPage {
             '</div>'
         })
       })
-    } else if (this.oldZoomLevel > 14 && MapPage.map.getZoom() == 14 && this.olderZoomLevel >= 14) {
+    } else if (this.oldZoomLevel > this.fixZoomLevel-1 && MapPage.map.getZoom() == this.fixZoomLevel-1 && this.olderZoomLevel >= this.fixZoomLevel-1) {
       marker = L.marker([restaurant.latitude, restaurant.longitude], {
         icon: new L.DivIcon({
           className: 'my-div-icon',
