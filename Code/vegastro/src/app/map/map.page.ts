@@ -21,8 +21,8 @@ export class MapPage {
   userMarker!: L.CircleMarker;
   static map: L.Map;
   defaultMarker: L.Icon = L.icon({
-    iconUrl: '../../assets/MarkerPoint3.svg',
-    iconSize: [22, 22],
+    iconUrl: '../../assets/icon/Marker.svg',
+    iconSize: [40, 40],
   });
   currentNorthEastLat: number = 0;
   currentNorthEastLon: number = 0;
@@ -30,7 +30,7 @@ export class MapPage {
   currentSouthWestLon: number = 0;
   activeMarkers: L.Marker[] = [];
 
-  constructor(protected platform: Platform, private geolocation: Geolocation , private router: Router) { }
+  constructor(protected platform: Platform, private geolocation: Geolocation, private router: Router) { }
 
   ngOnInit() {
     //Generate Start map
@@ -68,20 +68,20 @@ export class MapPage {
       });
     }, 20000);
 
-    const initInterval = setInterval(()=>{
-      try{
-        MapPage.map.on('drag', (e)=>{
+    const initInterval = setInterval(() => {
+      try {
+        MapPage.map.on('drag', (e) => {
           this.updateMarkers();
         });
-        MapPage.map.on('zoom', (e)=>{
+        MapPage.map.on('zoom', (e) => {
           this.updateMarkers();
         });
-        MapPage.map.on('move', (e)=>{
+        MapPage.map.on('move', (e) => {
           this.updateMarkers();
         });
         clearInterval(initInterval);
-      } catch {}
-    },50)
+      } catch { }
+    }, 50)
   }
 
   updateMarkers() {
@@ -115,7 +115,7 @@ export class MapPage {
             this.activeMarkers = [];
 
             for (const restaurant of response.data) {
-              this.addMarker(restaurant);              
+              this.addMarker(restaurant);
             }
           }
         });
@@ -139,19 +139,41 @@ export class MapPage {
       });
   }
 
-  addMarker(restaurant : any) {
-    const marker = L.marker([restaurant.latitude , restaurant.longitude], { icon: this.defaultMarker }).addTo(MapPage.map);
-    marker.addEventListener('click' , ()=>{
-      
+  addMarker(restaurant: any) {
+    const marker = L.marker([restaurant.latitude, restaurant.longitude], { icon: this.defaultMarker })
+    let content = document.createElement('div');
+    content.style.display = "flex";
+    content.style.alignItems = "center";
+    content.style.minWidth = "fit-content";
+    content.style.minHeight = "fit-content";
+    let name = document.createElement('p');
+    name.style.minWidth = "fit-content";
+    name.style.minHeight = "fit-content";
+    name.style.margin = '0 2vh 0 0';
+    name.style.fontSize = '2vh';
+    name.innerText = restaurant.restaurantName
+    content.addEventListener('click', () => {
       let inputs = {
         id: restaurant._id,
         image: "pizzaDemo.png",
         restaurantName: restaurant.restaurantName,
         type: restaurant.type,
         stars: 4,
-        description: restaurant.description,        
+        description: restaurant.description,
         menu: restaurant.menu,
         fromMarker: true
+      }
+
+      switch (inputs.type) {
+        case "meat":
+          inputs.type = "MeatIcon.svg";
+          break;
+        case "vegetarian":
+          inputs.type = "VegetarianIcon.svg";
+          break;
+        case "vegan":
+          inputs.type = "VeganIcon.svg";
+          break;
       }
 
       let navigationExtras: NavigationExtras = {
@@ -159,9 +181,32 @@ export class MapPage {
           inputs: inputs
         }
       };
-      this.router.navigate(['/tabs','restaurantDetail'], navigationExtras);       
-    })
-    
+      this.router.navigate(['/tabs', 'restaurantDetail'], navigationExtras);
+    });
+
+    let foodType;
+    switch (restaurant.type) {
+      case "meat":
+        foodType = "MeatIcon.svg";
+        break;
+      case "vegetarian":
+        foodType = "VegetarianIcon.svg";
+        break;
+      case "vegan":
+        foodType = "VeganIcon.svg";
+        break;
+    }
+    let icon = document.createElement("ion-icon");
+    icon.style.marginRight = "1vh";
+    icon.style.minWidth = "3vh";
+    icon.style.minHeight = "3vh";
+    icon.src = "../../assets/icon/" + foodType;
+    content.appendChild(icon);
+    content.appendChild(name);
+    content.className = "test";
+    let popup = L.popup({ autoClose: false, closeOnEscapeKey: false }).setContent(content);
+    marker.bindPopup(popup);
+    marker.addTo(MapPage.map);
     this.activeMarkers.push(marker);
   }
 
