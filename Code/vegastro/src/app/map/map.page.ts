@@ -141,8 +141,7 @@ export class MapPage {
       });
   }
 
-  addMarker(restaurant: any) {
-    console.log(MapPage.map.getZoom() );
+  addMarker(restaurant: any) {    
     let marker;   
 
     if(MapPage.map.getZoom()>= 15){
