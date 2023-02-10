@@ -14,16 +14,11 @@
                 </ion-buttons>
             </ng-template>
 
-
-            
-
-            
-
             <ion-icon class="typeIcon" src="../../assets/icon/{{inputs.type}}"></ion-icon>
             <h1>{{inputs.restaurantName}}</h1>
             <div id="favouriteStarWrapper" >
-                <ion-icon *ngIf="!favourite" name="star-outline" style="color: grey" id="star"></ion-icon>
-                <ion-icon *ngIf="favourite" name="star" style="color: yellow" id="star"></ion-icon>
+                <ion-icon *ngIf="!inputs.isFav" name="star-outline" style="color: grey" id="star" (click)="addFavRestaurant()"></ion-icon>
+                <ion-icon *ngIf="inputs.isFav" name="star" style="color: yellow" id="star" (click)="removeFavRestaurant()"></ion-icon>
             </div>            
         </div>
     </div>

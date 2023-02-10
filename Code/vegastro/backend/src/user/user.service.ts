@@ -52,7 +52,6 @@ export class UserService {
       .findOne({token: token})
       .exec();
     if (!user) return null;
-    console.log(user);
     
     return this.getFavouriteRestaurants(user);
   }
@@ -83,19 +82,17 @@ export class UserService {
     return newUser.save();
   }
 
-  async AddFvouriteRestaurant(
-    restaurantName: String,
-    username: String,
+  async addFvouriteRestaurant(
+    restId: string,
+    token: string,
   ): Promise<HttpStatus | HttpException> {
     const restaurant = await this.restaurantModel
-      .findOne({ restaurantName: restaurantName })
+      .findOne({ _id: restId })
       .exec();
-    console.log(restaurant
-      );
     
     if(!restaurant) return new HttpException("des scheiß Restaurant gibts ned oida" , HttpStatus.NOT_FOUND)
 
-    let user = await this.userModel.findOne({ username: username }).exec();
+    let user = await this.userModel.findOne({ token: token }).exec();
 
     let favouriteRestaurants = await this._getUserDetails(user)
       .favouriteRestaurants;
@@ -104,8 +101,32 @@ export class UserService {
 
     this.userModel
       .updateOne(
-        { username: username },
+        { token: token },
         { $set: { favouriteRestaurants: favouriteRestaurants } },
+      )
+      .exec();
+
+    return HttpStatus.OK;
+  }
+
+  async removeFvouriteRestaurant(
+    restId: string,
+    token: string,
+  ): Promise<HttpStatus | HttpException> {
+    const restaurant = await this.restaurantModel
+      .findOne({ _id: restId })
+      .exec();
+    
+    if(!restaurant) return new HttpException("des scheiß Restaurant gibts ned oida" , HttpStatus.NOT_FOUND)
+
+    let user = await this.userModel.findOne({ token: token }).exec();
+    let favRests = this.getFavouriteRestaurants(user).favouriteRestaurants;
+    favRests.splice(favRests.indexOf(restaurant.id),1);
+    
+    this.userModel
+      .updateOne(
+        { token: token },
+        { $set: { favouriteRestaurants: favRests } },
       )
       .exec();
 

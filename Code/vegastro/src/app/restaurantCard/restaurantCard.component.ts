@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import axios from 'axios';
 import { RestaurantCardDetail } from '../restaurantCardDetail/restaurantCardDetail.page';
 enum MealType 
   {
@@ -25,7 +26,8 @@ export interface RestaurantCardInputs {
   description: string,
   preDescr?: string,
   menu?: [MealDto],
-  fromMarker?: boolean
+  fromMarker?: boolean,
+  isFav: boolean
 }
 
 
@@ -42,7 +44,8 @@ export class RestaurantCard {
     restaurantName: "Mc Donalds",
     type: "VegetarianIcon.svg",
     stars: 4,
-    description: "This is a Mc Donalds"
+    description: "This is a Mc Donalds",
+    isFav: false
   };
 
   inputs: any = this.defaultInputs;

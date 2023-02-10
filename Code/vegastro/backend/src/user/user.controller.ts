@@ -18,8 +18,13 @@ export class UserController {
   }
   
   @Put('addFvouriteRestaurant')
-  create(@Body() input : {restaurantName: String , username: String}): Promise<HttpStatus | HttpException> {
-    return this.userService.AddFvouriteRestaurant(input.restaurantName, input.username)
+  addFav(@Body() input : {restId: string , token: string}): Promise<HttpStatus | HttpException> {
+    return this.userService.addFvouriteRestaurant(input.restId, input.token)
+  }
+
+  @Put('removeFvouriteRestaurant')
+  removeFav(@Body() input : {restId: string , token: string}): Promise<HttpStatus | HttpException> {
+    return this.userService.removeFvouriteRestaurant(input.restId, input.token)
   }
 
   @Put('addToken')

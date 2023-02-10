@@ -23,8 +23,8 @@ export class MapPage {
   currentSouthWestLat: number = 0;
   currentSouthWestLon: number = 0;
   activeMarkers: L.Marker[] = [];
-  fixZoomLevel= 14;
-  olderZoomLevel = this.fixZoomLevel-1;
+  fixZoomLevel = 14;
+  olderZoomLevel = this.fixZoomLevel - 1;
   oldZoomLevel = this.fixZoomLevel;
 
   constructor(protected platform: Platform, private geolocation: Geolocation, private router: Router) { }
@@ -81,6 +81,18 @@ export class MapPage {
         clearInterval(initInterval);
       } catch { }
     }, 50)
+
+    if(!sessionStorage.getItem('favouriteRestaurants') && sessionStorage.getItem('userToken')) {
+      axios.get('http://localhost:3000/user/favourites/' + sessionStorage.getItem('userToken')).then((response) => {
+        let favRestaurants = [];
+        if(response.data.favouriteRestaurants.length > 0) {
+          for (const restaurant of response.data.favouriteRestaurants) {
+            favRestaurants.push(restaurant);
+          }
+        }
+        sessionStorage.setItem('favouriteRestaurants', JSON.stringify(favRestaurants))
+      })
+    }
   }
 
   updateMarkers() {
@@ -166,7 +178,7 @@ export class MapPage {
             '</div>'
         })
       })
-    } else if (this.oldZoomLevel > this.fixZoomLevel-1 && MapPage.map.getZoom() == this.fixZoomLevel-1 && this.olderZoomLevel >= this.fixZoomLevel-1) {
+    } else if (this.oldZoomLevel > this.fixZoomLevel - 1 && MapPage.map.getZoom() == this.fixZoomLevel - 1 && this.olderZoomLevel >= this.fixZoomLevel - 1) {
       marker = L.marker([restaurant.latitude, restaurant.longitude], {
         icon: new L.DivIcon({
           className: 'my-div-icon',
@@ -190,17 +202,6 @@ export class MapPage {
       })
     }
 
-    // let content = document.createElement('div');
-    // content.style.display = "flex";
-    // content.style.alignItems = "center";
-    // content.style.minWidth = "fit-content";
-    // content.style.minHeight = "fit-content";
-    // let name = document.createElement('p')
-    // name.style.minWidth = "fit-content";
-    // name.style.minHeight = "fit-content";
-    // name.style.margin = '0 2vh 0 0';
-    // name.style.fontSize = '2vh';
-    // name.innerText = restaurant.restaurantName
     marker.addEventListener('click', () => {
       let inputs = {
         id: restaurant._id,
@@ -232,29 +233,6 @@ export class MapPage {
       };
       this.router.navigate(['/tabs', 'restaurantDetail'], navigationExtras);
     });
-
-    // let foodType;
-    // switch (restaurant.type) {
-    //   case "meat":
-    //     foodType = "MeatIcon.svg";
-    //     break;
-    //   case "vegetarian":
-    //     foodType = "VegetarianIcon.svg";
-    //     break;
-    //   case "vegan":
-    //     foodType = "VeganIcon.svg";
-    //     break;
-    // }
-    // let icon = document.createElement("ion-icon");
-    // icon.style.marginRight = "1vh";
-    // icon.style.minWidth = "3vh";
-    // icon.style.minHeight = "3vh";
-    // icon.src = "../../assets/icon/" + foodType;
-    // content.appendChild(icon);
-    // content.appendChild(name);
-    // content.className = "test";
-    // let popup = L.popup({ autoClose: false, closeOnEscapeKey: false }).setContent(content);
-    // marker.bindPopup(popup);
     marker.addTo(MapPage.map);
     this.activeMarkers.push(marker);
   }

@@ -60,9 +60,17 @@ export class RestaurantsPage {
               if(document.getElementById('restaurantCards')) {
                 document.getElementById('restaurantCards')!.innerHTML = "<h1 style='font-size: 4vh;margin: 3.5vh 16px 0 16px;text-align: center;'>T R E F F E R</h1>"
               }
-              for (const restaurant of response.data) {
-                let desc = restaurant.description ? restaurant.description : "";
-                this.service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: "meat", stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu })
+              if(sessionStorage.getItem('favouriteRestaurants')){
+                let favRests: [string] = JSON.parse(sessionStorage.getItem('favouriteRestaurants')!);
+                for (const restaurant of response.data) {
+                  let desc = restaurant.description ? restaurant.description : "";
+                  this.service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: "meat", stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: favRests.includes(restaurant.id) })
+                }
+              } else {
+                for (const restaurant of response.data) {
+                  let desc = restaurant.description ? restaurant.description : "";
+                  this.service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: "meat", stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: false })
+                }
               }
             } else if (document.getElementById('restaurantCards')){
               document.getElementById('restaurantCards')!.innerHTML = "<h1 style='margin-top: 75%; text-align: center; font-size: 3vh;'>Keine Treffer gefunden</h1>"

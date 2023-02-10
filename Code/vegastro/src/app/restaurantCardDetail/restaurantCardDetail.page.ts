@@ -17,7 +17,6 @@ declare global {
 export class RestaurantCardDetail {
   inputs: RestaurantCardInputs;
   oldInputs: RestaurantCardInputs;
-  favourite = true;
 
   constructor(private route: ActivatedRoute, private router: Router, private service: MealService) {
     this.inputs = {
@@ -26,7 +25,8 @@ export class RestaurantCardDetail {
       restaurantName: "Mc Donalds",
       type: "VegetarianIcon.svg",
       stars: 4,
-      description: "This is a Mc Donalds"
+      description: "This is a Mc Donalds",
+      isFav: false
     };
 
     this.oldInputs = {
@@ -35,10 +35,11 @@ export class RestaurantCardDetail {
       restaurantName: "Mc Donalds",
       type: "VegetarianIcon.svg",
       stars: 4,
-      description: "This is a Mc Donalds"
+      description: "This is a Mc Donalds",
+      isFav: false
     };
 
-    this.route.queryParams.subscribe(params => { 
+    this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation()?.extras?.state?.['inputs'] != undefined) {
         this.inputs = this.router.getCurrentNavigation()!.extras!.state!["inputs"];
       }
@@ -47,18 +48,20 @@ export class RestaurantCardDetail {
 
   ngOnInit() {
     axios.get('http://localhost:3000/restaurant')
-    .then(function (response) {
-      console.log(response);
-    })
+      .then(function (response) {
+        console.log(response);
+      })
   }
-  
+
   ngDoCheck() {
-    if(this.inputs !== this.oldInputs) {
+    if (this.inputs !== this.oldInputs) {
+      console.log(this.inputs);
+
       document.getElementById("meals")!.innerHTML = '';
-      if(this.inputs.menu != null){
-        
+      if (this.inputs.menu != null) {
+
         for (const meal of this.inputs.menu) {
-          if(meal.description) {
+          if (meal.description) {
             this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: meal.price, type: meal.type, descr: meal.description });
           } else {
             this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: meal.price, type: meal.type });
@@ -66,6 +69,32 @@ export class RestaurantCardDetail {
         }
       }
       this.oldInputs = this.inputs;
+    }
+  }
+
+  addFavRestaurant() {
+    if(sessionStorage.getItem('favouriteRestaurants')) {
+      this.inputs.isFav = !this.inputs.isFav;
+      let favRests = JSON.parse(sessionStorage.getItem('favouriteRestaurants')!);
+      favRests.push(this.inputs.id);
+      sessionStorage.setItem('favouriteRestaurants', JSON.stringify(favRests));
+      axios.put('http://localhost:3000/user/addFvouriteRestaurant', {
+        "restId": this.inputs.id,
+        "token": sessionStorage.getItem('userToken')
+      })
+    }
+  }
+
+  removeFavRestaurant() {
+    if(sessionStorage.getItem('favouriteRestaurants')) {
+      this.inputs.isFav = !this.inputs.isFav;
+      let favRests: [string] = JSON.parse(sessionStorage.getItem('favouriteRestaurants')!);
+      favRests.splice(favRests.indexOf(this.inputs.id), 1);
+      sessionStorage.setItem('favouriteRestaurants', JSON.stringify(favRests));
+      axios.put('http://localhost:3000/user/removeFvouriteRestaurant', {
+        "restId": this.inputs.id,
+        "token": sessionStorage.getItem('userToken')
+      })
     }
   }
 }

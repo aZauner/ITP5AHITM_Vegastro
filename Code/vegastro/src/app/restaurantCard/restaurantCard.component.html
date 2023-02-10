@@ -6,6 +6,9 @@
     <ion-card-title>
       <ion-icon class="typeIcon" src="../../assets/icon/{{inputs.type}}"></ion-icon>
       {{inputs.restaurantName}}
+      <div id="favouriteStarWrapper" >
+        <ion-icon *ngIf="inputs.isFav" name="star" style="color: yellow" id="star"></ion-icon>
+    </div>       
     </ion-card-title>
     <ion-card-subtitle>
       <div class="restaurantStars">
