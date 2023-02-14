@@ -19,7 +19,7 @@
           <ion-input maxlength="30" formControlName="email"  required></ion-input>                   
         </ion-item>
         <div class="error" >
-          <p *ngIf="checkMailValidation()">Keine Gültige Mail</p>
+          <p *ngIf="checkMailValidation()">Keine gültige Mail</p>
         </div>
         
         <ion-item counter="true">
@@ -27,12 +27,12 @@
           <ion-input maxlength="50" formControlName="password"  required></ion-input>          
         </ion-item>
         <div class="error" >
-          <p *ngIf="checkPasswordValidation()">keine gültiges Passwort</p>
+          <p *ngIf="checkPasswordValidation()">Kein gültiges Passwort</p>
         </div>
 
         <ion-button ion-button type="submit" [disabled]="!login.valid">einloggen</ion-button>
         <div class="error" >
-          <p *ngIf="!foundUser">keine User gefunden</p>
+          <p *ngIf="!foundUser">Kein User gefunden</p>
         </div>       
       </div>   
   

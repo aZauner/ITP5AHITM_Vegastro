@@ -54,7 +54,7 @@ export class RestaurantsPage {
                   if (MapPage.filters.includes(restaurant.type)) {
                     count++;
                     let desc = restaurant.description ? restaurant.description : "";
-                    this.service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: "meat", stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: favRests.includes(restaurant.id) })
+                    this.service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: favRests.includes(restaurant.id) })
                   }
                 }
                 if (count == 0 && document.getElementById('restaurantCards')) {
@@ -64,7 +64,7 @@ export class RestaurantsPage {
               } else {
                 for (const restaurant of response.data) {
                   let desc = restaurant.description ? restaurant.description : "";
-                  this.service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: "meat", stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: favRests.includes(restaurant.id) })
+                  this.service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: favRests.includes(restaurant.id) })
                 }
               }
             } else {
@@ -74,7 +74,7 @@ export class RestaurantsPage {
                   if (MapPage.filters.includes(restaurant.type)) {
                     count++
                     let desc = restaurant.description ? restaurant.description : "";
-                    this.service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: "meat", stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: false })
+                    this.service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: false })
                   }
                 }
                 if (count == 0 && document.getElementById('restaurantCards')) {
@@ -84,7 +84,7 @@ export class RestaurantsPage {
               } else {
                 for (const restaurant of response.data) {
                   let desc = restaurant.description ? restaurant.description : "";
-                  this.service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: "meat", stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: false })
+                  this.service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: false })
                 }
               }
             }
