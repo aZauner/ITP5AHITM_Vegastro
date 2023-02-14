@@ -18,14 +18,11 @@ export class MapPage {
   userLocation: { lat: number; lon: number } = { lat: 0, lon: 0 };
   userMarker!: L.CircleMarker;
   static map: L.Map;
-  currentNorthEastLat: number = 0;
-  currentNorthEastLon: number = 0;
-  currentSouthWestLat: number = 0;
-  currentSouthWestLon: number = 0;
   activeMarkers: L.Marker[] = [];
   fixZoomLevel = 14;
   olderZoomLevel = this.fixZoomLevel - 1;
   oldZoomLevel = this.fixZoomLevel;
+  static filters: string[] = []
 
   constructor(protected platform: Platform, private geolocation: Geolocation, private router: Router) { }
 
@@ -82,10 +79,10 @@ export class MapPage {
       } catch { }
     }, 50)
 
-    if(!sessionStorage.getItem('favouriteRestaurants') && sessionStorage.getItem('userToken')) {
+    if (!sessionStorage.getItem('favouriteRestaurants') && sessionStorage.getItem('userToken')) {
       axios.get('http://localhost:3000/user/favourites/' + sessionStorage.getItem('userToken')).then((response) => {
         let favRestaurants = [];
-        if(response.data.favouriteRestaurants.length > 0) {
+        if (response.data.favouriteRestaurants.length > 0) {
           for (const restaurant of response.data.favouriteRestaurants) {
             favRestaurants.push(restaurant);
           }
@@ -96,46 +93,45 @@ export class MapPage {
   }
 
   updateMarkers() {
-
     const bounds = MapPage.map.getBounds();
-    if (
-      bounds.getNorthEast().lat != this.currentNorthEastLat ||
-      bounds.getNorthEast().lng != this.currentNorthEastLon ||
-      bounds.getSouthWest().lat != this.currentSouthWestLat ||
-      bounds.getSouthWest().lng != this.currentSouthWestLon
-    ) {
-      this.currentNorthEastLat = bounds.getNorthEast().lat;
-      this.currentNorthEastLon = bounds.getNorthEast().lng;
-      this.currentSouthWestLat = bounds.getSouthWest().lat;
-      this.currentSouthWestLon = bounds.getSouthWest().lng;
-      axios
-        .get(
-          'http://localhost:3000/restaurant/getNearPosition/' +
-          bounds.getNorthEast().lat +
-          '/' +
-          bounds.getNorthEast().lng +
-          '/' +
-          bounds.getSouthWest().lat +
-          '/' +
-          bounds.getSouthWest().lng
-        )
-        .then((response) => {
-          if (response.data.status != 404) {
-            for (const marker of this.activeMarkers) {
-              MapPage.map.removeLayer(marker);
-            }
-            this.activeMarkers = [];
+    axios
+      .get(
+        'http://localhost:3000/restaurant/getNearPosition/' +
+        bounds.getNorthEast().lat +
+        '/' +
+        bounds.getNorthEast().lng +
+        '/' +
+        bounds.getSouthWest().lat +
+        '/' +
+        bounds.getSouthWest().lng
+      )
+      .then((response) => {
+        if (response.data.status != 404) {
+          for (const marker of this.activeMarkers) {
+            MapPage.map.removeLayer(marker);
+          }
 
+          this.activeMarkers = [];
+          if (MapPage.filters.length > 0) {
+            for (const restaurant of response.data) {
+              if (MapPage.filters.includes(restaurant.type)) {
+                this.addMarker(restaurant);
+              }
+            }
+          } else {
             for (const restaurant of response.data) {
               this.addMarker(restaurant);
             }
-            if (this.oldZoomLevel != MapPage.map.getZoom() && this.olderZoomLevel != this.oldZoomLevel) {
-              this.olderZoomLevel = this.oldZoomLevel;
-              this.oldZoomLevel = MapPage.map.getZoom()
-            }
           }
-        });
-    }
+
+
+          if (this.oldZoomLevel != MapPage.map.getZoom() && this.olderZoomLevel != this.oldZoomLevel) {
+            this.olderZoomLevel = this.oldZoomLevel;
+            this.oldZoomLevel = MapPage.map.getZoom()
+          }
+        }
+      });
+
   }
 
   // //Get Location of User
@@ -348,12 +344,28 @@ export class MapPage {
 
   openFilter() {
     const btn = document.getElementById('filter')!;
-
     if (btn.style.visibility == 'hidden') {
       btn.style.visibility = 'visible';
     } else {
       btn.style.visibility = 'hidden';
     }
+  }
+
+  addFilter(filter: string) {
+    if (MapPage.filters.includes(filter)) {
+      MapPage.filters.splice(MapPage.filters.indexOf(filter), 1)
+    } else {
+      MapPage.filters.push(filter)
+    }
+    const btn = document.getElementById(filter)!;
+    if(btn.classList.contains("off")){
+      btn.classList.add("on")
+      btn.classList.remove("off")
+    } else {
+      btn.classList.add("off")
+      btn.classList.remove("on")
+    }
+    this.updateMarkers();
   }
 }
 

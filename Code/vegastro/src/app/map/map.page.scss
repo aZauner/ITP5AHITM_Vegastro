@@ -42,8 +42,6 @@ p {
     margin-right: 2vh;
     padding-top: 1.5vh;
     background: rgb(74, 215, 57);
-    background: radial-gradient(circle, rgba(74, 215, 57, 1) 0%, rgba(70, 220, 52, 1) 100%);
-
 }
 
 
@@ -98,6 +96,52 @@ ion-footer ion-toolbar div {
     align-items: center;
     justify-content: space-between;
     padding: 1vh 1.5vh 1vh 0;
+}
+
+.off {
+    border-radius: 1vh;
+    color: white;
+    font-weight: bold;
+    height: fit-content;
+    width: fit-content;
+    text-align: left;
+    font-size: 2.5vh;
+    padding: 1vh 0.5vh 1vh 0.5vh;
+    background: grey;
+    margin-bottom: 1vh;
+    animation: removeFilterAnim 700ms forwards;
+}
+
+@keyframes addFilterAnim {
+    from {padding-right: 0.5vh}
+    to {padding-right: 10vh;}
+}
+
+@keyframes removeFilterAnim {
+    from {padding-right: 10vh;}
+    to {padding-right: 0.5vh}
+}
+
+.on {
+    border-radius: 1vh;
+    color: white;
+    font-weight: bold;
+    height: fit-content;
+    width: fit-content;
+    text-align: left;
+    font-size: 2.5vh;
+    padding: 1vh 0.5vh 1vh 0.5vh;
+    background: #48A734;
+    animation: addFilterAnim 700ms forwards;
+    margin-bottom: 1vh;
+}
+
+#filterList {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto auto;
+
 }
 
 #filter {

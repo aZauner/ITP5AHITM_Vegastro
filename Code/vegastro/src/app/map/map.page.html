@@ -13,6 +13,11 @@
 <div id="map">
   <div id="filter" style="visibility: hidden;">
     <h1>K A T E G O R I E N</h1>
+    <div id="filterList">
+      <ion-button class="off" id="meat" (click)="addFilter('meat')" fill="clear">Fleisch</ion-button>
+      <ion-button class="off" id="vegetarian" (click)="addFilter('vegetarian')" fill="clear">Vegetarisch</ion-button>
+      <ion-button class="off" id="vegan" (click)="addFilter('vegan')" fill="clear">Vegan</ion-button>
+    </div>
   </div>
   <div style="width: 100vw; justify-content: center; display: flex;">
     <div id="btnDivBox">
@@ -24,11 +29,3 @@
     </div>
   </div>
 </div>
-<!--
-<ion-footer>
-  <ion-toolbar>
-    <div>
-      
-    </div>
-  </ion-toolbar>
-</ion-footer>-->

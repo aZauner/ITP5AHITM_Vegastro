@@ -46,17 +46,8 @@ export class RestaurantCardDetail {
     });
   }
 
-  ngOnInit() {
-    axios.get('http://localhost:3000/restaurant')
-      .then(function (response) {
-        console.log(response);
-      })
-  }
-
   ngDoCheck() {
     if (this.inputs !== this.oldInputs) {
-      console.log(this.inputs);
-
       document.getElementById("meals")!.innerHTML = '';
       if (this.inputs.menu != null) {
 
