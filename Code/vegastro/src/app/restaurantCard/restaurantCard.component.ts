@@ -12,7 +12,7 @@ enum MealType
 interface MealDto {
   _id: string,
   title: string,
-  price: number,
+  price: string,
   description?: string,
   type: MealType
 }

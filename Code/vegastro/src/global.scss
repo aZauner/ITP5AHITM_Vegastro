@@ -29,3 +29,17 @@
 .ion-page {
     justify-content: flex-start;
 }
+
+ion-toast.favToast{
+    font-size: 17px;
+    --height: 70px;
+}
+
+ion-toast.favToast::part(button) {
+    font-size: 17px;
+    color: #48A734;
+}
+
+ion-toast.favToast::part(icon) {
+    font-size: 30px;
+}

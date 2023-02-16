@@ -5,6 +5,6 @@ export class CreateMealDto {
     title: string;
     description: string;
     type: FoodType;
-    price: number;
+    price: string;
     allergic: AllergicType;
 }

@@ -1,5 +1,6 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import axios from 'axios';
 import { MealService } from '../meal/mealService';
 import { RestaurantCardInputs } from '../restaurantCard/restaurantCard.component';
@@ -18,7 +19,7 @@ export class RestaurantCardDetail {
   inputs: RestaurantCardInputs;
   oldInputs: RestaurantCardInputs;
 
-  constructor(private route: ActivatedRoute, private router: Router, private service: MealService) {
+  constructor(private route: ActivatedRoute, private router: Router, private service: MealService, private toastController: ToastController) {
     this.inputs = {
       id: "1",
       image: "pizzaDemo.png",
@@ -50,7 +51,6 @@ export class RestaurantCardDetail {
     if (this.inputs !== this.oldInputs) {
       document.getElementById("meals")!.innerHTML = '';
       if (this.inputs.menu != null) {
-
         for (const meal of this.inputs.menu) {
           if (meal.description) {
             this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: meal.price, type: meal.type, descr: meal.description });
@@ -63,7 +63,7 @@ export class RestaurantCardDetail {
     }
   }
 
-  addFavRestaurant() {
+  async addFavRestaurant() {
     if(sessionStorage.getItem('favouriteRestaurants')) {
       this.inputs.isFav = !this.inputs.isFav;
       let favRests = JSON.parse(sessionStorage.getItem('favouriteRestaurants')!);
@@ -73,6 +73,22 @@ export class RestaurantCardDetail {
         "restId": this.inputs.id,
         "token": sessionStorage.getItem('userToken')
       })
+    } else {
+        const toast = await this.toastController.create({
+          message: 'Nicht angemeldet',
+          duration: 1000,
+          position: 'middle',
+          icon: 'person-circle-outline',
+          cssClass: 'favToast',
+          buttons: [
+            {
+              text: 'Anmelden',
+              role: 'login',
+              handler: () => { this.router.navigateByUrl("/login") }
+            }
+          ]
+        });
+        await toast.present();
     }
   }
 

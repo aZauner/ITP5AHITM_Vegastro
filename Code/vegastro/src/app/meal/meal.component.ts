@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 export interface MealInputs {
   id: string,
   name: string,
-  price: number,
+  price: string,
   type: "MeatIcon.svg" | "VegetarianIcon.svg" | "VeganIcon.svg" | "meat" | "vegetarian" | "vegan",
   descr?: string
 }
@@ -18,7 +18,7 @@ export class Meal {
   defaultInputs: MealInputs = {
     id: "1",
     name: "Pizza Diavolo",
-    price: 12.50,
+    price: '12.50',
     type: "VegetarianIcon.svg",
     descr: "This is a simple Pizza"
   };

@@ -19,7 +19,7 @@ export class Meal {
   type: FoodType;
 
   @Prop({ required: true })
-  price: number;
+  price: string;
 
   @Prop({ required: false, enum: AllergicType })
   allergic: AllergicType;

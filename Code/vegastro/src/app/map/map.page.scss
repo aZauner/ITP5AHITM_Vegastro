@@ -141,14 +141,14 @@ ion-footer ion-toolbar div {
     flex-direction: column;
     width: 90%;
     margin: auto auto;
-
+    padding-bottom: 3vh;
 }
 
 #filter {
     position: relative;
     z-index: 2000;
     background-color: var(--ion-background-color);
-    height: 50%;
+    height: fit-content;
     width: 100%;
     border-bottom-left-radius: 3vh;
     border-bottom-right-radius: 3vh;
