@@ -19,7 +19,7 @@ export class AuthService {
     const { firstname, lastname, username, email, password} = user;
     
     const existingUser = await this.userService.findByMail(email);
-    if(existingUser) return new HttpException('User exists already', HttpStatus.FORBIDDEN)
+    if(existingUser) return new HttpException('User exists already', HttpStatus.NOT_FOUND)
     
     const hashedPassword = await this.hashPassword(password);
     

@@ -1,0 +1,67 @@
+
+  <ion-tab-bar slot="top">  
+    <div id="logoName">
+      <ion-label id="logoNameFirst">veg</ion-label>
+      <ion-label id="logoNameSecond">astro</ion-label>
+      <ion-icon id="logoIcon" src="../../../assets/Logo.svg"></ion-icon>
+    </div>
+  </ion-tab-bar>
+
+<ion-content>
+
+  <h1>REGISTRIEREN</h1>
+
+  <form [formGroup]="registration" (ngSubmit)="executeLogin()">
+    
+      <div class="inputblock" style="visibility: visible;">
+        <ion-item counter="true" >
+          <ion-label position="floating">Vorname</ion-label>
+          <ion-input maxlength="30" formControlName="firstName"  required></ion-input>                   
+        </ion-item>
+        <div class="error" >
+          <p *ngIf="checkFirstNameValidation()">Es muss ein Wert gesetzt sein</p>
+        </div>
+        
+        <ion-item counter="true">
+          <ion-label position="floating">Nachname</ion-label>
+          <ion-input maxlength="50" formControlName="lastName"  required></ion-input>          
+        </ion-item>
+        <div class="error" >
+          <p *ngIf="checkLastNameValidation()">Es muss ein Wert gesetzt sein</p>
+        </div>
+
+        <ion-item counter="true">
+          <ion-label position="floating">Username</ion-label>
+          <ion-input maxlength="50" formControlName="username"  required></ion-input>          
+        </ion-item>
+        <div class="error" >
+          <p *ngIf="checkUsernameValidation()">Es muss ein Wert gesetzt sein</p>
+        </div>
+
+        <ion-item counter="true" >
+          <ion-label position="floating">Email</ion-label>
+          <ion-input maxlength="30" formControlName="email" type="email" required></ion-input>                   
+        </ion-item>
+        <div class="error" >
+          <p *ngIf="checkMailValidation()">Keine gültige Mail</p>
+        </div>
+
+        <ion-item counter="true">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input maxlength="50" formControlName="password"  type="password" required></ion-input>          
+        </ion-item>
+        <div class="error" >
+          <p *ngIf="checkPasswordValidation()">Kein gültiges Passwort</p>
+        </div>
+
+        <ion-button ion-button type="submit" [disabled]="!registration.valid">einloggen</ion-button>
+        <div class="error" >
+          <p *ngIf="!mailUsed">Es existiert bereits ein User mit diesem Username oder Mail</p>
+        </div>       
+      </div>   
+  
+  </form>  
+    
+
+</ion-content>
+
