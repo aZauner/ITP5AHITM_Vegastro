@@ -15,7 +15,6 @@ export class RatingController {
 
   @Post('create')
   create(@Body() rating: CreateRatingDto): Promise<RatingDocument | HttpException> {   
-    
     return this.ratingService.create(rating);
   }
 }

@@ -18,6 +18,8 @@ declare global {
 export class RestaurantCardDetail {
   inputs: RestaurantCardInputs;
   oldInputs: RestaurantCardInputs;
+  ratingComment: string = "";
+  userStarRating: number = 0;
   
   constructor(private route: ActivatedRoute, private router: Router, private service: MealService, private toastController: ToastController) {
     this.inputs = {
@@ -117,11 +119,21 @@ export class RestaurantCardDetail {
   }
 
   confirm() {
-    this.modal.dismiss(null, 'confirm');
     if (sessionStorage.getItem('userToken')) {
-      // Hier bewertung mit datenbank durchführen
+      axios.post('http://localhost:3000/rating/create', {  userToken: sessionStorage.getItem('userToken'),
+      restaurant: this.inputs.id,
+      stars: this.userStarRating,
+      comment: this.ratingComment}).then((response)=>{
+        console.log(response);
+        
+      })
+      this.modal.dismiss(null, 'confirm');
     } else {
       this.callToast(1600)
     }
+  }
+
+  ratingChanged(event: number) {
+    this.userStarRating = event;
   }
 }

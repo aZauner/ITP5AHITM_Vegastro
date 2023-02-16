@@ -200,7 +200,7 @@ export class MapPage {
 
     marker.addEventListener('click', () => {
       let inputs = {
-        id: restaurant._id,
+        id: restaurant.id,
         image: "pizzaDemo.png",
         restaurantName: restaurant.restaurantName,
         type: restaurant.type,

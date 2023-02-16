@@ -19,6 +19,23 @@
     height: fit-content;
 }
 
+ion-content {
+    --overflow: hidden;
+}
+
+ion-item {
+    --background: var(--ion-background-color);
+}
+
+#starRating {
+    margin: 1vh;
+}
+
+#modal-restaurant-name {
+    --border-color: var(--ion-background-color);
+    --padding-bottom: 2vh;
+}
+
 img {
     border-top-left-radius: 2vh;
     border-top-right-radius: 2vh;

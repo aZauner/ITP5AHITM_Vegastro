@@ -21,7 +21,9 @@ export class RatingService {
       return {
         id: rating._id,
         userToken: rating.userToken,
-        stars: rating.stars        
+        restaurant: rating.restaurant,
+        stars: rating.stars,
+        comment: rating.comment 
       };
     }
     

@@ -68,11 +68,25 @@
                             </ion-buttons>
                             <ion-title>Bewertung</ion-title>
                             <ion-buttons slot="end">
-                                <ion-button (click)="confirm()" (click)="confirm()" [strong]="true">Senden</ion-button>
+                                <ion-button (click)="confirm()" [strong]="true">Senden</ion-button>
                             </ion-buttons>
                         </ion-toolbar>
                     </ion-header>
-                    
+                    <ion-content class="ion-padding">
+                        <ion-item id="modal-restaurant-name">
+                            <h1 style="margin: 0">{{inputs.restaurantName}}</h1>
+                        </ion-item>
+                        <ion-item>
+                            <div>
+                                <p style="margin:0"> Sterne</p>
+                                <ion-rating-stars id="starRating" [filledColor]="'#48A734'" (ratingChange)="ratingChanged($event)"></ion-rating-stars>
+                            </div>
+                        </ion-item>
+                        <ion-item counter="true">
+                            <ion-label position="floating">Kommentar</ion-label>
+                            <ion-input [(ngModel)]="ratingComment"></ion-input>                   
+                          </ion-item>
+                    </ion-content>
                 </ng-template>
             </ion-modal>
         </div>
