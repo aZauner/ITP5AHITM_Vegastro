@@ -1,20 +1,22 @@
 .starOff {
-    font-size: 2vh;
-    color: rgb(215, 215, 215);
+    font-size: 2.5vh;
+    color: var(--ion-text-color-rgb);
     margin: 0.2vh;
 }
 
 .starOn {
-    font-size: 2vh;
-    color: rgb(240, 240, 0);
+    font-size: 2.5vh;
+    color: #48A734;
     margin: 0.2vh;
 }
 
 .restaurantStars {
-    background-color: rgb(17, 17, 17);
+    background-color: none;
     width: fit-content;
     border-radius: 1.7vh;
-    padding: 1vh 1.2vh 1vh 1.2vh;
+    display: flex;
+    align-items: center;
+    height: fit-content;
 }
 
 img {
@@ -45,7 +47,16 @@ main {
     margin-left: auto;
 }
 
+#ratingsDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+#open-modal {
+    --background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1);
+    --color: var(--ion-text-color)
+}
 
 #restaurantName {
     font-size: 3vh;

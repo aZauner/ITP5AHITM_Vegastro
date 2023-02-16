@@ -4,7 +4,7 @@
         <div id="restaurantName">
 
             <ng-template [ngIf]="inputs.fromMarker" [ngIfElse]="fromListRouter">
-                <ion-buttons [routerLink]="['/tabs','tab1']" slot="start" >
+                <ion-buttons [routerLink]="['/tabs','tab1']" slot="start">
                     <ion-back-button defaultHref="tabs/tab1" text="" icon="arrow-back-outline"></ion-back-button>
                 </ion-buttons>
             </ng-template>
@@ -16,44 +16,65 @@
 
             <ion-icon class="typeIcon" src="../../assets/icon/{{inputs.type}}"></ion-icon>
             <h1>{{inputs.restaurantName}}</h1>
-            <div id="favouriteStarWrapper" >
-                <ion-icon *ngIf="!inputs.isFav" name="star-outline" style="color: grey" id="star" (click)="addFavRestaurant()"></ion-icon>
-                <ion-icon *ngIf="inputs.isFav" name="star" style="color: yellow" id="star" (click)="removeFavRestaurant()"></ion-icon>
-            </div>            
+            <div id="favouriteStarWrapper">
+                <ion-icon *ngIf="!inputs.isFav" name="star-outline" style="color: grey" id="star"
+                    (click)="addFavRestaurant()"></ion-icon>
+                <ion-icon *ngIf="inputs.isFav" name="star" style="color: white" id="star"
+                    (click)="removeFavRestaurant()"></ion-icon>
+            </div>
         </div>
     </div>
     <div class="wrapper">
-        <div class="restaurantStars">
-            <ng-template [ngIf]="inputs.stars <= 5" [ngIfElse]="greyStar">
-                <ion-icon class="starOn" name="star"></ion-icon>
-            </ng-template>
-            <ng-template #greyStar>
-                <ion-icon class="starOff" name="star"></ion-icon>
-            </ng-template>
-            <ng-template [ngIf]="inputs.stars <= 4" [ngIfElse]="greyStar">
-                <ion-icon class="starOn" name="star"></ion-icon>
-            </ng-template>
-            <ng-template #greyStar>
-                <ion-icon class="starOff" name="star"></ion-icon>
-            </ng-template>
-            <ng-template [ngIf]="inputs.stars <= 3" [ngIfElse]="greyStar">
-                <ion-icon class="starOn" name="star"></ion-icon>
-            </ng-template>
-            <ng-template #greyStar>
-                <ion-icon class="starOff" name="star"></ion-icon>
-            </ng-template>
-            <ng-template [ngIf]="inputs.stars <= 2" [ngIfElse]="greyStar">
-                <ion-icon class="starOn" name="star"></ion-icon>
-            </ng-template>
-            <ng-template #greyStar>
-                <ion-icon class="starOff" name="star"></ion-icon>
-            </ng-template>
-            <ng-template [ngIf]="inputs.stars <= 1" [ngIfElse]="greyStar">
-                <ion-icon class="starOn" name="star"></ion-icon>
-            </ng-template>
-            <ng-template #greyStar>
-                <ion-icon class="starOff" name="star"></ion-icon>
-            </ng-template>
+        <div id="ratingsDiv">
+            <div class="restaurantStars">
+                <ng-template [ngIf]="inputs.stars <= 5" [ngIfElse]="greyStar">
+                    <ion-icon class="starOn" name="star"></ion-icon>
+                </ng-template>
+                <ng-template #greyStar>
+                    <ion-icon class="starOff" name="star-outline"></ion-icon>
+                </ng-template>
+                <ng-template [ngIf]="inputs.stars <= 4" [ngIfElse]="greyStar">
+                    <ion-icon class="starOn" name="star"></ion-icon>
+                </ng-template>
+                <ng-template #greyStar>
+                    <ion-icon class="starOff" name="star-outline"></ion-icon>
+                </ng-template>
+                <ng-template [ngIf]="inputs.stars <= 3" [ngIfElse]="greyStar">
+                    <ion-icon class="starOn" name="star"></ion-icon>
+                </ng-template>
+                <ng-template #greyStar>
+                    <ion-icon class="starOff" name="star-outline"></ion-icon>
+                </ng-template>
+                <ng-template [ngIf]="inputs.stars <= 2" [ngIfElse]="greyStar">
+                    <ion-icon class="starOn" name="star"></ion-icon>
+                </ng-template>
+                <ng-template #greyStar>
+                    <ion-icon class="starOff" name="star-outline"></ion-icon>
+                </ng-template>
+                <ng-template [ngIf]="inputs.stars <= 1" [ngIfElse]="greyStar">
+                    <ion-icon class="starOn" name="star"></ion-icon>
+                </ng-template>
+                <ng-template #greyStar>
+                    <ion-icon class="starOff" name="star-outline"></ion-icon>
+                </ng-template>
+            </div>
+            <ion-button id="open-modal" expand="block" fill="clear">Bewerten</ion-button>
+            <ion-modal #modal trigger="open-modal">
+                <ng-template>
+                    <ion-header>
+                        <ion-toolbar>
+                            <ion-buttons slot="start">
+                                <ion-button (click)="cancel()" role="cancel">Abbrechen</ion-button>
+                            </ion-buttons>
+                            <ion-title>Bewertung</ion-title>
+                            <ion-buttons slot="end">
+                                <ion-button (click)="confirm()" (click)="confirm()" [strong]="true">Senden</ion-button>
+                            </ion-buttons>
+                        </ion-toolbar>
+                    </ion-header>
+                    
+                </ng-template>
+            </ion-modal>
         </div>
         <p id="restaurantDescription">{{inputs.description}}</p>
         <ion-list id="meals">
