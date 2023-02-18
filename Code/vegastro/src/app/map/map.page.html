@@ -21,7 +21,7 @@
   </div>
   <div style="width: 100vw; justify-content: center; display: flex;">
     <div id="btnDivBox">
-      <ion-button id="hitBtn" fill="clear" expand="block" [routerLink]="['/tabs','tab2']">
+      <ion-button id="hitBtn" fill="clear" expand="block" (click)="getFavRestsMem()" [routerLink]="['/tabs','tab2']">
         Treffer
       </ion-button>
       <ion-icon slot="icon-only" id="locate" name="locate" (click)="setMapToUserLocation()"></ion-icon>

@@ -79,7 +79,15 @@ export class MapPage {
       } catch { }
     }, 50)
 
+    MapPage.getFavRests();
+  }
+
+  getFavRestsMem = MapPage.getFavRests;
+
+  static getFavRests() {
     if (!sessionStorage.getItem('favouriteRestaurants') && sessionStorage.getItem('userToken')) {
+      console.log("dodl");
+      
       axios.get('http://localhost:3000/user/favourites/' + sessionStorage.getItem('userToken')).then((response) => {
         let favRestaurants = [];
         if (response.data.favouriteRestaurants.length > 0) {
@@ -199,6 +207,7 @@ export class MapPage {
     }
 
     marker.addEventListener('click', () => {
+      this.getFavRestsMem();
       let inputs = {
         id: restaurant.id,
         image: "pizzaDemo.png",

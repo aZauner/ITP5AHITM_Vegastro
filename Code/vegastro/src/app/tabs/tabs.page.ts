@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MapPage } from '../map/map.page';
+import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
+import { RestaurantsPage } from '../restaurants/restaurants.page';
 
 @Component({
   selector: 'app-tabs',
@@ -6,6 +9,11 @@ import { Component } from '@angular/core';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
-  basketValue: number = 0;
 
+  constructor(private service: RestaurantCardService) {}
+
+  update() {
+    MapPage.getFavRests();
+    RestaurantsPage.updateRestaurantsStatic(this.service);
+  }
 }

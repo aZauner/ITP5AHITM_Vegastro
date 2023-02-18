@@ -60,15 +60,6 @@ p {
     padding: 1.5vh;
 }
 
-
-#searchbarLoading,
-ion-spinner {
-    margin-left: 50vw;
-    transform: translateX(-50%);
-    z-index: 100;
-    margin-bottom: 1vh;
-}
-
 #search {
     display: flex;
     flex-wrap: nowrap;

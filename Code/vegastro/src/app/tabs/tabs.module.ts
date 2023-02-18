@@ -7,6 +7,7 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
     TabsPageRoutingModule,
     ExploreContainerComponentModule
   ],
+  providers: [RestaurantCardService],
   declarations: [TabsPage]
 })
 export class TabsPageModule {}
