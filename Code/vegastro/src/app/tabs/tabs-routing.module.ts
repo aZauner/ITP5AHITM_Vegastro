@@ -22,7 +22,11 @@ const routes: Routes = [
       {
         path: 'restaurantDetail',
         loadChildren: () => import('../restaurantCardDetail/restaurantCardDetail.module').then(m => m.RestaurantCardDetailModule)
-      },  
+      },
+      {
+        path: 'favouriteRestaurants',
+        loadChildren: () => import('../favourites/favourites.module').then(m => m.FavouritesModule)
+      },
       {    
         path: 'restaurantRegistration',
         redirectTo: '/restaurantRegistration',

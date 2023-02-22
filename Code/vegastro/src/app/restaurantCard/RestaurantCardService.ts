@@ -34,4 +34,29 @@ export class RestaurantCardService {
         component.instance.inputs = inputs;
         this.app.attachView(component.hostView);
     }
+
+    addDynamicComponentFav(inputs: RestaurantCardInputs) {
+        const factory = this.resolver.resolveComponentFactory(RestaurantCard);
+        const div = document.createElement("div");
+        document.getElementById("favouriteRestaurants")!.appendChild(div);
+        const component = factory.create(this.injector, [], div);
+        switch (inputs.type) {
+            case "meat":
+                inputs.type = "MeatIcon.svg";
+                break;
+            case "vegetarian":
+                inputs.type = "VegetarianIcon.svg";
+                break;
+            case "vegan":
+                inputs.type = "VeganIcon.svg";
+                break;
+        }
+        if(inputs.description.length > 150) {
+            inputs.preDescr = inputs.description.slice(0,150) + " ...";
+        } else {
+            inputs.preDescr = inputs.description;
+        }
+        component.instance.inputs = inputs;
+        this.app.attachView(component.hostView);
+    }
 }

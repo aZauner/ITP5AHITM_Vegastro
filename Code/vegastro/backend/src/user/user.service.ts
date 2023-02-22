@@ -49,7 +49,7 @@ export class UserService {
 
   async findFavouriteRestaurants(token: string): Promise<{favouriteRestaurants: [Restaurant]} | null> {
     const user = await this.userModel
-      .findOne({token: token})
+      .findOne({token: token}).populate('favouriteRestaurants','', this.restaurantModel)
       .exec();
     if (!user) return null;
     

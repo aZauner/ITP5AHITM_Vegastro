@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FavouritesPage } from '../favourites/favourites.page';
 import { MapPage } from '../map/map.page';
 import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
 import { RestaurantsPage } from '../restaurants/restaurants.page';
@@ -15,5 +16,6 @@ export class TabsPage {
   update() {
     MapPage.getFavRests();
     RestaurantsPage.updateRestaurantsStatic(this.service);
+    FavouritesPage.updateRestaurantsStatic(this.service);
   }
 }
