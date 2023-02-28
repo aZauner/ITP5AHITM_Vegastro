@@ -88,6 +88,8 @@
 
 @media (prefers-color-scheme: light) {
   * {
+    --ion-text-color-rgb: 0, 0, 0;
+
     --ion-text-color: #000;
     --ion-activated-button-color: #6c6c6c;
     --ion-background-color: #fff;

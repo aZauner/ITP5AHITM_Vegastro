@@ -1,4 +1,15 @@
 ion-avatar{
-    width: 30vw;
-    height: 30vw;
+    width: 50vw;
+    height: 50vw;
+    margin-left:  25vw;
+    position: relative;
+    top:7vh;
+    border: var(--ion-background-color) 7px solid;
+}
+#headerDiv{
+    background-color: rgb(98, 98, 98);
+    padding: 2vh 0;
+    border-bottom-left-radius: 40%;
+    border-bottom-right-radius: 40%;
+    background:rgba(var(--ion-text-color-rgb),0.05);
 }
