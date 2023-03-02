@@ -159,6 +159,23 @@ export class MapPage {
       });
   }
 
+  async getAverageStarts(id: string) {
+    let ratingstars = 0;
+    await axios
+      .get('http://localhost:3000/rating/byRestaurant/' + id)
+      .then((response) => {
+        let sumStars = 0;
+        if (response.data.length > 0) {
+          for (const star of response.data) {
+            sumStars += star.stars;
+          }
+          ratingstars = sumStars / response.data.length;
+        }
+        // console.log(ratingstars);
+      });
+    return ratingstars;
+  }
+
   addMarker(restaurant: any) {
     let marker;
     if (MapPage.map.getZoom() == this.fixZoomLevel && this.oldZoomLevel < this.fixZoomLevel) {
@@ -206,7 +223,7 @@ export class MapPage {
       })
     }
 
-    marker.addEventListener('click', () => {
+    marker.addEventListener('click', async () => {
       this.getFavRestsMem();
       let inputs = {
         id: restaurant.id,
@@ -218,6 +235,11 @@ export class MapPage {
         menu: restaurant.menu,
         fromMarker: true
       }
+
+      await this.getAverageStarts(inputs.id).then((starRating) => {
+          console.log(starRating);
+          inputs.stars = starRating
+      })
 
       switch (inputs.type) {
         case "meat":

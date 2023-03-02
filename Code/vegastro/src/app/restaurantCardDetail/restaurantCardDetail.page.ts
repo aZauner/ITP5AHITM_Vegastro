@@ -49,8 +49,15 @@ export class RestaurantCardDetail {
     });
   }
 
-  ngDoCheck() {
+  ngOnInit(){    
+    console.log(this.inputs.stars);    
+  }
+
+  ngDoCheck() {   
+
     if (this.inputs !== this.oldInputs) {
+
+      
       document.getElementById("meals")!.innerHTML = '';
       if (this.inputs.menu != null) {
         for (const meal of this.inputs.menu) {
@@ -64,6 +71,27 @@ export class RestaurantCardDetail {
       this.oldInputs = this.inputs;
     }
   }
+
+  
+
+//   printStars() { 
+//     console.log(this.inputs.stars);        
+
+//     let starBox = document.getElementById('starBox')!;
+//     starBox.innerHTML = "asdf"
+//     starBox.innerHTML =
+//       '<style> .starOn {        font-size: 2.5vh;       color: #48A734;      margin: 0.2vh;   }' +
+//       '  .starOff {          font-size: 2.5vh;          color: var(--ion-text-color-rgb);        margin: 0.2vh; }</style>';
+//     for (let i = 1; i <= 5; i++) {
+//       if (this.inputs.stars >= i) {
+//         starBox.innerHTML +=
+//           '<ng-template >   <ion-icon class="starOn" name="star"></ion-icon>  </ng-template>';           
+//       } else {
+//         starBox.innerHTML +=
+//           '<ng-template >   <ion-icon class="starOff" name="star"></ion-icon>  </ng-template>';          
+//       }
+//     }        
+// }
 
   addFavRestaurant() {
     if(sessionStorage.getItem('favouriteRestaurants')) {

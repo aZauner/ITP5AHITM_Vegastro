@@ -12,31 +12,31 @@
     </ion-card-title>
     <ion-card-subtitle>
       <div class="restaurantStars" id="starBox">
-        <ng-template [ngIf]="inputs.stars <= 5" [ngIfElse]="greyStar">
+        <ng-template [ngIf]="inputs.stars >= 1" [ngIfElse]="greyStar">
           <ion-icon class="starOn" name="star"></ion-icon>
       </ng-template>
       <ng-template #greyStar>
           <ion-icon class="starOff" name="star-outline"></ion-icon>
       </ng-template>
-      <ng-template [ngIf]="inputs.stars <= 4" [ngIfElse]="greyStar">
+      <ng-template [ngIf]="inputs.stars >= 2" [ngIfElse]="greyStar">
           <ion-icon class="starOn" name="star"></ion-icon>
       </ng-template>
       <ng-template #greyStar>
           <ion-icon class="starOff" name="star-outline"></ion-icon>
       </ng-template>
-      <ng-template [ngIf]="inputs.stars <= 3" [ngIfElse]="greyStar">
+      <ng-template [ngIf]="inputs.stars >= 3" [ngIfElse]="greyStar">
           <ion-icon class="starOn" name="star"></ion-icon>
       </ng-template>
       <ng-template #greyStar>
           <ion-icon class="starOff" name="star-outline"></ion-icon>
       </ng-template>
-      <ng-template [ngIf]="inputs.stars <= 2" [ngIfElse]="greyStar">
+      <ng-template [ngIf]="inputs.stars >= 4" [ngIfElse]="greyStar">
           <ion-icon class="starOn" name="star"></ion-icon>
       </ng-template>
       <ng-template #greyStar>
           <ion-icon class="starOff" name="star-outline"></ion-icon>
       </ng-template>
-      <ng-template [ngIf]="inputs.stars <= 1" [ngIfElse]="greyStar">
+      <ng-template [ngIf]="inputs.stars >= 5" [ngIfElse]="greyStar">
           <ion-icon class="starOn" name="star"></ion-icon>
       </ng-template>
       <ng-template #greyStar>
