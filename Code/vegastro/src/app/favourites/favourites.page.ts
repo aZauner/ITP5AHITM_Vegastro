@@ -35,7 +35,7 @@ export class FavouritesPage {
               restaurantCardList.innerHTML = "<h1 style='font-size: 4vh;margin: 3.5vh 16px 0 16px;text-align: center;'>F A V O R I T E N</h1>"
                 for (const restaurant of response.data.favouriteRestaurants) {
                     let desc = restaurant.description ? restaurant.description : "";
-                    service.addDynamicComponentFav({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: true })
+                    service.addDynamicComponentFav({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: true , fromFavPage: true })
                   }
           } else {
             restaurantCardList.innerHTML = "<h1 style='margin-top: 75%; text-align: center; font-size: 3vh;'>Keine Favoriten gefunden</h1>"

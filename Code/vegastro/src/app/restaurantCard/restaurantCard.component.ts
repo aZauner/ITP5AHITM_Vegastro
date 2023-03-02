@@ -27,7 +27,8 @@ export interface RestaurantCardInputs {
   preDescr?: string,
   menu?: [MealDto],
   fromMarker?: boolean,
-  isFav: boolean
+  isFav: boolean,
+  fromFavPage?: boolean
 }
 
 
