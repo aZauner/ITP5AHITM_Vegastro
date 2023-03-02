@@ -7,6 +7,7 @@ import { User, UserSchema } from 'src/schema/user.schema';
 import { UserModule } from 'src/user/user.module';
 import { Meal, MealSchema } from 'src/schema/meal.schema';
 
+
 @Module({
   imports: [
     MongooseModule.forFeature([

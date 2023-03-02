@@ -15,7 +15,7 @@ export class RestaurantService {
     @InjectModel(User.name)
     private readonly userModel: Model<UserDocument>,
     @InjectModel(Meal.name)
-    private readonly mealModel: Model<MealDocument>
+    private readonly mealModel: Model<MealDocument>     
   ) { }
 
   async findRestaurantsNearPosion(

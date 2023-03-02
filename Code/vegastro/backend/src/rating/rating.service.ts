@@ -16,7 +16,7 @@ export class RatingService {
     private readonly ratingModel: Model<RatingDocument>,
     
     ) { }  
-
+    
     _getRatingDetails(rating: RatingDocument): RatingDetails {
       return {
         id: rating._id,
@@ -40,10 +40,24 @@ export class RatingService {
       
       return res;
     }
-
+    
     async create(rating: CreateRatingDto): Promise<HttpException | RatingDocument> {
       const newRating = new this.ratingModel(rating);
       return newRating.save()
     }
 
-}
+    async findRatingsByRestaurant(restaurantId: string): Promise<HttpException | RatingDetails[]> {
+      const ratings = await this.ratingModel
+      .find({ restaurant: restaurantId })
+      .exec();
+      if(!ratings) return new HttpException('Keine Ratings gefunden' , HttpStatus.NOT_FOUND)
+      let res = [];
+      for (const rating of ratings) {
+        res.push(this._getRatingDetails(rating))
+      }
+      
+      return res;
+    }
+    
+  }
+  

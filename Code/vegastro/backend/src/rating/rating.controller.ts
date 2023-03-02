@@ -13,6 +13,11 @@ export class RatingController {
     return this.ratingService.findRatings(userToken);
   }
 
+  @Get('byRestaurant/:restaurantId')
+  findRatingsByRestaurant(@Param('restaurantId') restaurantId: string): Promise<RatingDetails[] | HttpException> {
+    return this.ratingService.findRatingsByRestaurant(restaurantId);
+  }
+
   @Post('create')
   create(@Body() rating: CreateRatingDto): Promise<RatingDocument | HttpException> {   
     return this.ratingService.create(rating);

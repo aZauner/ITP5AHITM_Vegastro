@@ -15,7 +15,7 @@ ion-content {
 ion-icon {
     font-size: 4.3vh;
     color: #48A734;
-
+    margin-right: 2vh;
 }
 
 ion-tabs {
@@ -26,11 +26,15 @@ ion-menu-button {
     width: fit-content;
     height: fit-content;
     font-size: 5.5vh;
-    color: #48A734;
+    color: #48A734;    
 }
 
 ion-searchbar {
     background: none;
+}
+
+ion-button{
+    color: white;    
 }
 
 #logoIcon {

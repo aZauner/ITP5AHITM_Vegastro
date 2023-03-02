@@ -3,12 +3,19 @@
     <div class="wrapper outer">
         <div id="restaurantName">
 
-            <ng-template [ngIf]="inputs.fromMarker" [ngIfElse]="fromListRouter">
+            <ng-template [ngIf]="inputs.fromMarker">
                 <ion-buttons [routerLink]="['/tabs','tab1']" slot="start">
                     <ion-back-button defaultHref="tabs/tab1" text="" icon="arrow-back-outline"></ion-back-button>
                 </ion-buttons>
             </ng-template>
-            <ng-template #fromListRouter>
+
+            <ng-template  [ngIf]="inputs.fromFavPage" >
+                <ion-buttons [routerLink]="['/tabs','favouriteRestaurants']" slot="start">
+                    <ion-back-button defaultHref="tabs/favouriteRestaurants" text="" icon="arrow-back-outline"></ion-back-button>
+                </ion-buttons>
+            </ng-template>
+
+            <ng-template [ngIf]="!inputs.fromFavPage && !inputs.fromMarker">
                 <ion-buttons [routerLink]="['/tabs','tab2']" slot="start" #fromResultsRouter>
                     <ion-back-button defaultHref="tabs/tab2" text="" icon="arrow-back-outline"></ion-back-button>
                 </ion-buttons>
