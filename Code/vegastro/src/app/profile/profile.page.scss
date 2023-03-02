@@ -7,9 +7,38 @@ ion-avatar{
     border: var(--ion-background-color) 7px solid;
 }
 #headerDiv{
-    background-color: rgb(98, 98, 98);
     padding: 2vh 0;
     border-bottom-left-radius: 40%;
     border-bottom-right-radius: 40%;
     background:rgba(var(--ion-text-color-rgb),0.05);
+}
+table{
+    margin: auto auto;
+    margin-top: 10vh;
+}
+td input{
+    background: none;
+    border: none;
+    text-align: left;
+}
+td input:disabled{
+    color:rgba(var(--ion-text-color-rgb),0.55);
+}
+tr{
+    width: 95vw;
+    height: 7vh;
+    margin-top: 5vh;
+    margin: auto auto;
+    border-bottom: 1px solid rgba(var(--ion-text-color-rgb),0.15);
+}
+td ion-icon{
+    font-size: 2rem;
+    padding:0 5vw;
+    color: #48A734;
+}
+ion-button{
+    margin-top: 7vh;
+    margin-left: 30vw;
+    width: 40vw;
+    background-color: #48A734;
 }
