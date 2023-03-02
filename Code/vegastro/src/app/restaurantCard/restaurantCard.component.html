@@ -11,7 +11,7 @@
     </div>       
     </ion-card-title>
     <ion-card-subtitle>
-      <div class="restaurantStars">
+      <div class="restaurantStars" id="starBox">
         <ng-template [ngIf]="inputs.stars <= 5" [ngIfElse]="greyStar">
           <ion-icon class="starOn" name="star"></ion-icon>
       </ng-template>

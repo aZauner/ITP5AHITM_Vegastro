@@ -42,7 +42,7 @@ export class Restaurant {
   location: LocationRestaurant
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Meal' }], required: false })
-  menu: [Meal];
+  menu: [Meal];  
 }
 
 export type RestaurantDocument = Restaurant & Document;
