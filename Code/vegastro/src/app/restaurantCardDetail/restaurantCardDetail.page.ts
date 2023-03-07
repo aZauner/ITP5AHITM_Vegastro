@@ -158,7 +158,7 @@ export class RestaurantCardDetail {
       this.modal.dismiss(null, 'confirm');
     } else {
       this.callToast(1600)
-    }
+    } 
   }
 
   ratingChanged(event: number) {

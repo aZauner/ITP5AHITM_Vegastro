@@ -72,9 +72,10 @@ export class RestaurantCardService {
         inputs.preDescr = inputs.description;
       }
       component.instance.inputs = inputs;
-      this.app.attachView(component.hostView);
+      this.app.attachView(component.hostView);      
     });
   }
+  
 
   async getAverageStarts(id: string) {
     let ratingstars = 0;
