@@ -11,9 +11,9 @@ export class UserService {
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
     @InjectModel(Restaurant.name)
     private readonly restaurantModel: Model<RestaurantDocument>,
-  ) {}
-
-  _getUserDetails(user: UserDocument): UserDetails {
+    ) {}
+    
+    _getUserDetails(user: UserDocument): UserDetails {
     return {
       id: user._id,
       firstname: user.firstname,
@@ -24,50 +24,50 @@ export class UserService {
       token: user.token,
     };
   }
-
+  
   async addToken(
     id: string,
     token: string,
-  ): Promise<HttpStatus | HttpException> {
-    let user = await this.userModel.findOne({ id: id }).exec();
-    if(!user) new HttpException('Keinen User gefunden', HttpStatus.NOT_FOUND)
-    this.userModel
+    ): Promise<HttpStatus | HttpException> {
+      let user = await this.userModel.findOne({ id: id }).exec();
+      if(!user) new HttpException('Keinen User gefunden', HttpStatus.NOT_FOUND)
+      this.userModel
       .updateOne(
         { _id: id },
         { $set: { token: token } },
-      )
-      .exec();
-    return HttpStatus.OK
-  }
+        )
+        .exec();
+        return HttpStatus.OK
+      }
+      
+      async findByToken(token: string): Promise<UserDetails | null> {
+        const user = await this.userModel.findOne({token: token})
+        .exec();
+        if (!user) return null;
+        return this._getUserDetails(user);
+      }
+      
+      async findFavouriteRestaurants(token: string): Promise<{favouriteRestaurants: [Restaurant]} | null> {
+        const user = await this.userModel
+        .findOne({token: token}).populate('favouriteRestaurants','', this.restaurantModel)
+        .exec();
+        if (!user) return null;
+        
+        return this.getFavouriteRestaurants(user);
+      }
+      getFavouriteRestaurants(user: UserDocument): {favouriteRestaurants: [Restaurant]} {
+        return {
+          favouriteRestaurants: user.favouriteRestaurants
+        };
+      }
+      
+      async findByMail(email: string): Promise<UserDocument | null> {
+        return this.userModel.findOne({ email }).exec();
+      } 
 
-  async findByToken(token: string): Promise<UserDetails | null> {
-    const user = await this.userModel.findOne({token: token})
-    .exec();
-    if (!user) return null;
-    return this._getUserDetails(user);
-  }
-
-  async findFavouriteRestaurants(token: string): Promise<{favouriteRestaurants: [Restaurant]} | null> {
-    const user = await this.userModel
-      .findOne({token: token}).populate('favouriteRestaurants','', this.restaurantModel)
-      .exec();
-    if (!user) return null;
-    
-    return this.getFavouriteRestaurants(user);
-  }
-  getFavouriteRestaurants(user: UserDocument): {favouriteRestaurants: [Restaurant]} {
-    return {
-      favouriteRestaurants: user.favouriteRestaurants
-    };
-  }
-
-  async findByMail(email: string): Promise<UserDocument | null> {
-    return this.userModel.findOne({ email }).exec();
-  }
-
-  async create(
-    firstname: string,
-    lastname: string,
+      async create(
+        firstname: string,
+        lastname: string,
     username: string,
     email: string,
     hashedPassword: string,
@@ -80,6 +80,16 @@ export class UserService {
       password: hashedPassword,
     });
     return newUser.save();
+  }
+
+  async changeUserData(token: string ,firstname: string, lastname: string, username: string, email: string): Promise<HttpStatus | HttpException> {
+    this.userModel
+      .updateOne(
+        { token: token },
+        { $set: { firstname: firstname , lastname: lastname , username: username , email: email } },
+      )
+      .exec();
+      return HttpStatus.OK;
   }
 
   async addFvouriteRestaurant(

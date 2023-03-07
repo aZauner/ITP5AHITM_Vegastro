@@ -22,6 +22,11 @@ export class UserController {
     return this.userService.addFvouriteRestaurant(input.restId, input.token)
   }
 
+  @Put('changeUserData')
+  changeUserData(@Body() input : { token: string ,firstname: string , lastname: string, username: string, email:string}): Promise<HttpStatus | HttpException> {
+    return this.userService.changeUserData( input.token ,input.firstname, input.lastname, input.username, input.email)
+  }
+  
   @Put('removeFvouriteRestaurant')
   removeFav(@Body() input : {restId: string , token: string}): Promise<HttpStatus | HttpException> {
     return this.userService.removeFvouriteRestaurant(input.restId, input.token)

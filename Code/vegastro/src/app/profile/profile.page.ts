@@ -30,7 +30,7 @@ isEditable = false;
     axios.get('http://localhost:3000/user/' + sessionStorage.getItem('userToken')).then((response) => {
         this.userData = response.data;
         this.userData.fullname = this.userData.firstname + " " + this.userData.lastname; 
-        console.log( this.userData.id);
+        console.log( this.userData);
 
       })
   }
