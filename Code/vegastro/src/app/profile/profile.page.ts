@@ -10,7 +10,17 @@ import axios from 'axios';
 
 
 export class ProfilePage implements OnInit {
+isEditable = false;
+    userData = {
+      fullname: "",
+      id:"",
+      firstname:"",
+      lastname:"",
+      username:"",
+      email:""
+    }
 
+    
   constructor() { }
 
   ngOnInit(){
@@ -18,14 +28,23 @@ export class ProfilePage implements OnInit {
   }
   ngAfterViewInit() {
     axios.get('http://localhost:3000/user/' + sessionStorage.getItem('userToken')).then((response) => {
-        console.log(response.data);
-        console.log( document.getElementById("nameInput"));
-        document.getElementById("nameInput");
+        this.userData = response.data;
+        this.userData.fullname = this.userData.firstname + " " + this.userData.lastname; 
+        console.log( this.userData.id);
 
       })
   }
 
-  
+  updateProfileData(){
+    //axios.put('http://localhost:3000/user/')
+  }
+
+ 
+
+  toggleEditable(){
+    this.isEditable = !this.isEditable;
+   
+  }
   
    // inputs: ProfilePage = this.defaultInputs;
   

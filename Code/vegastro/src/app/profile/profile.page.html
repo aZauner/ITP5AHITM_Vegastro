@@ -12,20 +12,22 @@
   <table>
     <tr>
       <td><ion-icon name="person-outline"></ion-icon></td>
-      <td><input value="Simon Elmecker" id="nameInput" disabled></td>
+      <td><input value={{userData.fullname}} id="nameInput" [disabled]="!isEditable"></td>
     </tr>
     <tr>
    <td> <ion-icon name="person-circle-outline"></ion-icon></td>
-   <td><input value="Username" disabled></td>
+   <td><input value="Username" [disabled]="!isEditable"></td>
    </tr>
    <tr>
    <td><ion-icon name="lock-closed-outline"></ion-icon></td>
-   <td><input type="password" value="213123" disabled></td>
+   <td><input type="password" value="213123" [disabled]="!isEditable"></td>
   </tr>
   <tr>
     <td><ion-icon name="mail-outline"></ion-icon></td>
-    <td><input type="email" value="elmeckersimon@gmail.com" disabled></td>
+    <td><input type="email" value="elmeckersimon@gmail.com" [disabled]="!isEditable"></td>
   </tr>
   </table>
-  <ion-button>Bearbeiten</ion-button>
+  <ion-button (click)="updateProfileData()">Submit</ion-button>
+
+  <ion-button (click)="toggleEditable()">Bearbeiten</ion-button>
 </ion-content>
