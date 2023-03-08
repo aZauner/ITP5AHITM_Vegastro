@@ -52,22 +52,13 @@ export class UserService {
       
       async findFavouriteRestaurants(token: string): Promise<{favouriteRestaurants: [Restaurant]} | null> {        
         const user = await this.userModel
-        .findOne({token: token}).populate({path: 'favouriteRestaurants' , populate: {path: 'menu' , match: [this.mealModel]}})
+        .findOne({token: token}).populate({path: 'favouriteRestaurants', match: [this.restaurantModel], populate: {path:'menu', model: this.mealModel}})
         .exec();
         if (!user) return null;
-        
-        console.log(this.getFavouriteRestaurants(user));        
         return this.getFavouriteRestaurants(user);
       }
+
       getFavouriteRestaurants(user: UserDocument): {favouriteRestaurants: [Restaurant]} {
-        console.log("--------------------------------------------");
-        console.log(user.favouriteRestaurants);
-         
-        // for(let i = 0 ; i < user.favouriteRestaurants.length; i++){
-        //   console.log(user.favouriteRestaurants[i].menu);
-          
-        // }
-        
         return {
           favouriteRestaurants: user.favouriteRestaurants
         };

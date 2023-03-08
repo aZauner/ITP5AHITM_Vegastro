@@ -31,8 +31,7 @@ export class FavouritesPage {
         .get(
           'http://localhost:3000/user/favourites/' + sessionStorage.getItem('userToken'))
         .then((response) => {
-          if (response.data.status != 404) {
-            console.log(response.data);            
+          if (response.data.status != 404) {          
               restaurantCardList.innerHTML = "<h1 style='font-size: 4vh;margin: 3.5vh 16px 0 16px;text-align: center;'>F A V O R I T E N</h1>"
                 for (const restaurant of response.data.favouriteRestaurants) {
                     let desc = restaurant.description ? restaurant.description : "";                                      

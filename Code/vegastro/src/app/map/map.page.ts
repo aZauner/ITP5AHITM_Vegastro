@@ -86,13 +86,11 @@ export class MapPage {
 
   static getFavRests() {
     if (!sessionStorage.getItem('favouriteRestaurants') && sessionStorage.getItem('userToken')) {
-      console.log("dodl");
-      
       axios.get('http://localhost:3000/user/favourites/' + sessionStorage.getItem('userToken')).then((response) => {
         let favRestaurants = [];
         if (response.data.favouriteRestaurants.length > 0) {
           for (const restaurant of response.data.favouriteRestaurants) {
-            favRestaurants.push(restaurant);
+            favRestaurants.push(restaurant._id);
           }
         }
         sessionStorage.setItem('favouriteRestaurants', JSON.stringify(favRestaurants))
