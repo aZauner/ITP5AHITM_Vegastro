@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Meal, MealDocument } from 'src/schema/meal.schema';
 import { Restaurant, RestaurantDocument } from 'src/schema/restaurant.schema';
 import { User, UserDocument } from '../schema/user.schema';
 import { UserDetails } from './entities/user.entity';
@@ -8,9 +9,11 @@ import { UserDetails } from './entities/user.entity';
 @Injectable()
 export class UserService {
   constructor(
+    @InjectModel(Meal.name)
+    private readonly mealModel: Model<MealDocument>,  
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
     @InjectModel(Restaurant.name)
-    private readonly restaurantModel: Model<RestaurantDocument>,
+    private readonly restaurantModel: Model<RestaurantDocument>,     
     ) {}
     
     _getUserDetails(user: UserDocument): UserDetails {
@@ -47,15 +50,24 @@ export class UserService {
         return this._getUserDetails(user);
       }
       
-      async findFavouriteRestaurants(token: string): Promise<{favouriteRestaurants: [Restaurant]} | null> {
+      async findFavouriteRestaurants(token: string): Promise<{favouriteRestaurants: [Restaurant]} | null> {        
         const user = await this.userModel
-        .findOne({token: token}).populate('favouriteRestaurants','', this.restaurantModel)
+        .findOne({token: token}).populate({path: 'favouriteRestaurants' , populate: {path: 'menu' , match: [this.mealModel]}})
         .exec();
         if (!user) return null;
         
+        console.log(this.getFavouriteRestaurants(user));        
         return this.getFavouriteRestaurants(user);
       }
       getFavouriteRestaurants(user: UserDocument): {favouriteRestaurants: [Restaurant]} {
+        console.log("--------------------------------------------");
+        console.log(user.favouriteRestaurants);
+         
+        // for(let i = 0 ; i < user.favouriteRestaurants.length; i++){
+        //   console.log(user.favouriteRestaurants[i].menu);
+          
+        // }
+        
         return {
           favouriteRestaurants: user.favouriteRestaurants
         };

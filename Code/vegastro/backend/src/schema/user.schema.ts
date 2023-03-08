@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
 import { Restaurant } from './restaurant.schema';
+
 @Schema()
 export class User {
   @Prop({ required: true })

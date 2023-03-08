@@ -18,6 +18,11 @@ export class MealController {
     return this.mealService.create(meal);
   }
 
+  @Get('/getById/:id')
+  getMealById(@Param('id') id: string): Promise<MealDetails | HttpException> {
+    return this.mealService.getMealById(id);
+  }
+
   @Get()
   getAllMeals(): Promise<MealDetails[] | HttpException> {
     return this.mealService.getAll();

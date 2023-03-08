@@ -10,33 +10,41 @@ export class MealService {
   constructor(
     @InjectModel(Meal.name)
     private readonly mealModel: Model<MealDocument>
-  ) { }
-
-  _getMealDetails(meal: MealDocument): MealDetails {
-    return {
-      id: meal._id,
-      title: meal.title,
-      description: meal.description,
-      type: meal.type,
-      price: meal.price,
-      allergic: meal.allergic
-    };
-  }
-
-  async findByName(title: string): Promise<MealDetails | null> {
-    const meal = await this.mealModel
+    ) { }
+    
+    _getMealDetails(meal: MealDocument): MealDetails {
+      return {
+        id: meal._id,
+        title: meal.title,
+        description: meal.description,
+        type: meal.type,
+        price: meal.price,
+        allergic: meal.allergic
+      };
+    }
+    
+    async findByName(title: string): Promise<MealDetails | null> {
+      const meal = await this.mealModel
       .findOne({ title: title })
       .exec();
-    if (!meal) return null;
-    return this._getMealDetails(meal);
-  }
+      if (!meal) return null;
+      return this._getMealDetails(meal);
+    }
+    
+    async getMealById(id: string): Promise<HttpException | MealDetails> {
+      const meal = await this.mealModel
+      .findOne({ id: id })
+      .exec();
+      if (!meal) return null;
+      return this._getMealDetails(meal);
+    }
 
-  async create(meal: CreateMealDto): Promise<MealDocument | HttpException> {
-    const newMeal = new this.mealModel(meal);
-    return newMeal.save();
-  }
-
-  async getAll(): Promise<HttpException | MealDetails[]> {
+    async create(meal: CreateMealDto): Promise<MealDocument | HttpException> {
+      const newMeal = new this.mealModel(meal);
+      return newMeal.save();
+    }
+    
+    async getAll(): Promise<HttpException | MealDetails[]> {
     const meals = await this.mealModel
       .find()
       .exec();
