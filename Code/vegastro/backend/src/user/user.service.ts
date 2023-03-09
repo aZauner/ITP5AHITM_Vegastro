@@ -92,6 +92,7 @@ export class UserService {
         { $set: { firstname: firstname , lastname: lastname , username: username , email: email } },
       )
       .exec();
+      console.log("dofl")
       return HttpStatus.OK;
   }
 

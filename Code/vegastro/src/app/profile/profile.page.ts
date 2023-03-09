@@ -10,46 +10,51 @@ import axios from 'axios';
 
 
 export class ProfilePage implements OnInit {
-isEditable = false;
-    userData = {
-      fullname: "",
-      id:"",
-      firstname:"",
-      lastname:"",
-      username:"",
-      email:""
-    }
+  isEditable = false;
+  userData = {
+    id: "",
+    firstname: "",
+    lastname: "",
+    username: "",
+    email: "",
+    password: ""
+  }
 
-    
+
   constructor() { }
 
-  ngOnInit(){
+  ngOnInit() {
 
   }
   ngAfterViewInit() {
     axios.get('http://localhost:3000/user/' + sessionStorage.getItem('userToken')).then((response) => {
-        this.userData = response.data;
-        this.userData.fullname = this.userData.firstname + " " + this.userData.lastname; 
-        console.log( this.userData);
+      this.userData = response.data;
+      console.log(this.userData);
 
-      })
+    })
   }
 
-  updateProfileData(){
-    axios.put('http://localhost:3000/user/changeUserDate', {
-      "token": {
-        
-      }
-      
-    })  }
-
- 
-
-  toggleEditable(){
+  updateProfileData() {
+    console.log(2);
+    
+    axios.put('http://localhost:3000/user/changeUserData', {      
+      "token": sessionStorage.getItem('userToken'),
+      "firstname": this.userData.firstname,
+      "lastname": this.userData.lastname,
+      "username": this.userData.username,
+      "email": this.userData.email      
+    })
     this.isEditable = !this.isEditable;
-   
-  }
-  
+
+}
+
+
+
+toggleEditable(){
+  this.isEditable = !this.isEditable;
+
+}
+
    // inputs: ProfilePage = this.defaultInputs;
   
   
