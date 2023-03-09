@@ -181,7 +181,7 @@ export class MapPage {
         icon: new L.DivIcon({
           className: 'my-div-icon',
           html: '<style>@keyframes fadeInAnimation {0% {opacity: 0;}100% {opacity: 1;}}</style><div style="min-width:fit-content;  transform: translate(-47%,-40%);">' +
-            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>' +
+            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker_'+ restaurant.type +  '.svg"/>' +
             '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;' +
             'animation: fadeInAnimation ease 500ms; animation-iteration-count: 1; animation-fill-mode: forwards;">' + restaurant.restaurantName + '</p>' +
             '</div>'
@@ -192,7 +192,7 @@ export class MapPage {
         icon: new L.DivIcon({
           className: 'my-div-icon',
           html: '<div style="min-width:fit-content;  transform: translate(-47%,-40%);">' +
-            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>' +
+            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker_'+ restaurant.type +  '.svg"/>' +
             '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;">' + restaurant.restaurantName + '</p>' +
             '</div>'
         })
@@ -203,7 +203,7 @@ export class MapPage {
           className: 'my-div-icon',
           html: '<style>@keyframes fadeInAnimation {0%{opacity:1;}100%{opacity:0}}</style>' +
             '<div style=" min-width:fit-content; min-height: fit-content;  transform: translate(-47%,-40%);">' +
-            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>' +
+            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker_'+ restaurant.type +  '.svg"/>' +
             '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;' +
             'animation: fadeInAnimation ease 500ms; animation-iteration-count: 1; animation-fill-mode: forwards;">' + restaurant.restaurantName + '</p>' +
             '</div>'
@@ -214,7 +214,7 @@ export class MapPage {
         icon: new L.DivIcon({
           className: 'my-div-icon',
           html: '<div style="min-width:fit-content;  transform: translate(-47%,-40%);">' +
-            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker.svg"/>' +
+            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker_'+ restaurant.type +  '.svg"/>' +
             '<p style="min-width:fit-content;display:block;color: black; opacity: 0; white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;">' + restaurant.restaurantName + '</p>' +
             '</div>'
         })
