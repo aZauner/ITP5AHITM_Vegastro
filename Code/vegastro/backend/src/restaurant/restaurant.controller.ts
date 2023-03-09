@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, Put, HttpStatus } from '@nestjs/common';
 import { RestaurantDocument } from 'src/schema/restaurant.schema';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { RestaurantDetails } from './entities/restaurant.entity';
@@ -26,5 +26,10 @@ export class RestaurantController {
   @Get()
   getAllRestaurants(): Promise<RestaurantDetails[] | HttpException> {
     return this.restaurantService.getAllRstaurants();
+  }
+
+  @Put('addMealToMenu')
+  addMealToMenu(@Body() input : { mealid: string ,restaurantid: string }): Promise<HttpStatus | HttpException> {
+    return this.restaurantService.addMealToMenu( input.mealid , input.restaurantid)
   }
 }

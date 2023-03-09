@@ -99,8 +99,7 @@ export class RestaurantCardDetail {
 
         devisionPerMeal.meat = devisionPerMeal.meat/inputs.menu.length;
         devisionPerMeal.vegetarian = devisionPerMeal.vegetarian/inputs.menu.length
-        devisionPerMeal.vegan = devisionPerMeal.vegan/inputs.menu.length
-        console.log(devisionPerMeal);
+        devisionPerMeal.vegan = devisionPerMeal.vegan/inputs.menu.length        
         this.mealDevisionInputs = devisionPerMeal;      
 
       }

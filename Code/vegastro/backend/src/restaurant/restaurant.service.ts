@@ -16,9 +16,39 @@ export class RestaurantService {
     private readonly userModel: Model<UserDocument>,
     @InjectModel(Meal.name)
     private readonly mealModel: Model<MealDocument>     
-  ) { }
+    ) { }
+    
+    async addMealToMenu(mealid: string, restaurantid: string): Promise<any> {
+      const restaurant = await this.restaurantModel
+      .findOne({ _id: restaurantid })
+      .exec();
 
-  async findRestaurantsNearPosion(
+      if(!restaurant) return new HttpException("restaurant nicht gefunden" , HttpStatus.NOT_FOUND)
+
+      let menu = await this._getRestaurantDetails(restaurant)
+      .menu;      
+
+      const meal = await this.mealModel
+      .findOne({ _id: mealid })
+      .exec();
+
+      if(!meal) return new HttpException("Meal nicht gefunden" , HttpStatus.NOT_FOUND)
+
+      menu.push(meal._id);      
+
+      console.log(menu);
+
+      this.restaurantModel
+      .updateOne(
+        { _id: restaurantid },
+        { $set: { menu: menu } },
+      )
+      .exec();
+
+      return HttpStatus.OK;
+    }
+
+    async findRestaurantsNearPosion(
     northLat: number,
     northLon: number,
     southLat: number,
