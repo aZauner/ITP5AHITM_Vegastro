@@ -64,7 +64,7 @@
                 <ng-template #greyStar>
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
                 </ng-template>
-            </div>
+            </div>            
             <ion-button id="open-modal" expand="block" fill="clear">Bewerten</ion-button>
             <ion-modal #modal trigger="open-modal">
                 <ng-template>
@@ -97,6 +97,9 @@
                 </ng-template>
             </ion-modal>
         </div>
+        <ion-progress-bar class="meatBar" [value]="mealDevisionInputs.meat" ></ion-progress-bar>
+        <ion-progress-bar class="veganBar" [value]="mealDevisionInputs.vegan" ></ion-progress-bar>
+        <ion-progress-bar class="vegeatarianBar" [value]="mealDevisionInputs.vegetarian" ></ion-progress-bar>
         <p id="restaurantDescription">{{inputs.description}}</p>
         <ion-list id="meals">
 

@@ -45,6 +45,30 @@ img {
     object-fit: cover;
 }
 
+ion-progress-bar{
+    box-sizing: border-box;
+    height: 1.5vh;
+    width: 30vw;
+    border-radius: 2vh;  
+    margin-top: 0.5vh;  
+}
+
+ion-progress-bar::part(track){
+    background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1)
+}
+
+.meatBar::part(progress){
+    background: red
+}
+
+.veganBar::part(progress){
+    background: var(--ion-app-color)
+}
+
+.vegeatarianBar::part(progress){
+    background: purple
+}
+
 main {
     overflow: auto;
 }

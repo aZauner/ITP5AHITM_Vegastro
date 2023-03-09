@@ -20,6 +20,11 @@ export class RestaurantCardDetail {
   oldInputs: RestaurantCardInputs;
   ratingComment: string = "";
   userStarRating: number = 0;
+  mealDevisionInputs = {
+    meat: 0,
+    vegan: 0,
+    vegetarian: 0
+  }
   
   constructor(private route: ActivatedRoute, private router: Router, private service: MealService, private toastController: ToastController) {
     this.inputs = {
@@ -50,14 +55,14 @@ export class RestaurantCardDetail {
   }
 
   ngOnInit(){    
-    console.log(this.inputs.stars);    
+    console.log(this.inputs.stars);        
   }
 
   ngDoCheck() {   
 
     if (this.inputs !== this.oldInputs) {
 
-      
+      this.mealDivision(this.inputs)
       document.getElementById("meals")!.innerHTML = '';
       if (this.inputs.menu != null) {
         for (const meal of this.inputs.menu) {
@@ -72,26 +77,35 @@ export class RestaurantCardDetail {
     }
   }
 
-  
+  mealDivision(inputs: any){      
+      let devisionPerMeal = {
+        meat: 0,
+        vegan: 0,
+        vegetarian: 0
+      }
 
-//   printStars() { 
-//     console.log(this.inputs.stars);        
+      if(inputs.menu.length > 0){
+        for(let i = 0; i < inputs.menu.length; i++){
+            if(inputs.menu[i].type == 'meat'){
+              devisionPerMeal.meat ++
+            }
+            else if (inputs.menu[i].type == 'vegetarian'){
+              devisionPerMeal.vegetarian ++
+            }  
+            else if (inputs.menu[i].type == 'vegan'){
+              devisionPerMeal.vegan ++
+            }   
+        }
 
-//     let starBox = document.getElementById('starBox')!;
-//     starBox.innerHTML = "asdf"
-//     starBox.innerHTML =
-//       '<style> .starOn {        font-size: 2.5vh;       color: #48A734;      margin: 0.2vh;   }' +
-//       '  .starOff {          font-size: 2.5vh;          color: var(--ion-text-color-rgb);        margin: 0.2vh; }</style>';
-//     for (let i = 1; i <= 5; i++) {
-//       if (this.inputs.stars >= i) {
-//         starBox.innerHTML +=
-//           '<ng-template >   <ion-icon class="starOn" name="star"></ion-icon>  </ng-template>';           
-//       } else {
-//         starBox.innerHTML +=
-//           '<ng-template >   <ion-icon class="starOff" name="star"></ion-icon>  </ng-template>';          
-//       }
-//     }        
-// }
+        devisionPerMeal.meat = devisionPerMeal.meat/inputs.menu.length;
+        devisionPerMeal.vegetarian = devisionPerMeal.vegetarian/inputs.menu.length
+        devisionPerMeal.vegan = devisionPerMeal.vegan/inputs.menu.length
+        console.log(devisionPerMeal);
+        this.mealDevisionInputs = devisionPerMeal;      
+
+      }
+      
+  }
 
   addFavRestaurant() {
     if(sessionStorage.getItem('favouriteRestaurants')) {
