@@ -25,6 +25,8 @@ export class RestaurantCardDetail {
     vegan: 0,
     vegetarian: 0
   }
+
+  roundedStarRating = 0;
   
   constructor(private route: ActivatedRoute, private router: Router, private service: MealService, private toastController: ToastController) {
     this.inputs = {
@@ -61,7 +63,7 @@ export class RestaurantCardDetail {
   ngDoCheck() {   
 
     if (this.inputs !== this.oldInputs) {
-
+      this.roundedStarRating = Math.round(this.inputs.stars * 100) / 100 
       this.mealDivision(this.inputs)
       document.getElementById("meals")!.innerHTML = '';
       if (this.inputs.menu != null) {

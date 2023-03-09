@@ -1,3 +1,9 @@
+.roundedStarValue{
+    margin: 0.6vh 0 0 1vh;
+    padding: 0%;
+
+}
+
 .starOff {
     font-size: 2.5vh;
     color: var(--ion-text-color-rgb);
@@ -91,7 +97,7 @@ main {
 #ratingsDiv {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;    
 }
 
 #open-modal {
@@ -132,3 +138,4 @@ main {
 #meals {
     margin-bottom: 5vh;
 }
+

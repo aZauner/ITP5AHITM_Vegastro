@@ -63,8 +63,9 @@
                 </ng-template>
                 <ng-template #greyStar>
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
-                </ng-template>
-            </div>            
+                </ng-template>                
+                <p class="roundedStarValue">{{roundedStarRating}}</p>           
+            </div> 
             <ion-button id="open-modal" expand="block" fill="clear">Bewerten</ion-button>
             <ion-modal #modal trigger="open-modal">
                 <ng-template>
