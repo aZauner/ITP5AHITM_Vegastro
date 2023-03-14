@@ -42,11 +42,14 @@ export class ProfilePage implements OnInit {
 
   updateProfileData() {
     
-    axios.put('http://localhost:3000/auth/changePassword', {
+    axios.put('http://localhost:3000/auth/changeData', {
       "token": sessionStorage.getItem('userToken'),
       "oldPassword": this.userData.oldPassword,
       "newPassword": this.userData.newPassword,
-      "confirmedPassword": this.userData.newConfirmedPassword
+      "confirmedPassword": this.userData.newConfirmedPassword,
+      "firstname": this.userData.firstname,
+      "lastname": this.userData.lastname,
+      "username": this.userData.username
     })
     //bcrypt.hash("asd", 12);
     this.errorMessage= "asd"

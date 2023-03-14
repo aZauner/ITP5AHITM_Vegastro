@@ -46,7 +46,7 @@ export class AuthService {
     return bcrypt.compare(password, hashedPassword);
   }
 
-  async changePassword(token: string, oldPassword: string, newPassword: string, confirmedPassword: string): Promise<HttpStatus | HttpException> {
+  async changeData(token: string, oldPassword: string, newPassword: string, confirmedPassword: string, firstname: string, lastname: string, username:string): Promise<HttpStatus | HttpException> {
     const user = await this.userService.findByToken(token);
 
     const userExist = !!user;
@@ -62,9 +62,12 @@ export class AuthService {
    
    
 
-    const newUser = await this.userService.changePassword({
+    const newUser = await this.userService.changeUserDataPwd({
       token: token,
-      password: newHash
+      password: newHash,
+      firstname : firstname,
+      lastname: lastname,
+      username: username
     });
   }
 

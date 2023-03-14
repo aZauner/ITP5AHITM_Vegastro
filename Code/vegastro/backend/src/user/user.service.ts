@@ -14,7 +14,7 @@ export class UserService {
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
     @InjectModel(Restaurant.name)
     private readonly restaurantModel: Model<RestaurantDocument>,
-    ) {}
+  ) { }
 
   _getUserDetails(user: UserDocument): UserDetails {
     return {
@@ -100,11 +100,13 @@ export class UserService {
     return HttpStatus.OK;
   }
 
-  async changePassword(input:{token: string, password: string}){
        
+  async changeUserDataPwd(input: { token: string, password: string, firstname: string, lastname: string, username: string }) {
+
+
     this.userModel.updateOne(
-      {token: input.token},
-      {$set: {password: input.password}}
+      { token: input.token },
+      { $set: { password: input.password, firstname: input.firstname, lastname: input.lastname, username: input.username } }
     ).exec();
     return HttpStatus.OK;
 
@@ -160,7 +162,7 @@ export class UserService {
 
     return HttpStatus.OK;
   }
-  
-  
-  
+
+
+
 }

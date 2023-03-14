@@ -18,9 +18,9 @@ export class AuthController {
     return this.authService.login(user);
   }
   
-  @Put('changePassword')
-  changePassword(@Body() input : {token: string, oldPassword: string, newPassword: string, confirmedPassword: string}): Promise<HttpStatus | HttpException> {
-    return this.authService.changePassword(input.token,input.oldPassword, input.newPassword, input.confirmedPassword )
+  @Put('changeData')
+  changeData(@Body() input : {token: string, oldPassword: string, newPassword: string, confirmedPassword: string, firstname: string, lastname: string, username:string}): Promise<HttpStatus | HttpException> {
+    return this.authService.changeData(input.token,input.oldPassword, input.newPassword, input.confirmedPassword ,input.firstname, input.lastname, input.username )
   }
   
 
