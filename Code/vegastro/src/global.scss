@@ -35,6 +35,12 @@ ion-toast.favToast{
     --height: 70px;
 }
 
+ion-toast.LoggedOutToast{
+    font-size: 17px;
+    --height: 70px;
+    text-align: center;
+}
+
 ion-toast.favToast::part(button) {
     font-size: 17px;
     color: #48A734;
