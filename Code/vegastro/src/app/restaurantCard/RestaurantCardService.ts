@@ -49,8 +49,7 @@ export class RestaurantCardService {
 
   async addDynamicComponentFav(inputs: RestaurantCardInputs) {
     await this.getAverageStarts(inputs.id).then((starRating) => {
-      inputs.stars = starRating;
-      console.log(inputs.stars);
+      inputs.stars = starRating;      
 
       const factory = this.resolver.resolveComponentFactory(RestaurantCard);
       const div = document.createElement('div');
@@ -89,8 +88,7 @@ export class RestaurantCardService {
             sumStars += star.stars;
           }
           ratingstars = sumStars / response.data.length;
-        }
-        // console.log(ratingstars);
+        }        
       });
     return ratingstars;
   }

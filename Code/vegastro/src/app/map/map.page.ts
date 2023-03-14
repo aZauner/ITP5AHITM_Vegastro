@@ -168,8 +168,7 @@ export class MapPage {
             sumStars += star.stars;
           }
           ratingstars = sumStars / response.data.length;
-        }
-        // console.log(ratingstars);
+        }        
       });
     return ratingstars;
   }
@@ -234,8 +233,7 @@ export class MapPage {
         fromMarker: true
       }
 
-      await this.getAverageStarts(inputs.id).then((starRating) => {
-          console.log(starRating);
+      await this.getAverageStarts(inputs.id).then((starRating) => {          
           inputs.stars = starRating
       })
 

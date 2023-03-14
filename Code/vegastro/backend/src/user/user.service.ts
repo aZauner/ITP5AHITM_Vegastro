@@ -96,17 +96,12 @@ export class UserService {
         { token: token },
         { $set: { firstname: firstname, lastname: lastname, username: username, email: email } },
       )
-      .exec();
-    console.log("dofl")
+      .exec();    
     return HttpStatus.OK;
   }
 
   async changePassword(input:{token: string, password: string}){
-
-
-    console.log(input.token
-      );
-    
+       
     this.userModel.updateOne(
       {token: input.token},
       {$set: {password: input.password}}

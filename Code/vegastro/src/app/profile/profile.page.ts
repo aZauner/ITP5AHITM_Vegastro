@@ -35,8 +35,7 @@ export class ProfilePage implements OnInit {
   ngAfterViewInit() {
     
     axios.get('http://localhost:3000/user/' + sessionStorage.getItem('userToken')).then((response) => {
-      this.userData = response.data;
-      console.log(this.userData)
+      this.userData = response.data;      
 
     })
   }

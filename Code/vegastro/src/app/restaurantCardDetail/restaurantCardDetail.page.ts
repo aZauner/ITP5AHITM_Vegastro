@@ -57,7 +57,7 @@ export class RestaurantCardDetail {
   }
 
   ngOnInit(){    
-    console.log(this.inputs.stars);        
+         
   }
 
   ngDoCheck() {   
