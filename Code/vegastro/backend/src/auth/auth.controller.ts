@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, HttpStatus, HttpException } from '@nestjs/common';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { ExistingUserDto } from 'src/user/dto/existing-user.dto';
 import { UserDetails } from 'src/user/entities/user.entity';
@@ -17,4 +17,11 @@ export class AuthController {
   login(@Body() user: ExistingUserDto): Promise<{token: string} | null> {
     return this.authService.login(user);
   }
+  
+  @Put('changePassword')
+  changePassword(@Body() input : {token: string, oldPassword: string, newPassword: string, confirmedPassword: string}): Promise<HttpStatus | HttpException> {
+    return this.authService.changePassword(input.token,input.oldPassword, input.newPassword, input.confirmedPassword )
+  }
+  
+
 }

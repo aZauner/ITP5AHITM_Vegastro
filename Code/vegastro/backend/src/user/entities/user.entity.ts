@@ -8,4 +8,5 @@ export interface UserDetails {
     email: string;
     favouriteRestaurants: [Restaurant],
     token: string;
+    password: string
 }

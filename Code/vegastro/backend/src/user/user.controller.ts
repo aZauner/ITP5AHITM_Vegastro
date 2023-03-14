@@ -1,5 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Put, HttpStatus, HttpException } from '@nestjs/common';
 import { Restaurant } from 'src/schema/restaurant.schema';
+import { UserDocument } from 'src/schema/user.schema';
+import { CreateUserDto } from './dto/create-user.dto';
 import { UserDetails } from './entities/user.entity';
 import { UserService } from './user.service';
 
@@ -27,6 +29,8 @@ export class UserController {
     return this.userService.changeUserData( input.token ,input.firstname, input.lastname, input.username, input.email)
   }
   
+  
+
   @Put('removeFvouriteRestaurant')
   removeFav(@Body() input : {restId: string , token: string}): Promise<HttpStatus | HttpException> {
     return this.userService.removeFvouriteRestaurant(input.restId, input.token)
@@ -36,5 +40,8 @@ export class UserController {
   addToken(@Body() input : {id: string , token: string}): Promise<HttpStatus | HttpException> {
     return this.userService.addToken(input.id, input.token)
   }
+
+
+  
 
 }

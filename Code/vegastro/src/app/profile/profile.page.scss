@@ -24,6 +24,10 @@ td input{
 td input:disabled{
     color:rgba(var(--ion-text-color-rgb),0.55);
 }
+.userFullName{
+    display: flex;
+    flex-direction: row;
+}
 tr{
     width: 95vw;
     height: 7vh;
