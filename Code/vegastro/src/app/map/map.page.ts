@@ -20,8 +20,6 @@ export class MapPage {
   static map: L.Map;
   activeMarkers: L.Marker[] = [];
   fixZoomLevel = 14;
-  olderZoomLevel = this.fixZoomLevel - 1;
-  oldZoomLevel = this.fixZoomLevel;
   static filters: string[] = []
 
   constructor(protected platform: Platform, private geolocation: Geolocation, private router: Router) { }
@@ -129,12 +127,6 @@ export class MapPage {
               this.addMarker(restaurant);
             }
           }
-
-
-          if (this.oldZoomLevel != MapPage.map.getZoom() && this.olderZoomLevel != this.oldZoomLevel) {
-            this.olderZoomLevel = this.oldZoomLevel;
-            this.oldZoomLevel = MapPage.map.getZoom()
-          }
         }
       });
 
@@ -175,36 +167,14 @@ export class MapPage {
 
   addMarker(restaurant: any) {
     let marker;
-    if (MapPage.map.getZoom() == this.fixZoomLevel && this.oldZoomLevel < this.fixZoomLevel) {
+    if (MapPage.map.getZoom() >= this.fixZoomLevel) {
       marker = L.marker([restaurant.latitude, restaurant.longitude], {
         icon: new L.DivIcon({
           className: 'my-div-icon',
-          html: '<style>@keyframes fadeInAnimation {0% {opacity: 0;}100% {opacity: 1;}}</style><div style="min-width:fit-content;  transform: translate(-47%,-40%);">' +
-            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker_'+ restaurant.type +  '.svg"/>' +
-            '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;' +
-            'animation: fadeInAnimation ease 500ms; animation-iteration-count: 1; animation-fill-mode: forwards;">' + restaurant.restaurantName + '</p>' +
-            '</div>'
-        })
-      })
-    } else if (MapPage.map.getZoom() >= this.fixZoomLevel) {
-      marker = L.marker([restaurant.latitude, restaurant.longitude], {
-        icon: new L.DivIcon({
-          className: 'my-div-icon',
-          html: '<div style="min-width:fit-content;  transform: translate(-47%,-40%);">' +
-            '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker_'+ restaurant.type +  '.svg"/>' +
-            '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;">' + restaurant.restaurantName + '</p>' +
-            '</div>'
-        })
-      })
-    } else if (this.oldZoomLevel > this.fixZoomLevel - 1 && MapPage.map.getZoom() == this.fixZoomLevel - 1 && this.olderZoomLevel >= this.fixZoomLevel - 1) {
-      marker = L.marker([restaurant.latitude, restaurant.longitude], {
-        icon: new L.DivIcon({
-          className: 'my-div-icon',
-          html: '<style>@keyframes fadeInAnimation {0%{opacity:1;}100%{opacity:0}}</style>' +
+          html: 
             '<div style=" min-width:fit-content; min-height: fit-content;  transform: translate(-47%,-40%);">' +
             '<img style="height: 40px;width: 40px;display:block;margin: auto auto;" src="../../assets/icon/Marker_'+ restaurant.type +  '.svg"/>' +
-            '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;' +
-            'animation: fadeInAnimation ease 500ms; animation-iteration-count: 1; animation-fill-mode: forwards;">' + restaurant.restaurantName + '</p>' +
+            '<p style="min-width:fit-content;color: black;white-space: nowrap;font-size:2vh;margin-top:0.5vh;font-weight:bold;">' + restaurant.restaurantName + '</p>' +
             '</div>'
         })
       })

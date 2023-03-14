@@ -25,9 +25,11 @@ export class RestaurantCardDetail {
     vegan: 0,
     vegetarian: 0
   }
+  comments = []
 
   roundedStarRating = 0;
-  
+  restaurantRated = false;
+
   constructor(private route: ActivatedRoute, private router: Router, private service: MealService, private toastController: ToastController) {
     this.inputs = {
       id: "1",
@@ -38,7 +40,7 @@ export class RestaurantCardDetail {
       description: "This is a Mc Donalds",
       isFav: false
     };
-    
+
     this.oldInputs = {
       id: "1",
       image: "pizzaDemo.png",
@@ -56,14 +58,10 @@ export class RestaurantCardDetail {
     });
   }
 
-  ngOnInit(){    
-         
-  }
-
   ngDoCheck() {   
 
     if (this.inputs !== this.oldInputs) {
-      this.roundedStarRating = Math.round(this.inputs.stars * 100) / 100 
+      this.roundedStarRating = Math.round(this.inputs.stars * 100) / 100
       this.mealDivision(this.inputs)
       document.getElementById("meals")!.innerHTML = '';
       if (this.inputs.menu != null) {
@@ -75,41 +73,56 @@ export class RestaurantCardDetail {
           }
         }
       }
+
+      //ratings laden
+      axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
+        this.comments = response.data
+        if(response.data.length > 0) {
+          for (const comment of response.data) {
+            if (comment.userToken! == sessionStorage.getItem('userToken')) {
+              this.restaurantRated = true;
+            }
+          }
+        } else {
+          this.restaurantRated = false;
+        }
+      })
+
       this.oldInputs = this.inputs;
     }
   }
 
-  mealDivision(inputs: any){      
-      let devisionPerMeal = {
-        meat: 0,
-        vegan: 0,
-        vegetarian: 0
-      }
+  mealDivision(inputs: any) {
+    let devisionPerMeal = {
+      meat: 0,
+      vegan: 0,
+      vegetarian: 0
+    }
 
-      if(inputs.menu.length > 0){
-        for(let i = 0; i < inputs.menu.length; i++){
-            if(inputs.menu[i].type == 'meat'){
-              devisionPerMeal.meat ++
-            }
-            else if (inputs.menu[i].type == 'vegetarian'){
-              devisionPerMeal.vegetarian ++
-            }  
-            else if (inputs.menu[i].type == 'vegan'){
-              devisionPerMeal.vegan ++
-            }   
+    if (inputs.menu.length > 0) {
+      for (let i = 0; i < inputs.menu.length; i++) {
+        if (inputs.menu[i].type == 'meat') {
+          devisionPerMeal.meat++
         }
-
-        devisionPerMeal.meat = devisionPerMeal.meat/inputs.menu.length;
-        devisionPerMeal.vegetarian = devisionPerMeal.vegetarian/inputs.menu.length
-        devisionPerMeal.vegan = devisionPerMeal.vegan/inputs.menu.length        
-        this.mealDevisionInputs = devisionPerMeal;      
-
+        else if (inputs.menu[i].type == 'vegetarian') {
+          devisionPerMeal.vegetarian++
+        }
+        else if (inputs.menu[i].type == 'vegan') {
+          devisionPerMeal.vegan++
+        }
       }
-      
+
+      devisionPerMeal.meat = devisionPerMeal.meat / inputs.menu.length;
+      devisionPerMeal.vegetarian = devisionPerMeal.vegetarian / inputs.menu.length
+      devisionPerMeal.vegan = devisionPerMeal.vegan / inputs.menu.length
+      this.mealDevisionInputs = devisionPerMeal;
+
+    }
+
   }
 
   addFavRestaurant() {
-    if(sessionStorage.getItem('favouriteRestaurants')) {
+    if (sessionStorage.getItem('favouriteRestaurants')) {
       this.inputs.isFav = !this.inputs.isFav;
       let favRests = JSON.parse(sessionStorage.getItem('favouriteRestaurants')!);
       favRests.push(this.inputs.id);
@@ -119,7 +132,7 @@ export class RestaurantCardDetail {
         "token": sessionStorage.getItem('userToken')
       })
     } else {
-        this.callToast(1300)
+      this.callToast(1300)
     }
   }
 
@@ -142,7 +155,7 @@ export class RestaurantCardDetail {
   }
 
   removeFavRestaurant() {
-    if(sessionStorage.getItem('favouriteRestaurants')) {
+    if (sessionStorage.getItem('favouriteRestaurants')) {
       this.inputs.isFav = !this.inputs.isFav;
       let favRests: [string] = JSON.parse(sessionStorage.getItem('favouriteRestaurants')!);
       favRests.splice(favRests.indexOf(this.inputs.id), 1);
@@ -163,20 +176,31 @@ export class RestaurantCardDetail {
 
   confirm() {
     if (sessionStorage.getItem('userToken')) {
-      axios.post('http://localhost:3000/rating/create', {  userToken: sessionStorage.getItem('userToken'),
-      restaurant: this.inputs.id,
-      stars: this.userStarRating,
-      comment: this.ratingComment}).then((response)=>{
-        console.log(response);
-        
+      axios.post('http://localhost:3000/rating/create', {
+        userToken: sessionStorage.getItem('userToken'),
+        restaurant: this.inputs.id,
+        stars: this.userStarRating,
+        comment: this.ratingComment
+      }).then((response) => {
+        this.restaurantRated = true;
       })
       this.modal.dismiss(null, 'confirm');
+      setTimeout(()=>{
+        axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
+          this.comments = response.data
+        })
+      }, 200)
+      
     } else {
       this.callToast(1600)
-    } 
+    }
   }
 
   ratingChanged(event: number) {
     this.userStarRating = event;
+  }
+
+  scrollToComments() {
+    document.getElementById('comments')?.scrollIntoView()
   }
 }

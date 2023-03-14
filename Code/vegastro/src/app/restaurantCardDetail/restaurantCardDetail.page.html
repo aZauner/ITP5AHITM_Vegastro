@@ -26,7 +26,7 @@
             <div id="favouriteStarWrapper">
                 <ion-icon *ngIf="!inputs.isFav" name="star-outline" style="color: grey" id="star"
                     (click)="addFavRestaurant()"></ion-icon>
-                <ion-icon *ngIf="inputs.isFav" name="star" style="color: white" id="star"
+                <ion-icon *ngIf="inputs.isFav" name="star" style="color: var(--ion-text-color)" id="star"
                     (click)="removeFavRestaurant()"></ion-icon>
             </div>
         </div>
@@ -66,7 +66,7 @@
                 </ng-template>                
                 <p class="roundedStarValue">{{roundedStarRating}}</p>           
             </div> 
-            <ion-button id="open-modal" expand="block" fill="clear">Bewerten</ion-button>
+            <ion-button *ngIf="!restaurantRated" id="open-modal" expand="block" fill="clear">Bewerten</ion-button>
             <ion-modal #modal trigger="open-modal">
                 <ng-template>
                     <ion-header>
@@ -98,12 +98,26 @@
                 </ng-template>
             </ion-modal>
         </div>
-        <ion-progress-bar class="meatBar" [value]="mealDevisionInputs.meat" ></ion-progress-bar>
-        <ion-progress-bar class="veganBar" [value]="mealDevisionInputs.vegan" ></ion-progress-bar>
-        <ion-progress-bar class="vegeatarianBar" [value]="mealDevisionInputs.vegetarian" ></ion-progress-bar>
+        <div class="ratingsOverview">
+            <div>
+                <ion-progress-bar class="meatBar" [value]="mealDevisionInputs.meat" ></ion-progress-bar>
+                <ion-progress-bar class="veganBar" [value]="mealDevisionInputs.vegan" ></ion-progress-bar>
+                <ion-progress-bar class="vegeatarianBar" [value]="mealDevisionInputs.vegetarian" ></ion-progress-bar>
+            </div>
+            <p (click)="scrollToComments()">Kommentare</p>
+        </div>
+        
         <p id="restaurantDescription">{{inputs.description}}</p>
         <ion-list id="meals">
 
+        </ion-list>
+        <ion-list id="comments">
+            <div *ngIf="comments.length > 0">
+                <h1 style="margin-top: 8vh">Kommentare</h1>
+                <comment *ngFor="let i of comments" [inputs]="i"></comment>
+            </div>
+            <h1 *ngIf="comments.length == 0">Es gibt noch keine Bewertungen</h1>
+            
         </ion-list>
     </div>
 </main>

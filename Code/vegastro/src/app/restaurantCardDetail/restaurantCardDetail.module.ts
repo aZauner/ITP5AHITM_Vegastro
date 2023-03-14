@@ -9,6 +9,7 @@ import { RestaurantCardDetailRoutingModule } from './restaurantCardDetail-routin
 import { MealModule } from '../meal/meal.module';
 import { MealService } from '../meal/mealService';
 import { Meal } from '../meal/meal.component';
+import { Comment } from '../comment/comment.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ import { Meal } from '../meal/meal.component';
     RestaurantCardDetailRoutingModule,
     MealModule
   ],
-  declarations: [RestaurantCardDetail],
+  declarations: [RestaurantCardDetail, Comment],
   providers: [MealService],
   entryComponents: [Meal]
 })

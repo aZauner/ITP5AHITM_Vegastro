@@ -1,3 +1,7 @@
+* {
+    scroll-behavior: smooth;
+}
+
 .roundedStarValue{
     margin: 0.6vh 0 0 1vh;
     padding: 0%;
@@ -135,7 +139,11 @@ main {
     margin-top: 3vh;
 }
 
-#meals {
-    margin-bottom: 5vh;
-}
 
+.ratingsOverview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+    color: var(--ion-app-color)
+}
