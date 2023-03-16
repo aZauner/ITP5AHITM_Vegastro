@@ -34,7 +34,9 @@ export interface RestaurantCardInputs {
   fromMarker?: boolean;
   isFav: boolean;
   fromFavPage?: boolean;
-}
+  mealDevisionInputs?: object;
+  }
+
 
 @Component({
   selector: 'restaurant-card',

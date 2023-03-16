@@ -9,7 +9,7 @@ import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
   styleUrls: ['restaurants.page.scss']
 })
 export class RestaurantsPage {
-  check: boolean = true;
+  check: boolean = true;  
   constructor(private service: RestaurantCardService) {
   }
   ngOnInit() {
@@ -62,7 +62,7 @@ export class RestaurantsPage {
                 for (const restaurant of response.data) {
                   if (MapPage.filters.includes(restaurant.type)) {
                     count++;
-                    let desc = restaurant.description ? restaurant.description : "";
+                    let desc = restaurant.description ? restaurant.description : "";                                       
                     service.addDynamicComponent({ id: restaurant.id, image: "pizzaDemo.png", restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: favRests.includes(restaurant.id) })
                   }
                 }
@@ -104,3 +104,5 @@ export class RestaurantsPage {
     }
   }
 }
+
+

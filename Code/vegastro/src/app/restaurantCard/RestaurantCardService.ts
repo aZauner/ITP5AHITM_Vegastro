@@ -12,6 +12,7 @@ import {
 } from './restaurantCard.component';
 @Injectable()
 export class RestaurantCardService {
+  mealDevisionInputs: any;
   constructor(
     private resolver: ComponentFactoryResolver,
     private injector: Injector,
@@ -19,9 +20,12 @@ export class RestaurantCardService {
   ) {}
 
   async addDynamicComponent(inputs: RestaurantCardInputs) {
-    await this.getAverageStarts(inputs.id).then((starRating) => {
+    await this.getAverageStarts(inputs.id).then((starRating) => {      
            
     inputs.stars =  Math.round(starRating * 100) / 100
+    this.mealDivision(inputs); 
+      inputs.mealDevisionInputs = this.mealDevisionInputs; 
+      
       const factory = this.resolver.resolveComponentFactory(RestaurantCard);
       const div = document.createElement('div');
       document.getElementById('restaurantCards')!.appendChild(div);
@@ -49,7 +53,9 @@ export class RestaurantCardService {
 
   async addDynamicComponentFav(inputs: RestaurantCardInputs) {
     await this.getAverageStarts(inputs.id).then((starRating) => {
-      inputs.stars = starRating;      
+      inputs.stars = starRating;
+      this.mealDivision(inputs); 
+      inputs.mealDevisionInputs = this.mealDevisionInputs;      
 
       const factory = this.resolver.resolveComponentFactory(RestaurantCard);
       const div = document.createElement('div');
@@ -70,7 +76,7 @@ export class RestaurantCardService {
         inputs.preDescr = inputs.description.slice(0, 150) + ' ...';
       } else {
         inputs.preDescr = inputs.description;
-      }
+      }           
       component.instance.inputs = inputs;
       this.app.attachView(component.hostView);      
     });
@@ -91,5 +97,35 @@ export class RestaurantCardService {
         }        
       });
     return ratingstars;
+  }
+
+
+  mealDivision(inputs: any) {
+    let devisionPerMeal = {
+      meat: 0,
+      vegan: 0,
+      vegetarian: 0
+    }
+  
+    if (inputs.menu.length > 0) {
+      for (let i = 0; i < inputs.menu.length; i++) {
+        if (inputs.menu[i].type == 'meat') {
+          devisionPerMeal.meat++
+        }
+        else if (inputs.menu[i].type == 'vegetarian') {
+          devisionPerMeal.vegetarian++
+        }
+        else if (inputs.menu[i].type == 'vegan') {
+          devisionPerMeal.vegan++
+        }
+      }
+  
+      devisionPerMeal.meat = devisionPerMeal.meat / inputs.menu.length;
+      devisionPerMeal.vegetarian = devisionPerMeal.vegetarian / inputs.menu.length
+      devisionPerMeal.vegan = devisionPerMeal.vegan / inputs.menu.length
+      this.mealDevisionInputs = devisionPerMeal;
+  
+    }
+  
   }
 }

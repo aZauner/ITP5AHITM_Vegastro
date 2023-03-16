@@ -58,10 +58,17 @@
           <ion-icon *ngIf="inputs.stars >= 4.5" class="starOn" name="star-half-outline"></ion-icon>
         </ng-template>
       </div>
-    </ion-card-subtitle>
+    </ion-card-subtitle>  
+    <div class="ratingsOverview">
+      <div>
+        <ion-progress-bar class="meatBar"  [value]="inputs.mealDevisionInputs.meat"></ion-progress-bar>
+          <ion-progress-bar class="veganBar" [value]="inputs.mealDevisionInputs.vegan" ></ion-progress-bar>
+          <ion-progress-bar class="vegeatarianBar" [value]="inputs.mealDevisionInputs.vegetarian" ></ion-progress-bar>
+      </div>      
+    </div>  
   </ion-card-header>
 
   <ion-card-content>
-    {{inputs.preDescr}}
+    {{inputs.preDescr}}    
   </ion-card-content>
 </ion-card>
