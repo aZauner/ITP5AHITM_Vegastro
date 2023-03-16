@@ -24,7 +24,10 @@ td input {
     border: none;
     text-align: left;
 }
-
+#errorMessage{
+    color: red;
+    text-align: center;
+}
 td input:disabled {
     color: rgba(var(--ion-text-color-rgb), 0.55);
 }
@@ -44,6 +47,7 @@ tr {
     margin: auto auto;
     border-bottom: 1px solid rgba(var(--ion-text-color-rgb), 0.15);
 }
+
 
 td ion-icon {
     font-size: 2rem;

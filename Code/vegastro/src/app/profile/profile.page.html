@@ -32,11 +32,9 @@
       <td><ion-icon name="lock-closed-outline"></ion-icon></td>
       <td><input type="password" [(ngModel)]="userData.newConfirmedPassword" placeholder="Neues Passwort bestätigen"></td>
     </tr>
-    <tr>
-      <td></td>
-      <td><p>{{errorMessage}}</p>
-    </tr>
+
   </table>
+  <p id="errorMessage">{{errorMessage}}</p>
   <ion-button (click)="updateProfileData()" [hidden]="!isEditable">Submit</ion-button>
 
   <ion-button (click)="toggleEditable()">Bearbeiten</ion-button>

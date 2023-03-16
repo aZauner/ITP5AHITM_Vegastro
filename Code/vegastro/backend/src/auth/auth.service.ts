@@ -51,14 +51,16 @@ export class AuthService {
 
     const userExist = !!user;
 
-    if (!userExist) return new HttpException('Not found', HttpStatus.BAD_REQUEST)
+    if (!userExist) return new HttpException('Benutzer nicht gefunden', HttpStatus.BAD_REQUEST)
 
     const newHash = await this.hashPassword(newPassword);
    
-    const doespasswordMatch = await this.passwordMatch(oldPassword, user.password)
-    if (!doespasswordMatch) return new HttpException('old Password does not match', HttpStatus.BAD_REQUEST)
+    
 
-    if (newPassword != confirmedPassword) return new HttpException('New Password does not match', HttpStatus.BAD_REQUEST);
+    const doespasswordMatch = await this.passwordMatch(oldPassword, user.password)
+    if (!doespasswordMatch) return new HttpException('Altes Passwort stimmt nicht überein!', HttpStatus.BAD_REQUEST)
+    if(oldPassword == newPassword) return new HttpException('Neues und altes Passwort sind gleich!', HttpStatus.BAD_REQUEST)
+    if (newPassword != confirmedPassword) return new HttpException('Neues Passwort stimmt nicht überein!', HttpStatus.BAD_REQUEST);
    
    
 

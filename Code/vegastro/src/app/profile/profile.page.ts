@@ -20,12 +20,12 @@ export class ProfilePage implements OnInit {
     username: "",
     email: "",
     password: "",
-    oldPassword:"",
-    newPassword:"",
-    newConfirmedPassword:""
+    oldPassword: "",
+    newPassword: "",
+    newConfirmedPassword: ""
   }
 
-  errorMessage="1234";
+  errorMessage = "";
 
   constructor() { }
 
@@ -33,15 +33,15 @@ export class ProfilePage implements OnInit {
 
   }
   ngAfterViewInit() {
-    
+
     axios.get('http://localhost:3000/user/' + sessionStorage.getItem('userToken')).then((response) => {
-      this.userData = response.data;      
+      this.userData = response.data;
 
     })
   }
 
   updateProfileData() {
-    
+
     axios.put('http://localhost:3000/auth/changeData', {
       "token": sessionStorage.getItem('userToken'),
       "oldPassword": this.userData.oldPassword,
@@ -50,27 +50,32 @@ export class ProfilePage implements OnInit {
       "firstname": this.userData.firstname,
       "lastname": this.userData.lastname,
       "username": this.userData.username
-    })
+    }).then((response) => {
+      if (response.data.status != 200) {
+        this.errorMessage = response.data.message;
+
+      }
+    });
+
     //bcrypt.hash("asd", 12);
-    this.errorMessage= "asd"
-  /**  axios.put('http://localhost:3000/user/changeUserData', {      
-      "token": sessionStorage.getItem('userToken'),
-      "firstname": this.userData.firstname,
-      "lastname": this.userData.lastname,
-      "username": this.userData.username,
-      "email": this.userData.email      
-    }) */
+    /**  axios.put('http://localhost:3000/user/changeUserData', {      
+        "token": sessionStorage.getItem('userToken'),
+        "firstname": this.userData.firstname,
+        "lastname": this.userData.lastname,
+        "username": this.userData.username,
+        "email": this.userData.email      
+      }) */
     this.isEditable = !this.isEditable;
 
-}
+  }
 
 
 
-toggleEditable(){
-  this.isEditable = !this.isEditable;
-}
+  toggleEditable() {
+    this.isEditable = !this.isEditable;
+  }
 
-   // inputs: ProfilePage = this.defaultInputs;
-  
-  
+  // inputs: ProfilePage = this.defaultInputs;
+
+
 }
