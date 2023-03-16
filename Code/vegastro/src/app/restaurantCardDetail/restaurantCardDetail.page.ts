@@ -61,7 +61,7 @@ export class RestaurantCardDetail {
   ngDoCheck() {
 
     if (this.inputs !== this.oldInputs) {
-      this.roundedStarRating = Math.round(this.inputs.stars * 100) / 100
+      this.roundedStarRating = this.inputs.stars;
       this.mealDivision(this.inputs)
       document.getElementById("meals")!.innerHTML = '';
       if (this.inputs.menu != null) {

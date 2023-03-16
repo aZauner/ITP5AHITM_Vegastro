@@ -54,9 +54,7 @@ export class RestaurantCard {
 
   inputs: any = this.defaultInputs;
 
-  constructor(private router: Router) {}
-
-   
+  constructor(private router: Router) {}  
 
   openDetails() {
     let navigationExtras: NavigationExtras = {
@@ -65,5 +63,6 @@ export class RestaurantCard {
       },
     };
     this.router.navigate(['/tabs', 'restaurantDetail'], navigationExtras);
-  }
+  }  
+  
 }

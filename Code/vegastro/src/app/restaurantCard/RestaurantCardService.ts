@@ -20,8 +20,8 @@ export class RestaurantCardService {
 
   async addDynamicComponent(inputs: RestaurantCardInputs) {
     await this.getAverageStarts(inputs.id).then((starRating) => {
-
-    inputs.stars = starRating
+           
+    inputs.stars =  Math.round(starRating * 100) / 100
       const factory = this.resolver.resolveComponentFactory(RestaurantCard);
       const div = document.createElement('div');
       document.getElementById('restaurantCards')!.appendChild(div);
