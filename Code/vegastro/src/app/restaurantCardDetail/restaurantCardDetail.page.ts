@@ -57,8 +57,7 @@ export class RestaurantCardDetail {
   ngDoCheck() {
 
     if (this.inputs !== this.oldInputs) {
-      this.roundedStarRating = this.inputs.stars;
-      console.log(this.inputs.mealDevisionInputs); 
+      this.roundedStarRating = this.inputs.stars;      
       this.mealDevisionInputs = this.inputs.mealDevisionInputs 
       document.getElementById("meals")!.innerHTML = '';
       if (this.inputs.menu != null) {
