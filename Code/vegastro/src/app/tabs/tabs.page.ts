@@ -31,7 +31,7 @@ export class TabsPage {
   logout(){
     sessionStorage.clear() 
     this.callToast(1300)   
-  }
+  }  
 
   async callToast(duration: number) {
     const toast = await this.toastController.create({

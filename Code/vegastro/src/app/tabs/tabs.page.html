@@ -33,8 +33,9 @@
         Restaurants
       </ion-button>
     </ion-menu-toggle>
+
     <ion-menu-toggle>                                 
-      <ion-button fill="clear" routerLink="/tabs/usertab">
+      <ion-button fill="clear" routerLink="/tabs/usertab" [disabled]="!loggedIn" >
         <ion-icon name="person-circle-outline"></ion-icon>
         Benutzer
       </ion-button>
@@ -43,7 +44,7 @@
     
 
     <ion-menu-toggle>
-      <ion-button fill="clear" routerLink="/tabs/favouriteRestaurants">
+      <ion-button fill="clear" routerLink="/tabs/favouriteRestaurants" [disabled]="!loggedIn" >
         <ion-icon name="star"></ion-icon>
         Favoriten
       </ion-button>

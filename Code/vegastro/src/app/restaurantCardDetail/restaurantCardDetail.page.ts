@@ -154,6 +154,16 @@ export class RestaurantCardDetail {
     await toast.present();
   }
 
+  async callInputErrorToast(duration: number) {
+    const toast = await this.toastController.create({
+      message: 'Beide Felder Müssen gesetzt sein',
+      duration: duration,
+      position: 'middle',      
+      cssClass: 'favToast'      
+    });
+    await toast.present();
+  }
+
   removeFavRestaurant() {
     if (sessionStorage.getItem('favouriteRestaurants')) {
       this.inputs.isFav = !this.inputs.isFav;
@@ -176,27 +186,33 @@ export class RestaurantCardDetail {
 
   confirm() {
     if (sessionStorage.getItem('userToken')) {
-      axios.post('http://localhost:3000/rating/create', {
-        userToken: sessionStorage.getItem('userToken'),
-        restaurant: this.inputs.id,
-        stars: this.userStarRating,
-        comment: this.ratingComment
-      }).then((response) => {
-        this.restaurantRated = true;
-      })
-      this.modal.dismiss(null, 'confirm');
-      setTimeout(() => {
-        axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
-          this.comments = response.data
-          let sumStars = 0;
-          if (response.data.length > 0) {
-            for (const star of response.data) {
-              sumStars += star.stars;
-            }
-            this.roundedStarRating = Math.round((sumStars / response.data.length) * 100) / 100
-          }
+      
+
+      if(this.userStarRating != 0 && this.ratingComment != ''){
+        axios.post('http://localhost:3000/rating/create', {
+          userToken: sessionStorage.getItem('userToken'),
+          restaurant: this.inputs.id,
+          stars: this.userStarRating,
+          comment: this.ratingComment
+        }).then((response) => {
+          this.restaurantRated = true;
         })
-      }, 200)
+        this.modal.dismiss(null, 'confirm');
+        setTimeout(() => {
+          axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
+            this.comments = response.data
+            let sumStars = 0;
+            if (response.data.length > 0) {
+              for (const star of response.data) {
+                sumStars += star.stars;
+              }
+              this.roundedStarRating = Math.round((sumStars / response.data.length) * 100) / 100
+            }
+          })
+        }, 200)        
+      }else{
+        this.callInputErrorToast(1300)        
+      }
     } else {
       this.callToast(1600)
     }

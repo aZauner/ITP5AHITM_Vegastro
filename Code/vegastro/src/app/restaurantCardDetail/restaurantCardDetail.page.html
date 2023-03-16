@@ -33,69 +33,52 @@
     </div>
     <div class="wrapper">
         <div id="ratingsDiv">
-            <div class="restaurantStars" id="starBox">                
-                              
+            <div class="restaurantStars" id="starBox">  
                 <ng-template [ngIf]="roundedStarRating < 0.5">
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
-                </ng-template>                
-
+                </ng-template>
                 <ng-template [ngIf]="roundedStarRating >= 1" [ngIfElse]="halfStar">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
-
                 <ng-template #halfStar>                    
                         <ion-icon *ngIf="roundedStarRating >= 0.5 && roundedStarRating < 1" class="starOn" name="star-half-outline"></ion-icon> 
                 </ng-template>
-
                 <ng-template [ngIf]="roundedStarRating < 1.5">
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
-                </ng-template>                
-
+                </ng-template> 
                 <ng-template [ngIf]="roundedStarRating >= 2" [ngIfElse]="halfStar1">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
-
                 <ng-template #halfStar1>
                         <ion-icon *ngIf="roundedStarRating >= 1.5 && roundedStarRating < 2" class="starOn" name="star-half-outline"></ion-icon>                                  
                 </ng-template>
-
                 <ng-template [ngIf]="roundedStarRating < 2.5">
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
-                </ng-template>                
-
+                </ng-template> 
                 <ng-template [ngIf]="roundedStarRating >= 3" [ngIfElse]="halfStar2">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
-
                 <ng-template #halfStar2>
                         <ion-icon *ngIf="roundedStarRating >= 2.5 && roundedStarRating < 3" class="starOn" name="star-half-outline"></ion-icon>
-                </ng-template>
-
-                
+                </ng-template>                
                 <ng-template [ngIf]="roundedStarRating < 3.5">
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
-                </ng-template>                
-
+                </ng-template>
                 <ng-template [ngIf]="roundedStarRating >= 4" [ngIfElse]="halfStar3">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
-
                 <ng-template #halfStar3>                    
                         <ion-icon *ngIf="roundedStarRating >= 3.5 && roundedStarRating < 4" class="starOn" name="star-half-outline"></ion-icon>                                 
                 </ng-template>
-
                 <ng-template [ngIf]="roundedStarRating < 4.5">
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
-                </ng-template>                
-
+                </ng-template>
                 <ng-template [ngIf]="roundedStarRating >= 5" [ngIfElse]="halfStar4">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
-
                 <ng-template #halfStar4>                    
                         <ion-icon *ngIf="roundedStarRating >= 4.5" class="starOn" name="star-half-outline"></ion-icon>                                  
-                </ng-template>                               
-
+                </ng-template> 
                 <p class="roundedStarValue">{{roundedStarRating}}</p>           
             </div> 
             <ion-button  id="open-modal" expand="block" fill="clear">Bewerten</ion-button>
