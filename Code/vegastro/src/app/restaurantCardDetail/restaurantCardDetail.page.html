@@ -34,31 +34,31 @@
     <div class="wrapper">
         <div id="ratingsDiv">
             <div class="restaurantStars" id="starBox">
-                <ng-template [ngIf]="inputs.stars >= 1" [ngIfElse]="greyStar">
+                <ng-template [ngIf]="roundedStarRating >= 0.5" [ngIfElse]="greyStar">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
                 <ng-template #greyStar>
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
                 </ng-template>
-                <ng-template [ngIf]="inputs.stars >= 2" [ngIfElse]="greyStar">
+                <ng-template [ngIf]="roundedStarRating >= 1.5" [ngIfElse]="greyStar">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
                 <ng-template #greyStar>
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
                 </ng-template>
-                <ng-template [ngIf]="inputs.stars >= 3" [ngIfElse]="greyStar">
+                <ng-template [ngIf]="roundedStarRating >= 2.5" [ngIfElse]="greyStar">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
                 <ng-template #greyStar>
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
                 </ng-template>
-                <ng-template [ngIf]="inputs.stars >= 4" [ngIfElse]="greyStar">
+                <ng-template [ngIf]="roundedStarRating >= 3.5" [ngIfElse]="greyStar">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
                 <ng-template #greyStar>
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
                 </ng-template>
-                <ng-template [ngIf]="inputs.stars >= 5" [ngIfElse]="greyStar">
+                <ng-template [ngIf]="roundedStarRating >= 4.5" [ngIfElse]="greyStar">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
                 <ng-template #greyStar>
@@ -66,7 +66,7 @@
                 </ng-template>                
                 <p class="roundedStarValue">{{roundedStarRating}}</p>           
             </div> 
-            <ion-button *ngIf="!restaurantRated" id="open-modal" expand="block" fill="clear">Bewerten</ion-button>
+            <ion-button  id="open-modal" expand="block" fill="clear">Bewerten</ion-button>
             <ion-modal #modal trigger="open-modal">
                 <ng-template>
                     <ion-header>

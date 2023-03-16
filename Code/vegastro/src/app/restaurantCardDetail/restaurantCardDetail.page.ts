@@ -58,7 +58,7 @@ export class RestaurantCardDetail {
     });
   }
 
-  ngDoCheck() {   
+  ngDoCheck() {
 
     if (this.inputs !== this.oldInputs) {
       this.roundedStarRating = Math.round(this.inputs.stars * 100) / 100
@@ -77,7 +77,7 @@ export class RestaurantCardDetail {
       //ratings laden
       axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
         this.comments = response.data
-        if(response.data.length > 0) {
+        if (response.data.length > 0) {
           for (const comment of response.data) {
             if (comment.userToken! == sessionStorage.getItem('userToken')) {
               this.restaurantRated = true;
@@ -185,16 +185,23 @@ export class RestaurantCardDetail {
         this.restaurantRated = true;
       })
       this.modal.dismiss(null, 'confirm');
-      setTimeout(()=>{
+      setTimeout(() => {
         axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
           this.comments = response.data
+          let sumStars = 0;
+          if (response.data.length > 0) {
+            for (const star of response.data) {
+              sumStars += star.stars;
+            }
+            this.roundedStarRating = Math.round((sumStars / response.data.length) * 100) / 100
+          }
         })
       }, 200)
-      
     } else {
       this.callToast(1600)
     }
   }
+
 
   ratingChanged(event: number) {
     this.userStarRating = event;

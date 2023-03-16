@@ -40,6 +40,15 @@
       </ion-button>
     </ion-menu-toggle>
 
+    
+
+    <ion-menu-toggle>
+      <ion-button fill="clear" routerLink="/tabs/favouriteRestaurants">
+        <ion-icon name="star"></ion-icon>
+        Favoriten
+      </ion-button>
+    </ion-menu-toggle>
+
     <ion-menu-toggle *ngIf='!loggedIn'>
       <ion-button fill="clear" routerLink="/login">
         <ion-icon name="log-in-outline"></ion-icon>
@@ -51,13 +60,6 @@
       <ion-button fill="clear" (click)="logout()" routerLink="/tabs/tab1">
         <ion-icon name="log-out-outline"></ion-icon>
         Logout
-      </ion-button>
-    </ion-menu-toggle>
-
-    <ion-menu-toggle>
-      <ion-button fill="clear" routerLink="/tabs/favouriteRestaurants">
-        <ion-icon name="star"></ion-icon>
-        Favoriten
       </ion-button>
     </ion-menu-toggle>
 
