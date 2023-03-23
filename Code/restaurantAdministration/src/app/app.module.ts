@@ -9,10 +9,15 @@ import {RouterModule, RouterOutlet, Routes} from "@angular/router";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AuthGuardService} from "./services/authGuard.service";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 const appRoutes: Routes = [
-  {path: 'home' , component: DashboardComponent}
+  {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
+  {path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuardService]},
+  {path: 'login' , component: LoginPageComponent}
 ]
 
 @NgModule({
@@ -29,9 +34,12 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MatInputModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule,
+    MatButtonModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

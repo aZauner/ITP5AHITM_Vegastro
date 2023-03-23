@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AppComponent } from '../app.component';
-import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,11 +8,7 @@ import { UserService } from '../services/user.service';
 })
 export class DashboardComponent {
 
-  constructor(private userService: UserService){
-  }
-
-  ngOnInit(){
-    this.userService.logIn();
+  constructor(){
   }
 
 }

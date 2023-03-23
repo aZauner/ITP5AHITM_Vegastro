@@ -3,7 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot,RouterStateSnapshot } from 
 
 
 @Injectable()
-export class User implements CanActivate {
+export class AuthGuardService implements CanActivate {
 
   constructor(private _router:Router ) {
   }
