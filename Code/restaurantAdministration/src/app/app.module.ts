@@ -7,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageComponent } from './login-page/login-page.component';
 import {RouterModule, RouterOutlet, Routes} from "@angular/router";
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
+import {ReactiveFormsModule} from "@angular/forms";
 
 const appRoutes: Routes = [
   {path: 'home' , component: DashboardComponent}
@@ -23,7 +26,10 @@ const appRoutes: Routes = [
     AppRoutingModule,
     BrowserAnimationsModule,
     RouterOutlet,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
