@@ -9,7 +9,7 @@ import {RouterModule, RouterOutlet, Routes} from "@angular/router";
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
-  // {path: '/' , component: AppComponent}
+  {path: 'home' , component: DashboardComponent}
 ]
 
 @NgModule({
@@ -22,6 +22,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    RouterOutlet,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

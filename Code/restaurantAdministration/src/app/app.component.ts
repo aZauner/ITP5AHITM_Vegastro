@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { UserService } from './services/user.service';
 
 
 
@@ -10,10 +12,13 @@ import { Component } from '@angular/core';
 export class AppComponent{
   title = 'restaurantAdministration';
 
+  loggedInSubscription : Subscription; 
   loggedIn = false;
 
-  ngOnInit(){
-
+  constructor(private userService: UserService){
+    this.loggedInSubscription = this.userService.loggedIn.subscribe((loggedIn)=>{
+      this.loggedIn = loggedIn
+    })  
   }
 
 }
