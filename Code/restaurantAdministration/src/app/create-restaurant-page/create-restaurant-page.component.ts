@@ -17,7 +17,7 @@ export class CreateRestaurantPageComponent {
   createRestaurant: FormGroup;
   hide = true;
   types = ['vegan', 'meat', 'vegetarian'];
-  location = { street: '', housenumber: '', plz: '', city: '' };
+  location = { street: '', housenumber: '', plz: '', city: '', floor: '' };
   createInputs = {
     restaurantName: '',
     latitude: 0,
@@ -40,14 +40,21 @@ export class CreateRestaurantPageComponent {
       floor: ['', Validators.minLength(2)],
       street: ['', Validators.minLength(2)],
       housenumber: ['', Validators.minLength(2)],
+      type: ['']
     });
   }
 
   create() {
-    this.createInputs.location.city = this.location.city;
-    this.createInputs.location.housenumber = this.location.housenumber;
-    this.createInputs.location.plz = this.location.plz;
-    this.createInputs.location.street = this.location.street;
+    this.location.city = this.createRestaurant.value.city
+    this.location.housenumber = this.createRestaurant.value.housenumber
+    this.location.plz = this.createRestaurant.value.plz
+    this.location.street = this.createRestaurant.value.street 
+    this.createInputs.location= this.location;
+    this.createInputs.location.floor = this.createRestaurant.value.floor
+    this.createInputs.description = this.createRestaurant.value.description
+    this.createInputs.restaurantName = this.createRestaurant.value.restaurantName
+    this.createInputs.type = this.createRestaurant.value.type
+   
     this.createInputs.owner = sessionStorage.getItem("userToken")!;
     this.addrSearch(
       this.location.street +
@@ -62,19 +69,22 @@ export class CreateRestaurantPageComponent {
 
   addrSearch(address: string) {
     axios
-      .post(
+      .get(
         'https://nominatim.openstreetmap.org/search?format=json&limit=3&q=' +
           address
       )
-      .then((response) => {
-        console.log(response.data);
+      .then((response) => {      
         if (response.data.length > 0) {          
-          this.createInputs.latitude = response.data[0].lat;
-          this.createInputs.longitude = response.data[0].lon;
-          console.log(this.createInputs);          
+          this.createInputs.latitude = Number.parseFloat(response.data[0].lat) ;
+          this.createInputs.longitude =  Number.parseFloat(response.data[0].lon);
+          this.postRestaurant()
         } else {
           console.log('Geht ned');
         }
       });    
+  }
+
+  postRestaurant(){
+
   }
 }

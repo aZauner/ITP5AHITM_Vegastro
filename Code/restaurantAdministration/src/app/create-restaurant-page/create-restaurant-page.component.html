@@ -4,12 +4,12 @@
             <h1>Create new Restaurant</h1>
             <mat-form-field class="example-full-width">
                 <mat-label>Restaurant Name</mat-label>
-                <input  formControlName="restaurantName" matInput placeholder="name" required [(ngModel)]="createInputs.restaurantName">
+                <input  formControlName="restaurantName" matInput placeholder="name" required>
             </mat-form-field>
 
             <mat-form-field appearance="fill">
                 <mat-label>Restaurant Type</mat-label>
-                <mat-select required  [(ngModel)]="createInputs.type">
+                <mat-select required  formControlName="type">
                   <mat-option *ngFor="let typ of types" [value]="typ">
                     {{typ}}
                   </mat-option>
@@ -18,39 +18,39 @@
 
               <mat-form-field class="example-full-width">
                 <mat-label>Description</mat-label>
-                <input  formControlName="description" matInput placeholder="Dieses Restaurant ..." required [(ngModel)]="createInputs.description">
+                <input  formControlName="description" matInput placeholder="Dieses Restaurant ..." required >
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
                 <mat-label>City</mat-label>
-                <input  formControlName="city" matInput placeholder="Wien" required [(ngModel)]="location.city">
+                <input  formControlName="city" matInput placeholder="Wien" required >
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
                 <mat-label>PLZ</mat-label>
-                <input  formControlName="plz" matInput placeholder="z.B. 4690" required [(ngModel)]="location.plz">
+                <input  formControlName="plz" matInput placeholder="z.B. 4690" required >
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
                 <mat-label>Street</mat-label>
-                <input  formControlName="street" matInput placeholder="z.B. Borisstraße" required [(ngModel)]="location.street">
+                <input  formControlName="street" matInput placeholder="z.B. Borisstraße" required >
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
                 <mat-label>Housenumber</mat-label>
-                <input  formControlName="housenumber" matInput placeholder="z.B. 3" required [(ngModel)]="location.housenumber">
+                <input  formControlName="housenumber" matInput placeholder="z.B. 3" required >
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
                 <mat-label>Floor</mat-label>
-                <input  formControlName="floor" matInput placeholder="z.B. 3"  [(ngModel)]="createInputs.location.floor">
+                <input  formControlName="floor" matInput placeholder="z.B. 3"  >
             </mat-form-field>
 
-            <!-- <button class="loginBtn" [disabled]="!createRestaurant.valid"  (click)="create()"
-                mat-stroked-button>Restaurant erstellen</button> -->
-            
-            <button class="loginBtn"  (click)="create()"
+            <button class="loginBtn" [disabled]="!createRestaurant.valid"  (click)="create()"
                 mat-stroked-button>Restaurant erstellen</button>
+            
+            <!-- <button class="loginBtn"  (click)="create()"
+                mat-stroked-button>Restaurant erstellen</button> -->
 
         </div>
 
