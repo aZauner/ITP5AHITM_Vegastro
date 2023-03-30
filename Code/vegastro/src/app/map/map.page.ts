@@ -357,10 +357,12 @@ export class MapPage {
     const btn = document.getElementById(filter)!;
     if(btn.classList.contains("off")){
       btn.classList.add("on")
+      btn.classList.add(filter)
       btn.classList.remove("off")
     } else {
       btn.classList.add("off")
       btn.classList.remove("on")
+      btn.classList.remove(filter)
     }
     this.updateMarkers();
   }

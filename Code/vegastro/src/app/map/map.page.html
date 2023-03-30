@@ -14,9 +14,15 @@
   <div id="filter" style="visibility: hidden;">
     <h1>K A T E G O R I E N</h1>
     <div id="filterList">
-      <ion-button class="off" id="meat" (click)="addFilter('meat')" fill="clear">Fleisch</ion-button>
-      <ion-button class="off" id="vegetarian" (click)="addFilter('vegetarian')" fill="clear">Vegetarisch</ion-button>
-      <ion-button class="off" id="vegan" (click)="addFilter('vegan')" fill="clear">Vegan</ion-button>
+      <div class="off" id="meat" (click)="addFilter('meat')">
+        <p>Fleisch</p>
+      </div>
+      <div class="off" id="vegetarian" (click)="addFilter('vegetarian')">
+        <p>Vegetarisch</p>
+      </div>
+      <div class="off" id="vegan" (click)="addFilter('vegan')">
+        <p>Vegan</p>
+      </div>
     </div>
   </div>
   <div style="width: 100vw; justify-content: center; display: flex;">

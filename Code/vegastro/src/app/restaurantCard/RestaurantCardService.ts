@@ -26,10 +26,12 @@ export class RestaurantCardService {
     this.mealDivision(inputs); 
       inputs.mealDevisionInputs = this.mealDevisionInputs; 
       
+      
       const factory = this.resolver.resolveComponentFactory(RestaurantCard);
       const div = document.createElement('div');
       document.getElementById('restaurantCards')!.appendChild(div);
       const component = factory.create(this.injector, [], div);
+      
       switch (inputs.type) {
         case 'meat':
           inputs.type = 'MeatIcon.svg';
@@ -41,6 +43,7 @@ export class RestaurantCardService {
           inputs.type = 'VeganIcon.svg';
           break;
       }
+      
       if (inputs.description.length > 150) {
         inputs.preDescr = inputs.description.slice(0, 150) + ' ...';
       } else {
@@ -119,13 +122,12 @@ export class RestaurantCardService {
           devisionPerMeal.vegan++
         }
       }
-  
       devisionPerMeal.meat = devisionPerMeal.meat / inputs.menu.length;
       devisionPerMeal.vegetarian = devisionPerMeal.vegetarian / inputs.menu.length
       devisionPerMeal.vegan = devisionPerMeal.vegan / inputs.menu.length
-      this.mealDevisionInputs = devisionPerMeal;
-  
+      
     }
+    this.mealDevisionInputs = devisionPerMeal;
   
   }
 }

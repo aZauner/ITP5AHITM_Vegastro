@@ -94,23 +94,30 @@ ion-footer ion-toolbar div {
     color: white;
     font-weight: bold;
     height: fit-content;
-    width: fit-content;
+    width: 50%;
     text-align: left;
     font-size: 2.5vh;
-    padding: 1vh 0.5vh 1vh 0.5vh;
-    background: grey;
+    padding: 0.5vh 0.5vh 0.5vh 0.5vh;
+    background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.3);
     margin-bottom: 1vh;
-    animation: removeFilterAnim 700ms forwards;
+    animation: removeFilterAnim 300ms forwards;
+    // animation: removeFilterAnim 500ms forwards;
 }
 
 @keyframes addFilterAnim {
-    from {padding-right: 0.5vh}
-    to {padding-right: 10vh;}
+    // 0% {width: 50%; margin-left: 0;}
+    // 50% {width: 100%;margin-left: 0;}
+    // 100% {width:50%; margin-left: 50%;}
+    0% {margin-left: 0;}
+    100% {margin-left: 50%;}
 }
 
 @keyframes removeFilterAnim {
-    from {padding-right: 10vh;}
-    to {padding-right: 0.5vh}
+    // 0% {width:50%; margin-left: 50%;}
+    // 50% {width: 100%;margin-left: 0%;}
+    // 100% {width: 50%; margin-left: 0;}
+    0% {margin-left: 50%;}
+    100% {margin-left: 0;}
 }
 
 .on {
@@ -118,12 +125,13 @@ ion-footer ion-toolbar div {
     color: white;
     font-weight: bold;
     height: fit-content;
-    width: fit-content;
+    width: 50%;
     text-align: left;
     font-size: 2.5vh;
-    padding: 1vh 0.5vh 1vh 0.5vh;
+    padding: 0.5vh 0.5vh 0.5vh 0.5vh;
     background: #48A734;
-    animation: addFilterAnim 700ms forwards;
+    animation: addFilterAnim 300ms forwards;
+    // animation: addFilterAnim 500ms forwards;
     margin-bottom: 1vh;
 }
 
@@ -152,4 +160,25 @@ ion-footer ion-toolbar div {
     color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);
     margin: 0;
     padding: 2vh;
+}
+
+.off > p,
+.on > p {
+    background:none;
+    color: white;
+    margin: 0;
+    text-align: center;
+}
+
+
+.meat {
+    background: var(--ion-type-meat);
+}
+
+.vegan {
+    background: var(--ion-type-vegan);
+}
+
+.vegetarian {
+    background: var(--ion-type-vegetarian);
 }

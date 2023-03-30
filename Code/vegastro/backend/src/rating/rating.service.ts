@@ -50,6 +50,7 @@ export class RatingService {
       const ratings = await this.ratingModel
       .find({ restaurant: restaurantId })
       .exec();
+      
       if(!ratings) return new HttpException('Keine Ratings gefunden' , HttpStatus.NOT_FOUND)
       let res = [];
       for (const rating of ratings) {
