@@ -60,15 +60,15 @@ ion-progress-bar::part(track){
 }
 
 .meatBar::part(progress){
-    background: red
+    background: var(--ion-type-meat)
 }
 
 .veganBar::part(progress){
-    background: var(--ion-app-color)
+    background: var(--ion-type-vegan)
 }
 
 .vegeatarianBar::part(progress){
-    background: purple
+    background: var(--ion-type-vegetarian)
 }
 
 .restaurantStars {

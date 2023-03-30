@@ -61,10 +61,10 @@ export class RestaurantCardDetail {
   ngDoCheck() {
 
     if (this.inputs !== this.oldInputs) {
-      this.roundedStarRating =  Math.round(this.inputs.stars * 100) / 100
-      console.log(this.inputs.mealDevisionInputs);      
-      this.mealDivision(this.inputs)
+      this.roundedStarRating =  Math.round(this.inputs.stars * 100) / 100  
       document.getElementById("meals")!.innerHTML = '';
+      this.mealDivision(this.inputs);
+      
       if (this.inputs.menu != null) {
         for (const meal of this.inputs.menu) {
           if (meal.description) {
@@ -116,9 +116,9 @@ export class RestaurantCardDetail {
       devisionPerMeal.meat = devisionPerMeal.meat / inputs.menu.length;
       devisionPerMeal.vegetarian = devisionPerMeal.vegetarian / inputs.menu.length
       devisionPerMeal.vegan = devisionPerMeal.vegan / inputs.menu.length
-      this.mealDevisionInputs = devisionPerMeal;
-
+      
     }
+    this.mealDevisionInputs = devisionPerMeal;
 
   }
 
