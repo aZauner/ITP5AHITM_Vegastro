@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import axios from 'axios';
-
 @Component({
   selector: 'login',
   templateUrl: 'login.page.html',
