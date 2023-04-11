@@ -7,6 +7,7 @@ import { User, UserDocument } from 'src/schema/user.schema';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { RestaurantDetails } from './entities/restaurant.entity';
 
+
 @Injectable()
 export class RestaurantService {
   constructor(
@@ -103,7 +104,7 @@ export class RestaurantService {
   }
 
   async create(restaurant: CreateRestaurantDto): Promise<RestaurantDocument | HttpException> {
-    const owner = await this.userModel.findOne({ username: restaurant.owner }).exec();
+    const owner = await this.userModel.findOne({ token: restaurant.owner }).exec();
 
     if (!owner) return new HttpException('Es existiert kein User mit diesem Username', HttpStatus.NOT_FOUND);
 

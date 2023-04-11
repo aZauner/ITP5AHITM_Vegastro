@@ -14,7 +14,22 @@ import axios from 'axios';
   styleUrls: ['./create-restaurant-page.component.scss'],
 })
 export class CreateRestaurantPageComponent {
-  createRestaurant: FormGroup;
+  formBuilder: FormBuilder = new FormBuilder
+
+  firstFormGroup = this.formBuilder.group({
+    restaurantName: ['', Validators.minLength(2)],
+    description: ['', Validators.minLength(2)],
+    type: ['', Validators.minLength(2)],
+  });
+  secondFormGroup = this.formBuilder.group({
+    city: ['', Validators.minLength(2)],
+    plz: ['', Validators.minLength(2)],
+    floor: ['', Validators.minLength(2)],
+    street: ['', Validators.minLength(2)],
+    housenumber: [''],
+  });
+  isLinear = true;
+
   hide = true;
   types = ['vegan', 'meat', 'vegetarian'];
   location = { street: '', housenumber: '', plz: '', city: '', floor: '' };
@@ -27,35 +42,21 @@ export class CreateRestaurantPageComponent {
     description: '',
     location: { city: '', plz: '', street: '', housenumber: '', floor: '' },
   };
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService
-  ) {
-    this.createRestaurant = this.formBuilder.group({
-      restaurantName: ['', Validators.minLength(2)],
-      description: ['', Validators.minLength(2)],
-      city: ['', Validators.minLength(2)],
-      plz: ['', Validators.minLength(2)],
-      floor: ['', Validators.minLength(2)],
-      street: ['', Validators.minLength(2)],
-      housenumber: ['', Validators.minLength(2)],
-      type: ['']
-    });
-  }
+ 
 
   create() {
-    this.location.city = this.createRestaurant.value.city
-    this.location.housenumber = this.createRestaurant.value.housenumber
-    this.location.plz = this.createRestaurant.value.plz
-    this.location.street = this.createRestaurant.value.street 
-    this.createInputs.location= this.location;
-    this.createInputs.location.floor = this.createRestaurant.value.floor
-    this.createInputs.description = this.createRestaurant.value.description
-    this.createInputs.restaurantName = this.createRestaurant.value.restaurantName
-    this.createInputs.type = this.createRestaurant.value.type
-   
-    this.createInputs.owner = sessionStorage.getItem("userToken")!;
+    this.location.city = this.secondFormGroup.value.city!;
+    this.location.housenumber = this.secondFormGroup.value.housenumber!;
+    this.location.plz = this.secondFormGroup.value.plz!;
+    this.location.street = this.secondFormGroup.value.street!;
+    this.createInputs.location = this.location;
+    this.createInputs.location.floor = this.secondFormGroup.value.floor!;
+
+    this.createInputs.description = this.firstFormGroup.value.description!;
+    this.createInputs.restaurantName =  this.firstFormGroup.value.restaurantName!;
+    this.createInputs.type = this.firstFormGroup.value.type!;
+
+    this.createInputs.owner = sessionStorage.getItem('userToken')!;
     this.addrSearch(
       this.location.street +
         ' ' +
@@ -73,18 +74,22 @@ export class CreateRestaurantPageComponent {
         'https://nominatim.openstreetmap.org/search?format=json&limit=3&q=' +
           address
       )
-      .then((response) => {      
-        if (response.data.length > 0) {          
-          this.createInputs.latitude = Number.parseFloat(response.data[0].lat) ;
-          this.createInputs.longitude =  Number.parseFloat(response.data[0].lon);
-          this.postRestaurant()
+      .then((response) => {
+        if (response.data.length > 0) {
+          this.createInputs.latitude = Number.parseFloat(response.data[0].lat);
+          this.createInputs.longitude = Number.parseFloat(response.data[0].lon);
+          this.postRestaurant();
         } else {
           console.log('Geht ned');
         }
-      });    
+      });
   }
 
-  postRestaurant(){
-
+  postRestaurant() {
+    axios
+      .post('http://localhost:3000/restaurant/create', this.createInputs)
+      .then(function (response) {
+        console.log(response);
+      });
   }
 }

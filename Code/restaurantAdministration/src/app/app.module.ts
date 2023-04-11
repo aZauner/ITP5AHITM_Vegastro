@@ -14,12 +14,16 @@ import {AuthGuardService} from "./services/authGuard.service";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { CreateRestaurantPageComponent } from './create-restaurant-page/create-restaurant-page.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import { NavComponent } from './nav/nav.component';
+import { ManageRestaurantsPageComponent } from './manage-restaurants-page/manage-restaurants-page.component';
 
 const appRoutes: Routes = [
   {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
   {path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuardService]},
   {path: 'login' , component: LoginPageComponent},
-  {path: 'createRestaurant' , component: CreateRestaurantPageComponent}
+  {path: 'createRestaurant' , component: CreateRestaurantPageComponent},
+  {path: 'manageRestaurants' , component: ManageRestaurantsPageComponent}
 ]
 
 @NgModule({
@@ -27,7 +31,9 @@ const appRoutes: Routes = [
     AppComponent,
     LoginPageComponent,
     DashboardComponent,
-    CreateRestaurantPageComponent
+    CreateRestaurantPageComponent,
+    NavComponent,
+    ManageRestaurantsPageComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatStepperModule
   ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]
