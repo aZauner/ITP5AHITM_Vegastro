@@ -36,5 +36,5 @@ export class RestaurantController {
   @Get('getByOwner/:token')
   getByOwner(@Param('token') token: string): Promise<RestaurantDetails[] | HttpException> {
     return this.restaurantService.getByOwner(token);
-  }
+  }  
 }
