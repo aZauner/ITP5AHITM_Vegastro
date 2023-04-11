@@ -19,8 +19,6 @@ export class RestaurantService {
   ) {}
 
   async addMealToMenu(mealid: string, restaurantid: string): Promise<any> {
-    console.log("0");
-    
     const restaurant = await this.restaurantModel
       .findOne({ _id: restaurantid })
       .exec();
@@ -30,22 +28,20 @@ export class RestaurantService {
         'restaurant nicht gefunden',
         HttpStatus.NOT_FOUND,
       );
-      console.log("1");
+
     let menu = await this._getRestaurantDetails(restaurant).menu;
 
     const meal = await this.mealModel.findOne({ _id: mealid }).exec();
 
     if (!meal)
       return new HttpException('Meal nicht gefunden', HttpStatus.NOT_FOUND);
-      console.log("2");
-      
 
     menu.push(meal._id);
-        
+        console.log(restaurant)
     this.restaurantModel
       .updateOne({ _id: restaurantid }, { $set: { menu: menu } })
       .exec();
-      console.log("3");
+
     return HttpStatus.OK;
   }
 

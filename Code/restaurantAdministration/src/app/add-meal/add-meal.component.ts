@@ -27,10 +27,10 @@ export class AddMealComponent {
   formBuilder: FormBuilder = new FormBuilder();
 
   firstFormGroup = this.formBuilder.group({
-    mealName: ['', Validators.minLength(2)],
+    mealName: ['', Validators.minLength(1)],
     description: ['', Validators.minLength(2)],
     type: ['', Validators.minLength(2)],
-    price: ['', Validators.minLength(2)],
+    price: ['', Validators.pattern(/^(?:-(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))|(?:0|(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))))(?:.\d+|)$/)],
   });
 
   hide = true;
