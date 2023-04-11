@@ -32,4 +32,9 @@ export class RestaurantController {
   addMealToMenu(@Body() input : { mealid: string ,restaurantid: string }): Promise<HttpStatus | HttpException> {
     return this.restaurantService.addMealToMenu( input.mealid , input.restaurantid)
   }
+
+  @Get('getByOwner/:token')
+  getByOwner(@Param('token') token: string): Promise<RestaurantDetails[] | HttpException> {
+    return this.restaurantService.getByOwner(token);
+  }
 }
