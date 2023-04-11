@@ -1,1 +1,40 @@
-<p>add-meal works!</p>
+<body>
+    <form [formGroup]="firstFormGroup">
+        <div class="wrapper">
+            <mat-form-field class="example-full-width">
+                <mat-label>Titel</mat-label>
+                <input formControlName="mealName" matInput placeholder="name" required>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <input formControlName="description" matInput placeholder="Dieses Restaurant ..." required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Meal Type</mat-label>
+                <mat-select required formControlName="type">
+                    <mat-option *ngFor="let typ of types" [value]="typ">
+                        {{typ}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> 
+            
+            <mat-form-field class="example-full-width">
+                <mat-label>Preis</mat-label>
+                <input formControlName="price" matInput placeholder="1.70" required>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <ng-template matStepLabel>Done</ng-template>
+    <div class="wrapper">
+        <div>
+            <button class="loginBtn" [disabled]="!firstFormGroup.valid" (click)="create()" mat-stroked-button>Restaurant
+                erstellen</button>
+
+        </div>
+    </div>
+
+
+</body>
