@@ -39,7 +39,7 @@ export class RestaurantService {
     menu.push(meal._id);
         console.log(restaurant)
     this.restaurantModel
-      .updateOne({ _id: restaurantid }, { $set: { menu: menu } })
+      .updateOne({ _id: restaurantid }, { $set: { menu: menu } }) 
       .exec();
 
     return HttpStatus.OK;

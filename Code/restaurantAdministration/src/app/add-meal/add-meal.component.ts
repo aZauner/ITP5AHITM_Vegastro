@@ -16,12 +16,17 @@ import axios from 'axios';
 })
 export class AddMealComponent {
   id = '';
+  createMealActive = false
+  showMealsActive = false
+  meals = []
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     console.log(this.id);
+
+
   }
 
   formBuilder: FormBuilder = new FormBuilder();
@@ -62,5 +67,13 @@ export class AddMealComponent {
             console.log(response);
           });
       });
+  }
+
+  showCreate(){
+    this.createMealActive = !this.createMealActive;
+  }
+
+  showMeals(){
+    this.showMealsActive = !this.showMealsActive;
   }
 }

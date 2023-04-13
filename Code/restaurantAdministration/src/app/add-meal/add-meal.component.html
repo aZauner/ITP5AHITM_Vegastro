@@ -1,6 +1,6 @@
 <body>
-    <p>Gericht erstellen</p>
-    <form [formGroup]="firstFormGroup">
+    <button (click)="showCreate()">create new meal</button>
+    <form [formGroup]="firstFormGroup" [hidden]="!createMealActive">
         <div class="wrapper">
             <mat-form-field class="example-full-width">
                 <mat-label>Titel</mat-label>
@@ -26,14 +26,17 @@
                 <input formControlName="price" matInput placeholder="1.70" required>
             </mat-form-field>
         </div>
+        <div class="wrapper">
+            <div>
+                <button class="loginBtn" [disabled]="!firstFormGroup.valid" (click)="create()" mat-stroked-button>Gericht
+                    erstellen</button>
+    
+            </div>
+        </div>
     </form>
     
-    <div class="wrapper">
-        <div>
-            <button class="loginBtn" [disabled]="!firstFormGroup.valid" (click)="create()" mat-stroked-button>Gericht
-                erstellen</button>
+    <button (click)="showMeals()">Show Meals</button>
+    <div class="mealsBox" [hidden]="!showMealsActive">
 
-        </div>
     </div>
-
 </body>
