@@ -6,7 +6,7 @@ import { CreateMealDto } from './dto/create-meal.dto';
 import { MealDetails } from './entities/meal.entity';
 
 @Injectable()
-export class MealService {
+export class MealService {  
   constructor(
     @InjectModel(Meal.name)
     private readonly mealModel: Model<MealDocument>
@@ -19,8 +19,30 @@ export class MealService {
         description: meal.description,
         type: meal.type,
         price: meal.price,
-        allergic: meal.allergic
+        allergic: meal.allergic,
+        active: meal.active
       };
+    }
+
+    async chnageActive(mealid: string): Promise<any> {
+      // console.log(mealid);
+      
+      const meal = await this.mealModel
+      .findOne({ _id: mealid })
+      .exec();
+
+      let newStatus = !meal.active;
+      // console.log(meal.active);
+      
+      //Es werden immer alle upgedated
+      this.mealModel
+      .updateOne(
+        { _id: mealid },
+        { $set: { active: newStatus } }
+      )
+      .exec();      
+      
+      
     }
     
     async findByName(title: string): Promise<MealDetails | null> {
@@ -32,10 +54,12 @@ export class MealService {
     }
     
     async getMealById(id: string): Promise<HttpException | MealDetails> {
+      console.log(id);      
       const meal = await this.mealModel
-      .findOne({ id: id })
+      .findOne({ _id: id })
       .exec();
       if (!meal) return null;
+      console.log(meal);      
       return this._getMealDetails(meal);
     }
 

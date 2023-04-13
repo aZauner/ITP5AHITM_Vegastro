@@ -23,6 +23,9 @@ export class Meal {
 
   @Prop({ required: false, enum: AllergicType })
   allergic: AllergicType;
+
+  @Prop({ required: true, default: true})
+  active: boolean;
 }
 
 export type MealDocument = Meal & Document;

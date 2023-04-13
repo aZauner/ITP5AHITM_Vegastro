@@ -14,6 +14,7 @@ interface MealDto {
   price: string;
   description?: string;
   type: MealType;
+  active: boolean;
 }
 
 export interface RestaurantCardInputs {

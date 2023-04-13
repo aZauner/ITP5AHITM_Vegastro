@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException } from '@nestjs/common';
+import { Controller, Get, Put, Post, Body, Patch, Param, Delete, HttpException } from '@nestjs/common';
 import { MealDocument } from 'src/schema/meal.schema';
 import { CreateMealDto } from './dto/create-meal.dto';
 import { MealDetails } from './entities/meal.entity';
@@ -27,4 +27,9 @@ export class MealController {
   getAllMeals(): Promise<MealDetails[] | HttpException> {
     return this.mealService.getAll();
   }
+
+  @Put('changeActiveStatus')
+  chnageActive(@Body() input : { mealid: string }): Promise<any> {
+    return this.mealService.chnageActive( input.mealid)
+  }  
 }

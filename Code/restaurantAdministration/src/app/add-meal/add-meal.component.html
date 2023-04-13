@@ -37,6 +37,16 @@
     
     <button (click)="showMeals()">Show Meals</button>
     <div class="mealsBox" [hidden]="!showMealsActive">
-
+        <div *ngFor="let meal of meals;  let i = index" class="meal">
+            <p>Titel: <input type="text" [disabled]="!editValues[i].editable" value="{{meal.title}}"></p>
+            <p>Description: <input type="text" [disabled]="!editValues[i].editable" value="{{meal.description}}"></p>
+            <p>Preis: <input type="text" [disabled]="!editValues[i].editable" value="{{meal.price}}">€</p>
+            <div class="flex">
+                <p (click)="editMeal(i)">bearbeiten</p>
+                <p *ngIf="editValues[i].editable">Submit</p>
+            </div>
+            <button *ngIf="meals[i].active" (click)="toggleActive(i)">Ausblenden</button> 
+            <button *ngIf="!meals[i].active" (click)="toggleActive(i)">Einblenden</button>                
+        </div>
     </div>
 </body>

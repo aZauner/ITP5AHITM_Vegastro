@@ -8,9 +8,9 @@ import { RestaurantService } from './restaurant.service';
 export class RestaurantController {
   constructor(private readonly restaurantService: RestaurantService) { }
 
-  @Get(':name')
-  findOne(@Param('name') name: string): Promise<RestaurantDetails | null> {
-    return this.restaurantService.findByName(name);
+  @Get(':id')
+  findOne(@Param('id') id: string): Promise<RestaurantDetails | null> {
+    return this.restaurantService.findByName(id);
   }
 
   @Post('create')
@@ -31,8 +31,8 @@ export class RestaurantController {
   @Put('addMealToMenu')
   addMealToMenu(@Body() input : { mealid: string ,restaurantid: string }): Promise<HttpStatus | HttpException> {
     return this.restaurantService.addMealToMenu( input.mealid , input.restaurantid)
-  }
-
+  }  
+  
   @Get('getByOwner/:token')
   getByOwner(@Param('token') token: string): Promise<RestaurantDetails[] | HttpException> {
     return this.restaurantService.getByOwner(token);

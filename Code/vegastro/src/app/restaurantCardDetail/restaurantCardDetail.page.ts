@@ -67,10 +67,12 @@ export class RestaurantCardDetail {
       
       if (this.inputs.menu != null) {
         for (const meal of this.inputs.menu) {
-          if (meal.description) {
-            this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: meal.price, type: meal.type, descr: meal.description });
-          } else {
-            this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: meal.price, type: meal.type });
+          if(meal.active == true){
+            if (meal.description) {
+              this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: meal.price, type: meal.type, descr: meal.description });
+            } else {
+              this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: meal.price, type: meal.type });
+            }
           }
         }
       }

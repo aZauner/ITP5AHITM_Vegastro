@@ -2,6 +2,7 @@ body{
   margin: 0;
   padding: 0;
   background-color: #2b8034;
+  width: 83vw;  
 }
 .nav{
   display: none;
@@ -9,7 +10,7 @@ body{
 .wrapper{
   margin-left: auto;
   margin-right: auto;
-  width: 60vw;
+  width: auto;
   display: flex;
   justify-content: center;
   align-items: center;

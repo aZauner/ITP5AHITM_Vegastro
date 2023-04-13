@@ -6,9 +6,25 @@ import { Restaurant, RestaurantDocument } from 'src/schema/restaurant.schema';
 import { User, UserDocument } from 'src/schema/user.schema';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { RestaurantDetails } from './entities/restaurant.entity';
+import { MealDetails } from 'src/meal/entities/meal.entity';
+import { log } from 'console';
+import { json } from 'stream/consumers';
 
 @Injectable()
 export class RestaurantService {
+
+  _getMealDetails(meal: MealDocument): MealDetails {
+    return {
+      id: meal._id,
+      title: meal.title,
+      description: meal.description,
+      type: meal.type,
+      price: meal.price,
+      allergic: meal.allergic,
+      active: meal.active
+    };
+  }
+  
   constructor(
     @InjectModel(Restaurant.name)
     private readonly restaurantModel: Model<RestaurantDocument>,
@@ -17,6 +33,8 @@ export class RestaurantService {
     @InjectModel(Meal.name)
     private readonly mealModel: Model<MealDocument>,
   ) {}
+
+
 
   async addMealToMenu(mealid: string, restaurantid: string): Promise<any> {
     const restaurant = await this.restaurantModel
@@ -98,9 +116,9 @@ export class RestaurantService {
     };
   }
 
-  async findByName(name: string): Promise<RestaurantDetails | null> {
+  async findByName(id: string): Promise<RestaurantDetails | null> {
     const restaurant = await this.restaurantModel
-      .findOne({ restaurantName: name })
+      .findOne({ _id: id })
       .populate('owner', '', this.userModel)
       .populate('menu', '', this.mealModel)
       .exec();

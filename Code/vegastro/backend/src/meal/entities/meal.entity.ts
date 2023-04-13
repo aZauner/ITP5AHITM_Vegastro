@@ -8,5 +8,6 @@ export interface MealDetails {
     description: string;
     type: FoodType;
     price: string;
-    allergic: AllergicType
+    allergic: AllergicType;
+    active: boolean;
 }
