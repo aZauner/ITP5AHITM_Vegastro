@@ -12,4 +12,15 @@ import { Subscription } from 'rxjs';
 export class AppComponent{
   title = 'restaurantAdministration';
 
+  loggedIn = false
+
+  ngOnInit(){
+    if(sessionStorage.getItem("userToken") != undefined){
+      this.loggedIn = true
+    }else{
+      this.loggedIn = false
+
+    }
+  }
+
 }

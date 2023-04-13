@@ -15,38 +15,37 @@ export class RestaurantService {
     @InjectModel(User.name)
     private readonly userModel: Model<UserDocument>,
     @InjectModel(Meal.name)
-    private readonly mealModel: Model<MealDocument>     
-    ) { }
-    
-    async addMealToMenu(mealid: string, restaurantid: string): Promise<any> {
-      const restaurant = await this.restaurantModel
+    private readonly mealModel: Model<MealDocument>,
+  ) {}
+
+  async addMealToMenu(mealid: string, restaurantid: string): Promise<any> {
+    const restaurant = await this.restaurantModel
       .findOne({ _id: restaurantid })
       .exec();
 
-      if(!restaurant) return new HttpException("restaurant nicht gefunden" , HttpStatus.NOT_FOUND)
+    if (!restaurant)
+      return new HttpException(
+        'restaurant nicht gefunden',
+        HttpStatus.NOT_FOUND,
+      );
 
-      let menu = await this._getRestaurantDetails(restaurant)
-      .menu;      
+    let menu = await this._getRestaurantDetails(restaurant).menu;
 
-      const meal = await this.mealModel
-      .findOne({ _id: mealid })
+    const meal = await this.mealModel.findOne({ _id: mealid }).exec();
+
+    if (!meal)
+      return new HttpException('Meal nicht gefunden', HttpStatus.NOT_FOUND);
+
+    menu.push(meal._id);
+        console.log(restaurant)
+    this.restaurantModel
+      .updateOne({ _id: restaurantid }, { $set: { menu: menu } })
       .exec();
 
-      if(!meal) return new HttpException("Meal nicht gefunden" , HttpStatus.NOT_FOUND)
+    return HttpStatus.OK;
+  }
 
-      menu.push(meal._id);
-
-      this.restaurantModel
-      .updateOne(
-        { _id: restaurantid },
-        { $set: { menu: menu } },
-      )
-      .exec();
-
-      return HttpStatus.OK;
-    }
-
-    async findRestaurantsNearPosion(
+  async findRestaurantsNearPosion(
     northLat: number,
     northLon: number,
     southLat: number,
@@ -56,7 +55,8 @@ export class RestaurantService {
       .find({
         latitude: { $lt: northLat, $gt: southLat },
         longitude: { $lt: northLon, $gt: southLon },
-      }).populate('menu', '', this.mealModel)
+      })
+      .populate('menu', '', this.mealModel)
       .exec();
 
     if (restaurants.length == 0) {
@@ -73,7 +73,11 @@ export class RestaurantService {
       });
     } else {
       for (let i = 0; i < 20; i++) {
-        rest.push(this._getRestaurantDetails(restaurants[Math.floor(Math.random() * restaurants.length)]));
+        rest.push(
+          this._getRestaurantDetails(
+            restaurants[Math.floor(Math.random() * restaurants.length)],
+          ),
+        );
       }
     }
 
@@ -90,22 +94,32 @@ export class RestaurantService {
       type: restaurant.type,
       description: restaurant.description,
       location: restaurant.location,
-      menu: restaurant.menu
+      menu: restaurant.menu,
     };
   }
 
   async findByName(name: string): Promise<RestaurantDetails | null> {
     const restaurant = await this.restaurantModel
-      .findOne({ restaurantName: name }).populate('owner', '', this.userModel).populate('menu', '', this.mealModel)
+      .findOne({ restaurantName: name })
+      .populate('owner', '', this.userModel)
+      .populate('menu', '', this.mealModel)
       .exec();
     if (!restaurant) return null;
     return this._getRestaurantDetails(restaurant);
   }
 
-  async create(restaurant: CreateRestaurantDto): Promise<RestaurantDocument | HttpException> {
-    const owner = await this.userModel.findOne({ username: restaurant.owner }).exec();
+  async create(
+    restaurant: CreateRestaurantDto,
+  ): Promise<RestaurantDocument | HttpException> {
+    const owner = await this.userModel
+      .findOne({ token: restaurant.owner })
+      .exec();
 
-    if (!owner) return new HttpException('Es existiert kein User mit diesem Username', HttpStatus.NOT_FOUND);
+    if (!owner)
+      return new HttpException(
+        'Es existiert kein User mit diesem Username',
+        HttpStatus.NOT_FOUND,
+      );
 
     restaurant.owner = owner;
     const newRestaurant = new this.restaurantModel(restaurant);
@@ -113,14 +127,46 @@ export class RestaurantService {
   }
 
   async getAllRstaurants(): Promise<HttpException | RestaurantDetails[]> {
-    const restaurants = await this.restaurantModel
-      .find()
-      .exec();
-    if (!restaurants) return new HttpException('keine Restaurants gefunden', HttpStatus.NOT_FOUND);
+    const restaurants = await this.restaurantModel.find().exec();
+    if (!restaurants)
+      return new HttpException(
+        'keine Restaurants gefunden',
+        HttpStatus.NOT_FOUND,
+      );
 
     let restaurnArry = [];
     for (const rest of restaurants) {
-      restaurnArry.push(this._getRestaurantDetails(rest))
+      restaurnArry.push(this._getRestaurantDetails(rest));
+    }
+    return restaurnArry;
+  }
+
+  async getByOwner(
+    token: string,
+  ): Promise<HttpException | RestaurantDetails[]> {
+
+    const owner = await this.userModel
+      .findOne({ token: token })
+      .exec();
+
+    if (!owner)
+      return new HttpException(
+        'Es existiert kein User mit diesem Token',
+        HttpStatus.NOT_FOUND,
+      );
+
+    const restaurants = await this.restaurantModel
+      .find({ owner: owner })
+      .exec();
+    if (!restaurants)
+      return new HttpException(
+        'keine Restaurants gefunden',
+        HttpStatus.NOT_FOUND,
+      );
+
+    let restaurnArry = [];
+    for (const rest of restaurants) {
+      restaurnArry.push(this._getRestaurantDetails(rest));  
     }
     return restaurnArry;
   }

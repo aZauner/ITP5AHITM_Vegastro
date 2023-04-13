@@ -1,0 +1,17 @@
+<h1>Meine Restaurants</h1>
+
+<div class="restaurnatBox">
+    <div *ngFor="let restaurant of restaurants" class="restaurantItem">
+        <div >
+
+            <p class="restaurantName">{{restaurant.restaurantName}}</p>
+            <div class="innerContent">
+                <p>{{restaurant.location.city}}</p>
+                <p>{{restaurant.location.housenumber}}</p>
+                <p>{{restaurant.location.street}}</p>
+            </div>
+            <button routerLink="/addMeal/{{restaurant.id}}">Bearbeiten</button>
+
+        </div>
+    </div>
+</div>

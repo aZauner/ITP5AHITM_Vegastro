@@ -24,7 +24,8 @@
         
         <ion-item counter="true">
           <ion-label position="floating">Password</ion-label>
-          <ion-input maxlength="50" formControlName="password"  type="password" required></ion-input>          
+
+          <ion-input maxlength="50" formControlName="password"  type="password" required></ion-input>  
         </ion-item>
         <div class="error" >
           <p *ngIf="checkPasswordValidation()">Kein gültiges Passwort</p>

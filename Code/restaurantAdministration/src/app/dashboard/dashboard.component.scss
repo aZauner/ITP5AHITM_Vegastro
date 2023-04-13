@@ -1,0 +1,30 @@
+#contentBox{
+    display: flex;
+    flex-direction: row;
+    width: 83vw;
+    margin-top: 35vh;
+    height: 30vh;
+    justify-content: center;
+}
+.linkElement {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(245, 245, 245);
+    border-radius: 20px;
+    margin: 0 5vw;
+    padding: 3vw;
+    align-items: center;
+    -webkit-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
+-moz-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
+box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
+}
+.linkElement img{
+   width: 8vw;
+}
+.linkElement p{
+   
+    margin-top: 2vh;
+   text-align: center;
+   color: rgb(30, 91, 3);
+   font-size: 1rem;
+ }

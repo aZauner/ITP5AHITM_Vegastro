@@ -41,7 +41,7 @@ p {
     padding: 1vh;
     margin-right: 2vh;
     padding-top: 1.5vh;
-    background: rgb(74, 215, 57);
+    background: rgb(44, 166, 0);
 }
 
 
@@ -100,24 +100,24 @@ ion-footer ion-toolbar div {
     padding: 0.5vh 0.5vh 0.5vh 0.5vh;
     background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.3);
     margin-bottom: 1vh;
-    animation: removeFilterAnim 300ms forwards;
-    // animation: removeFilterAnim 500ms forwards;
+    // animation: removeFilterAnim 300ms forwards;
+    animation: removeFilterAnim 500ms forwards;
 }
 
 @keyframes addFilterAnim {
-    // 0% {width: 50%; margin-left: 0;}
-    // 50% {width: 100%;margin-left: 0;}
-    // 100% {width:50%; margin-left: 50%;}
-    0% {margin-left: 0;}
-    100% {margin-left: 50%;}
+    0% {width: 50%; margin-left: 0;}
+    50% {width: 100%;margin-left: 0;}
+    100% {width:50%; margin-left: 50%;}
+    // 0% {margin-left: 0;}
+    // 100% {margin-left: 50%;}
 }
 
 @keyframes removeFilterAnim {
-    // 0% {width:50%; margin-left: 50%;}
-    // 50% {width: 100%;margin-left: 0%;}
-    // 100% {width: 50%; margin-left: 0;}
-    0% {margin-left: 50%;}
-    100% {margin-left: 0;}
+    0% {width:50%; margin-left: 50%;}
+    50% {width: 100%;margin-left: 0%;}
+    100% {width: 50%; margin-left: 0;}
+    // 0% {margin-left: 50%;}
+    // 100% {margin-left: 0;}
 }
 
 .on {
@@ -130,8 +130,8 @@ ion-footer ion-toolbar div {
     font-size: 2.5vh;
     padding: 0.5vh 0.5vh 0.5vh 0.5vh;
     background: #48A734;
-    animation: addFilterAnim 300ms forwards;
-    // animation: addFilterAnim 500ms forwards;
+    // animation: addFilterAnim 300ms forwards;
+    animation: addFilterAnim 500ms forwards;
     margin-bottom: 1vh;
 }
 
