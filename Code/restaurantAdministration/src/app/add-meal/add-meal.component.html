@@ -39,7 +39,7 @@
     
     <div class="mealsBox" [hidden]="!showMealsActive">
         <div *ngFor="let meal of meals;  let i = index" class="meal">
-            <form (submit)="submitChanges(title.value)">
+            <form (submit)="submitChanges( i, title.value , desc.value, price.value)">
                 <p>Titel: <input type="text" #title [disabled]="!editValues[i].editable" value="{{meal.title}}"></p>
                 <p>Beschreibung: <input type="text" #desc [disabled]="!editValues[i].editable" value="{{meal.description}}"></p>
                 <p>Preis: <input type="text" #price [disabled]="!editValues[i].editable" value="{{meal.price}}">€</p>

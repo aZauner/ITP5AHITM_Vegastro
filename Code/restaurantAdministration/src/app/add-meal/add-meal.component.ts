@@ -41,22 +41,25 @@ export class AddMealComponent {
     this.loadMeals();
   }
 
-  submitChanges(value: string) {
+  submitChanges( index: number,value: string , desc: string, price: string) {
+    console.log(this.meals[index]._id);    
     console.log(value);
+    console.log(desc);
+    console.log(price);
       
 
-    // axios
-    //   .put('http://localhost:3000/meal/changeMealValues' , {})
-    //   .then((response) => {
-    //     // console.log(response);
-    //     if (response.data.menu.length > 0) {
-    //       for (const meal of response.data.menu) {
-    //         this.meals.push(meal);
-    //         this.editValues.push({ mealId: meal._id, editable: false });
-    //         // console.log(this.editValues);
-    //       }
-    //     }
-    //   });
+    axios
+      .put('http://localhost:3000/meal/changeMealValues' , {
+        mealId: this.meals[index]._id,
+        title : value,
+        description : desc,
+        type: this.meals[index].type,
+        price: price 
+    })
+      .then((response) => {
+        console.log("changed");
+        this.loadMeals();       
+      });
     
   }
 
