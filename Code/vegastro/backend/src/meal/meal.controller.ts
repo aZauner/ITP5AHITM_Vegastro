@@ -3,6 +3,7 @@ import { MealDocument } from 'src/schema/meal.schema';
 import { CreateMealDto } from './dto/create-meal.dto';
 import { MealDetails } from './entities/meal.entity';
 import { MealService } from './meal.service';
+import { FoodType } from 'src/schema/restaurant.schema';
 
 @Controller('meal')
 export class MealController {
@@ -31,5 +32,11 @@ export class MealController {
   @Put('changeActiveStatus')
   chnageActive(@Body() input : { mealid: string }): Promise<any> {
     return this.mealService.chnageActive( input.mealid)
-  }  
+  } 
+  
+  @Put('changeMealValues')
+  changeMealValues(@Body() input : { mealId: string ,title: string , description: string,  type: string, price: string }): Promise<any> {
+         
+    return this.mealService.changeMealValues( input)
+  }
 }
