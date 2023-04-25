@@ -31,7 +31,7 @@ export class CreateRestaurantPageComponent {
   isLinear = true;
 
   hide = true;
-  types = ['vegan', 'meat', 'vegetarian'];
+  types = ['Vegan', 'Fleisch', 'Vegetarisch'];
   location = { street: '', housenumber: '', plz: '', city: '', floor: '' };
   createInputs = {
     restaurantName: '',

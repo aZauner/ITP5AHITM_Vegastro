@@ -1,5 +1,7 @@
 <body>
-    <button (click)="showCreate()">create new meal</button>
+    <button class="mainBtn" (click)="showCreate()">create new meal</button>
+    <button class="mainBtn" (click)="showMeals()">Show Meals</button>
+
     <form [formGroup]="firstFormGroup" [hidden]="!createMealActive">
         <div class="wrapper">
             <mat-form-field class="example-full-width">
@@ -8,7 +10,7 @@
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-                <mat-label>Description</mat-label>
+                <mat-label>Beschreibung</mat-label>
                 <input formControlName="description" matInput placeholder="Dieses Restaurant ..." required>
             </mat-form-field>
 
@@ -35,18 +37,17 @@
         </div>
     </form>
     
-    <button (click)="showMeals()">Show Meals</button>
     <div class="mealsBox" [hidden]="!showMealsActive">
         <div *ngFor="let meal of meals;  let i = index" class="meal">
             <p>Titel: <input type="text" [disabled]="!editValues[i].editable" value="{{meal.title}}"></p>
-            <p>Description: <input type="text" [disabled]="!editValues[i].editable" value="{{meal.description}}"></p>
+            <p>Beschreibung: <input type="text" [disabled]="!editValues[i].editable" value="{{meal.description}}"></p>
             <p>Preis: <input type="text" [disabled]="!editValues[i].editable" value="{{meal.price}}">€</p>
             <div class="flex">
-                <p (click)="editMeal(i)">bearbeiten</p>
+                <button (click)="editMeal(i)">Bearbeiten</button>
                 <p *ngIf="editValues[i].editable">Submit</p>
             </div>
-            <button *ngIf="meals[i].active" (click)="toggleActive(i)">Ausblenden</button> 
-            <button *ngIf="!meals[i].active" (click)="toggleActive(i)">Einblenden</button>                
+            <button class="activeBtn" *ngIf="meals[i].active" (click)="toggleActive(i)">Deaktivieren</button> 
+            <button class="activeBtn" *ngIf="!meals[i].active" (click)="toggleActive(i)">Aktivieren</button>                
         </div>
     </div>
 </body>

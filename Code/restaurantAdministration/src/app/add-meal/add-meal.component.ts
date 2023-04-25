@@ -108,10 +108,13 @@ export class AddMealComponent {
 
   showCreate() {
     this.createMealActive = !this.createMealActive;
+    this.showMealsActive = false;
+
   }
 
   showMeals() {
     this.showMealsActive = !this.showMealsActive;
+    this.createMealActive = false;
   }
 
   toggleActive(indexToChange: number) {

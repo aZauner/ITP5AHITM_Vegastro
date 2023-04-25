@@ -5,11 +5,12 @@
                 <div class="wrapper">
                     <mat-form-field class="example-full-width">
                         <mat-label>Restaurant Name</mat-label>
-                        <input formControlName="restaurantName" matInput placeholder="name" required>
+                        <input formControlName="restaurantName" matInput placeholder="Name" required>
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
-                        <mat-label>Restaurant Type</mat-label>
+                        <mat-label>Restaurant Typ
+                        </mat-label>
                         <mat-select required formControlName="type">
                             <mat-option *ngFor="let typ of types" [value]="typ">
                                 {{typ}}
@@ -18,10 +19,10 @@
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Description</mat-label>
+                        <mat-label>Beschreibung</mat-label>
                         <input formControlName="description" matInput placeholder="Dieses Restaurant ..." required>
                     </mat-form-field>
-                    <button mat-button matStepperNext>Next</button>
+                    <button mat-button matStepperNext>Weiter</button>
                 </div>
             </form>
         </mat-step>
@@ -29,7 +30,7 @@
             <form [formGroup]="secondFormGroup">
                 <div class="wrapper">
                     <mat-form-field class="example-full-width">
-                        <mat-label>City</mat-label>
+                        <mat-label>Stadt</mat-label>
                         <input formControlName="city" matInput placeholder="Wien" required>
                     </mat-form-field>
 
@@ -39,29 +40,29 @@
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Street</mat-label>
+                        <mat-label>Straße</mat-label>
                         <input formControlName="street" matInput placeholder="z.B. Borisstraße" required>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Housenumber</mat-label>
+                        <mat-label>Hausnummer</mat-label>
                         <input formControlName="housenumber" matInput placeholder="z.B. 3" required>
                     </mat-form-field>
 
                     <mat-form-field class="example-full-width">
-                        <mat-label>Floor</mat-label>
+                        <mat-label>Stockwerk</mat-label>
                         <input formControlName="floor" matInput placeholder="z.B. 3">
                     </mat-form-field>
-                    <button class="next_btn"  mat-button matStepperNext>Next</button>
+                    <button class="next_btn"  mat-button matStepperNext>Weiter</button>
                 </div>
             </form>
         </mat-step>
         <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
+            <ng-template matStepLabel>Fertig</ng-template>
             <div class="wrapper">
-                <p>You are now done.</p>
+                <p>Sie sind fertig!</p>
                 <div>
-                    <button class="loginBtn" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid"  (click)="create()"
+                    <button routerLink="/dashboard" class="loginBtn" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid"  (click)="create()"
                     mat-stroked-button>Restaurant erstellen</button>               
                     <!-- <button routerLink="/dashboard" class="loginBtn" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid"  
                     mat-stroked-button>Restaurant erstellen</button>   -->
