@@ -38,20 +38,6 @@
     </form>
     
     <div class="mealsBox" [hidden]="!showMealsActive">
-<<<<<<< Updated upstream
-        <div *ngFor="let meal of meals;  let i = index" class="meal">
-            <form (submit)="submitChanges(title.value)">
-                <p>Titel: <input type="text" #title [disabled]="!editValues[i].editable" value="{{meal.title}}"></p>
-                <p>Beschreibung: <input type="text" #desc [disabled]="!editValues[i].editable" value="{{meal.description}}"></p>
-                <p>Preis: <input type="text" #price [disabled]="!editValues[i].editable" value="{{meal.price}}">€</p>
-                <div class="flex">
-                    <p (click)="editMeal(i)">Bearbeiten</p>
-                    <button *ngIf="editValues[i].editable" type="submit" >Submit</button>
-                </div>
-                <p class="activeBtn" *ngIf="meals[i].active" (click)="toggleActive(i)">Deaktivieren</p> 
-                <p class="activeBtn" *ngIf="!meals[i].active" (click)="toggleActive(i)">Aktivieren</p>
-            </form>                
-=======
         <div *ngFor="let meal of meals;  let i = index" id="meal"     [className]="meals[i].active ? 'active' : 'inactive'">
             <p>Titel: <input class="restaurantInputs" type="text" [disabled]="!editValues[i].editable" value="{{meal.title}}"></p>
             <p>Beschreibung: <input class="restaurantInputs" type="text" [disabled]="!editValues[i].editable" value="{{meal.description}}"></p>
@@ -62,7 +48,6 @@
             </div>
             <button class="activeBtn" *ngIf="meals[i].active" (click)="toggleActive(i)">Deaktivieren</button> 
             <button class="activeBtn" *ngIf="!meals[i].active" (click)="toggleActive(i)">Aktivieren</button>                
->>>>>>> Stashed changes
         </div>
     </div>
 </body>
