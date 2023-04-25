@@ -15,6 +15,7 @@ import axios from 'axios';
   styleUrls: ['./add-meal.component.scss'],
 })
 export class AddMealComponent {
+
   id = '';
   createMealActive = false;
   showMealsActive = false;
@@ -40,8 +41,26 @@ export class AddMealComponent {
     this.loadMeals();
   }
 
-  editMeal(mealIndex: number) {
-    console.log(mealIndex);
+  submitChanges(value: string) {
+    console.log(value);
+      
+
+    // axios
+    //   .put('http://localhost:3000/meal/changeMealValues' , {})
+    //   .then((response) => {
+    //     // console.log(response);
+    //     if (response.data.menu.length > 0) {
+    //       for (const meal of response.data.menu) {
+    //         this.meals.push(meal);
+    //         this.editValues.push({ mealId: meal._id, editable: false });
+    //         // console.log(this.editValues);
+    //       }
+    //     }
+    //   });
+    
+  }
+
+  editMeal(mealIndex: number) {    
     this.editValues[mealIndex].editable = !this.editValues[mealIndex].editable;
   }
 
