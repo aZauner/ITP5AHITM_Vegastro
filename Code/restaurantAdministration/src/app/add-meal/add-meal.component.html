@@ -56,7 +56,7 @@
     </div>
 
     <div class="ratingBox"  [hidden]="!showRatingsActive">
-        <p >Deine Durchschnittliche Sternebewertung </p>
+        <p class="ratingHeadline">Deine Durchschnittliche Sternebewertung </p>
               
         <ng-template [ngIf]="roundedStarRating < 0.5">
             <mat-icon class="starOff" >star_border</mat-icon>
@@ -103,5 +103,37 @@
         <ng-template #halfStar4>                    
                 <mat-icon *ngIf="roundedStarRating >= 4.5" class="starOn" >star_half</mat-icon>                                  
         </ng-template> 
+
+        <div *ngFor="let rating of ratings" class="commentBox">
+            <p>{{rating.comment}}</p>
+
+            <ng-template [ngIf]="rating.stars >= 1" >
+                <mat-icon class="starOn" >star</mat-icon>
+            </ng-template>
+            <ng-template [ngIf]="rating.stars >= 2" [ngIfElse]="halfStar">
+                <mat-icon class="starOn" >star</mat-icon>
+            </ng-template>
+            <ng-template #halfStar>                    
+                    <mat-icon class="starOff" >star_border</mat-icon> 
+            </ng-template>
+            <ng-template [ngIf]="rating.stars >= 3" [ngIfElse]="halfStar">
+                <mat-icon class="starOn" >star</mat-icon>
+            </ng-template>
+            <ng-template #halfStar>                    
+                    <mat-icon class="starOff" >star_border</mat-icon> 
+            </ng-template>
+            <ng-template [ngIf]="rating.stars >= 4" [ngIfElse]="halfStar">
+                <mat-icon class="starOn" >star</mat-icon>
+            </ng-template>
+            <ng-template #halfStar>                    
+                    <mat-icon class="starOff" >star_border</mat-icon> 
+            </ng-template>
+            <ng-template [ngIf]="rating.stars >= 5" [ngIfElse]="halfStar">
+                <mat-icon class="starOn" >star</mat-icon>
+            </ng-template>
+            <ng-template #halfStar>                    
+                    <mat-icon class="starOff" >star_border</mat-icon> 
+            </ng-template>
+        </div>
     </div>
 </body>

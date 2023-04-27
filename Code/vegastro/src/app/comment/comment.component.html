@@ -1,4 +1,34 @@
 <ion-item>
-  <p>{{inputs.comment}}</p>
-  <p>{{inputs.stars}}</p>
+  <div class="flex">
+    <div class="starBox">
+      <ng-template [ngIf]="inputs.stars >= 1">
+        <ion-icon class="starOn" name="star"></ion-icon>
+      </ng-template>
+      <ng-template [ngIf]="inputs.stars >= 2" [ngIfElse]="halfStar">
+        <ion-icon class="starOn" name="star"></ion-icon>
+      </ng-template>
+      <ng-template #halfStar>                    
+            <ion-icon  class="starOff" name="star-outline"></ion-icon> 
+      </ng-template>
+      <ng-template [ngIf]="inputs.stars >= 3" [ngIfElse]="halfStar">
+        <ion-icon class="starOn" name="star"></ion-icon>
+      </ng-template>
+      <ng-template #halfStar>                    
+            <ion-icon  class="starOff" name="star-outline"></ion-icon> 
+      </ng-template>
+      <ng-template [ngIf]="inputs.stars >= 4" [ngIfElse]="halfStar">
+        <ion-icon class="starOn" name="star"></ion-icon>
+      </ng-template>
+      <ng-template #halfStar>                    
+            <ion-icon  class="starOff" name="star-outline"></ion-icon> 
+      </ng-template>
+      <ng-template [ngIf]="inputs.stars >= 5" [ngIfElse]="halfStar">
+        <ion-icon class="starOn" name="star"></ion-icon>
+      </ng-template>
+      <ng-template #halfStar>                    
+            <ion-icon  class="starOff" name="star-outline"></ion-icon> 
+      </ng-template>
+    </div>
+    <p class="comment">{{inputs.comment}}</p>
+  </div>
 </ion-item>

@@ -92,10 +92,25 @@ body{
   color: grey;
 }
 
+.commentBox{
+    padding: 1%;
+    -webkit-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
+    -moz-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
+    box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);    
+    box-sizing: border-box;
+    border-width: 0.1vh;
+    border-radius: 0.3 vh;
+    margin-top: 2vh;
+}
+
+.ratingHeadline{
+  font-size: 3vh;
+}
+
 .ratingBox{
     font-family: "Comfortaa";
     width: 70vw;
-    margin-left: 10vw;
+    margin-left: 8vw;
     margin-top: 5vh;
     padding: 1%;
     -webkit-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
