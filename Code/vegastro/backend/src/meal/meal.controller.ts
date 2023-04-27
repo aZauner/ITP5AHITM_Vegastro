@@ -39,4 +39,9 @@ export class MealController {
          
     return this.mealService.changeMealValues( input)
   }
+
+  @Delete('deleteMeal/:mealId')
+  deleteMeal(@Param('mealId') mealId: string): Promise<any> {         
+    return this.mealService.deleteMeal( mealId)
+  }
 }

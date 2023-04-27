@@ -7,6 +7,7 @@ import { MealDetails } from './entities/meal.entity';
 
 @Injectable()
 export class MealService {
+  
   constructor(
     @InjectModel(Meal.name)
     private readonly mealModel: Model<MealDocument>,
@@ -22,6 +23,10 @@ export class MealService {
       allergic: meal.allergic,
       active: meal.active,
     };
+  }
+
+  async deleteMeal(mealId: string): Promise<any> {
+    this.mealModel.deleteOne({_id: mealId}).exec();
   }
 
   async changeMealValues(input: {

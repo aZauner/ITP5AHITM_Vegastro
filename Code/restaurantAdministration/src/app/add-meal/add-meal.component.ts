@@ -126,6 +126,7 @@ export class AddMealComponent {
             this.loadMeals();
           });
       });
+      this.loadMeals();
   }
 
   showCreate() {
@@ -147,6 +148,15 @@ export class AddMealComponent {
       .put('http://localhost:3000/meal/changeActiveStatus', {
         mealid: this.meals[indexToChange]._id,
       })
+      .then((response) => {        
+        this.loadMeals();
+      });
+  }
+
+  deleteMeal(id: string){
+    console.log(id);
+    axios
+      .delete('http://localhost:3000/meal/deleteMeal/' + id)
       .then((response) => {        
         this.loadMeals();
       });

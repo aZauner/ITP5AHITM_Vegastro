@@ -49,6 +49,7 @@
                 </div>
                 <p class="activeBtn" *ngIf="meals[i].active" (click)="toggleActive(i)">Deaktivieren</p> 
                 <p class="activeBtn" *ngIf="!meals[i].active" (click)="toggleActive(i)">Aktivieren</p>
+                <p class="activeBtn" (click)="deleteMeal(meal._id)">Löschen</p>
             </form>                
         </div>
     </div>
