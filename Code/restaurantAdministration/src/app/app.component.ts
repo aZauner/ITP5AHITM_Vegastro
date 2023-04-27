@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 
@@ -11,6 +12,8 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent{
   title = 'restaurantAdministration';
+
+  constructor(public router: Router) {}
 
   loggedIn = false
 

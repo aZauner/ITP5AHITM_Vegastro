@@ -7,18 +7,40 @@
     flex-direction: column;   
 }
 
-img{
-    width:  25%;
-    margin: 1vh 37.5%;
-}
-#imgBox{
+#titleBox{
+    display: flex;
+    flex-direction: row-reverse;
     background-color: rgb(9, 20, 9);
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    flex-wrap: wrap;
+    padding: 0 1vw 0 1vw;
 }
+
+#logo {
+    width: 5vh;
+    margin: 1vw;
+}
+
 #linkList{
     display: flex;
     flex-direction: column;
-    
+}
+
+#logoNameBox {
+    margin-top: 1.5vw;
+    margin-bottom: 1vw;
+}
+
+#logoNameFirst {
+    font-size: 3.5vh;
+    color: #48A734;
+}
+
+#logoNameSecond {
+    font-size: 3.5vh;
+    color: white;
 }
 
 a{
@@ -29,7 +51,7 @@ a{
     border: none;
     padding: 2vw 1vw;
     width: 15vw;
-    transition: all 0.5s;
+    transition: background-color 0.5s;
 }
 a:hover{
     background-color:rgb(6, 46, 19);
