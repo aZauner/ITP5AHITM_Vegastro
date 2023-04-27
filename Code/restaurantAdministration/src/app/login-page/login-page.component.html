@@ -15,8 +15,12 @@
           </button>
         </mat-form-field>
 
-      <button class="loginBtn" [disabled]="!login.valid" routerLink="/dashboard"  (click) ="logIn()" mat-stroked-button>Login</button>
-
+       <div id="flexOuterBox"> 
+      <button class="loginBtn" [disabled]="!login.valid" routerLink="/dashboard"  (click) ="logIn()">Login</button>
+      
+      <label class="labelRegistration">Noch keinen Account?</label>
+      <button class="registrationBtn"  routerLink="/registration">Jetzt registrieren</button>
+    </div>
     </div>
 
   </div>

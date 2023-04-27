@@ -10,6 +10,7 @@ export class AuthController {
 
   @Post('register')
   register(@Body() user: CreateUserDto): Promise<UserDetails | null> {
+    console.log(user)
     return this.authService.register(user);
   }
 

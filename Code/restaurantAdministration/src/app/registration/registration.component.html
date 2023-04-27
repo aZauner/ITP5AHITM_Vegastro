@@ -1,0 +1,43 @@
+<body>
+    <div class="wrapper">
+
+<form [formGroup]="firstFormGroup">
+        <mat-form-field class="example-full-width">
+            <mat-label>Vorname</mat-label>
+            <input formControlName="firstname" matInput placeholder="Max" required>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Nachname</mat-label>
+            <input formControlName="lastname" matInput placeholder="Mustermann" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Benutzername</mat-label>
+            <input formControlName="username" matInput placeholder="Benutzername" required>
+        </mat-form-field> 
+        
+        <mat-form-field appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input formControlName="email" matInput placeholder="example@test.com" required>
+        </mat-form-field> 
+
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+            <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+  
+
+
+    <button class="loginBtn" [disabled]="!firstFormGroup.valid" (click)="create()" >Benutzer erstellen</button>
+    <label class="labelRegistration">Haben Sie schon einen Account?</label>
+
+    <button class="registrationBtn"  routerLink="/login">Login</button>
+
+</form>
+</div>
+
+</body>
