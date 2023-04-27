@@ -1,6 +1,7 @@
 <body>
     <button class="mainBtn" (click)="showCreate()">create new meal</button>
     <button class="mainBtn" (click)="showMeals()">Show Meals</button>
+    <button class="mainBtn" (click)="showRatingsBox()">Show Meals</button>
 
     <form [formGroup]="firstFormGroup" [hidden]="!createMealActive">
         <div class="wrapper">
@@ -42,7 +43,7 @@
             <form (submit)="submitChanges( i, title.value , desc.value, price.value)">
                 <p>Titel: <input type="text" #title [disabled]="!editValues[i].editable" value="{{meal.title}}"></p>
                 <p>Beschreibung: <input type="text" #desc [disabled]="!editValues[i].editable" value="{{meal.description}}"></p>
-                <p>Preis: <input type="text" #price [disabled]="!editValues[i].editable" value="{{meal.price}}">€</p>
+                <p>Preis: <input type="number" #price [disabled]="!editValues[i].editable" value="{{meal.price}}">€</p>
                 <div class="flex">
                     <p (click)="editMeal(i)">Bearbeiten</p>
                     <button *ngIf="editValues[i].editable" type="submit" >Submit</button>
@@ -52,5 +53,55 @@
                 <p class="activeBtn" (click)="deleteMeal(meal._id)">Löschen</p>
             </form>                
         </div>
+    </div>
+
+    <div class="ratingBox"  [hidden]="!showRatingsActive">
+        <p >Deine Durchschnittliche Sternebewertung </p>
+              
+        <ng-template [ngIf]="roundedStarRating < 0.5">
+            <mat-icon class="starOff" >star_border</mat-icon>
+        </ng-template>
+        <ng-template [ngIf]="roundedStarRating >= 1" [ngIfElse]="halfStar">
+            <mat-icon class="starOn" >star</mat-icon>
+        </ng-template>
+        <ng-template #halfStar>                    
+                <mat-icon *ngIf="roundedStarRating >= 0.5 && roundedStarRating < 1" class="starOn" >star_half</mat-icon> 
+        </ng-template>
+        <ng-template [ngIf]="roundedStarRating < 1.5">
+            <mat-icon class="starOff" >star_border</mat-icon>
+        </ng-template> 
+        <ng-template [ngIf]="roundedStarRating >= 2" [ngIfElse]="halfStar1">
+            <mat-icon class="starOn" >star</mat-icon>
+        </ng-template>
+        <ng-template #halfStar1>
+                <mat-icon *ngIf="roundedStarRating >= 1.5 && roundedStarRating < 2" class="starOn" >star_half</mat-icon>                                  
+        </ng-template>
+        <ng-template [ngIf]="roundedStarRating < 2.5">
+            <mat-icon class="starOff" >star_border</mat-icon>
+        </ng-template> 
+        <ng-template [ngIf]="roundedStarRating >= 3" [ngIfElse]="halfStar2">
+            <mat-icon class="starOn" >star</mat-icon>
+        </ng-template>
+        <ng-template #halfStar2>
+                <mat-icon *ngIf="roundedStarRating >= 2.5 && roundedStarRating < 3" class="starOn" >star_half</mat-icon>
+        </ng-template>                
+        <ng-template [ngIf]="roundedStarRating < 3.5">
+            <mat-icon class="starOff" >star_border</mat-icon>
+        </ng-template>
+        <ng-template [ngIf]="roundedStarRating >= 4" [ngIfElse]="halfStar3">
+            <mat-icon class="starOn" >star</mat-icon>
+        </ng-template>
+        <ng-template #halfStar3>                    
+                <mat-icon *ngIf="roundedStarRating >= 3.5 && roundedStarRating < 4" class="starOn" >star_half</mat-icon>                                 
+        </ng-template>
+        <ng-template [ngIf]="roundedStarRating < 4.5">
+            <mat-icon class="starOff" >star_border</mat-icon>
+        </ng-template>
+        <ng-template [ngIf]="roundedStarRating >= 5" [ngIfElse]="halfStar4">
+            <mat-icon class="starOn" >star</mat-icon>
+        </ng-template>
+        <ng-template #halfStar4>                    
+                <mat-icon *ngIf="roundedStarRating >= 4.5" class="starOn" >star_half</mat-icon>                                  
+        </ng-template> 
     </div>
 </body>

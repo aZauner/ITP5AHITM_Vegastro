@@ -19,6 +19,7 @@ export class AddMealComponent {
   id = '';
   createMealActive = false;
   showMealsActive = false;
+  showRatingsActive = false;
 
   meals = [
     {
@@ -31,6 +32,15 @@ export class AddMealComponent {
     },
   ];
 
+  ratings = [
+    {
+      stars: 0,
+      comment: ""
+    }
+  ]
+
+  roundedStarRating=0
+
   editValues = [{ mealId: '', editable: false }];
 
   constructor(private route: ActivatedRoute) {}
@@ -39,6 +49,7 @@ export class AddMealComponent {
     this.id = this.route.snapshot.params['id'];
     // console.log(this.id);
     this.loadMeals();
+    this.loadRatings();
   }
 
   submitChanges( index: number,value: string , desc: string, price: string) {
@@ -82,6 +93,22 @@ export class AddMealComponent {
           }
         }
       });
+  }
+
+  loadRatings() {
+    this.ratings = [];    
+    axios.get('http://localhost:3000/rating/byRestaurant/' + this.id).then((response) => {
+            this.ratings = response.data
+            let sumStars = 0;
+            if (response.data.length > 0) {
+              for (const star of response.data) {
+                sumStars += star.stars;
+              }
+              this.roundedStarRating = Math.round((sumStars / response.data.length) * 100) / 100
+            }
+            console.log(this.ratings);
+            console.log(this.roundedStarRating);  
+          })
   }
 
   formBuilder: FormBuilder = new FormBuilder();
@@ -132,12 +159,19 @@ export class AddMealComponent {
   showCreate() {
     this.createMealActive = !this.createMealActive;
     this.showMealsActive = false;
-
+    this.showRatingsActive = false;
   }
 
   showMeals() {
     this.showMealsActive = !this.showMealsActive;
     this.createMealActive = false;
+    this.showRatingsActive = false;
+  }
+
+  showRatingsBox(){
+    this.showRatingsActive = !this.showRatingsActive;
+    this.showMealsActive = false;
+    this.createMealActive = false
   }
 
   toggleActive(indexToChange: number) {

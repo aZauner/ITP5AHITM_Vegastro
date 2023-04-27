@@ -82,6 +82,28 @@ body{
 .mealsBox{
     height: 10vh;
     width: 80vw;    
+  }
+
+.starOn{
+  color: #48A734;
+}
+
+.starOff {
+  color: grey;
+}
+
+.ratingBox{
+    font-family: "Comfortaa";
+    width: 70vw;
+    margin-left: 10vw;
+    margin-top: 5vh;
+    padding: 1%;
+    -webkit-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
+    -moz-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
+    box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);    
+    box-sizing: border-box;
+    border-width: 0.1vh;
+    border-radius: 0.3 vh;
 }
 
 #meal{
