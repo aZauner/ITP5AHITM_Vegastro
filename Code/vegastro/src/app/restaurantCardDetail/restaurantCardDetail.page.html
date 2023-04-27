@@ -81,7 +81,7 @@
                 </ng-template> 
                 <p class="roundedStarValue">{{roundedStarRating}}</p>           
             </div> 
-            <ion-button  id="open-modal" expand="block" fill="clear">Bewerten</ion-button>
+            <ion-button [disabled]="restaurantRated" id="open-modal" expand="block" fill="clear">Bewerten</ion-button>
             <ion-modal #modal trigger="open-modal">
                 <ng-template>
                     <ion-header>
