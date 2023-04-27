@@ -1,7 +1,7 @@
 body{
   margin: 0;
   padding: 0;
-  background-color: #2b8034;
+  background-color: #83ca8a;
   width: 100vw;
 }
 .nav{
@@ -16,10 +16,39 @@ body{
   align-items: center;
   height: 100vh;
 }
+.labelRegistration{
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+}
+.loginBtn{
+  background-color: #21ae2f;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 1vh;
+}
+.registrationBtn{
+  background: none;
+  border: none;  
+  color:#2b8034;
+  margin-bottom: 2vh;
+  padding-bottom: 5px;
+  transition: border-bottom 0.5s;
+  border-bottom: 1px solid transparent;
 
+}
+.registrationBtn:hover{
+  border-bottom: 1px solid #2b8034;
+}
+#flexOuterBox{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
 .formBox{
   background-color: white;
-  width: 60vw;
+  width: 30vw;
   border-radius: 3vh;
   padding: 2vh;
 }

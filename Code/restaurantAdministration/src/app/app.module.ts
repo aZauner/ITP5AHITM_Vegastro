@@ -18,11 +18,13 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { NavComponent } from './nav/nav.component';
 import { ManageRestaurantsPageComponent } from './manage-restaurants-page/manage-restaurants-page.component';
 import { AddMealComponent } from './add-meal/add-meal.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 const appRoutes: Routes = [
   {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
   {path: 'dashboard' , component: DashboardComponent, canActivate: [AuthGuardService]},
   {path: 'login' , component: LoginPageComponent},
+  {path: 'registration' , component: RegistrationComponent},
   {path: 'createRestaurant' , component: CreateRestaurantPageComponent},
   {path: 'manageRestaurants' , component: ManageRestaurantsPageComponent},
   {path: 'addMeal/:id' , component: AddMealComponent}
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
     CreateRestaurantPageComponent,
     NavComponent,
     ManageRestaurantsPageComponent,
-    AddMealComponent
+    AddMealComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
