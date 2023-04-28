@@ -119,6 +119,8 @@ body{
     box-sizing: border-box;
     border-width: 0.1vh;
     border-radius: 0.3 vh;
+    overflow: scroll;
+    height: 80vh;
 }
 
 #meal{
