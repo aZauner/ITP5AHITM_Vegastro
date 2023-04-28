@@ -129,7 +129,7 @@
         <ion-list id="comments">
             <div *ngIf="comments.length > 0">
                 <h1 style="margin-top: 8vh">Kommentare</h1>
-                <comment *ngFor="let i of comments" [inputs]="i"></comment>
+                <comment *ngFor="let comment of comments; let i = index" [inputs]="comment" [id]="i"></comment>
             </div>
             <h1 *ngIf="comments.length == 0">Es gibt noch keine Bewertungen</h1>
             

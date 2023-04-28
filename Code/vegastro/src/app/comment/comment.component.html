@@ -7,28 +7,49 @@
       <ng-template [ngIf]="inputs.stars >= 2" [ngIfElse]="halfStar">
         <ion-icon class="starOn" name="star"></ion-icon>
       </ng-template>
-      <ng-template #halfStar>                    
-            <ion-icon  class="starOff" name="star-outline"></ion-icon> 
+      <ng-template #halfStar>
+        <ion-icon class="starOff" name="star-outline"></ion-icon>
       </ng-template>
       <ng-template [ngIf]="inputs.stars >= 3" [ngIfElse]="halfStar">
         <ion-icon class="starOn" name="star"></ion-icon>
       </ng-template>
-      <ng-template #halfStar>                    
-            <ion-icon  class="starOff" name="star-outline"></ion-icon> 
+      <ng-template #halfStar>
+        <ion-icon class="starOff" name="star-outline"></ion-icon>
       </ng-template>
       <ng-template [ngIf]="inputs.stars >= 4" [ngIfElse]="halfStar">
         <ion-icon class="starOn" name="star"></ion-icon>
       </ng-template>
-      <ng-template #halfStar>                    
-            <ion-icon  class="starOff" name="star-outline"></ion-icon> 
+      <ng-template #halfStar>
+        <ion-icon class="starOff" name="star-outline"></ion-icon>
       </ng-template>
       <ng-template [ngIf]="inputs.stars >= 5" [ngIfElse]="halfStar">
         <ion-icon class="starOn" name="star"></ion-icon>
       </ng-template>
-      <ng-template #halfStar>                    
-            <ion-icon  class="starOff" name="star-outline"></ion-icon> 
+      <ng-template #halfStar>
+        <ion-icon class="starOff" name="star-outline"></ion-icon>
       </ng-template>
     </div>
-    <p class="comment">{{inputs.comment}}</p>
+    <p class="comment">{{inputs.comment}}</p>  
+
+    <ion-button *ngIf="isOwnComment" id="{{id}}" expand="block" fill="clear">Edit</ion-button>
+    <ion-modal #modal trigger="{{id}}">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancel()" role="cancel">Abbrechen</ion-button>
+            </ion-buttons>
+            <ion-title>Bewertung</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="confirm()" [strong]="true">Senden</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <p>{{inputs.comment}}</p>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
   </div>
 </ion-item>
