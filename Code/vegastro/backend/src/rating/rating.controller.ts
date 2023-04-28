@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, Put } from '@nestjs/common';
 import { Rating, RatingDocument } from 'src/schema/rating.schema';
 import { CreateRatingDto } from './dto/create-rating.dto';
 import { RatingDetails } from './entities/rating.entity';
@@ -21,5 +21,10 @@ export class RatingController {
   @Post('create')
   create(@Body() rating: CreateRatingDto): Promise<RatingDocument | HttpException> {   
     return this.ratingService.create(rating);
+  }
+
+  @Put('updateRating')
+  updateRating(@Body() input : {id: string, comment: string, rating: number}): Promise<any> {   
+    return this.ratingService.updateRating(input);
   }
 }

@@ -26,3 +26,11 @@
 .change{
     color: #48A734;
 }
+
+ion-content {
+    --overflow: hidden;
+}
+
+ion-item {
+    --background: var(--ion-background-color);
+}

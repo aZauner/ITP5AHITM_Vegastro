@@ -10,7 +10,7 @@ import { RatingDetails } from './entities/rating.entity';
 
 
 @Injectable()
-export class RatingService {
+export class RatingService {  
   constructor(
     @InjectModel(Rating.name)
     private readonly ratingModel: Model<RatingDocument>,
@@ -25,6 +25,12 @@ export class RatingService {
         stars: rating.stars,
         comment: rating.comment 
       };
+    }
+
+    async updateRating(input: { id: string; comment: string; rating: number; }): Promise<any> {
+      this.ratingModel
+      .updateOne({ _id: input.id }, { $set: { comment: input.comment , stars: input.rating } })
+      .exec();
     }
     
     async findRatings(userToken: string): Promise<HttpException | RatingDetails[]> {
