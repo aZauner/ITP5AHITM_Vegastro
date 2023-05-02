@@ -19,6 +19,7 @@ import { NavComponent } from './nav/nav.component';
 import { ManageRestaurantsPageComponent } from './manage-restaurants-page/manage-restaurants-page.component';
 import { AddMealComponent } from './add-meal/add-meal.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { KontoComponent } from './konto/konto.component';
 
 const appRoutes: Routes = [
   {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
@@ -27,7 +28,9 @@ const appRoutes: Routes = [
   {path: 'registration' , component: RegistrationComponent},
   {path: 'createRestaurant' , component: CreateRestaurantPageComponent},
   {path: 'manageRestaurants' , component: ManageRestaurantsPageComponent},
-  {path: 'addMeal/:id' , component: AddMealComponent}
+  {path: 'addMeal/:id' , component: AddMealComponent},
+  {path: 'konto' , component: KontoComponent}
+
 ]
 
 @NgModule({
@@ -39,7 +42,8 @@ const appRoutes: Routes = [
     NavComponent,
     ManageRestaurantsPageComponent,
     AddMealComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    KontoComponent
   ],
   imports: [
     BrowserModule,

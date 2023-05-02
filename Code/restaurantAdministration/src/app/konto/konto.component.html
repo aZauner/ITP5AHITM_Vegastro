@@ -1,0 +1,17 @@
+<body>
+    <div class="wrapper">
+        <h1>Willkommen {{userData.username}} 👋</h1>
+
+        <div id="content">
+            <input [disabled]="!isEditable" [(ngModel)]="userData.firstname">
+            <input [disabled]="!isEditable" [(ngModel)]="userData.lastname">
+            <input [disabled]="!isEditable" [(ngModel)]="userData.email">
+            <input [hidden]="!isEditable" type="password" placeholder="Altes Passwort" [(ngModel)]="userData.oldPassword">
+            <input [hidden]="!isEditable" type="password" placeholder="Neues Passwort" [(ngModel)]="userData.newPassword">
+            <input [hidden]="!isEditable" type="password" placeholder="Neues Passwort bestätigen"  [(ngModel)]="userData.newConfirmedPassword">
+            <p>{{errorMessage}}</p>
+            <button (click)="toggle()">Bearbeiten</button>
+            <button [hidden]="!isEditable" (click)="update()">Speichern</button>
+        </div>
+    </div>
+</body>
