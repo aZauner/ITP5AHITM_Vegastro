@@ -115,6 +115,8 @@
                 <mat-icon *ngIf="roundedStarRating >= 4.5" class="starOn" >star_half</mat-icon>                                  
         </ng-template> 
 
+        <p>{{roundedStarRating}}</p>
+
         <div *ngFor="let rating of ratings" class="commentBox">
             <p>{{rating.comment}}</p>
 

@@ -63,7 +63,7 @@ export class AddMealComponent {
   submitChanges( index: number,value: string , desc: string, price: string, ) {
     console.log(this.meals[index]._id);    
     
-    
+
     console.log(this.changedType);
     if(this.changedType == ""){
       this.changedType =  this.meals[index].type;
@@ -118,8 +118,8 @@ export class AddMealComponent {
               }
               this.roundedStarRating = Math.round((sumStars / response.data.length) * 100) / 100
             }
-            console.log(this.ratings);
-            console.log(this.roundedStarRating);  
+            // console.log(this.ratings);
+            // console.log(this.roundedStarRating);  
           })
   }
 
