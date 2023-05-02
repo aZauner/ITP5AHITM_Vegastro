@@ -39,12 +39,12 @@
     </form>
     
     <div class="mealsBox" [hidden]="!showMealsActive">
-        <div *ngFor="let meal of meals;  let i = index" id="meal" [className]="meals[i].active ? 'active' : 'inactive'">
+        <div *ngFor="let meal of meals;  let i = index" id="meal" >
             <form (submit)="submitChanges( i, title.value , desc.value, price.value)">
-                <p>Titel: <input type="text" #title [disabled]="!editValues[i].editable" value="{{meal.title}}"></p>
-                <p>Beschreibung: <input type="text" #desc [disabled]="!editValues[i].editable" value="{{meal.description}}"></p>
-                <p>Preis: <input type="number" #price [disabled]="!editValues[i].editable" value="{{meal.price}}">€</p>
-                <div class="flex">
+                <p [className]="meals[i].active ? 'active' : 'inactive'">Titel: <input [className]="meals[i].active ? 'active' : 'inactive'" type="text" #title [disabled]="!editValues[i].editable" value="{{meal.title}}"></p>
+                <p [className]="meals[i].active ? 'active' : 'inactive'">Beschreibung: <input [className]="meals[i].active ? 'active' : 'inactive'"type="text" #desc [disabled]="!editValues[i].editable" value="{{meal.description}}"></p>
+                <p [className]="meals[i].active ? 'active' : 'inactive'">Preis: <input [className]="meals[i].active ? 'active' : 'inactive'"type="number" #price [disabled]="!editValues[i].editable" value="{{meal.price}}">€</p>
+                <div [className]="meals[i].active ? 'active' : 'inactive'"class="flex">
                     <p (click)="editMeal(i)">Bearbeiten</p>
                     <button *ngIf="editValues[i].editable" type="submit" >Submit</button>
                 </div>
