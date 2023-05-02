@@ -42,6 +42,8 @@ export class KontoComponent {
   }
 
   update(){
+
+    if(this.userData.oldPassword !== undefined && this.userData.newPassword!== undefined && this.userData.newConfirmedPassword !==undefined){
     axios.put('http://localhost:3000/auth/changeData', {
       "token": sessionStorage.getItem('userToken'),
       "oldPassword": this.userData.oldPassword,
@@ -56,7 +58,7 @@ export class KontoComponent {
 
       }
     });
-
+  }
     //bcrypt.hash("asd", 12);
     /**  axios.put('http://localhost:3000/user/changeUserData', {      
         "token": sessionStorage.getItem('userToken'),
