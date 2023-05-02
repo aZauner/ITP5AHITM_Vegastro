@@ -39,6 +39,8 @@ export class AddMealComponent {
     }
   ]
 
+  changedType = "";
+
   roundedStarRating=0
 
   editValues = [{ mealId: '', editable: false }];
@@ -52,11 +54,20 @@ export class AddMealComponent {
     this.loadRatings();
   }
 
-  submitChanges( index: number,value: string , desc: string, price: string) {
+  onChangeType(type: string){
+    this.changedType = type;
+    console.log(this.changedType);
+    
+  }
+
+  submitChanges( index: number,value: string , desc: string, price: string, ) {
     console.log(this.meals[index]._id);    
-    console.log(value);
-    console.log(desc);
-    console.log(price);
+    
+    
+    console.log(this.changedType);
+    if(this.changedType == ""){
+      this.changedType =  this.meals[index].type;
+    }
       
 
     axios
@@ -64,11 +75,12 @@ export class AddMealComponent {
         mealId: this.meals[index]._id,
         title : value,
         description : desc,
-        type: this.meals[index].type,
+        type: this.changedType,
         price: price 
     })
       .then((response) => {
         console.log("changed");
+        this.changedType = ""
         this.loadMeals();       
       });
     

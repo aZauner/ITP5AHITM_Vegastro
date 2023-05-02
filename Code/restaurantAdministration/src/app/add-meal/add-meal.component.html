@@ -44,10 +44,21 @@
                 <p [className]="meals[i].active ? 'active' : 'inactive'">Titel: <input [className]="meals[i].active ? 'active' : 'inactive'" type="text" #title [disabled]="!editValues[i].editable" value="{{meal.title}}"></p>
                 <p [className]="meals[i].active ? 'active' : 'inactive'">Beschreibung: <input [className]="meals[i].active ? 'active' : 'inactive'"type="text" #desc [disabled]="!editValues[i].editable" value="{{meal.description}}"></p>
                 <p [className]="meals[i].active ? 'active' : 'inactive'">Preis: <input [className]="meals[i].active ? 'active' : 'inactive'"type="number" #price [disabled]="!editValues[i].editable" value="{{meal.price}}">€</p>
+                <p *ngIf="!editValues[i].editable" [className]="meals[i].active ? 'active' : 'inactive'">Meal Type: <input [className]="meals[i].active ? 'active' : 'inactive'" #price [disabled]="!editValues[i].editable" value="{{meal.type}}"></p>
+                
+                <div class="flex">
+                    <p *ngIf="editValues[i].editable" [className]="meals[i].active ? 'active' : 'inactive'">Meal Type:</p>
+                    <select #type (change)="onChangeType(type.value)" [className]="meals[i].active ? 'active' : 'inactive'" *ngIf="editValues[i].editable" >
+                        <option *ngFor="let typ of types" [value]="typ">
+                            {{typ}}
+                        </option>
+                    </select>
+                </div>
+                    
                 <div [className]="meals[i].active ? 'active' : 'inactive'"class="flex">
                     <p (click)="editMeal(i)">Bearbeiten</p>
                     <button *ngIf="editValues[i].editable" type="submit" >Submit</button>
-                </div>
+                </div>                
                 <p class="activeBtn" *ngIf="meals[i].active" (click)="toggleActive(i)">Deaktivieren</p> 
                 <p class="activeBtn" *ngIf="!meals[i].active" (click)="toggleActive(i)">Aktivieren</p>
                 <p class="activeBtn" (click)="deleteMeal(meal._id)">Löschen</p>
