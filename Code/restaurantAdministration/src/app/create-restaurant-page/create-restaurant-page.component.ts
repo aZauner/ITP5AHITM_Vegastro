@@ -15,6 +15,7 @@ import axios from 'axios';
 })
 export class CreateRestaurantPageComponent {
   formBuilder: FormBuilder = new FormBuilder
+  formData = new FormData()
 
   firstFormGroup = this.formBuilder.group({
     restaurantName: ['', Validators.minLength(2)],
@@ -31,7 +32,7 @@ export class CreateRestaurantPageComponent {
   isLinear = true;
 
   hide = true;
-  types = ['Vegan', 'Fleisch', 'Vegetarisch'];
+  types = ['vegan', 'meat', 'vegetarian'];
   location = { street: '', housenumber: '', plz: '', city: '', floor: '' };
   createInputs = {
     restaurantName: '',
@@ -41,17 +42,21 @@ export class CreateRestaurantPageComponent {
     type: '',
     description: '',
     location: { city: '', plz: '', street: '', housenumber: '', floor: '' },
+    image: ''
   };
- 
+
 
   create() {
+    const input: HTMLInputElement = document.getElementById("file")! as HTMLInputElement;
+    const file = input.files![0]
+    this.formData.set("name", "test")
+    this.formData.set("file", file)
     this.location.city = this.secondFormGroup.value.city!;
     this.location.housenumber = this.secondFormGroup.value.housenumber!;
     this.location.plz = this.secondFormGroup.value.plz!;
     this.location.street = this.secondFormGroup.value.street!;
     this.createInputs.location = this.location;
     this.createInputs.location.floor = this.secondFormGroup.value.floor!;
-
     this.createInputs.description = this.firstFormGroup.value.description!;
     this.createInputs.restaurantName =  this.firstFormGroup.value.restaurantName!;
     this.createInputs.type = this.firstFormGroup.value.type!;
@@ -85,11 +90,17 @@ export class CreateRestaurantPageComponent {
       });
   }
 
-  postRestaurant() {
+  async postRestaurant() {
+    
+    await axios
+      .post('http://localhost:3000/image', this.formData)
+      .then((response) => {
+        this.createInputs.image = response.data._id
+      });
+      
     axios
       .post('http://localhost:3000/restaurant/create', this.createInputs)
       .then(function (response) {
-        console.log(response);
       });
   }
 }

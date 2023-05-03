@@ -7,12 +7,14 @@ import { AuthModule } from './auth/auth.module';
 import { RestaurantModule } from './restaurant/restaurant.module';
 import { MealModule } from './meal/meal.module';
 import { RatingModule } from './rating/rating.module';
+import { ImageModule } from './file-upload/image/image.module';
 
 @Module({
   imports: [
     MongooseModule.forRoot(
       'mongodb+srv://vegastro:vegastro@cluster0.00htsk8.mongodb.net/?retryWrites=true&w=majority'
     ),
+    ImageModule,
     UserModule,
     AuthModule,
     RestaurantModule,

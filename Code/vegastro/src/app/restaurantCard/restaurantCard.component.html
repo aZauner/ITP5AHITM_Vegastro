@@ -1,13 +1,13 @@
 <ion-card (click)="openDetails()">
   <div style="width:100%;text-align: center;">
-    <img alt="Silhouette of mountains" src="../../assets/{{inputs.image}}" />
+    <img  *ngIf="inputs.image" src="http://localhost:3000/image/{{inputs.image}}" />
   </div>
   <ion-card-header>
     <ion-card-title>
       <ion-icon class="typeIcon" src="../../assets/icon/{{inputs.type}}"></ion-icon>
       {{inputs.restaurantName}}
       <div id="favouriteStarWrapper">
-        <ion-icon *ngIf="inputs.isFav" name="star" style="color: white" id="star"></ion-icon>
+        <ion-icon *ngIf="inputs.isFav" name="star" style="color: var(--ion-text-color)" id="star"></ion-icon>
       </div>
     </ion-card-title>
     <ion-card-subtitle>

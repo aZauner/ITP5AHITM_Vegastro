@@ -12,4 +12,5 @@ export interface RestaurantDetails {
     description: string;
     location: LocationRestaurant;
     menu: [Meal];
+    image?: string;
 }

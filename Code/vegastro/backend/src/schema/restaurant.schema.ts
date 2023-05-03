@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document, PromiseProvider } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 import { Meal } from './meal.schema';
 import { User } from './user.schema';
 
@@ -42,7 +42,10 @@ export class Restaurant {
   location: LocationRestaurant
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Meal' }], required: false })
-  menu: [Meal];  
+  menu: [Meal]; 
+  
+  @Prop({ required: false })
+  image: string;
 }
 
 export type RestaurantDocument = Restaurant & Document;

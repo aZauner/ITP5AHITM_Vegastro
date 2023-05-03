@@ -194,7 +194,7 @@ export class MapPage {
       this.getFavRestsMem();
       let inputs = {
         id: restaurant.id,
-        image: "pizzaDemo.png",
+        image: restaurant.image ? restaurant.image : null,
         restaurantName: restaurant.restaurantName,
         type: restaurant.type,
         stars: 4,

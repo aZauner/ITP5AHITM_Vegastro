@@ -11,4 +11,5 @@ export class CreateRestaurantDto {
     description: string;
     location: LocationRestaurant;
     allergic: AllergicType
+    image: string
 }

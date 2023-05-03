@@ -1,5 +1,5 @@
 <main>
-    <img src="../../assets/{{inputs.image}}" alt="Restaurant Bild">
+    <img *ngIf="inputs.image" src="http://localhost:3000/image/{{inputs.image}}">
     <div class="wrapper outer">
         <div id="restaurantName">
 

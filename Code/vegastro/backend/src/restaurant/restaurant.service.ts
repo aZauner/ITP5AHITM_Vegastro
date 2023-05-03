@@ -113,6 +113,7 @@ export class RestaurantService {
       description: restaurant.description,
       location: restaurant.location,
       menu: restaurant.menu,
+      image: restaurant.image
     };
   }
 
