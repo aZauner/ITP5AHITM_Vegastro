@@ -29,7 +29,7 @@
         <ion-icon class="starOff" name="star-outline"></ion-icon>
       </ng-template>
     </div>
-    <p class="comment">{{inputs.comment}}</p>
+    <p class="comment">{{formattedDate}} | {{inputs.comment}} </p>
 
     <ion-button *ngIf="isOwnComment" id="{{id}}" expand="block" fill="clear">Edit</ion-button>
     <ion-modal #modal trigger="{{id}}">

@@ -8,4 +8,5 @@ export interface RatingDetails {
     restaurant: Restaurant;
     stars: number;
     comment: string;
+    date: Date;
 }

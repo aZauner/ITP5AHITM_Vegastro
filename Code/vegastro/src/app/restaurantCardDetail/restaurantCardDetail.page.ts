@@ -85,6 +85,8 @@ export class RestaurantCardDetail {
       //ratings laden
       axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
         this.comments = response.data
+        console.log(this.comments);
+        
         if (response.data.length > 0) {
           for (const comment of response.data) {
             if (comment.userToken! == sessionStorage.getItem('userToken')) {

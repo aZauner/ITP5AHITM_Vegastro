@@ -7,4 +7,5 @@ export class CreateRatingDto {
     restaurant: Restaurant;
     stars: number;
     comment: string;
+    date: Date;
 }

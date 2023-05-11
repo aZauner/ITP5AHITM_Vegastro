@@ -23,13 +23,14 @@ export class RatingService {
         userToken: rating.userToken,
         restaurant: rating.restaurant,
         stars: rating.stars,
-        comment: rating.comment 
+        comment: rating.comment,
+        date: rating.date
       };
     }
 
     async updateRating(input: { id: string; comment: string; rating: number; }): Promise<any> {
       this.ratingModel
-      .updateOne({ _id: input.id }, { $set: { comment: input.comment , stars: input.rating } })
+      .updateOne({ _id: input.id }, { $set: { comment: input.comment , stars: input.rating , date: new Date()} })
       .exec();
     }
     
@@ -47,7 +48,8 @@ export class RatingService {
       return res;
     }
     
-    async create(rating: CreateRatingDto): Promise<HttpException | RatingDocument> {
+    async create(rating: CreateRatingDto): Promise<HttpException | RatingDocument> {   
+      rating.date = new Date()       
       const newRating = new this.ratingModel(rating);
       return newRating.save()
     }

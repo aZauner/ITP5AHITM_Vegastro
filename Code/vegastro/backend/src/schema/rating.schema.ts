@@ -15,6 +15,9 @@ export class Rating {
 
   @Prop({ required: true })
   comment: string
+
+  @Prop({ required: true })
+  date: Date
 }
 
 export type RatingDocument = Rating & Document;

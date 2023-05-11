@@ -10,7 +10,7 @@ import axios from 'axios';
 })
 
 export class Comment {
-  @Input() inputs = { id: "",comment: "",stars: 0, userToken: ""}
+  @Input() inputs = { id: "",comment: "",stars: 0, userToken: "", date: new Date()}
   @Input() id = 0
 
   @ViewChild(IonModal)
@@ -20,14 +20,17 @@ export class Comment {
   modalOpen = false
   userStarRating = 0
   comment = ""
+  formattedDate = "";
 
   constructor(public modalController: ModalController){}
 
-  ngOnInit(){      
+  ngOnInit(){     
+    this.formattedDate = new Date(this.inputs.date).toLocaleDateString();    
+    
     if(this.inputs.userToken == sessionStorage.getItem("userToken")){
       this.isOwnComment = true; 
       this.userStarRating = this.inputs.stars
-      this.comment = this.inputs.comment
+      this.comment = this.inputs.comment      
     }
   }
 
