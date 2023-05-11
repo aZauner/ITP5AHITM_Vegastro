@@ -67,11 +67,15 @@
         <mat-step>
             <ng-template matStepLabel>Absenden</ng-template>
             <div class="wrapper">
-                <p>Sie sind fertig!</p>
                 <div style="display: flex; gap: 15px">
                     <button mat-button matStepperPrevious>Zurück</button>
-                    <button routerLink="/dashboard" class="loginBtn" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid"  (click)="create()"
-                    mat-button>Restaurant erstellen</button>               
+                    <!-- <button routerLink="/dashboard" class="loginBtn" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid"  (click)="create()"
+                    mat-button>Restaurant erstellen</button> -->
+                    <button class="loginBtn" [disabled]="!firstFormGroup.valid || !secondFormGroup.valid"  (click)="create()"
+                    mat-button>Restaurant erstellen</button>
+                    <span class="error" *ngIf="noValidLoc">
+                        Der angegebene Standort ist nicht gültig
+                    </span>               
                 </div>
             </div>
         </mat-step>

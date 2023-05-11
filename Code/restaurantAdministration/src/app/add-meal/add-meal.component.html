@@ -117,36 +117,40 @@
 
         <p>{{roundedStarRating}}</p>
 
-        <div *ngFor="let rating of ratings" class="commentBox">
-            <p>{{rating.comment}}</p>
+        <div *ngFor="let rating of ratings" class="commentBox">            
+            <div class="starBox">
+                <ng-template [ngIf]="rating.stars >= 1" >
+                    <mat-icon class="starOn" >star</mat-icon>
+                </ng-template>
+                <ng-template [ngIf]="rating.stars >= 2" [ngIfElse]="halfStar">
+                    <mat-icon class="starOn" >star</mat-icon>
+                </ng-template>
+                <ng-template #halfStar>                    
+                        <mat-icon class="starOff" >star_border</mat-icon> 
+                </ng-template>
+                <ng-template [ngIf]="rating.stars >= 3" [ngIfElse]="halfStar">
+                    <mat-icon class="starOn" >star</mat-icon>
+                </ng-template>
+                <ng-template #halfStar>                    
+                        <mat-icon class="starOff" >star_border</mat-icon> 
+                </ng-template>
+                <ng-template [ngIf]="rating.stars >= 4" [ngIfElse]="halfStar">
+                    <mat-icon class="starOn" >star</mat-icon>
+                </ng-template>
+                <ng-template #halfStar>                    
+                        <mat-icon class="starOff" >star_border</mat-icon> 
+                </ng-template>
+                <ng-template [ngIf]="rating.stars >= 5" [ngIfElse]="halfStar">
+                    <mat-icon class="starOn" >star</mat-icon>
+                </ng-template>
+                <ng-template #halfStar>                    
+                        <mat-icon class="starOff" >star_border</mat-icon> 
+                </ng-template>
 
-            <ng-template [ngIf]="rating.stars >= 1" >
-                <mat-icon class="starOn" >star</mat-icon>
-            </ng-template>
-            <ng-template [ngIf]="rating.stars >= 2" [ngIfElse]="halfStar">
-                <mat-icon class="starOn" >star</mat-icon>
-            </ng-template>
-            <ng-template #halfStar>                    
-                    <mat-icon class="starOff" >star_border</mat-icon> 
-            </ng-template>
-            <ng-template [ngIf]="rating.stars >= 3" [ngIfElse]="halfStar">
-                <mat-icon class="starOn" >star</mat-icon>
-            </ng-template>
-            <ng-template #halfStar>                    
-                    <mat-icon class="starOff" >star_border</mat-icon> 
-            </ng-template>
-            <ng-template [ngIf]="rating.stars >= 4" [ngIfElse]="halfStar">
-                <mat-icon class="starOn" >star</mat-icon>
-            </ng-template>
-            <ng-template #halfStar>                    
-                    <mat-icon class="starOff" >star_border</mat-icon> 
-            </ng-template>
-            <ng-template [ngIf]="rating.stars >= 5" [ngIfElse]="halfStar">
-                <mat-icon class="starOn" >star</mat-icon>
-            </ng-template>
-            <ng-template #halfStar>                    
-                    <mat-icon class="starOff" >star_border</mat-icon> 
-            </ng-template>
+                <p class="date"> | {{rating.date | date : 'd.MM.Y'}}</p>
+            </div>                
+
+            <p>{{rating.comment}}</p>
         </div>
     </div>
 </body> 

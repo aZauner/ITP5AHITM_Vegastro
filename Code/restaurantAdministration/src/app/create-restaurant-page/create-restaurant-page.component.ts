@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import axios from 'axios';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-restaurant-page',
@@ -16,6 +17,9 @@ import axios from 'axios';
 export class CreateRestaurantPageComponent {
   formBuilder: FormBuilder = new FormBuilder
   formData = new FormData()
+  noValidLoc = false;
+
+  constructor(private router: Router) {}
 
   firstFormGroup = this.formBuilder.group({
     restaurantName: ['', Validators.minLength(2)],
@@ -84,7 +88,11 @@ export class CreateRestaurantPageComponent {
           this.createInputs.latitude = Number.parseFloat(response.data[0].lat);
           this.createInputs.longitude = Number.parseFloat(response.data[0].lon);
           this.postRestaurant();
+          this.noValidLoc = false
+          this.router.navigateByUrl('/dashboard')
         } else {
+          this.noValidLoc = true
+
           console.log('Geht ned');
         }
       });

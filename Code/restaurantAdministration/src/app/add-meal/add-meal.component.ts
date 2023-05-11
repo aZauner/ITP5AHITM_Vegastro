@@ -35,7 +35,8 @@ export class AddMealComponent {
   ratings = [
     {
       stars: 0,
-      comment: ""
+      comment: "",
+      date: new Date()
     }
   ]
 
