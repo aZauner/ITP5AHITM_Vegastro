@@ -4,6 +4,7 @@ import { MapPage } from '../map/map.page';
 import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
 import { RestaurantsPage } from '../restaurants/restaurants.page';
 import { IonModal, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -14,18 +15,19 @@ export class TabsPage {
 
   loggedIn = false;
 
-  constructor(private service: RestaurantCardService,  private toastController: ToastController) {}
+  constructor(private service: RestaurantCardService,  private toastController: ToastController, private router: Router) {}
   
   update() {
     MapPage.getFavRests();
     RestaurantsPage.updateRestaurantsStatic(this.service);
-    FavouritesPage.updateRestaurantsStatic(this.service);
+    if(this.router.url != "/tabs/favouriteRestaurants") {
+      FavouritesPage.updateRestaurantsStatic(this.service);
+    }
     if(sessionStorage.getItem('userToken')){
       this.loggedIn = true
     }else{
       this.loggedIn = false
     }
-         
   }
 
   logout(){

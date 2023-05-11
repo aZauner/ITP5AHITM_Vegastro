@@ -11,7 +11,7 @@
 
             <ng-template  [ngIf]="inputs.fromFavPage" >
                 <ion-buttons [routerLink]="['/tabs','favouriteRestaurants']" slot="start">
-                    <ion-back-button defaultHref="tabs/favouriteRestaurants" text="" icon="arrow-back-outline"></ion-back-button>
+                    <ion-back-button defaultHref="tabs/favouriteRestaurants" text="" icon="arrow-back-outline" (click)="updateRestaurants()"></ion-back-button>
                 </ion-buttons>
             </ng-template>
 
