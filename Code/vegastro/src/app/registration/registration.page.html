@@ -54,7 +54,9 @@
           <p *ngIf="checkPasswordValidation()">Kein gültiges Passwort</p>
         </div>
 
-        <ion-button ion-button type="submit" [disabled]="!registration.valid">einloggen</ion-button>
+        <ion-item type="file"></ion-item>
+
+        <ion-button ion-button type="submit" [disabled]="!registration.valid">Registrieren</ion-button>
         <div class="error" >
           <p *ngIf="!mailUsed">Es existiert bereits ein User mit diesem Username oder Mail</p>
         </div>       

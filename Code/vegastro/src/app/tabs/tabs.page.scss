@@ -10,6 +10,7 @@ ion-content {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;    
+    --overflow: hidden;
 }
 
 ion-icon {
@@ -48,6 +49,15 @@ ion-button{
     font-size: 4vh;
     display: flex;
     align-items: center;
+}
+
+#logoNameMenu {
+    width: 100%;
+    margin: 1vh 0 1vh 0;
+    font-size: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #logoNameFirst {

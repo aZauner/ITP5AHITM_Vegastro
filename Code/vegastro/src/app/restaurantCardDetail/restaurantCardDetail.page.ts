@@ -4,6 +4,8 @@ import { IonModal, ToastController } from '@ionic/angular';
 import axios from 'axios';
 import { MealService } from '../meal/mealService';
 import { RestaurantCardInputs } from '../restaurantCard/restaurantCard.component';
+import { FavouritesPage } from '../favourites/favourites.page';
+import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
 
 declare global {
   interface Window { inputs: RestaurantCardInputs; }
@@ -30,7 +32,7 @@ export class RestaurantCardDetail {
   roundedStarRating = 0;
   restaurantRated = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, private service: MealService, private toastController: ToastController) {
+  constructor(private route: ActivatedRoute, private router: Router, private service: MealService, private toastController: ToastController, private restaurantService: RestaurantCardService) {
     this.inputs = {
       id: "1",
       image: "pizzaDemo.png",
@@ -58,8 +60,11 @@ export class RestaurantCardDetail {
     });
   }
 
-  ngDoCheck() {
+  updateRestaurants() {
+    FavouritesPage.updateRestaurantsStatic(this.restaurantService)
+  }
 
+  ngDoCheck() {
     if (this.inputs !== this.oldInputs) {
       this.roundedStarRating =  Math.round(this.inputs.stars * 100) / 100  
       document.getElementById("meals")!.innerHTML = '';
@@ -189,8 +194,6 @@ export class RestaurantCardDetail {
 
   confirm() {
     if (sessionStorage.getItem('userToken')) {
-      
-
       if(this.userStarRating != 0 && this.ratingComment != ''){
         axios.post('http://localhost:3000/rating/create', {
           userToken: sessionStorage.getItem('userToken'),

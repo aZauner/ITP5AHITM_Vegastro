@@ -36,17 +36,13 @@ export class Comment {
   }
 
   confirm(){
-    console.log(this.comment);
-    console.log(this.userStarRating);
-    console.log(this.inputs.id);
-    
     axios.put('http://localhost:3000/rating/updateRating', {      
         id: this.inputs.id,
         comment: this.comment,
         rating: this.userStarRating      
     }).then((response) => {
       this.modal.dismiss(null, 'cancel');
-      }) 
+    }) 
   } 
   
   ratingChanged(event: number) {

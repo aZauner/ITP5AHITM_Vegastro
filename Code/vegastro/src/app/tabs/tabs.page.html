@@ -12,30 +12,31 @@
 </ion-tabs>
 
 <ion-menu contentId="logoIcon">
-  <ion-header>
-
-  </ion-header>
   <ion-content class="ion-padding">
-
+    <div id="logoNameMenu">
+      <ion-label id="logoNameFirst">veg</ion-label>
+      <ion-label id="logoNameSecond">astro</ion-label>
+      <ion-icon id="logoIcon" src="../../../assets/Logo.svg"></ion-icon>
+    </div>
 
     <ion-menu-toggle>
       <ion-button fill="clear" routerLink="/tabs/tab1">
-        <ion-icon name="map-outline"></ion-icon>      
-        Karte                                         
+        <ion-icon style="margin-right:1vh" name="map-outline"></ion-icon>      
+        <h3>Karte</h3>                                         
       </ion-button>                                   
     </ion-menu-toggle>                                    
 
     <ion-menu-toggle>                                 
       <ion-button fill="clear" routerLink="/tabs/tab2">
-        <ion-icon name="restaurant-outline"></ion-icon>
-        Restaurants
+        <ion-icon style="margin-right:1vh" name="restaurant-outline"></ion-icon>
+        <h3>Restaurants</h3>
       </ion-button>
     </ion-menu-toggle>
 
     <ion-menu-toggle>                                 
       <ion-button fill="clear" routerLink="/tabs/usertab" [disabled]="!loggedIn" >
-        <ion-icon name="person-circle-outline"></ion-icon>
-        Benutzer
+        <ion-icon style="margin-right:1vh" name="person-circle-outline"></ion-icon>
+        <h3>Benutzer</h3>
       </ion-button>
     </ion-menu-toggle>
 
@@ -43,22 +44,22 @@
 
     <ion-menu-toggle>
       <ion-button fill="clear" routerLink="/tabs/favouriteRestaurants" [disabled]="!loggedIn" >
-        <ion-icon name="star"></ion-icon>
-        Favoriten
+        <ion-icon style="margin-right:1vh" name="star"></ion-icon>
+        <h3>Favoriten</h3>
       </ion-button>
     </ion-menu-toggle>
 
     <ion-menu-toggle *ngIf='!loggedIn'>
       <ion-button fill="clear" routerLink="/login">
-        <ion-icon name="log-in-outline"></ion-icon>
-        Login
+        <ion-icon style="margin-right:1vh" name="log-in-outline"></ion-icon>
+        <h3>Login</h3>
       </ion-button>
     </ion-menu-toggle>
 
     <ion-menu-toggle *ngIf='loggedIn'>
       <ion-button fill="clear" (click)="logout()" routerLink="/tabs/tab1">
-        <ion-icon name="log-out-outline"></ion-icon>
-        Logout
+        <ion-icon style="margin-right:1vh" name="log-out-outline"></ion-icon>
+        <h3>Logout</h3>
       </ion-button>
     </ion-menu-toggle>
 

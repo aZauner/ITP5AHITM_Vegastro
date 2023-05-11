@@ -11,3 +11,4 @@ export interface MealDetails {
     allergic: AllergicType;
     active: boolean;
 }
+ 
