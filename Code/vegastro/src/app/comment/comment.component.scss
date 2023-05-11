@@ -17,10 +17,14 @@
 
 .starBox{
     margin-top: 0.3vh;
+    display: flex;    
+    align-items: center;
+    justify-content: center;
 }
 
 .comment{
-    margin-top: 0.1vh;
+    margin-top: 1vh;
+    margin-bottom: 0.5vh;
 }
 
 .change{
@@ -33,4 +37,22 @@ ion-content {
 
 ion-item {
     --background: var(--ion-background-color);
+}
+
+ion-icon{
+    font-size:1vh;
+}
+
+.date{
+    display: inline-block;
+    margin: 0%;
+    padding: 0%;
+    font-size: 1.5vh;
+    margin-left: 0.2vw;
+    vertical-align: bottom;
+}
+
+ion-button{
+    width: fit-content;
+    font-size: 2vh
 }

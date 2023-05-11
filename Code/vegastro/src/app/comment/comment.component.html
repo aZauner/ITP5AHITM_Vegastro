@@ -2,34 +2,36 @@
   <div class="flex">
     <div class="starBox">
       <ng-template [ngIf]="inputs.stars >= 1">
-        <ion-icon class="starOn" name="star"></ion-icon>
+        <ion-icon size="small" class="starOn" name="star"></ion-icon>
       </ng-template>
       <ng-template [ngIf]="inputs.stars >= 2" [ngIfElse]="halfStar">
-        <ion-icon class="starOn" name="star"></ion-icon>
+        <ion-icon size="small" class="starOn" name="star"></ion-icon>
       </ng-template>
       <ng-template #halfStar>
-        <ion-icon class="starOff" name="star-outline"></ion-icon>
+        <ion-icon size="small" class="starOff" name="star-outline"></ion-icon>
       </ng-template>
       <ng-template [ngIf]="inputs.stars >= 3" [ngIfElse]="halfStar">
-        <ion-icon class="starOn" name="star"></ion-icon>
+        <ion-icon size="small" class="starOn" name="star"></ion-icon>
       </ng-template>
       <ng-template #halfStar>
-        <ion-icon class="starOff" name="star-outline"></ion-icon>
+        <ion-icon size="small" class="starOff" name="star-outline"></ion-icon>
       </ng-template>
       <ng-template [ngIf]="inputs.stars >= 4" [ngIfElse]="halfStar">
-        <ion-icon class="starOn" name="star"></ion-icon>
+        <ion-icon size="small" class="starOn" name="star"></ion-icon>
       </ng-template>
       <ng-template #halfStar>
-        <ion-icon class="starOff" name="star-outline"></ion-icon>
+        <ion-icon size="small" class="starOff" name="star-outline"></ion-icon>
       </ng-template>
       <ng-template [ngIf]="inputs.stars >= 5" [ngIfElse]="halfStar">
-        <ion-icon class="starOn" name="star"></ion-icon>
+        <ion-icon  size="small" class="starOn" name="star"></ion-icon>
       </ng-template>
       <ng-template #halfStar>
-        <ion-icon class="starOff" name="star-outline"></ion-icon>
+        <ion-icon size="small" class="starOff" name="star-outline"></ion-icon>
       </ng-template>
+      <p class="date"> | {{formattedDate}}</p>
     </div>
-    <p class="comment">{{formattedDate}} | {{inputs.comment}} </p>
+
+    <p class="comment">{{inputs.comment}} </p>
 
     <ion-button *ngIf="isOwnComment" id="{{id}}" expand="block" fill="clear">Edit</ion-button>
     <ion-modal #modal trigger="{{id}}">
