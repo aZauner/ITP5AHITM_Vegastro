@@ -27,4 +27,9 @@ export class RatingController {
   updateRating(@Body() input : {id: string, comment: string, rating: number}): Promise<any> {   
     return this.ratingService.updateRating(input);
   }
+
+  @Delete('delete/:ratingId')
+  delteRating(@Param('ratingId') ratingId: string): Promise<HttpException> {
+    return this.ratingService.delteRating(ratingId);
+  }
 }

@@ -33,6 +33,12 @@ export class RatingService {
       .updateOne({ _id: input.id }, { $set: { comment: input.comment , stars: input.rating , date: new Date()} })
       .exec();
     }
+
+    async delteRating(ratingId: string): Promise<any|HttpException> {
+      this.ratingModel
+      .deleteOne({ _id: ratingId }).exec();
+    }
+    
     
     async findRatings(userToken: string): Promise<HttpException | RatingDetails[]> {
       

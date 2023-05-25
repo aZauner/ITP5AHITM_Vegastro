@@ -19,12 +19,13 @@
     margin-top: 0.3vh;
     display: flex;    
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .comment{
     margin-top: 1vh;
     margin-bottom: 0.5vh;
+    word-break: break-word;
 }
 
 .change{
@@ -55,4 +56,18 @@ ion-icon{
 ion-button{
     width: fit-content;
     font-size: 2vh
+}
+
+.deleteBtn{
+    font-size: 2vh;
+}
+
+.toolBox{
+    margin-top: 0.3vh;
+    display: flex;    
+    align-items: center;    
+}
+
+.editBtn{
+    --padding-start: 0;
 }

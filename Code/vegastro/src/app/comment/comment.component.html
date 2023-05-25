@@ -23,7 +23,7 @@
         <ion-icon size="small" class="starOff" name="star-outline"></ion-icon>
       </ng-template>
       <ng-template [ngIf]="inputs.stars >= 5" [ngIfElse]="halfStar">
-        <ion-icon  size="small" class="starOn" name="star"></ion-icon>
+        <ion-icon size="small" class="starOn" name="star"></ion-icon>
       </ng-template>
       <ng-template #halfStar>
         <ion-icon size="small" class="starOff" name="star-outline"></ion-icon>
@@ -33,7 +33,12 @@
 
     <p class="comment">{{inputs.comment}} </p>
 
-    <ion-button *ngIf="isOwnComment" id="{{id}}" expand="block" fill="clear">Edit</ion-button>
+    <div class="toolBox">
+      <ion-button class="editBtn" *ngIf="isOwnComment" id="{{id}}" expand="block" fill="clear">Edit</ion-button>
+      <ion-icon class="deleteBtn" (click)="deleteComment()" *ngIf="isOwnComment" name="trash-outline"></ion-icon>
+    </div>
+
+
     <ion-modal #modal trigger="{{id}}">
       <ng-template>
         <ion-header>
@@ -47,19 +52,23 @@
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
-        <ion-content class="ion-padding">  
-          <ion-item counter="true">
-            <ion-label position="floating">Kommentar</ion-label>      
-            <ion-input [(ngModel)]="comment"></ion-input>
-          </ion-item> 
-          
-          <ion-item counter="true">
-            <ion-label > Sterne</ion-label>
-            <ion-rating-stars id="starRating" [filledColor]="'#48A734'" [rating]="userStarRating"
-              (ratingChange)="ratingChanged($event)"></ion-rating-stars>
+        <ion-content class="ion-padding">
+          <ion-item>
+            <div>
+              <p style="margin:0"> Sterne</p>
+              <ion-rating-stars id="starRating" [filledColor]="'#48A734'" [rating]="userStarRating"
+                (ratingChange)="ratingChanged($event)"></ion-rating-stars>
+            </div>
           </ion-item>
-          
+          <ion-item counter="true">
+            <ion-label position="floating">Kommentar</ion-label>
+            <ion-textarea [autoGrow]="true" wrap="soft" [spellcheck]="true" [(ngModel)]="comment" fill="solid"
+              placeholder="Enter text"></ion-textarea>
+          </ion-item>
+
         </ion-content>
+
+
 
 
       </ng-template>

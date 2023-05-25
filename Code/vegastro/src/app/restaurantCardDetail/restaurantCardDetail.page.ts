@@ -6,6 +6,8 @@ import { MealService } from '../meal/mealService';
 import { RestaurantCardInputs } from '../restaurantCard/restaurantCard.component';
 import { FavouritesPage } from '../favourites/favourites.page';
 import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
+import { UpdateService } from '../services/update.service';
+import { Subscription } from 'rxjs';
 
 declare global {
   interface Window { inputs: RestaurantCardInputs; }
@@ -32,7 +34,9 @@ export class RestaurantCardDetail {
   roundedStarRating = 0;
   restaurantRated = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, private service: MealService, private toastController: ToastController, private restaurantService: RestaurantCardService) {
+  updateSubscription : Subscription;
+
+  constructor(private route: ActivatedRoute, private router: Router, private service: MealService, private toastController: ToastController, private restaurantService: RestaurantCardService , private updateService: UpdateService) {
     this.inputs = {
       id: "1",
       image: "pizzaDemo.png",
@@ -58,6 +62,11 @@ export class RestaurantCardDetail {
         this.inputs = this.router.getCurrentNavigation()!.extras!.state!["inputs"];
       }
     });
+
+    this.updateSubscription = this.updateService.newUpdate.subscribe(()=>{
+      this.initialize()
+      console.log("funktioniert");      
+    }) 
   }
 
   updateRestaurants() {
@@ -100,6 +109,59 @@ export class RestaurantCardDetail {
 
       this.oldInputs = this.inputs;
     }
+  }
+
+  async initialize(){    
+          this.roundedStarRating =  Math.round(this.inputs.stars * 100) / 100  
+          document.getElementById("meals")!.innerHTML = '';
+          this.mealDivision(this.inputs);
+          
+          if (this.inputs.menu != null) {
+            for (const meal of this.inputs.menu) {
+              if(meal.active == true){
+                if (meal.description) {
+                  this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: meal.price, type: meal.type, descr: meal.description });
+                } else {
+                  this.service.addDynamicComponent({ id: meal._id, name: meal.title, price: meal.price, type: meal.type });
+                }
+              }
+            }
+          }
+    
+          //ratings laden
+          axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
+            this.comments = response.data
+            console.log(this.comments);
+            
+            if (response.data.length > 0) {
+              for (const comment of response.data) {
+                if (comment.userToken! == sessionStorage.getItem('userToken')) {
+                  this.restaurantRated = true;
+                }
+              }
+            } else {
+              this.restaurantRated = false;
+            }
+          })
+    
+          this.oldInputs = this.inputs;
+        this.roundedStarRating = await this.getAverageStarts();
+  }
+
+  async getAverageStarts() {
+    let ratingstars = 0;
+    await axios
+      .get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id)
+      .then((response) => {
+        let sumStars = 0;
+        if (response.data.length > 0) {
+          for (const star of response.data) {
+            sumStars += star.stars;
+          }
+          ratingstars = sumStars / response.data.length;
+        }        
+      });
+    return ratingstars;
   }
 
   mealDivision(inputs: any) {

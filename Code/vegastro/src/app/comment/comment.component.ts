@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { IonModal, ModalController } from '@ionic/angular';
 import axios from 'axios';
+import { UpdateService } from '../services/update.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class Comment {
   comment = ""
   formattedDate = "";
 
-  constructor(public modalController: ModalController){}
+  constructor(public modalController: ModalController, private updateService: UpdateService){}
 
   ngOnInit(){     
     this.formattedDate = new Date(this.inputs.date).toLocaleDateString();    
@@ -45,8 +46,15 @@ export class Comment {
         rating: this.userStarRating      
     }).then((response) => {
       this.modal.dismiss(null, 'cancel');
+      this.updateService.setNewUpdate(true); 
     }) 
   } 
+
+  deleteComment(){  
+    axios.delete('http://localhost:3000/rating/delete/' + this.inputs.id).then((response) => {
+      this.updateService.setNewUpdate(true); 
+    }) 
+  }
   
   ratingChanged(event: number) {
     this.userStarRating = event;
