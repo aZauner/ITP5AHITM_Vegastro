@@ -8,6 +8,7 @@ import { RestaurantModule } from './restaurant/restaurant.module';
 import { MealModule } from './meal/meal.module';
 import { RatingModule } from './rating/rating.module';
 import { ImageModule } from './file-upload/image/image.module';
+import { RatingupvotesModule } from './ratingupvotes/ratingupvotes.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { ImageModule } from './file-upload/image/image.module';
     AuthModule,
     RestaurantModule,
     MealModule,
-    RatingModule
+    RatingModule,
+    RatingupvotesModule
   ],
   controllers: [AppController],
   providers: [AppService],

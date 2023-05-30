@@ -35,7 +35,10 @@
 
     <div class="toolBox">
       <ion-button class="editBtn" *ngIf="isOwnComment" id="{{id}}" expand="block" fill="clear">Edit</ion-button>
-      <ion-icon class="deleteBtn" (click)="deleteComment()" *ngIf="isOwnComment" name="trash-outline"></ion-icon>
+      <ion-icon class="deleteBtn"  (click)="deleteComment()" *ngIf="isOwnComment" name="trash-outline"></ion-icon>
+      <ion-icon class="deleteBtn" *ngIf="!alreadyLikeComment" (click)="upvoteComment()" name="thumbs-up-outline"></ion-icon>
+      <ion-icon class="deleteBtn" *ngIf="alreadyLikeComment" (click)="deleteUpvoteComment()" name="thumbs-up"></ion-icon>
+      <p>{{commentUpvotes}}</p>
     </div>
 
 

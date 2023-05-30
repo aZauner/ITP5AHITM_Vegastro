@@ -106,7 +106,7 @@
                             </div>
                         </ion-item>
                         <ion-item counter="true">
-                            <ion-label position="floating">Kommentar</ion-label>                            
+                            <ion-label position="floating">Kommentar</ion-label>                                                   
                             <ion-textarea [autoGrow]="true" wrap="soft" [spellcheck]="true" [(ngModel)]="ratingComment" fill="solid" placeholder="Enter text"></ion-textarea>               
                           </ion-item>
                     </ion-content>
@@ -129,6 +129,8 @@
         <ion-list id="comments">
             <div *ngIf="comments.length > 0">
                 <h1 style="margin-top: 8vh">Kommentare</h1>
+                <ion-chip [ngClass]="{'activatedChip': false }" >Hilfreich</ion-chip>
+                <ion-chip [ngClass]="{'activatedChip': true }" >Neueste</ion-chip>
                 <comment *ngFor="let comment of comments; let i = index" [inputs]="comment" [id]="i"></comment>
             </div>
             <h1 *ngIf="comments.length == 0">Es gibt noch keine Bewertungen</h1>

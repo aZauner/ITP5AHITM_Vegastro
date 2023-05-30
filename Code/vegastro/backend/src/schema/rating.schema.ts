@@ -18,6 +18,8 @@ export class Rating {
 
   @Prop({ required: true })
   date: Date
+
+  
 }
 
 export type RatingDocument = Rating & Document;

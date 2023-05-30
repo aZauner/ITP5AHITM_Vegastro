@@ -148,3 +148,13 @@ main {
     color: var(--ion-app-color)
 }
 
+ion-chip {
+    --background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.3);
+    --color: var(--ion-text-color);
+  }
+
+.activatedChip {
+    --background: var( --ion-app-color);
+    --color: white;
+  }
+
