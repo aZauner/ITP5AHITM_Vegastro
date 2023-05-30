@@ -21,7 +21,7 @@ declare global {
 
 export class RestaurantCardDetail {
   inputs: RestaurantCardInputs; 
-  filter: "neueste" |'hilfreich' | "" = ""
+  filter: "neueste" |'hilfreich' = "hilfreich"
   oldInputs: RestaurantCardInputs;
   ratingComment: string = "";
   userStarRating: number = 0;
@@ -30,7 +30,8 @@ export class RestaurantCardDetail {
     vegan: 0,
     vegetarian: 0
   }
-  comments = []
+  comments: [{id: string;comment: string;stars: number; userToken: string; date: Date}?] = []
+
 
   roundedStarRating = 0;
   restaurantRated = false;
@@ -65,8 +66,7 @@ export class RestaurantCardDetail {
     });
 
     this.updateSubscription = this.updateService.newUpdate.subscribe(()=>{
-      this.initialize()
-      console.log("funktioniert");      
+      this.initialize()  
     }) 
   }
 
@@ -95,8 +95,7 @@ export class RestaurantCardDetail {
       //ratings laden
       axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
         this.comments = response.data
-        console.log(this.comments);
-        
+        this.selectFilter("hilfreich")
         if (response.data.length > 0) {
           for (const comment of response.data) {
             if (comment.userToken! == sessionStorage.getItem('userToken')) {
@@ -132,7 +131,6 @@ export class RestaurantCardDetail {
           //ratings laden
           axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
             this.comments = response.data
-            console.log(this.comments);
             
             if (response.data.length > 0) {
               for (const comment of response.data) {
@@ -298,27 +296,37 @@ export class RestaurantCardDetail {
     document.getElementById('comments')?.scrollIntoView()
   }
 
-  selectFilter(filterString: string){
+  async selectFilter(filterString: string){
     if(filterString == "hilfreich"){
-      this.filter= this.filter == "" || this.filter == "neueste" ? "hilfreich" : ""
+      this.filter = "hilfreich"
       
     } else {
-      this.filter= this.filter == "" || this.filter == "hilfreich" ? "neueste" : ""
+      this.filter = "neueste" 
     }
 
     if(this.filter == "hilfreich"){
-      console.log(this.filter); 
-      
+      let arr: { id: string; upvotes: number; }[] = []
+      for (const comment of this.comments) {
 
+        await axios.get("http://localhost:3000/ratingupvotes/getSumVotes/" + comment!.id).then((response)=>{
 
-    }else if (this.filter == "neueste"){      
-      this.comments.sort((a, b) => {
-        //@ts-ignore  
-        return new Date(b.date) - new Date(a.date);
-      });
-      
-    }else{
-        
+          arr.push({id: comment!.id, upvotes: response.data})
+        })
+      }
+      arr.sort((a,b) => {
+        return b.upvotes - a.upvotes
+      })
+      let arr1: [{id: string;comment: string;stars: number; userToken: string; date: Date}?] = []
+      for (const upvote of arr) {
+        for (const comment of this.comments) {
+          if(comment!.id == upvote.id) {
+            arr1.push(comment)
+          }
+        }
+      }
+      this.comments = arr1
+    }else if (this.filter == "neueste"){   
+      this.comments.sort((a, b) => (new Date(b!.date) as any) - (new Date(a!.date) as any));
     }
   }
 }

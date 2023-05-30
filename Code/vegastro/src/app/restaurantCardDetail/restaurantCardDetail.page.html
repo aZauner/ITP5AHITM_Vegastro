@@ -131,7 +131,7 @@
                 <h1 style="margin-top: 8vh">Kommentare</h1>
                 <ion-chip [ngClass]="{'activatedChip': filter == 'hilfreich' }" (click)="selectFilter('hilfreich')" >Hilfreich</ion-chip>
                 <ion-chip [ngClass]="{'activatedChip': filter == 'neueste' }" (click)="selectFilter('neueste')">Neueste</ion-chip>
-                <comment *ngFor="let comment of comments; let i = index" [inputs]="comment" [id]="i"></comment>
+                <comment *ngFor="let comment of comments; let i = index" [inputs]="comment!" [id]="i"></comment>
             </div>
             <h1 *ngIf="comments.length == 0">Es gibt noch keine Bewertungen</h1>
             
