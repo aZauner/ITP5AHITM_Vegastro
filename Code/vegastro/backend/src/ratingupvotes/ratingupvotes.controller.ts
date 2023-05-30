@@ -27,4 +27,5 @@ export class RatingupvoteController {
     return this.ratingupvoteService.getSum(ratingId);
   }
   
+  
 }

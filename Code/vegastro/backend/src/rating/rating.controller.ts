@@ -32,4 +32,5 @@ export class RatingController {
   delteRating(@Param('ratingId') ratingId: string): Promise<HttpException> {
     return this.ratingService.delteRating(ratingId);
   }
+
 }

@@ -20,7 +20,8 @@ declare global {
 })
 
 export class RestaurantCardDetail {
-  inputs: RestaurantCardInputs;
+  inputs: RestaurantCardInputs; 
+  filter: "neueste" |'hilfreich' | "" = ""
   oldInputs: RestaurantCardInputs;
   ratingComment: string = "";
   userStarRating: number = 0;
@@ -295,5 +296,29 @@ export class RestaurantCardDetail {
 
   scrollToComments() {
     document.getElementById('comments')?.scrollIntoView()
+  }
+
+  selectFilter(filterString: string){
+    if(filterString == "hilfreich"){
+      this.filter= this.filter == "" || this.filter == "neueste" ? "hilfreich" : ""
+      
+    } else {
+      this.filter= this.filter == "" || this.filter == "hilfreich" ? "neueste" : ""
+    }
+
+    if(this.filter == "hilfreich"){
+      console.log(this.filter); 
+      
+
+
+    }else if (this.filter == "neueste"){      
+      this.comments.sort((a, b) => {
+        //@ts-ignore  
+        return new Date(b.date) - new Date(a.date);
+      });
+      
+    }else{
+        
+    }
   }
 }
