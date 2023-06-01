@@ -24,8 +24,16 @@ ion-menu-button {
     color: #48A734;
 }
 
+ion-button{
+    display: flex;
+    justify-content: center;
+}
 ion-searchbar{
     background:none;
+}
+#errorMsg{
+    text-align: center;
+    font-size: 1rem;
 }
 
 ion-breadcrumbs{

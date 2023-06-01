@@ -31,12 +31,12 @@
           <p *ngIf="checkPasswordValidation()">Kein gültiges Passwort</p>
         </div>
 
-        <ion-button type="submit" [disabled]="!login.valid">Anmelden</ion-button>
+        <ion-button type="submit"  [disabled]="!login.valid">Anmelden</ion-button>
         <div class="error" >
-          <p *ngIf="!foundUser">Kein User gefunden</p>
+          <p *ngIf="!foundUser" id="errorMsg">Kein User gefunden</p>
         </div>   
         <ion-button class="linkToRegistration" style="--color: var(--ion-text-color); font-size: 2vh" routerLink="../registration">    
-          Registrieren
+          Noch keinen Account? <br>Registrieren
         </ion-button>    
       </div> 
   </form> 
