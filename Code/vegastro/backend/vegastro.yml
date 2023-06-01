@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: vegastro-pod
+spec:
+   containers:
+   - name: vegastro-backend
+     image: zauner/vegastrobackend
+     ports:
+     - containerPort: 3000
