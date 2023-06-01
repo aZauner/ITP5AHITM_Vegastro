@@ -1,7 +1,8 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { IonModal, ModalController } from '@ionic/angular';
+import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import axios from 'axios';
 import { UpdateService } from '../services/update.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,13 +26,16 @@ export class Comment {
   upvotes = [{userToken: "" , ratingId: ""}]
   alreadyLikeComment = false;
   commentUpvotes = 0 ;
+  loggedIn = false
 
 
-  constructor(public modalController: ModalController, private updateService: UpdateService){}
+  constructor(public modalController: ModalController, private updateService: UpdateService, private toastController: ToastController, private router: Router){}
 
   ngOnInit(){     
     this.formattedDate = new Date(this.inputs.date).toLocaleDateString();    
-    
+    if(sessionStorage.getItem("userToken")) {
+      this.loggedIn = true
+    }
     if(this.inputs.userToken == sessionStorage.getItem("userToken")){
       this.isOwnComment = true; 
       this.userStarRating = this.inputs.stars
@@ -55,6 +59,24 @@ export class Comment {
     axios.get('http://localhost:3000/ratingupvotes/getSumVotes/' + this.inputs.id).then((response) => {
       this.commentUpvotes = response.data
     })
+  }
+
+  async callToast(duration: number) {
+    const toast = await this.toastController.create({
+      message: 'Nicht angemeldet',
+      duration: duration,
+      position: 'middle',
+      icon: 'person-circle-outline',
+      cssClass: 'favToast',
+      buttons: [
+        {
+          text: 'Anmelden',
+          role: 'login',
+          handler: () => { this.router.navigateByUrl("/login") }
+        }
+      ]
+    });
+    await toast.present();
   }
 
   isCommentLiked(){
