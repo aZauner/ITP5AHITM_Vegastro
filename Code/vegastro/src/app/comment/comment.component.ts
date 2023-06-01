@@ -101,7 +101,9 @@ export class Comment {
         rating: this.userStarRating      
     }).then((response) => {
       this.modal.dismiss(null, 'cancel');
-      this.updateService.setNewUpdate(true); 
+      setTimeout(()=>{
+        this.updateService.setNewUpdate(true); 
+      } , 300)      
     }) 
   } 
 

@@ -126,8 +126,9 @@ export class RestaurantCardDetail {
                 }
               }
             }
-          }
-    
+          }       
+          
+          
           //ratings laden
           axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
             this.comments = response.data
