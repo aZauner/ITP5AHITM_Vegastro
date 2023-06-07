@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: vegastro-pod
+   labels:
+      app: vegastro
+spec:
+   selector:
+      matchLabels:
+         app: vegastro
+   template:
+      metadata:
+         labels:
+            app: vegastro
+      spec:
+         containers:
+         - name: vegastro-backend
+           image: zauner/vegastrobackend:latest
+           imagePullPolicy: Always
+           ports:
+           - containerPort: 3000

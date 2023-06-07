@@ -1,0 +1,25 @@
+piVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"vegastro-service","namespace":"student-t-stadler1"},"spec":{"ports":[{"port":3000,"protocol":"TCP","targetPort":3000}],"selector":{"app":"vegastrobackend"}}}
+  creationTimestamp: "2023-06-07T08:54:12Z"
+  name: vegastro-service
+  namespace: student-t-stadler1
+  resourceVersion: "150392995"
+  uid: b3d806a5-c89d-4fe4-a2b2-b2a9744a94a3
+spec:
+  clusterIP: 10.98.33.130
+  clusterIPs:
+  - 10.98.33.130
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: vegastrobackend
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
