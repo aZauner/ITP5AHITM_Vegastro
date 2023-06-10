@@ -23,9 +23,16 @@ Dies war das Review von Sprint 4. In diesem Sprint wurde die Vereinheitlichung d
 - Es wurde bemerkbar auf einen Bug gemacht und zwar ist man beim Reloaden der Desktopanwendung nicht mehr eingeloggt.
 
 
-## Besprechung am 10.05.2023
-### Anwesend: Tobias Stadler, Alexander Zauner,  Ana Paripovic, Simon Elmecker
+## Besprechung am 11.05.2023
+### Anwesend: Tobias Stadler, Alexander Zauner, Simon Elmecker
+Dies war das Review von Sprint 5. In diesem Sprint wurden die Fehler gefixt, die beim beim Anlegen von Restaurant vorhanden waren und die Ausblendung von der Navigationsbar. Ansonsten wurden Tasks erledigt, wie die Anzeige vom Bild des Restaurants, dem Ändern der bereits verfassten Kommentare von einem User und die Anzeige der Sterne bei den einzelnen Gerichten. Auch kann man nun als Gastronom alle zu seinem Restaurant verfassten Kommentare und Sternebewertungen sehen und das Ändern seiner eigenen Benutzerdaten.
 
+### Feedback
+
+
+## Besprechung am 01.06.2023
+### Anwesend: Tobias Stadler, Alexander Zauner, Simon Elmecker
+Dies war das Review von Sprint 6. In diesem Sprint wurden die Fehler gefixt, wie der Zeilenumbruch bei Kommentaren oder Rechtschreibüberprüfung. Auch das Auslegen vom Backend in die LeoCloud wurde umgesetzt. Man kann nun auch als User die Kommentare nach Datum oder Hilfreichste sortieren und Kommentare nach dem Verfassen wieder löschen. Als Gastronom hat man nun auch die Möglichkeit sich auszuloggen.
 
 ### Feedback
 
