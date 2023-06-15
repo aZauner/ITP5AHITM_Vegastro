@@ -36,3 +36,9 @@ Dies war das Review von Sprint 6. In diesem Sprint wurden die Fehler gefixt, wie
 
 ### Feedback
 
+## Besprechung am 15.06.2023
+### Anwesend: Tobias Stadler, Alexander Zauner, Simon Elmecker, Ana Paripovic
+Dies war das Review von Sprint 7. 
+
+### Feedback
+
