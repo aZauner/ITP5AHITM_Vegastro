@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import axios from 'axios';
+import { BASE_URL } from '../constants';
 @Component({
   selector: 'login',
   templateUrl: 'login.page.html',
@@ -44,7 +45,7 @@ export class LoginPage {
 
   executeLogin() {
     let loginData = this.login.value;
-    axios.post('http://localhost:3000/auth/login', { email: loginData.email, password: loginData.password })
+    axios.post(BASE_URL+'/auth/login', { email: loginData.email, password: loginData.password })
       .then((response) => {
         if (response.data.status != 404) {
           sessionStorage.setItem("userToken", response.data.token);

@@ -8,6 +8,7 @@ import { FavouritesPage } from '../favourites/favourites.page';
 import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
 import { UpdateService } from '../services/update.service';
 import { Subscription } from 'rxjs';
+import { BASE_URL } from '../constants';
 
 declare global {
   interface Window { inputs: RestaurantCardInputs; }
@@ -93,7 +94,7 @@ export class RestaurantCardDetail {
       }
 
       //ratings laden
-      axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
+      axios.get(BASE_URL+'/rating/byRestaurant/' + this.inputs.id).then((response) => {
         this.comments = response.data
         this.selectFilter("hilfreich")
         if (response.data.length > 0) {
@@ -130,7 +131,7 @@ export class RestaurantCardDetail {
           
           
           //ratings laden
-          axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
+          axios.get(BASE_URL+'/rating/byRestaurant/' + this.inputs.id).then((response) => {
             this.comments = response.data
             
             if (response.data.length > 0) {
@@ -151,7 +152,7 @@ export class RestaurantCardDetail {
   async getAverageStarts() {
     let ratingstars = 0;
     await axios
-      .get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id)
+      .get(BASE_URL+'/rating/byRestaurant/' + this.inputs.id)
       .then((response) => {
         let sumStars = 0;
         if (response.data.length > 0) {
@@ -199,7 +200,7 @@ export class RestaurantCardDetail {
       let favRests = JSON.parse(sessionStorage.getItem('favouriteRestaurants')!);
       favRests.push(this.inputs.id);
       sessionStorage.setItem('favouriteRestaurants', JSON.stringify(favRests));
-      axios.put('http://localhost:3000/user/addFvouriteRestaurant', {
+      axios.put(BASE_URL+'/user/addFvouriteRestaurant', {
         "restId": this.inputs.id,
         "token": sessionStorage.getItem('userToken')
       })
@@ -242,7 +243,7 @@ export class RestaurantCardDetail {
       let favRests: [string] = JSON.parse(sessionStorage.getItem('favouriteRestaurants')!);
       favRests.splice(favRests.indexOf(this.inputs.id), 1);
       sessionStorage.setItem('favouriteRestaurants', JSON.stringify(favRests));
-      axios.put('http://localhost:3000/user/removeFvouriteRestaurant', {
+      axios.put(BASE_URL+'/user/removeFvouriteRestaurant', {
         "restId": this.inputs.id,
         "token": sessionStorage.getItem('userToken')
       })
@@ -259,7 +260,7 @@ export class RestaurantCardDetail {
   confirm() {
     if (sessionStorage.getItem('userToken')) {
       if(this.userStarRating != 0 && this.ratingComment != ''){
-        axios.post('http://localhost:3000/rating/create', {
+        axios.post(BASE_URL+'/rating/create', {
           userToken: sessionStorage.getItem('userToken'),
           restaurant: this.inputs.id,
           stars: this.userStarRating,
@@ -269,7 +270,7 @@ export class RestaurantCardDetail {
         })
         this.modal.dismiss(null, 'confirm');
         setTimeout(() => {
-          axios.get('http://localhost:3000/rating/byRestaurant/' + this.inputs.id).then((response) => {
+          axios.get(BASE_URL+'/rating/byRestaurant/' + this.inputs.id).then((response) => {
             this.comments = response.data
             let sumStars = 0;
             if (response.data.length > 0) {
@@ -309,7 +310,7 @@ export class RestaurantCardDetail {
       let arr: { id: string; upvotes: number; }[] = []
       for (const comment of this.comments) {
 
-        await axios.get("http://localhost:3000/ratingupvotes/getSumVotes/" + comment!.id).then((response)=>{
+        await axios.get(BASE_URL+"/ratingupvotes/getSumVotes/" + comment!.id).then((response)=>{
 
           arr.push({id: comment!.id, upvotes: response.data})
         })

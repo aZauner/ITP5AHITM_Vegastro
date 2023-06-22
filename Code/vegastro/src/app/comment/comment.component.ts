@@ -3,6 +3,7 @@ import { IonModal, ModalController, ToastController } from '@ionic/angular';
 import axios from 'axios';
 import { UpdateService } from '../services/update.service';
 import { Router } from '@angular/router';
+import { BASE_URL } from '../constants';
 
 
 @Component({
@@ -51,12 +52,12 @@ export class Comment {
   }
 
   downloadLikes(){
-    axios.get('http://localhost:3000/ratingupvotes/getByUser/' + sessionStorage.getItem('userToken')).then((response) => {
+    axios.get(BASE_URL+'/ratingupvotes/getByUser/' + sessionStorage.getItem('userToken')).then((response) => {
       this.upvotes = response.data;
       this.isCommentLiked()
     })
 
-    axios.get('http://localhost:3000/ratingupvotes/getSumVotes/' + this.inputs.id).then((response) => {
+    axios.get(BASE_URL+'/ratingupvotes/getSumVotes/' + this.inputs.id).then((response) => {
       this.commentUpvotes = response.data
     })
   }
@@ -95,7 +96,7 @@ export class Comment {
   }
 
   confirm(){
-    axios.put('http://localhost:3000/rating/updateRating', {      
+    axios.put(BASE_URL+'/rating/updateRating', {      
         id: this.inputs.id,
         comment: this.comment,
         rating: this.userStarRating      
@@ -108,13 +109,13 @@ export class Comment {
   } 
 
   deleteComment(){  
-    axios.delete('http://localhost:3000/rating/delete/' + this.inputs.id).then((response) => {
+    axios.delete(BASE_URL+'/rating/delete/' + this.inputs.id).then((response) => {
       this.updateService.setNewUpdate(true); 
     }) 
   }
 
   deleteUpvoteComment(){
-    axios.put('http://localhost:3000/ratingupvotes/delete', {
+    axios.put(BASE_URL+'/ratingupvotes/delete', {
           userToken: sessionStorage.getItem('userToken'),
           ratingId: this.inputs.id        
         }).then((response) => {          
@@ -129,7 +130,7 @@ export class Comment {
   upvoteComment(){   
     console.log(this.inputs.userToken);
     
-    axios.post('http://localhost:3000/ratingupvotes/create', {
+    axios.post(BASE_URL+'/ratingupvotes/create', {
           userToken: sessionStorage.getItem('userToken'),
           ratingId: this.inputs.id        
         }).then((response) => {      

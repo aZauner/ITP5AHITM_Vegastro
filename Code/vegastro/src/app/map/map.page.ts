@@ -7,6 +7,7 @@ import {
 import { Platform } from '@ionic/angular';
 import axios from 'axios';
 import { NavigationExtras, Router } from '@angular/router';
+import { BASE_URL } from '../constants';
 
 @Component({
   selector: 'map',
@@ -23,8 +24,7 @@ export class MapPage {
   static filters: string[] = []
 
   constructor(protected platform: Platform, private geolocation: Geolocation, private router: Router) { }
-
-  ngOnInit() {
+ ngOnInit() { 
     //Generate Start map
     this.geolocation.getCurrentPosition().then((resp) => {
       this.userLocation = {
@@ -84,7 +84,7 @@ export class MapPage {
 
   static getFavRests() {
     if (!sessionStorage.getItem('favouriteRestaurants') && sessionStorage.getItem('userToken')) {
-      axios.get('http://localhost:3000/user/favourites/' + sessionStorage.getItem('userToken')).then((response) => {
+      axios.get(BASE_URL+'/user/favourites/' + sessionStorage.getItem('userToken')).then((response) => {
         let favRestaurants = [];
         if (response.data.favouriteRestaurants.length > 0) {
           for (const restaurant of response.data.favouriteRestaurants) {
@@ -100,7 +100,7 @@ export class MapPage {
     const bounds = MapPage.map.getBounds();
     axios
       .get(
-        'http://localhost:3000/restaurant/getNearPosition/' +
+        BASE_URL+'/restaurant/getNearPosition/' +
         bounds.getNorthEast().lat +
         '/' +
         bounds.getNorthEast().lng +
@@ -152,7 +152,7 @@ export class MapPage {
   async getAverageStarts(id: string) {
     let ratingstars = 0;
     await axios
-      .get('http://localhost:3000/rating/byRestaurant/' + id)
+      .get(BASE_URL+'/rating/byRestaurant/' + id)
       .then((response) => {
         let sumStars = 0;
         if (response.data.length > 0) {

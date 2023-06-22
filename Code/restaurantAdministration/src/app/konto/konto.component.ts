@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import axios from 'axios';
+import { BASE_URL } from '../components';
 
 @Component({
   selector: 'app-konto',
@@ -28,7 +29,7 @@ export class KontoComponent {
 
   ngAfterViewInit() {
 
-    axios.get('http://localhost:3000/user/' + sessionStorage.getItem('userToken')).then((response) => {
+    axios.get(BASE_URL+'/user/' + sessionStorage.getItem('userToken')).then((response) => {
       this.userData = response.data;
       console.log(this.userData);
       
@@ -44,7 +45,7 @@ export class KontoComponent {
   update(){
 
     if(this.userData.oldPassword !== undefined && this.userData.newPassword!== undefined && this.userData.newConfirmedPassword !==undefined){
-    axios.put('http://localhost:3000/auth/changeData', {
+    axios.put(BASE_URL+'/auth/changeData', {
       "token": sessionStorage.getItem('userToken'),
       "oldPassword": this.userData.oldPassword,
       "newPassword": this.userData.newPassword,

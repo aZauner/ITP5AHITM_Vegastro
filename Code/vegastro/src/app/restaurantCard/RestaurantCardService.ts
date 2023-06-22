@@ -10,6 +10,7 @@ import {
   RestaurantCard,
   RestaurantCardInputs,
 } from './restaurantCard.component';
+import { BASE_URL } from '../constants';
 @Injectable()
 export class RestaurantCardService {
   mealDevisionInputs: any;
@@ -89,7 +90,7 @@ export class RestaurantCardService {
   async getAverageStarts(id: string) {
     let ratingstars = 0;
     await axios
-      .get('http://localhost:3000/rating/byRestaurant/' + id)
+      .get(BASE_URL+'/rating/byRestaurant/' + id)
       .then((response) => {
         let sumStars = 0;
         if (response.data.length > 0) {

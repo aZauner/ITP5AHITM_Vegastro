@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import axios from 'axios';
+import { BASE_URL } from '../components';
 
 @Component({
   selector: 'app-registration',
@@ -53,7 +54,7 @@ export class RegistrationComponent {
     console.log(this.user);
     
     axios
-      .post('http://localhost:3000/auth/register', this.user)
+      .post(BASE_URL+'/auth/register', this.user)
       .then((response) => {
        console.log(response);
        

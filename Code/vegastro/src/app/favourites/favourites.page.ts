@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import axios from 'axios';
 import { MapPage } from '../map/map.page';
 import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
+import { BASE_URL } from '../constants';
 
 @Component({
   selector: 'favourites',
@@ -29,7 +30,7 @@ export class FavouritesPage {
       restaurantCardList.appendChild(spinner)
       axios
         .get(
-          'http://localhost:3000/user/favourites/' + sessionStorage.getItem('userToken'))
+          BASE_URL+'/user/favourites/' + sessionStorage.getItem('userToken'))
         .then((response) => {
           if (response.data.status != 404) {
             if (response.data.favouriteRestaurants[0] != undefined) {

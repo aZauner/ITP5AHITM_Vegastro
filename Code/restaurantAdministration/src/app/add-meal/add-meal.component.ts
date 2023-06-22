@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import axios from 'axios';
+import { BASE_URL } from '../components';
 
 @Component({
   selector: 'app-add-meal',
@@ -72,7 +73,7 @@ export class AddMealComponent {
       
 
     axios
-      .put('http://localhost:3000/meal/changeMealValues' , {
+      .put(BASE_URL+'/meal/changeMealValues' , {
         mealId: this.meals[index]._id,
         title : value,
         description : desc,
@@ -95,7 +96,7 @@ export class AddMealComponent {
     this.meals = [];
     this.editValues = [];
     axios
-      .get('http://localhost:3000/restaurant/' + this.id)
+      .get(BASE_URL+'/restaurant/' + this.id)
       .then((response) => {
         // console.log(response);
         if (response.data.menu.length > 0) {
@@ -110,7 +111,7 @@ export class AddMealComponent {
 
   loadRatings() {
     this.ratings = [];    
-    axios.get('http://localhost:3000/rating/byRestaurant/' + this.id).then((response) => {
+    axios.get(BASE_URL+'/rating/byRestaurant/' + this.id).then((response) => {
             this.ratings = response.data
             let sumStars = 0;
             if (response.data.length > 0) {
@@ -154,10 +155,10 @@ export class AddMealComponent {
     this.createInputs.type = this.firstFormGroup.value.type!;
     this.createInputs.price = this.firstFormGroup.value.price!;
     axios
-      .post('http://localhost:3000/meal/create', this.createInputs)
+      .post(BASE_URL+'/meal/create', this.createInputs)
       .then((response) => {
         axios
-          .put('http://localhost:3000/restaurant/addMealToMenu', {
+          .put(BASE_URL+'/restaurant/addMealToMenu', {
             mealid: response.data._id,
             restaurantid: this.id,
           })
@@ -192,7 +193,7 @@ export class AddMealComponent {
     
     console.log(this.meals[indexToChange]._id);    
     axios
-      .put('http://localhost:3000/meal/changeActiveStatus', {
+      .put(BASE_URL+'/meal/changeActiveStatus', {
         mealid: this.meals[indexToChange]._id,
       })
       .then((response) => {        
@@ -203,7 +204,7 @@ export class AddMealComponent {
   deleteMeal(id: string){
     console.log(id);
     axios
-      .delete('http://localhost:3000/meal/deleteMeal/' + id)
+      .delete(BASE_URL+'/meal/deleteMeal/' + id)
       .then((response) => {        
         this.loadMeals();
       });

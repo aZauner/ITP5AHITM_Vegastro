@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import axios from 'axios';
 import { Router } from '@angular/router';
+import { BASE_URL } from '../components';
 
 @Component({
   selector: 'app-create-restaurant-page',
@@ -101,13 +102,13 @@ export class CreateRestaurantPageComponent {
   async postRestaurant() {
     
     await axios
-      .post('http://localhost:3000/image', this.formData)
+      .post(BASE_URL+'/image', this.formData)
       .then((response) => {
         this.createInputs.image = response.data._id
       });
       
     axios
-      .post('http://localhost:3000/restaurant/create', this.createInputs)
+      .post(BASE_URL+'/restaurant/create', this.createInputs)
       .then(function (response) {
       });
   }

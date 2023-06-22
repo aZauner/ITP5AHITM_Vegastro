@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import {Router} from "@angular/router";
+import { BASE_URL } from '../components';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UserService {
   logIn(loginData: {mail:string, password:string}) {
     sessionStorage.clear()
     //let loginData = this.login.value;
-    axios.post('http://localhost:3000/auth/login', { email: loginData.mail, password: loginData.password })
+    axios.post(BASE_URL+'/auth/login', { email: loginData.mail, password: loginData.password })
       .then((response) => {
         if (response.data.status != 404) {
           sessionStorage.setItem("userToken", response.data.token);

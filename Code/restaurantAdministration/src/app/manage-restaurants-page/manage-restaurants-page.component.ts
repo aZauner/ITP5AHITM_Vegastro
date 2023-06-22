@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import axios from 'axios';
+import { BASE_URL } from '../components';
 
 @Component({
   selector: 'app-manage-restaurants-page',
@@ -19,7 +20,7 @@ export class ManageRestaurantsPageComponent {
 
   getUsersRestaurants() {
     axios
-      .get('http://localhost:3000/restaurant/getByOwner/' + sessionStorage.getItem("userToken"))
+      .get(BASE_URL+'/restaurant/getByOwner/' + sessionStorage.getItem("userToken"))
       .then( (response) => {
         console.log(response);
         this.restaurants = response.data

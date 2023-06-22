@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import axios from 'axios';
+import { BASE_URL } from '../constants';
 
 @Component({
   selector: 'registration',
@@ -69,7 +70,7 @@ export class RegistrationPage {
 
   executeLogin() {
     let registrationData = this.registration.value;
-    axios.post('http://localhost:3000/auth/register', { firstname: registrationData.firstName,
+    axios.post(BASE_URL+'/auth/register', { firstname: registrationData.firstName,
       lastname: registrationData.lastName,
       username: registrationData.username,
       email: registrationData.email,

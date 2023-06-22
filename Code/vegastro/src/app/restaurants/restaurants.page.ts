@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import axios from 'axios';
 import { MapPage } from '../map/map.page';
 import { RestaurantCardService } from '../restaurantCard/RestaurantCardService';
+import { BASE_URL } from '../constants';
 
 @Component({
   selector: 'restaurants',
@@ -41,7 +42,7 @@ export class RestaurantsPage {
       restaurantCardList.appendChild(spinner)
       axios
         .get(
-          'http://localhost:3000/restaurant/getNearPosition/' +
+          BASE_URL+'/restaurant/getNearPosition/' +
           bounds.getNorthEast().lat +
           '/' +
           bounds.getNorthEast().lng +
