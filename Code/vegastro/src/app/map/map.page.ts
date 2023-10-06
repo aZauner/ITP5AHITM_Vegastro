@@ -250,16 +250,20 @@ export class MapPage {
 
     setTimeout(() => {
       this.addrSearch((data: any) => {
+        
         if (document.getElementById('searchbarLoading') != null) {
           document.getElementById('searchbarLoading')?.remove();
         }
         if (data.length > 0) {
+          
           if (enter) {
+            
             MapPage.map.setView(
               [parseFloat(data[0].lat), parseFloat(data[0].lon)],
               14
             );
           } else if (index != undefined && index != null) {
+            
             MapPage.map.setView(
               [parseFloat(data[index].lat), parseFloat(data[index].lon)],
               14
@@ -273,7 +277,10 @@ export class MapPage {
             }
             let list = document.createElement('ion-list');
             for (let i = 0; i < data.length; i++) {
-              if (data[i].class != 'boundary') {
+              console.log(data[i]);
+              
+                console.log("test");
+                
                 let item = document.createElement('ion-item');
                 let label = document.createElement('p');
                 let text = data[i].display_name;
@@ -286,8 +293,10 @@ export class MapPage {
                 item.addEventListener('click', () => {
                   this.addressSearch(false, i);
                 });
-                list?.appendChild(item);
-              }
+                list.appendChild(item);
+                
+
+              
             }
             if (list.innerHTML == '') {
               if (document.getElementById('noDataFound') != null) {
@@ -332,6 +341,7 @@ export class MapPage {
     xmlhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         var arr = JSON.parse(this.responseText);
+        
         callback(arr);
       }
     };

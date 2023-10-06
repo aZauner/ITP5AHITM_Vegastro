@@ -114,10 +114,31 @@
             </ion-modal>
         </div>
         <div class="ratingsOverview">
-            <div>
-                <ion-progress-bar class="meatBar" [value]="this.mealDevisionInputs.meat" ></ion-progress-bar>
-                <ion-progress-bar class="veganBar" [value]="this.mealDevisionInputs.vegan" ></ion-progress-bar>
-                <ion-progress-bar class="vegeatarianBar" [value]="this.mealDevisionInputs.vegetarian" ></ion-progress-bar>
+            <div> <table>
+
+          
+                <tr>
+                  <td>
+                    Vegan
+                  </td>
+                  <td>
+                    <ion-progress-bar class="veganBar" [value]="this.mealDevisionInputs.vegan"></ion-progress-bar>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Vegetarisch</td>
+                  <td><ion-progress-bar class="vegeatarianBar"
+                      [value]="this.mealDevisionInputs.vegetarian"></ion-progress-bar>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Andere</td>
+                  <td> 
+                    <ion-progress-bar class="meatBar" [value]="this.mealDevisionInputs.other"></ion-progress-bar>
+                  </td>
+                </tr>
+              </table>
+               
             </div>
             <p (click)="scrollToComments()">Kommentare</p>
         </div>

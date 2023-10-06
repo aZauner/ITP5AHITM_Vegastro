@@ -4,7 +4,7 @@ import { Meal } from './meal.schema';
 import { User } from './user.schema';
 
 export enum FoodType {
-  Meat = "meat",
+  Other = "other",
   Vegetarian = "vegetarian",
   Vegan = "vegan"
 }

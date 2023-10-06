@@ -8,7 +8,10 @@ img {
     width: 100%;
     object-fit: cover;
 }
-
+table > tr >td{
+    color: white;
+    padding-right: 2vw;
+}
 #favouriteStarWrapper{
     margin-left: auto;
 }

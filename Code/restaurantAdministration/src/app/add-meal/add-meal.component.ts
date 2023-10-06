@@ -140,7 +140,7 @@ export class AddMealComponent {
   });
 
   hide = true;
-  types = ['vegan', 'meat', 'vegetarian'];
+  types = ['vegan', 'other', 'vegetarian'];
 
   createInputs = {
     title: '',

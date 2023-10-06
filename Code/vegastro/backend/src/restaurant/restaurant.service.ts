@@ -130,6 +130,7 @@ export class RestaurantService {
   async create(
     restaurant: CreateRestaurantDto,
   ): Promise<RestaurantDocument | HttpException> {
+    
     const owner = await this.userModel
       .findOne({ token: restaurant.owner })
       .exec();

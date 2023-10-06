@@ -106,15 +106,15 @@ export class RestaurantCardService {
 
   mealDivision(inputs: any) {
     let devisionPerMeal = {
-      meat: 0,
+      other: 0,
       vegan: 0,
       vegetarian: 0
     }
-  
+    
     if (inputs.menu.length > 0) {
       for (let i = 0; i < inputs.menu.length; i++) {
-        if (inputs.menu[i].type == 'meat') {
-          devisionPerMeal.meat++
+        if (inputs.menu[i].type == 'other') {
+          devisionPerMeal.other++
         }
         else if (inputs.menu[i].type == 'vegetarian') {
           devisionPerMeal.vegetarian++
@@ -123,12 +123,13 @@ export class RestaurantCardService {
           devisionPerMeal.vegan++
         }
       }
-      devisionPerMeal.meat = devisionPerMeal.meat / inputs.menu.length;
+      devisionPerMeal.other = devisionPerMeal.other / inputs.menu.length;
       devisionPerMeal.vegetarian = devisionPerMeal.vegetarian / inputs.menu.length
       devisionPerMeal.vegan = devisionPerMeal.vegan / inputs.menu.length
       
     }
     this.mealDevisionInputs = devisionPerMeal;
-  
+    console.log( this.mealDevisionInputs);
+    
   }
 }

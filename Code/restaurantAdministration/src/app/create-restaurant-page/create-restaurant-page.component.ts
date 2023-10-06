@@ -26,6 +26,7 @@ export class CreateRestaurantPageComponent {
     restaurantName: ['', Validators.minLength(2)],
     description: ['', Validators.minLength(2)],
     type: ['', Validators.minLength(2)],
+    image: ['', Validators.required]
   });
   secondFormGroup = this.formBuilder.group({
     city: ['', Validators.minLength(2)],
@@ -37,7 +38,7 @@ export class CreateRestaurantPageComponent {
   isLinear = true;
 
   hide = true;
-  types = ['vegan', 'meat', 'vegetarian'];
+  types = ['vegan',  'vegetarian'];
   location = { street: '', housenumber: '', plz: '', city: '', floor: '' };
   createInputs = {
     restaurantName: '',
@@ -84,13 +85,14 @@ export class CreateRestaurantPageComponent {
         'https://nominatim.openstreetmap.org/search?format=json&limit=3&q=' +
           address
       )
-      .then((response) => {
+      .then((response) => { 
         if (response.data.length > 0) {
           this.createInputs.latitude = Number.parseFloat(response.data[0].lat);
           this.createInputs.longitude = Number.parseFloat(response.data[0].lon);
           this.postRestaurant();
           this.noValidLoc = false
           this.router.navigateByUrl('/dashboard')
+          
         } else {
           this.noValidLoc = true
 
@@ -100,16 +102,21 @@ export class CreateRestaurantPageComponent {
   }
 
   async postRestaurant() {
+  
     
     await axios
       .post(BASE_URL+'/image', this.formData)
       .then((response) => {
         this.createInputs.image = response.data._id
       });
+
+    
       
     axios
       .post(BASE_URL+'/restaurant/create', this.createInputs)
       .then(function (response) {
+        console.log(response);
+        
       });
   }
 }

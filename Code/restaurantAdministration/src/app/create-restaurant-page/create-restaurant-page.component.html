@@ -23,9 +23,8 @@
                         <input formControlName="description" matInput placeholder="Dieses Restaurant ..." required>
                     </mat-form-field>
 
-                    <input accept="image/*" id="file" type="file" style="width:100%; margin-bottom:2vh" >
-
-                    <button mat-button matStepperNext>Weiter</button>
+                    <input formControlName="image" accept="image/*" id="file" type="file" style="width:100%; margin-bottom:2vh" required>
+                    <button mat-button matStepperNext >Weiter</button>
                 </div>
             </form>
         </mat-step>

@@ -13,7 +13,10 @@
     color: var(--ion-text-color-rgb);
     margin: 0.2vh;
 }
-
+table > tr >td{
+    color: white;
+    padding-right: 2vw;
+}
 .starOn {
     font-size: 2.5vh;
     color: #48A734;
