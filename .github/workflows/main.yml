@@ -28,7 +28,8 @@ jobs:
           file: |
             Code/vegastro/backend/vegastro_minikube.yml
             Code/vegastro/backend/vegastro_leocloud.yml
-          tag: Release ${{ github.run_number }}
+          tag: ${{ github.run_number }}
+          release_name: Release ${{github.run_number}}
           overwrite: true
           file_glob: false
 
