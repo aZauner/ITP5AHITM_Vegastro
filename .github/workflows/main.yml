@@ -25,11 +25,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: |
-            Code/vegastro/backend/vegastro_leocloud.yml
-            Code/vegastro/backend/vegastro_minikube.yml
+          file: Code/vegastro/backend/vegastro_leocloud.yml
           tag: ${{ github.ref }}
-          release_name: Release ${{github.run_number}}
           overwrite: true
           file_glob: true
 
