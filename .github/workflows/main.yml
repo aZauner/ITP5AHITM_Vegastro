@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
     branches:
-      - main
+      - test-actions
 
 env:
   DOCKER_HUB_USERNAME: stadlertobias
@@ -17,14 +17,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Build and push Docker image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          cd Code/vegastro/backend 
-          docker build -t stadlertobias/vegastroBackend .
-          docker login -u stadlertobias -p $DOCKER_HUB_ACCESS_TOKEN
-          docker push stadlertobias/vegastroBackend:latest
+      # - name: Build and push Docker image
+      #   env:
+      #     DOCKER_BUILDKIT: 1
+      #     DOCKER_HUB_ACCESS_TOKEN: dckr_pat_2Fu981nKJ7TV6W1n4-TOZ3foWG4
+      #   run: |
+      #     cd Code/vegastro/backend 
+      #     docker build -t zauner/vegastrobackend .
+      #     docker login -u zauner -p $DOCKER_HUB_ACCESS_TOKEN
+      #     docker push zauner/vegastrobackend:latest
+      - name: Create Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: |
+            Code/vegastro/backend/vegastro_leocloud.yml
+            Code/vegastro/backend/vegastro_minikube.yml
+          tag: ${{ github.run_number }}
+          release_name: Release ${{github.run_number}}
+          overwrite: true
+          file_glob: true
+
 
 
 
