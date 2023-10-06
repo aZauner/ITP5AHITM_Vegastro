@@ -30,7 +30,7 @@ jobs:
             Code/vegastro/backend/vegastro_leocloud.yml
           tag: Release ${{ github.run_number }}
           overwrite: true
-          file_glob: true
+          file_glob: false
 
 
 
