@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
     branches:
-      - test-actions
+      - test2
 
 jobs:
   build_and_push:
@@ -26,7 +26,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: Code/vegastro/backend/vegastro_leocloud.yml
-          tag: ${{ github.ref }}
+          tag: ${{ github.run_number }}
           overwrite: true
           file_glob: true
 
