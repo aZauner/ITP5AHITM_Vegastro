@@ -27,7 +27,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: Code/vegastro/backend/vegastro_leocloud.yml
           tag: latest
-          release_name: Release ${{ github.event.repository.updated_at}}
+          release_name: Release $(date +%Y%m%d%H%M)
           overwrite: true
       - name: Upload Kubernetes File
         uses: svenstaro/upload-release-action@v2
