@@ -3,7 +3,7 @@ name: Build APK
 on:
   push:
     branches:
-      - test2 # Change this to your project's main branch
+      - test2
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16 # You can change the Node.js version if needed
+          node-version: 16
 
       - name: Install Dependencies
         run: |
@@ -56,11 +56,5 @@ jobs:
           release_name: Release ${{ github.event.repository.updated_at }}
           overwrite: true
 
-
-      # - name: Archive APK Artifacts
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: app-release
-      #     path: ./Code/vegastro/android/app/build/outputs/apk/debug/app-debug.apk
 
 
