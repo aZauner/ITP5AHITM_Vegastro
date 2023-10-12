@@ -1,5 +1,5 @@
 <main>
-    <img *ngIf="inputs.image" src="http://localhost:3000/image/{{inputs.image}}">
+    <img *ngIf="inputs.image" src="https://student.cloud.htl-leonding.ac.at/a.zauner/vegastro/image/{{inputs.image}}">
     <div class="wrapper outer">
         <div id="restaurantName">
 
@@ -9,9 +9,10 @@
                 </ion-buttons>
             </ng-template>
 
-            <ng-template  [ngIf]="inputs.fromFavPage" >
+            <ng-template [ngIf]="inputs.fromFavPage">
                 <ion-buttons [routerLink]="['/tabs','favouriteRestaurants']" slot="start">
-                    <ion-back-button defaultHref="tabs/favouriteRestaurants" text="" icon="arrow-back-outline" (click)="updateRestaurants()"></ion-back-button>
+                    <ion-back-button defaultHref="tabs/favouriteRestaurants" text="" icon="arrow-back-outline"
+                        (click)="updateRestaurants()"></ion-back-button>
                 </ion-buttons>
             </ng-template>
 
@@ -33,42 +34,46 @@
     </div>
     <div class="wrapper">
         <div id="ratingsDiv">
-            <div class="restaurantStars" id="starBox">  
+            <div class="restaurantStars" id="starBox">
                 <ng-template [ngIf]="roundedStarRating < 0.5">
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
                 </ng-template>
                 <ng-template [ngIf]="roundedStarRating >= 1" [ngIfElse]="halfStar">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
-                <ng-template #halfStar>                    
-                        <ion-icon *ngIf="roundedStarRating >= 0.5 && roundedStarRating < 1" class="starOn" name="star-half-outline"></ion-icon> 
+                <ng-template #halfStar>
+                    <ion-icon *ngIf="roundedStarRating >= 0.5 && roundedStarRating < 1" class="starOn"
+                        name="star-half-outline"></ion-icon>
                 </ng-template>
                 <ng-template [ngIf]="roundedStarRating < 1.5">
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
-                </ng-template> 
+                </ng-template>
                 <ng-template [ngIf]="roundedStarRating >= 2" [ngIfElse]="halfStar1">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
                 <ng-template #halfStar1>
-                        <ion-icon *ngIf="roundedStarRating >= 1.5 && roundedStarRating < 2" class="starOn" name="star-half-outline"></ion-icon>                                  
+                    <ion-icon *ngIf="roundedStarRating >= 1.5 && roundedStarRating < 2" class="starOn"
+                        name="star-half-outline"></ion-icon>
                 </ng-template>
                 <ng-template [ngIf]="roundedStarRating < 2.5">
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
-                </ng-template> 
+                </ng-template>
                 <ng-template [ngIf]="roundedStarRating >= 3" [ngIfElse]="halfStar2">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
                 <ng-template #halfStar2>
-                        <ion-icon *ngIf="roundedStarRating >= 2.5 && roundedStarRating < 3" class="starOn" name="star-half-outline"></ion-icon>
-                </ng-template>                
+                    <ion-icon *ngIf="roundedStarRating >= 2.5 && roundedStarRating < 3" class="starOn"
+                        name="star-half-outline"></ion-icon>
+                </ng-template>
                 <ng-template [ngIf]="roundedStarRating < 3.5">
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
                 </ng-template>
                 <ng-template [ngIf]="roundedStarRating >= 4" [ngIfElse]="halfStar3">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
-                <ng-template #halfStar3>                    
-                        <ion-icon *ngIf="roundedStarRating >= 3.5 && roundedStarRating < 4" class="starOn" name="star-half-outline"></ion-icon>                                 
+                <ng-template #halfStar3>
+                    <ion-icon *ngIf="roundedStarRating >= 3.5 && roundedStarRating < 4" class="starOn"
+                        name="star-half-outline"></ion-icon>
                 </ng-template>
                 <ng-template [ngIf]="roundedStarRating < 4.5">
                     <ion-icon class="starOff" name="star-outline"></ion-icon>
@@ -76,11 +81,11 @@
                 <ng-template [ngIf]="roundedStarRating >= 5" [ngIfElse]="halfStar4">
                     <ion-icon class="starOn" name="star"></ion-icon>
                 </ng-template>
-                <ng-template #halfStar4>                    
-                        <ion-icon *ngIf="roundedStarRating >= 4.5" class="starOn" name="star-half-outline"></ion-icon>                                  
-                </ng-template> 
-                <p class="roundedStarValue">{{roundedStarRating}}</p>           
-            </div> 
+                <ng-template #halfStar4>
+                    <ion-icon *ngIf="roundedStarRating >= 4.5" class="starOn" name="star-half-outline"></ion-icon>
+                </ng-template>
+                <p class="roundedStarValue">{{roundedStarRating}}</p>
+            </div>
             <ion-button [disabled]="restaurantRated" id="open-modal" expand="block" fill="clear">Bewerten</ion-button>
             <ion-modal #modal trigger="open-modal">
                 <ng-template>
@@ -102,48 +107,53 @@
                         <ion-item>
                             <div>
                                 <p style="margin:0"> Sterne</p>
-                                <ion-rating-stars id="starRating" [filledColor]="'#48A734'" (ratingChange)="ratingChanged($event)"></ion-rating-stars>
+                                <ion-rating-stars id="starRating" [filledColor]="'#48A734'"
+                                    (ratingChange)="ratingChanged($event)"></ion-rating-stars>
                             </div>
                         </ion-item>
                         <ion-item counter="true">
-                            <ion-label position="floating">Kommentar</ion-label>                                                   
-                            <ion-textarea [autoGrow]="true" wrap="soft" [spellcheck]="true" [(ngModel)]="ratingComment" fill="solid" placeholder="Enter text"></ion-textarea>               
-                          </ion-item>
+                            <ion-label position="floating">Kommentar</ion-label>
+                            <ion-textarea [autoGrow]="true" wrap="soft" [spellcheck]="true" [(ngModel)]="ratingComment"
+                                fill="solid" placeholder="Enter text"></ion-textarea>
+                        </ion-item>
                     </ion-content>
                 </ng-template>
             </ion-modal>
         </div>
         <div class="ratingsOverview">
-            <div> <table>
+            <div>
+                <table>
 
-          
-                <tr>
-                  <td>
-                    Vegan
-                  </td>
-                  <td>
-                    <ion-progress-bar class="veganBar" [value]="this.mealDevisionInputs.vegan"></ion-progress-bar>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Vegetarisch</td>
-                  <td><ion-progress-bar class="vegeatarianBar"
-                      [value]="this.mealDevisionInputs.vegetarian"></ion-progress-bar>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Andere</td>
-                  <td> 
-                    <ion-progress-bar class="meatBar" [value]="this.mealDevisionInputs.other"></ion-progress-bar>
-                  </td>
-                  
-                </tr>
-              </table>
-               
+
+                    <tr>
+                        <td>
+                            Vegan
+                        </td>
+                        <td>
+                            <ion-progress-bar class="veganBar"
+                                [value]="this.mealDevisionInputs.vegan"></ion-progress-bar>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Vegetarisch</td>
+                        <td><ion-progress-bar class="vegeatarianBar"
+                                [value]="this.mealDevisionInputs.vegetarian"></ion-progress-bar>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Andere</td>
+                        <td>
+                            <ion-progress-bar class="meatBar"
+                                [value]="this.mealDevisionInputs.other"></ion-progress-bar>
+                        </td>
+
+                    </tr>
+                </table>
+
             </div>
             <p (click)="scrollToComments()">Kommentare</p>
         </div>
-        
+
         <p id="restaurantDescription">{{inputs.description}}</p>
         <ion-list id="meals">
 
@@ -151,12 +161,14 @@
         <ion-list id="comments">
             <div *ngIf="comments.length > 0">
                 <h1 style="margin-top: 8vh">Kommentare</h1>
-                <ion-chip [ngClass]="{'activatedChip': filter == 'hilfreich' }" (click)="selectFilter('hilfreich')" >Hilfreich</ion-chip>
-                <ion-chip [ngClass]="{'activatedChip': filter == 'neueste' }" (click)="selectFilter('neueste')">Neueste</ion-chip>
+                <ion-chip [ngClass]="{'activatedChip': filter == 'hilfreich' }"
+                    (click)="selectFilter('hilfreich')">Hilfreich</ion-chip>
+                <ion-chip [ngClass]="{'activatedChip': filter == 'neueste' }"
+                    (click)="selectFilter('neueste')">Neueste</ion-chip>
                 <comment *ngFor="let comment of comments; let i = index" [inputs]="comment!" [id]="i"></comment>
             </div>
             <h1 *ngIf="comments.length == 0">Es gibt noch keine Bewertungen</h1>
-            
+
         </ion-list>
     </div>
 </main>

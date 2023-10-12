@@ -6,12 +6,12 @@ import { Subject } from 'rxjs';
 })
 export class UpdateService {
 
-  BASE_URL = "http://localhost:3000";
+  BASE_URL = "https://student.cloud.htl-leonding.ac.at/a.zauner/vegastro";
 
 
   constructor() { }
 
-  getBaseUrl(){
+  getBaseUrl() {
     return this.BASE_URL;
   }
 
