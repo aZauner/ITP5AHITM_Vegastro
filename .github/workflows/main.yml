@@ -1,0 +1,121 @@
+name: Vegastro Actions
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build and push Docker image
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+          cd Code/vegastro/backend 
+          docker build -t zauner/vegastrobackend .
+          docker login -u zauner -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          docker push zauner/vegastrobackend:latest
+      - name: Create Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: Code/vegastro/backend/vegastro_leocloud.yml
+          tag: latest
+          release_name: Release ${{ github.run_number }}
+          overwrite: true
+      - name: Upload Kubernetes File
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: Code/vegastro/backend/vegastro_minikube.yml 
+          tag: latest
+          overwrite: true
+          prerelease: true
+          
+  Build-Android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        run: |
+         cd Code/vegastro
+         npm install
+
+      - name: Build Angular Ionic Project
+        run: |
+         cd Code/vegastro 
+         npm install -g @angular/cli  
+         npm run build # Replace with your build script if different
+
+      - name: Build APK
+        run: |
+          cd Code/vegastro
+          # Install Capacitor globally if not already installed
+          npm install -g @ionic/cli  
+
+          npm install -g @capacitor/cli 
+          
+          npm i @capacitor/core
+
+          ionic capacitor build android
+        
+          ionic capacitor copy android
+
+          cd android
+
+          ./gradlew assembleDebug
+
+      - name: Create Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./Code/vegastro/android/app/build/outputs/apk/debug/app-debug.apk
+          tag: latest
+          overwrite: true
+          prerelease: true
+
+  Build-Electron:
+    runs-on: windows-latest  
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        run: |
+          cd Code/restaurantAdministration
+          npm install
+
+      - name: Build Electron
+        run: | 
+          cd Code/restaurantAdministration
+          npm i
+          npm run build
+          npm run make
+
+      - name: Create Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./Code/restaurantAdministration/out/make/squirrel.windows/x64/restaurant-administration-0.0.0 Setup.exe
+          tag: latest
+          release_name: Release ${{ github.event.repository.updated_at }}
+          overwrite: true
+
+
+
