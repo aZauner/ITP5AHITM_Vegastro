@@ -23,6 +23,7 @@ jobs:
 
         - name: Build Electron
           run: | 
+            cd Code/restaurantAdministration
             npm run make
 
         - name: Create Release
