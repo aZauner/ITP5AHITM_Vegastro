@@ -1,0 +1,39 @@
+name: Deploy Adminpage as exe
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on:
+  push:
+    branches:
+      - test2
+jobs:
+    build:
+      runs-on: ubuntu-latest  
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v2
+  
+        - name: Set up Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: 16
+  
+        - name: Install Dependencies
+          run: |
+           cd Code/restaurantAdministration
+           npm install
+
+        - name: Build Electron
+          run: | 
+            npm run make
+
+        - name: Create Release
+          uses: svenstaro/upload-release-action@v2
+          with:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            file: ./Code/restaurantAdministration/out/restaurant-administration-win32-x64/restaurant-administration.exe
+            tag: latest
+            release_name: Release ${{ github.event.repository.updated_at }}
+            overwrite: true
+
+
+
+
