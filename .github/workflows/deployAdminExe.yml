@@ -1,9 +1,8 @@
 name: Deploy Adminpage as exe
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
     branches:
-      - test2
+      - main
 jobs:
     build:
       runs-on: windows-latest  

@@ -1,9 +1,8 @@
 name: Ymls as Release
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on:
   push:
     branches:
-      - test3
+      - main
 
 jobs:
   build_and_push:
