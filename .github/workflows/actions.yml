@@ -115,8 +115,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./Code/restaurantAdministration/out/make/squirrel.windows/x64/restaurant-administration-0.0.0 Setup.exe
           tag: latest
-          release_name: Release ${{ github.event.repository.updated_at }}
           overwrite: true
+          prerelease: true
 
 
 
