@@ -23,15 +23,15 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: Code/vegastro/backend/vegastro_leocloud.yml
-          tag: v0.0.1
-          release_name: Release ${{ github.run_number }}
+          tag: v0.0.${{github.run_number}}
+          release_name: Release v0.0.${{ github.run_number }}
           overwrite: true
       - name: Upload Kubernetes File
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: Code/vegastro/backend/vegastro_minikube.yml 
-          tag: v0.0.1
+          tag: v0.0.${{github.run_number}}
           overwrite: true
           prerelease: true
           
@@ -81,7 +81,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./Code/vegastro/android/app/build/outputs/apk/debug/app-debug.apk
-          tag: v0.0.1
+          tag: v0.0.${{github.run_number}}
           overwrite: true
           prerelease: true
 
@@ -115,7 +115,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./Code/restaurantAdministration/out/make/squirrel.windows/x64/restaurant-administration-0.0.0 Setup.exe
           asset_name: restaurant-administration-setup.exe
-          tag: v0.0.1
+          tag: v0.0.${{github.run_number}}
           overwrite: true
           prerelease: true
 
