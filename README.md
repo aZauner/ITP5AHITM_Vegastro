@@ -2,8 +2,8 @@
 
 
 ## Starten des Projekts
-```
 
+```
 npm i
 
 ionic serve
