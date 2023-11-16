@@ -62,6 +62,7 @@ jobs:
         run: |
           cd Code/vegastro
           # Install Capacitor globally if not already installed
+          npm install --force
           npm install -g @ionic/cli  
 
           npm install -g @capacitor/cli 
