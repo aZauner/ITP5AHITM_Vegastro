@@ -4,7 +4,7 @@ export interface MealInputs {
   id: string,
   name: string,
   price: string,
-  type: "MeatIcon.svg" | "VegetarianIcon.svg" | "VeganIcon.svg" | "meat" | "vegetarian" | "vegan",
+  type: "MeatIcon.svg" | "VegetarianIcon.svg" | "VeganIcon.svg" | "meat" | "vegetarian" | "vegan" | "other",
   descr?: string
 }
 

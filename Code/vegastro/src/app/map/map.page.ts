@@ -145,9 +145,6 @@ export class MapPage {
           resp.coords.longitude,
         ]);
       })
-      .catch((error) => {
-        console.log('Error getting location', error);
-      });
   }
 
   async getAverageStarts(id: string) {
@@ -232,7 +229,7 @@ export class MapPage {
     this.activeMarkers.push(marker);
   }
 
-  async navigateToRestaurant(restaurant: any){
+  async navigateToRestaurant(restaurant: any) {
     this.getFavRestsMem();
 
     let inputs = {
@@ -301,18 +298,18 @@ export class MapPage {
         if (data.length > 0) {
           axios.post('http://localhost:3000/search/searchByKeyword', { keyword: this.address })
             .then((response) => {
-              console.log(response);
+              (response);
               if (response.data.length >= 1) {
                 let restauransBySearch = response.data;
-                  let label = document.createElement('label');
-                  label.innerText = "Restaurants";
-                  label.style.opacity = "0.5";
-                  label.style.paddingLeft = "3vw";
+                let restaurantDiv = document.createElement("div");
+                let label = document.createElement('label');
+                label.innerText = "Restaurants";
+                label.style.opacity = "0.5";
+                label.style.paddingLeft = "3vw";
+                restaurantDiv.setAttribute("style", "padding-bottom: 2vh");
 
-                  //item.appendChild(label);
+                restaurantDiv.appendChild(label);
 
-                  list.prepend(label);
-                
 
                 for (let i = 0; i < restauransBySearch.length; i++) {
                   let item = document.createElement('ion-item');
@@ -323,24 +320,23 @@ export class MapPage {
 
                   item.appendChild(label);
                   item.addEventListener('click', () => {
-                     axios
-                    .get(BASE_URL + '/restaurant/' + restauransBySearch[i].restaurant.id)
-                    .then((response) => {
-                      console.log(response.data);
-                      
+                    axios
+                      .get(BASE_URL + '/restaurant/' + restauransBySearch[i].restaurant.id)
+                      .then((response) => {
+                        (response.data);
+
                         this.navigateToRestaurant(response.data);
 
-                    });
-                   
+                      });
+
                   });
-                  list.prepend(item);
+                  restaurantDiv.appendChild(item);
 
                 }
+                list.prepend(restaurantDiv)
               }
             });
           if (enter) {
-
-
 
             MapPage.map.setView(
               [parseFloat(data[0].lat), parseFloat(data[0].lon)],
@@ -360,20 +356,18 @@ export class MapPage {
               document.getElementById('noDataFound')?.remove();
             }
 
-            if (data.length >= 2) {
-              let label = document.createElement('label');
-              label.innerText = "Orte";
-              label.style.opacity = "0.5";
-              label.style.paddingLeft = "3vw";
+            let orteDiv = document.createElement("div");
+            let label = document.createElement('label');
+            label.innerText = "Orte";
+            label.style.opacity = "0.5";
+            label.style.paddingLeft = "3vw";
 
-              //item.appendChild(label);
+            orteDiv.appendChild(label)
 
-              list.appendChild(label);
-            }
-
+            let check = false;
 
             for (let i = 0; i < data.length; i++) {
-              if (data.length >= 2) {
+              if (data.length >= 2 && data[i].display_name.includes("Österreich")) {
                 let item = document.createElement('ion-item');
                 let label = document.createElement('p');
                 let text = data[i].display_name;
@@ -386,18 +380,12 @@ export class MapPage {
                 item.addEventListener('click', () => {
                   this.addressSearch(false, i);
                 });
-                list.appendChild(item);
-
+                orteDiv.appendChild(item);
+                check = true;
               }
-              console.log(data[i]);
-
-              console.log("test");
-
-
-
-
 
             }
+            check ? list.appendChild(orteDiv) : 0;
             /**if (list.innerHTML == '') {
               if (document.getElementById('noDataFound') != null) {
                 document.getElementById('noDataFound')?.remove();
@@ -428,7 +416,7 @@ export class MapPage {
           item.style.width = '100%';
           item.style.textAlign = 'center';
           document.getElementById('searchbar')?.appendChild(item);
-        }**/ 
+        }**/
       }, this.address);
     }, 250);
   }
