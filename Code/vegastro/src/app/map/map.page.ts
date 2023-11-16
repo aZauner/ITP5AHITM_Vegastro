@@ -192,6 +192,7 @@ export class MapPage {
 
     marker.addEventListener('click', async () => {
       this.getFavRestsMem();
+      
       let inputs = {
         id: restaurant.id,
         image: restaurant.image ? restaurant.image : null,

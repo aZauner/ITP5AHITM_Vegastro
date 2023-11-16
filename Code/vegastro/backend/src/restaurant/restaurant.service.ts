@@ -7,8 +7,7 @@ import { User, UserDocument } from 'src/schema/user.schema';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { RestaurantDetails } from './entities/restaurant.entity';
 import { MealDetails } from 'src/meal/entities/meal.entity';
-import { log } from 'console';
-import { json } from 'stream/consumers';
+import { RestaurantDto } from 'src/search/search.dto';
 
 @Injectable()
 export class RestaurantService {
@@ -24,7 +23,7 @@ export class RestaurantService {
       active: meal.active
     };
   }
-  
+
   constructor(
     @InjectModel(Restaurant.name)
     private readonly restaurantModel: Model<RestaurantDocument>,
@@ -32,7 +31,7 @@ export class RestaurantService {
     private readonly userModel: Model<UserDocument>,
     @InjectModel(Meal.name)
     private readonly mealModel: Model<MealDocument>,
-  ) {}
+  ) { }
 
 
 
@@ -55,12 +54,27 @@ export class RestaurantService {
       return new HttpException('Meal nicht gefunden', HttpStatus.NOT_FOUND);
 
     menu.push(meal._id);
-        console.log(restaurant)
+    console.log(restaurant)
     this.restaurantModel
-      .updateOne({ _id: restaurantid }, { $set: { menu: menu } }) 
+      .updateOne({ _id: restaurantid }, { $set: { menu: menu } })
       .exec();
 
     return HttpStatus.OK;
+  }
+
+  async findAllRestaurantsWithMeals(): Promise<RestaurantDto[]> {
+    let restaurants = await this.restaurantModel
+      .find()
+      .populate('menu', '', this.mealModel)
+      .exec();
+    
+    let rest: RestaurantDto[] = [];
+
+    restaurants.forEach((element) => {
+      rest.push(this._getRestaurantDetailsIndex(element));
+    });
+
+    return rest;
   }
 
   async findRestaurantsNearPosion(
@@ -117,6 +131,20 @@ export class RestaurantService {
     };
   }
 
+  _getRestaurantDetailsIndex(restaurant: RestaurantDocument): RestaurantDto {
+    return {
+      id: restaurant._id,
+      restaurantName: restaurant.restaurantName,
+      description: restaurant.description,
+      location: {
+        street: restaurant.location.street,
+        plz: restaurant.location.plz.toString(),
+        city: restaurant.location.city
+      },
+      menu: restaurant.menu,
+    };
+  }
+
   async findByName(id: string): Promise<RestaurantDetails | null> {
     const restaurant = await this.restaurantModel
       .findOne({ _id: id })
@@ -130,7 +158,7 @@ export class RestaurantService {
   async create(
     restaurant: CreateRestaurantDto,
   ): Promise<RestaurantDocument | HttpException> {
-    
+
     const owner = await this.userModel
       .findOne({ token: restaurant.owner })
       .exec();
@@ -186,7 +214,7 @@ export class RestaurantService {
 
     let restaurnArry = [];
     for (const rest of restaurants) {
-      restaurnArry.push(this._getRestaurantDetails(rest));  
+      restaurnArry.push(this._getRestaurantDetails(rest));
     }
     return restaurnArry;
   }

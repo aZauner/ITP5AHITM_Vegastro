@@ -26,6 +26,7 @@ import { Meal, MealSchema } from 'src/schema/meal.schema';
     ])
   ],
   providers: [RestaurantService],
-  controllers: [RestaurantController],
+  exports: [RestaurantService],
+  controllers: [RestaurantController]
 })
 export class RestaurantModule { }
