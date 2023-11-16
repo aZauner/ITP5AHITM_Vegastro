@@ -50,24 +50,24 @@ jobs:
       - name: Install Dependencies
         run: |
          cd Code/vegastro
-         npm install --force
+         npm install --legacy-peer-deps
 
       - name: Build Angular Ionic Project
         run: |
          cd Code/vegastro 
-         npm install -g @angular/cli  
+         npm install -g @angular/cli --legacy-peer-deps
          npm run build # Replace with your build script if different
 
       - name: Build APK
         run: |
           cd Code/vegastro
           # Install Capacitor globally if not already installed
-          npm install --force
-          npm install -g @ionic/cli  
+          npm install --legacy-peer-deps
+          npm install -g @ionic/cli --legacy-peer-deps
 
-          npm install -g @capacitor/cli 
+          npm install -g @capacitor/cli --legacy-peer-deps
           
-          npm i @capacitor/core
+          npm i @capacitor/core --legacy-peer-deps
 
           ionic capacitor build android
         
