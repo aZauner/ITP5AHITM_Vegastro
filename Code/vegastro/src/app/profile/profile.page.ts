@@ -59,7 +59,7 @@ export class ProfilePage implements OnInit {
     });
 
     //bcrypt.hash("asd", 12);
-    /**  axios.put('http://10.0.2.2:3000/user/changeUserData', {      
+    /**  axios.put('http://localhost:3000/user/changeUserData', {      
         "token": sessionStorage.getItem('userToken'),
         "firstname": this.userData.firstname,
         "lastname": this.userData.lastname,
