@@ -295,7 +295,7 @@ export class MapPage {
         }
         let list = document.createElement('ion-list');
 
-        axios.post('http://10.0.2.2:3000/search/searchByKeyword', { keyword: this.address })
+        axios.post('http://localhost:3000/search/searchByKeyword', { keyword: this.address })
           .then((response) => {
             if (response.data.length >= 1) {
               let restauransBySearch = response.data;

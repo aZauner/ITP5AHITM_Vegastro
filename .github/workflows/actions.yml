@@ -10,14 +10,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      # - name: Build and push Docker image
-      #   env:
-      #     DOCKER_BUILDKIT: 1
-      #   run: |
-      #     cd Code/vegastro/backend 
-      #     docker build -t zauner/vegastrobackend .
-      #     docker login -u zauner -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      #     docker push zauner/vegastrobackend:latest
+      - name: Build and push Docker image
+        env:
+          DOCKER_BUILDKIT: 1
+        run: |
+          cd Code/vegastro/backend 
+          docker build -t zauner/vegastrobackend .
+          docker login -u zauner -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          docker push zauner/vegastrobackend:latest
       - name: Create Release
         uses: svenstaro/upload-release-action@v2
         with:
