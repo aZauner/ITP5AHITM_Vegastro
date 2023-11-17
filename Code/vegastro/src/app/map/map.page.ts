@@ -294,11 +294,9 @@ export class MapPage {
           document.getElementById('searchbarLoading')?.remove();
         }
         let list = document.createElement('ion-list');
-
-        if (data.length > 0) {
+          
           axios.post('http://localhost:3000/search/searchByKeyword', { keyword: this.address })
             .then((response) => {
-              (response);
               if (response.data.length >= 1) {
                 let restauransBySearch = response.data;
                 let restaurantDiv = document.createElement("div");
@@ -306,7 +304,7 @@ export class MapPage {
                 label.innerText = "Restaurants";
                 label.style.opacity = "0.5";
                 label.style.paddingLeft = "3vw";
-                restaurantDiv.setAttribute("style", "padding-bottom: 2vh");
+                
 
                 restaurantDiv.appendChild(label);
 
@@ -361,7 +359,7 @@ export class MapPage {
             label.innerText = "Orte";
             label.style.opacity = "0.5";
             label.style.paddingLeft = "3vw";
-
+            orteDiv.setAttribute("style", "padding-top: 2vh");
             orteDiv.appendChild(label)
 
             let check = false;
@@ -403,7 +401,7 @@ export class MapPage {
             list.id = 'searchbarResultList';
             document.getElementById('searchbar')?.appendChild(list);
           }
-        }/**  else if (this.address != '') {
+        /**  else if (this.address != '') {
           if (document.getElementById('noDataFound') != null) {
             document.getElementById('noDataFound')?.remove();
           }

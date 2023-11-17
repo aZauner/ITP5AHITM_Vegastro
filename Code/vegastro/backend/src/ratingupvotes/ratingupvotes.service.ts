@@ -38,7 +38,6 @@ export class RatingupvoteService {
     }
    
     async getByUser(token: string): Promise<RatingupvotesDocument[]|HttpException> {
-      console.log(token);
       
       const ratingupVotes = await this.ratingUpvotesModel
         .find({ userToken: token })
@@ -48,9 +47,6 @@ export class RatingupvoteService {
           'keine Restaurants gefunden',
           HttpStatus.NOT_FOUND,
         );
-
-        console.log(ratingupVotes);
-          
       let ratingupVotesArray = [];
       for (const vote of ratingupVotes) {
         ratingupVotesArray.push(this._getVoteDetails(vote));  

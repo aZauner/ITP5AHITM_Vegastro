@@ -128,8 +128,6 @@ export class Comment {
   }
 
   upvoteComment(){   
-    console.log(this.inputs.userToken);
-    
     axios.post(BASE_URL+'/ratingupvotes/create', {
           userToken: sessionStorage.getItem('userToken'),
           ratingId: this.inputs.id        

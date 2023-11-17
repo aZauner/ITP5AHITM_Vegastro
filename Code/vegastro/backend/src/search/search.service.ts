@@ -158,6 +158,7 @@ export class SearchService {
                 index: "search_index",
                 body,
             });
+            
             if (res.body.hits.total.value == 0) {
                 return {
                     httpCode: 200,

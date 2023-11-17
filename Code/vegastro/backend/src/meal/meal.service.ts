@@ -72,10 +72,8 @@ export class MealService {
   }
 
   async getMealById(id: string): Promise<HttpException | MealDetails> {
-    console.log(id);
     const meal = await this.mealModel.findOne({ _id: id }).exec();
     if (!meal) return null;
-    console.log(meal);
     return this._getMealDetails(meal);
   }
 

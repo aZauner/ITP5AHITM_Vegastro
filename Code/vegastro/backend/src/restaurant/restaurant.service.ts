@@ -54,7 +54,6 @@ export class RestaurantService {
       return new HttpException('Meal nicht gefunden', HttpStatus.NOT_FOUND);
 
     menu.push(meal._id);
-    console.log(restaurant)
     this.restaurantModel
       .updateOne({ _id: restaurantid }, { $set: { menu: menu } })
       .exec();
