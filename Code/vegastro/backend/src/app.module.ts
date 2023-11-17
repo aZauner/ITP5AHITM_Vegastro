@@ -9,6 +9,7 @@ import { MealModule } from './meal/meal.module';
 import { RatingModule } from './rating/rating.module';
 import { ImageModule } from './file-upload/image/image.module';
 import { RatingupvotesModule } from './ratingupvotes/ratingupvotes.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { RatingupvotesModule } from './ratingupvotes/ratingupvotes.module';
     RestaurantModule,
     MealModule,
     RatingModule,
-    RatingupvotesModule
+    RatingupvotesModule,
+    SearchModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -35,7 +35,7 @@ export class ProfilePage implements OnInit {
   }
   ngAfterViewInit() {
 
-    axios.get(BASE_URL+'/user/' + sessionStorage.getItem('userToken')).then((response) => {
+    axios.get(BASE_URL + '/user/' + sessionStorage.getItem('userToken')).then((response) => {
       this.userData = response.data;
 
     })
@@ -43,7 +43,7 @@ export class ProfilePage implements OnInit {
 
   updateProfileData() {
 
-    axios.put(BASE_URL+'/auth/changeData', {
+    axios.put(BASE_URL + '/auth/changeData', {
       "token": sessionStorage.getItem('userToken'),
       "oldPassword": this.userData.oldPassword,
       "newPassword": this.userData.newPassword,
@@ -59,7 +59,7 @@ export class ProfilePage implements OnInit {
     });
 
     //bcrypt.hash("asd", 12);
-    /**  axios.put('http://localhost:3000/user/changeUserData', {      
+    /**  axios.put('http://10.0.2.2:3000/user/changeUserData', {      
         "token": sessionStorage.getItem('userToken'),
         "firstname": this.userData.firstname,
         "lastname": this.userData.lastname,

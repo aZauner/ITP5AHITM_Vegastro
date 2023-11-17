@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class UpdateService {
 
-  BASE_URL = "https://student.cloud.htl-leonding.ac.at/a.zauner/vegastro";
+  BASE_URL = "http://10.0.2.2:3000";
 
 
   constructor() { }

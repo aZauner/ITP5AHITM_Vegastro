@@ -30,7 +30,9 @@ export class UserService {
   }
 
 
-
+  async findAll() {
+    return this.userModel.find().exec();
+  }
 
 
   async addToken(

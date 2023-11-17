@@ -10,14 +10,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Build and push Docker image
-        env:
-          DOCKER_BUILDKIT: 1
-        run: |
-          cd Code/vegastro/backend 
-          docker build -t zauner/vegastrobackend .
-          docker login -u zauner -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          docker push zauner/vegastrobackend:latest
+      # - name: Build and push Docker image
+      #   env:
+      #     DOCKER_BUILDKIT: 1
+      #   run: |
+      #     cd Code/vegastro/backend 
+      #     docker build -t zauner/vegastrobackend .
+      #     docker login -u zauner -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      #     docker push zauner/vegastrobackend:latest
       - name: Create Release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -50,23 +50,24 @@ jobs:
       - name: Install Dependencies
         run: |
          cd Code/vegastro
-         npm install
+         npm install --legacy-peer-deps
 
       - name: Build Angular Ionic Project
         run: |
          cd Code/vegastro 
-         npm install -g @angular/cli  
+         npm install -g @angular/cli --legacy-peer-deps
          npm run build # Replace with your build script if different
 
       - name: Build APK
         run: |
           cd Code/vegastro
           # Install Capacitor globally if not already installed
-          npm install -g @ionic/cli  
+          npm install --legacy-peer-deps
+          npm install -g @ionic/cli --legacy-peer-deps
 
-          npm install -g @capacitor/cli 
+          npm install -g @capacitor/cli --legacy-peer-deps
           
-          npm i @capacitor/core
+          npm i @capacitor/core --legacy-peer-deps
 
           ionic capacitor build android
         

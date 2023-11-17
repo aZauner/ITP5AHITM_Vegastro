@@ -26,6 +26,7 @@ export class MealService {
                 inputs.type = "VeganIcon.svg";
                 break;
         }
+
         component.instance.inputs = inputs;
         this.app.attachView(component.hostView);
     }

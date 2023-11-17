@@ -1,1 +1,1 @@
-export const BASE_URL = "https://student.cloud.htl-leonding.ac.at/a.zauner/vegastro"
+export const BASE_URL = "http://10.0.2.2:3000"
