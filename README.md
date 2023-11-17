@@ -13,6 +13,17 @@ npm run start:dev
 ng serve
 ```
 
+## Starten von Postgres DB Lokal (Minikube)
+
+```
+minikube start
+
+kubectl apply -f .\postgres.yaml
+
+kubectl port-forward deployment/postgres 5432:5432
+
+```
+
 
 
 
