@@ -294,113 +294,113 @@ export class MapPage {
           document.getElementById('searchbarLoading')?.remove();
         }
         let list = document.createElement('ion-list');
-          
-          axios.post('http://localhost:3000/search/searchByKeyword', { keyword: this.address })
-            .then((response) => {
-              if (response.data.length >= 1) {
-                let restauransBySearch = response.data;
-                let restaurantDiv = document.createElement("div");
-                let label = document.createElement('label');
-                label.innerText = "Restaurants";
-                label.style.opacity = "0.5";
-                label.style.paddingLeft = "3vw";
-                
 
-                restaurantDiv.appendChild(label);
+        axios.post('http://10.0.2.2:3000/search/searchByKeyword', { keyword: this.address })
+          .then((response) => {
+            if (response.data.length >= 1) {
+              let restauransBySearch = response.data;
+              let restaurantDiv = document.createElement("div");
+              let label = document.createElement('label');
+              label.innerText = "Restaurants";
+              label.style.opacity = "0.5";
+              label.style.paddingLeft = "3vw";
 
 
-                for (let i = 0; i < restauransBySearch.length; i++) {
-                  let item = document.createElement('ion-item');
-                  let label = document.createElement('p');
-                  let text = restauransBySearch[i].restaurant.restaurantName;
+              restaurantDiv.appendChild(label);
 
-                  label.innerText = text;
 
-                  item.appendChild(label);
-                  item.addEventListener('click', () => {
-                    axios
-                      .get(BASE_URL + '/restaurant/' + restauransBySearch[i].restaurant.id)
-                      .then((response) => {
-                        (response.data);
+              for (let i = 0; i < restauransBySearch.length; i++) {
+                let item = document.createElement('ion-item');
+                let label = document.createElement('p');
+                let text = restauransBySearch[i].restaurant.restaurantName;
 
-                        this.navigateToRestaurant(response.data);
+                label.innerText = text;
 
-                      });
+                item.appendChild(label);
+                item.addEventListener('click', () => {
+                  axios
+                    .get(BASE_URL + '/restaurant/' + restauransBySearch[i].restaurant.id)
+                    .then((response) => {
+                      (response.data);
 
-                  });
-                  restaurantDiv.appendChild(item);
+                      this.navigateToRestaurant(response.data);
 
-                }
-                list.prepend(restaurantDiv)
+                    });
+
+                });
+                restaurantDiv.appendChild(item);
+
               }
-            });
-          if (enter) {
-
-            MapPage.map.setView(
-              [parseFloat(data[0].lat), parseFloat(data[0].lon)],
-              14
-            );
-          } else if (index != undefined && index != null) {
-
-            MapPage.map.setView(
-              [parseFloat(data[index].lat), parseFloat(data[index].lon)],
-              14
-            );
-          } else {
-            if (document.getElementById('searchbarResultList') != null) {
-              document.getElementById('searchbarResultList')?.remove();
+              list.prepend(restaurantDiv)
             }
+          });
+        if (enter) {
+
+          MapPage.map.setView(
+            [parseFloat(data[0].lat), parseFloat(data[0].lon)],
+            14
+          );
+        } else if (index != undefined && index != null) {
+
+          MapPage.map.setView(
+            [parseFloat(data[index].lat), parseFloat(data[index].lon)],
+            14
+          );
+        } else {
+          if (document.getElementById('searchbarResultList') != null) {
+            document.getElementById('searchbarResultList')?.remove();
+          }
+          if (document.getElementById('noDataFound') != null) {
+            document.getElementById('noDataFound')?.remove();
+          }
+
+          let orteDiv = document.createElement("div");
+          let label = document.createElement('label');
+          label.innerText = "Orte";
+          label.style.opacity = "0.5";
+          label.style.paddingLeft = "3vw";
+          orteDiv.setAttribute("style", "padding-top: 2vh");
+          orteDiv.appendChild(label)
+
+          let check = false;
+
+          for (let i = 0; i < data.length; i++) {
+            if (data.length >= 2 && data[i].display_name.includes("Österreich")) {
+              let item = document.createElement('ion-item');
+              let label = document.createElement('p');
+              let text = data[i].display_name;
+              if (text.length <= 40) {
+                label.innerText = text;
+              } else {
+                label.innerText = text.slice(0, 40) + '...';
+              }
+              item.appendChild(label);
+              item.addEventListener('click', () => {
+                this.addressSearch(false, i);
+              });
+              orteDiv.appendChild(item);
+              check = true;
+            }
+
+          }
+          check ? list.appendChild(orteDiv) : 0;
+          /**if (list.innerHTML == '') {
             if (document.getElementById('noDataFound') != null) {
               document.getElementById('noDataFound')?.remove();
             }
-
-            let orteDiv = document.createElement("div");
-            let label = document.createElement('label');
-            label.innerText = "Orte";
-            label.style.opacity = "0.5";
-            label.style.paddingLeft = "3vw";
-            orteDiv.setAttribute("style", "padding-top: 2vh");
-            orteDiv.appendChild(label)
-
-            let check = false;
-
-            for (let i = 0; i < data.length; i++) {
-              if (data.length >= 2 && data[i].display_name.includes("Österreich")) {
-                let item = document.createElement('ion-item');
-                let label = document.createElement('p');
-                let text = data[i].display_name;
-                if (text.length <= 40) {
-                  label.innerText = text;
-                } else {
-                  label.innerText = text.slice(0, 40) + '...';
-                }
-                item.appendChild(label);
-                item.addEventListener('click', () => {
-                  this.addressSearch(false, i);
-                });
-                orteDiv.appendChild(item);
-                check = true;
-              }
-
-            }
-            check ? list.appendChild(orteDiv) : 0;
-            /**if (list.innerHTML == '') {
-              if (document.getElementById('noDataFound') != null) {
-                document.getElementById('noDataFound')?.remove();
-              }
-              let item = document.createElement('ion-item');
-              let label1 = document.createElement('ion-label');
-              label1.innerText = 'Keine Treffer gefunden';
-              item.appendChild(label1);
-              item.id = 'noDataFound';
-              item.style.margin = '0 0 1vh 0';
-              item.style.width = '100%';
-              item.style.textAlign = 'center';
-              document.getElementById('searchbar')?.appendChild(item);
-            }**/
-            list.id = 'searchbarResultList';
-            document.getElementById('searchbar')?.appendChild(list);
-          }
+            let item = document.createElement('ion-item');
+            let label1 = document.createElement('ion-label');
+            label1.innerText = 'Keine Treffer gefunden';
+            item.appendChild(label1);
+            item.id = 'noDataFound';
+            item.style.margin = '0 0 1vh 0';
+            item.style.width = '100%';
+            item.style.textAlign = 'center';
+            document.getElementById('searchbar')?.appendChild(item);
+          }**/
+          list.id = 'searchbarResultList';
+          document.getElementById('searchbar')?.appendChild(list);
+        }
         /**  else if (this.address != '') {
           if (document.getElementById('noDataFound') != null) {
             document.getElementById('noDataFound')?.remove();
