@@ -1,5 +1,6 @@
 package at.vegastro.resource;
 
+import at.vegastro.dtos.LoginUserDto;
 import at.vegastro.model.User;
 import at.vegastro.repository.MealRepository;
 import at.vegastro.repository.UserRepository;
@@ -28,5 +29,12 @@ public class UserResource {
     public URI createUser(User user, @Context UriInfo uriInfo) {
         userRepository.createUser(user);
         return uriInfo.getAbsolutePathBuilder().path(Long.toString(user.id)).build();
+    }
+
+    @GET
+    @Path("/login")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Long loginUser(LoginUserDto loginData) {
+        return userRepository.loginUser(loginData);
     }
 }

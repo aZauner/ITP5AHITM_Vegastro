@@ -1,10 +1,7 @@
 package at.vegastro.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +11,9 @@ import java.util.List;
 public class User extends PanacheEntity {
     public String firstname;
     public String lastname;
+    @Column(unique = true)
     public String username;
+    @Column(unique = true)
     public String email;
     public String password;
     @OneToMany

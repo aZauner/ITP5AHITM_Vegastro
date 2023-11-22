@@ -1,5 +1,6 @@
 package at.vegastro.repository;
 
+import at.vegastro.dtos.LoginUserDto;
 import at.vegastro.model.User;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -23,5 +24,30 @@ public class UserRepository implements PanacheRepository<User> {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public Long loginUser(LoginUserDto loginData) {
+        System.out.println(loginData.email);
+        User user = find("email", loginData.email).firstResult();
+        System.out.println(user.username);
+
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(
+                    loginData.password.getBytes(StandardCharsets.UTF_8));
+            String hashedPassword = new String(Hex.encode(hash));
+
+
+            if (user.password.equals(hashedPassword)){
+                System.out.println(user.id);
+                return user.id;
+            }else {
+                return null;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
