@@ -31,10 +31,16 @@ public class UserResource {
         return uriInfo.getAbsolutePathBuilder().path(Long.toString(user.id)).build();
     }
 
-    @GET
+    @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
     public Long loginUser(LoginUserDto loginData) {
         return userRepository.loginUser(loginData);
+    }
+
+    @GET
+    @Path("{id}")
+    public User getUserByID(Long id) {
+        return userRepository.findById(id);
     }
 }

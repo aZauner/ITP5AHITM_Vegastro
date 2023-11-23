@@ -70,7 +70,7 @@ export class RegistrationPage {
 
   executeLogin() {
     let registrationData = this.registration.value;
-    axios.post(BASE_URL+'/auth/register', { firstname: registrationData.firstName,
+    axios.post(BASE_URL+'/user/register', { firstname: registrationData.firstName,
       lastname: registrationData.lastName,
       username: registrationData.username,
       email: registrationData.email,

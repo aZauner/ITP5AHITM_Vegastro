@@ -37,7 +37,6 @@ export class ProfilePage implements OnInit {
 
     axios.get(BASE_URL + '/user/' + sessionStorage.getItem('userToken')).then((response) => {
       this.userData = response.data;
-
     })
   }
 

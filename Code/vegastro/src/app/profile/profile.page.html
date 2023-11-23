@@ -12,7 +12,7 @@
   <table>
     <tr>
       <td><ion-icon name="person-outline"></ion-icon></td>
-      <td class="userFullName"><input  [(ngModel)]="userData.firstname" class="nameInput" [disabled]="!isEditable"><input
+      <td class="userFullName"><input [(ngModel)]="userData.firstname" class="nameInput" [disabled]="!isEditable"><input
           [(ngModel)]="userData.lastname" class="nameInput" [disabled]="!isEditable"></td>
     </tr>
 
@@ -35,7 +35,7 @@
 
   </table>
   <p id="errorMessage">{{errorMessage}}</p>
-  <ion-button (click)="updateProfileData()" [hidden]="!isEditable">Submit</ion-button>
+  <ion-button (click)="updateProfileData()" [hidden]="!isEditable">Speichern</ion-button>
 
-  <ion-button (click)="toggleEditable()">Bearbeiten</ion-button>
+  <ion-button (click)="toggleEditable()" [hidden]="isEditable">Bearbeiten</ion-button>
 </ion-content>

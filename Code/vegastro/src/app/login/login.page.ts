@@ -45,10 +45,10 @@ export class LoginPage {
 
   executeLogin() {
     let loginData = this.login.value;
-    axios.post(BASE_URL+'/auth/login', { email: loginData.email, password: loginData.password })
+    axios.post(BASE_URL+'/user/login', { email: loginData.email, password: loginData.password })
       .then((response) => {
         if (response.data.status != 404) {
-          sessionStorage.setItem("userToken", response.data.token);
+          sessionStorage.setItem("userToken", response.data);
           this.foundUser = true;
           this.router.navigate(['/tabs/tab1']);
         } else {
