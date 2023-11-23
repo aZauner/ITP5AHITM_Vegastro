@@ -4,7 +4,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 
 @Entity
-public class LocationRestaurant extends PanacheEntity {
+public class Location extends PanacheEntity {
     public String city;
     public Integer plz;
     public String street;

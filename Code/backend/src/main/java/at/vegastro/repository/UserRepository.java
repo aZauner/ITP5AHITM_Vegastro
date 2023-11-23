@@ -4,7 +4,10 @@ import at.vegastro.dtos.LoginUserDto;
 import at.vegastro.model.User;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.bouncycastle.util.encoders.Hex;
+import org.jboss.resteasy.reactive.RestResponse;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -22,7 +25,6 @@ public class UserRepository implements PanacheRepository<User> {
             user.password= hashedPassword;
             persist(user);
         }catch (Exception e){
-            e.printStackTrace();
         }
     }
 

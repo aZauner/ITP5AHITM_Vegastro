@@ -4,6 +4,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,8 +19,8 @@ public class Restaurant extends PanacheEntity {
 
     public String type;
     public String description;
-    @ManyToOne
-    public LocationRestaurant locationRestaurant;
+    @OneToOne
+    public Location location;
     @OneToMany
     public List<Meal> menu = new LinkedList<>();
 
