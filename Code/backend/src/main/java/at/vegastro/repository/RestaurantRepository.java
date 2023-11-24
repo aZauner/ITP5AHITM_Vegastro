@@ -38,4 +38,12 @@ public class RestaurantRepository implements PanacheRepository<Restaurant> {
         query.setParameter("southLon", southLon);
         return query.getResultList();
     }
+
+    public List<Restaurant> getAll() {
+        return listAll();
+    }
+
+    public void addMealToMenu(String mealid, String restaurantid) {
+        //TODO
+    }
 }

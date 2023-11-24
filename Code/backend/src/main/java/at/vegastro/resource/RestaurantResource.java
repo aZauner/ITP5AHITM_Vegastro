@@ -1,5 +1,6 @@
 package at.vegastro.resource;
 
+import at.vegastro.dtos.AddMealToRestaurantDto;
 import at.vegastro.model.Restaurant;
 import at.vegastro.model.User;
 import at.vegastro.repository.RestaurantRepository;
@@ -44,5 +45,20 @@ public class RestaurantResource {
                                                         @PathParam("southLon") Double southLon) {
         return restaurantRepository.findRestaurantsNearPosition(northLat,northLon,southLat ,southLon);
 
+    }
+
+    @GET
+    @Path("/getAll")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Restaurant> getAll() {
+        return restaurantRepository.getAll();
+
+    }
+
+    @PUT
+    @Path("/addMealToMenu")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addMealToMenu(AddMealToRestaurantDto mealData ) {
+        restaurantRepository.addMealToMenu(mealData.mealid, mealData.restaurantid);
     }
 }

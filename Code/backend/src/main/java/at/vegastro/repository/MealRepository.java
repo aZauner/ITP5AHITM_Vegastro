@@ -6,7 +6,16 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class MealRepository implements PanacheRepository<Meal> {
-    public String getString() {
-        return "test";
+
+    public Meal getByTitle(String title) {
+        return find("title", title).firstResult();
+    }
+
+    public void createRestaurant(Meal meal) {
+        persist(meal);
+    }
+
+    public Meal getMealById(Long id) {
+        return findById(id);
     }
 }
