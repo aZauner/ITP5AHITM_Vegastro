@@ -1,11 +1,15 @@
 package at.vegastro.resource;
 
+import at.vegastro.model.Rating;
+import at.vegastro.model.Restaurant;
 import at.vegastro.repository.RatingRepository;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Path("/rating")
 public class RatingResource {
@@ -14,9 +18,20 @@ public class RatingResource {
     RatingRepository ratingRepository;
 
     @GET
-    @Path("/test")
+    @Path("/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCourt() {
-        return "fds";
+    public List<Rating> findRatings(@PathParam("userId") Long userId) {
+           return ratingRepository.findbyUsertoken(userId);
     }
+
+    @Transactional
+    @POST
+    @Path("/create")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void createRating(Rating rating) {
+
+        rating.date = LocalDateTime.now();
+        ratingRepository.postRating(rating);
+    }
+
 }
