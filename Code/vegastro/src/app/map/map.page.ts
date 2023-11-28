@@ -193,7 +193,7 @@ export class MapPage {
 
       let inputs = {
         id: restaurant.id,
-        image: restaurant.image ? restaurant.image : null,
+        image: restaurant.image.id ? restaurant.image.id : null,
         restaurantName: restaurant.restaurantName,
         type: restaurant.type,
         stars: 4,
@@ -201,7 +201,8 @@ export class MapPage {
         menu: restaurant.menu,
         fromMarker: true
       }
-
+      console.log(inputs);
+      
       await this.getAverageStarts(inputs.id).then((starRating) => {
         inputs.stars = starRating
       })
@@ -234,7 +235,7 @@ export class MapPage {
 
     let inputs = {
       id: restaurant.id,
-      image: restaurant.image ? restaurant.image : null,
+      image: restaurant.image.id ? restaurant.image.id : null,
       restaurantName: restaurant.restaurantName,
       type: restaurant.type,
       stars: 4,

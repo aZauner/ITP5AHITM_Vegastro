@@ -24,5 +24,6 @@ public class Restaurant extends PanacheEntity {
     @OneToMany
     public List<Meal> menu = new LinkedList<>();
 
-    public String image;
+    @OneToOne
+    public Image image;
 }

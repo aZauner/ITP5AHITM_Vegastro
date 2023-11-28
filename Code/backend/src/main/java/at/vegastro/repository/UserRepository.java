@@ -7,7 +7,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.bouncycastle.util.encoders.Hex;
-import org.jboss.resteasy.reactive.RestResponse;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

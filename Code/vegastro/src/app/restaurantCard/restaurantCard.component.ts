@@ -57,7 +57,8 @@ export class RestaurantCard {
 
   inputs: any = this.defaultInputs;
 
-  constructor(private router: Router) {}  
+  constructor(private router: Router) {
+  }  
 
   openDetails() {
     let navigationExtras: NavigationExtras = {

@@ -81,6 +81,7 @@ export class RestaurantCardService {
       } else {
         inputs.preDescr = inputs.description;
       }
+      
       component.instance.inputs = inputs;
       this.app.attachView(component.hostView);
     });
