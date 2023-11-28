@@ -127,10 +127,12 @@ export class Comment {
     this.userStarRating = event;
   }
 
-  upvoteComment(){   
+  upvoteComment() {   
+    console.log(sessionStorage.getItem('userToken'));
+    console.log(this.inputs.id);
     axios.post(BASE_URL+'/ratingupvotes/create', {
-          userToken: sessionStorage.getItem('userToken'),
-          ratingId: this.inputs.id        
+      user: { id: parseInt(sessionStorage.getItem('userToken')!) },
+      rating: { id: this.inputs.id }        
         }).then((response) => {      
           this.downloadLikes()        
         })

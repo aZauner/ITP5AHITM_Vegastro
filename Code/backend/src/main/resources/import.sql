@@ -14,4 +14,4 @@ insert into Restaurant(id,restaurantName,latitude,longitude,owner_id,type,descri
 
 insert into Rating(id,user_id,restaurant_id,stars,comment) values(1,1,1,5,'Gutes Essen');
 
-insert into ratingupvotes(id,user_id,rating_id) values(1,1,1);
+insert into ratingupvotes(id,user_id,rating_id) values(10000,1,1);
