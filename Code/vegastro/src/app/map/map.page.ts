@@ -27,7 +27,7 @@ export class MapPage {
   ngOnInit() {
 
     //Generate Start map
-    this.geolocation.getCurrentPosition().then((resp) => {
+    this.geolocation.getCurrentPosition().then((resp) => {  
       this.userLocation = {
         lat: resp.coords.latitude,
         lon: resp.coords.longitude,

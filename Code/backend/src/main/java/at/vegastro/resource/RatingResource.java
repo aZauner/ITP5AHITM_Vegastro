@@ -29,9 +29,15 @@ public class RatingResource {
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
     public void createRating(Rating rating) {
-
         rating.date = LocalDateTime.now();
         ratingRepository.postRating(rating);
+    }
+
+    @GET
+    @Path("byRestaurant/{restaurantId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Rating> findByRestaurant(@PathParam("restaurantId") Long restaurantId) {
+        return ratingRepository.findByRestaurant(restaurantId);
     }
 
 }

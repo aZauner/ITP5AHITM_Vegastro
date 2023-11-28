@@ -1,11 +1,15 @@
 package at.vegastro.resource;
 
+import at.vegastro.model.Rating;
+import at.vegastro.model.Ratingupvotes;
 import at.vegastro.repository.RatingupvotesRepository;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Path("/ratingupvotes")
 public class RatingupvotesResource {
@@ -13,10 +17,25 @@ public class RatingupvotesResource {
     @Inject
     RatingupvotesRepository ratingupvotesRepository;
 
-    @GET
-    @Path("/test")
+    @Transactional
+    @POST
+    @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCourt() {
-        return "fds";
+    public void createRatingUpvote(Ratingupvotes ratingupvote) {
+        ratingupvotesRepository.create(ratingupvote);
+    }
+
+    @GET
+    @Path("getByUser/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Ratingupvotes> findByRestaurant(@PathParam("userId") Long userId) {
+        return ratingupvotesRepository.findByUser(userId);
+    }
+
+    @GET
+    @Path("getSumVotes/{ratingId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Long getSum(@PathParam("ratingId") Long ratingId) {
+        return ratingupvotesRepository.getSum(ratingId);
     }
 }

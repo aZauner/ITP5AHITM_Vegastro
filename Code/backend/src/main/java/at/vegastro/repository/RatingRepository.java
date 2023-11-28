@@ -18,4 +18,8 @@ public class RatingRepository implements PanacheRepository<Rating> {
     public void postRating(Rating rating) {
         persist(rating);
     }
+
+    public List<Rating> findByRestaurant(Long restaurantId) {
+        return find("restaurant.id", restaurantId).list();
+    }
 }
