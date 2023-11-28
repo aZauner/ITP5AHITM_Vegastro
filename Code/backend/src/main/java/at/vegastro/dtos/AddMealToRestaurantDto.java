@@ -1,6 +1,6 @@
 package at.vegastro.dtos;
 
 public class AddMealToRestaurantDto {
-    public String mealid;
-    public String restaurantid;
+    public Long mealid;
+    public Long restaurantid;
 }

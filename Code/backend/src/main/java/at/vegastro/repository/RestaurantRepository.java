@@ -2,6 +2,7 @@ package at.vegastro.repository;
 
 
 import at.vegastro.model.Location;
+import at.vegastro.model.Meal;
 import at.vegastro.model.Restaurant;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -17,6 +18,8 @@ public class RestaurantRepository implements PanacheRepository<Restaurant> {
 
     @Inject
     LocationRepository locationRestaurantRepository;
+    @Inject
+    MealRepository mealRepository;
     public void createRestaurant(Restaurant restaurant) {
         Location locationRestaurant = restaurant.location;
         locationRestaurantRepository.persist(locationRestaurant);
@@ -43,7 +46,10 @@ public class RestaurantRepository implements PanacheRepository<Restaurant> {
         return listAll();
     }
 
-    public void addMealToMenu(String mealid, String restaurantid) {
-        //TODO
+    public void addMealToMenu(Long mealid, Long restaurantid) {
+        Restaurant restaurant = findById(restaurantid);
+        Meal meal = this.mealRepository.getMealById(mealid);
+        restaurant.menu.add(meal);
+        this.getEntityManager().merge(restaurant);
     }
 }
