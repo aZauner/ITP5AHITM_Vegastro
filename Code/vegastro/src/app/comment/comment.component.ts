@@ -4,6 +4,7 @@ import axios from 'axios';
 import { UpdateService } from '../services/update.service';
 import { Router } from '@angular/router';
 import { BASE_URL } from '../constants';
+import { log } from 'console';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class Comment {
   userStarRating = 0
   comment = ""
   formattedDate = "";
-  upvotes = [{userToken: "" , ratingId: ""}]
+  upvotes = [{userToken: "" , rating: {id: ""}}]
   alreadyLikeComment = false;
   commentUpvotes = 0 ;
   loggedIn = false
@@ -58,6 +59,7 @@ export class Comment {
     if (this.loggedIn) {
       axios.get(BASE_URL+'/ratingupvotes/getByUser/' + sessionStorage.getItem('userToken')).then((response) => {
         this.upvotes = response.data;
+        console.log(this.upvotes);        
         this.isCommentLiked()
       })
     }
@@ -88,7 +90,7 @@ export class Comment {
   isCommentLiked(){
     let found = false
       for (const upvote of this.upvotes) {
-        if(upvote.ratingId == this.inputs.id){
+        if(upvote.rating.id == this.inputs.id){
           found = true  
         }
       }
@@ -121,7 +123,7 @@ export class Comment {
 
   deleteUpvoteComment(){
     axios.put(BASE_URL+'/ratingupvotes/delete', {
-          userToken: sessionStorage.getItem('userToken'),
+          userId: sessionStorage.getItem('userToken'),
           ratingId: this.inputs.id        
         }).then((response) => {          
           this.downloadLikes()        

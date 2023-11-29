@@ -1,5 +1,6 @@
 package at.vegastro.resource;
 
+import at.vegastro.dtos.DeleteRatingUpvoteDto;
 import at.vegastro.model.Rating;
 import at.vegastro.model.Ratingupvotes;
 import at.vegastro.repository.RatingupvotesRepository;
@@ -37,5 +38,15 @@ public class RatingupvotesResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Long getSum(@PathParam("ratingId") Long ratingId) {
         return ratingupvotesRepository.getSum(ratingId);
+    }
+
+    @PUT
+    @Transactional
+    @Path("/delete")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void delete(DeleteRatingUpvoteDto deleteRatingUpvote) {
+        System.out.println(deleteRatingUpvote.ratingId);
+        System.out.println(deleteRatingUpvote.userId);
+        ratingupvotesRepository.deleteUpvote(deleteRatingUpvote.ratingId, deleteRatingUpvote.userId);
     }
 }
