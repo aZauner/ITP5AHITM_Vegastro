@@ -123,8 +123,6 @@
         <div class="ratingsOverview">
             <div>
                 <table>
-
-
                     <tr>
                         <td>
                             Vegan
@@ -160,7 +158,7 @@
         </ion-list>
         <ion-list id="comments">
             <div *ngIf="comments.length > 0">
-                <h1 style="margin-top: 8vh">Kommentare</h1>
+                <h1 style="margin-top: 2vh">Kommentare</h1>
                 <ion-chip [ngClass]="{'activatedChip': filter == 'hilfreich' }"
                     (click)="selectFilter('hilfreich')">Hilfreich</ion-chip>
                 <ion-chip [ngClass]="{'activatedChip': filter == 'neueste' }"

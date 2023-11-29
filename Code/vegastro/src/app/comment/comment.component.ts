@@ -13,7 +13,7 @@ import { BASE_URL } from '../constants';
 })
 
 export class Comment {
-  @Input() inputs = { id: "",comment: "",stars: 0, userToken: "", date: new Date()}
+  @Input() inputs = { id: "",comment: "",stars: 0, user: {id: 0}, date: new Date()}
   @Input() id = 0
 
   @ViewChild(IonModal)
@@ -34,15 +34,18 @@ export class Comment {
 
   ngOnInit(){     
     this.formattedDate = new Date(this.inputs.date).toLocaleDateString();    
-    if(sessionStorage.getItem("userToken")) {
+    if (sessionStorage.getItem("userToken")) {
+      console.log(sessionStorage.getItem("userToken"));
       this.loggedIn = true
-    }
-    if(this.inputs.userToken == sessionStorage.getItem("userToken")){
-      this.isOwnComment = true; 
-      this.userStarRating = this.inputs.stars
-      this.comment = this.inputs.comment      
-    }    
+      if (this.inputs.user.id == parseInt(sessionStorage.getItem("userToken")!)) {
+        console.log(this.inputs);
 
+        this.isOwnComment = true;
+        this.userStarRating = this.inputs.stars
+        this.comment = this.inputs.comment
+      }    
+    }
+    
     this.downloadLikes()
 
   }
@@ -51,11 +54,13 @@ export class Comment {
     this.modal.dismiss(null, 'cancel');
   }
 
-  downloadLikes(){
-    axios.get(BASE_URL+'/ratingupvotes/getByUser/' + sessionStorage.getItem('userToken')).then((response) => {
-      this.upvotes = response.data;
-      this.isCommentLiked()
-    })
+  downloadLikes() {
+    if (this.loggedIn) {
+      axios.get(BASE_URL+'/ratingupvotes/getByUser/' + sessionStorage.getItem('userToken')).then((response) => {
+        this.upvotes = response.data;
+        this.isCommentLiked()
+      })
+    }
 
     axios.get(BASE_URL+'/ratingupvotes/getSumVotes/' + this.inputs.id).then((response) => {
       this.commentUpvotes = response.data

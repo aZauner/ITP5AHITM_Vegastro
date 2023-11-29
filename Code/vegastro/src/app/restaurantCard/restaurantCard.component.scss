@@ -9,7 +9,7 @@ img {
     object-fit: cover;
 }
 table > tr >td{
-    color: white;
+    color: var(--ion-text-color);
     padding-right: 2vw;
 }
 #favouriteStarWrapper{

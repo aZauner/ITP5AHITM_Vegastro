@@ -31,7 +31,7 @@ export class RestaurantCardDetail {
     vegan: 0,
     vegetarian: 0
   }
-  comments: [{id: string;comment: string;stars: number; userToken: string; date: Date}?] = []
+  comments: [{id: string;comment: string;stars: number; user: {id:number}; date: Date}?] = []
 
 
   roundedStarRating = 0;
@@ -99,7 +99,7 @@ export class RestaurantCardDetail {
         this.selectFilter("hilfreich")
         if (response.data.length > 0) {
           for (const comment of response.data) {
-            if (comment.userToken! == sessionStorage.getItem('userToken')) {
+            if (comment.user.id == sessionStorage.getItem('userToken')) {
               this.restaurantRated = true;
             }
           }
@@ -318,7 +318,7 @@ export class RestaurantCardDetail {
       arr.sort((a,b) => {
         return b.upvotes - a.upvotes
       })
-      let arr1: [{id: string;comment: string;stars: number; userToken: string; date: Date}?] = []
+      let arr1: [{id: string;comment: string;stars: number; user: {id:number}; date: Date}?] = []
       for (const upvote of arr) {
         for (const comment of this.comments) {
           if(comment!.id == upvote.id) {
