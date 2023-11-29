@@ -1,5 +1,6 @@
 package at.vegastro.resource;
 
+import at.vegastro.dtos.UpdateRatingDto;
 import at.vegastro.model.Rating;
 import at.vegastro.model.Restaurant;
 import at.vegastro.repository.RatingRepository;
@@ -29,15 +30,30 @@ public class RatingResource {
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
     public void createRating(Rating rating) {
-        rating.date = LocalDateTime.now();
         ratingRepository.postRating(rating);
     }
 
     @GET
-    @Path("byRestaurant/{restaurantId}")
+    @Path("/byRestaurant/{restaurantId}")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Rating> findByRestaurant(@PathParam("restaurantId") Long restaurantId) {
         return ratingRepository.findByRestaurant(restaurantId);
+    }
+
+    @Transactional
+    @PUT
+    @Path("/updateRating")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void updateRating(UpdateRatingDto updateRating) {
+        ratingRepository.updateRating(updateRating);
+    }
+
+    @Transactional
+    @DELETE
+    @Path("/delete/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void deleteRating(@PathParam("id") Long id) {
+        ratingRepository.deleteRating(id);
     }
 
 }

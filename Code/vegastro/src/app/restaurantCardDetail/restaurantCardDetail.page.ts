@@ -261,8 +261,12 @@ export class RestaurantCardDetail {
     if (sessionStorage.getItem('userToken')) {
       if(this.userStarRating != 0 && this.ratingComment != ''){
         axios.post(BASE_URL+'/rating/create', {
-          userToken: sessionStorage.getItem('userToken'),
-          restaurant: this.inputs.id,
+          user:{
+            id: sessionStorage.getItem('userToken')
+          } ,
+          restaurant: {
+            id: this.inputs.id
+          },
           stars: this.userStarRating,
           comment: this.ratingComment
         }).then((response) => {
