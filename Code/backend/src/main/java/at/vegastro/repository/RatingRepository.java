@@ -13,11 +13,13 @@ import java.util.List;
 public class RatingRepository implements PanacheRepository<Rating> {
     @Inject
      UserRepository userRepository;
+    
     public List<Rating> findbyUsertoken(Long userId) {
        return find("user", userRepository.find("id", userId)).list();
     }
 
     public void postRating(Rating rating) {
+        rating.date = LocalDateTime.now();
         persist(rating);
     }
 
