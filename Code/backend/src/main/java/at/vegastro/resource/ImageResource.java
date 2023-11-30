@@ -19,13 +19,13 @@ public class ImageResource {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Transactional
-    public Response uploadImage(@MultipartForm ImageUploadForm form) {
+    public Long uploadImage(@MultipartForm ImageUploadForm form) {
         Image imageEntity = new Image();
         imageEntity.imageName = form.name;
         imageEntity.imageData = form.data;
         imageEntity.persist();
-
-        return Response.ok("Image uploaded successfully").build();
+        System.out.println(imageEntity.id);
+        return imageEntity.id;
     }
 
     @GET

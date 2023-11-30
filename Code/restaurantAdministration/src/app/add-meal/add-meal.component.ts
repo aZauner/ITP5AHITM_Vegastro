@@ -63,7 +63,7 @@ export class AddMealComponent {
   }
 
   submitChanges(index: number, value: string, desc: string, price: string,) {
-    console.log(this.meals[index].id);
+    console.log(this.meals[index]._id);
 
 
     console.log(this.changedType);
@@ -74,7 +74,7 @@ export class AddMealComponent {
 
     axios
       .put(BASE_URL + '/meal/changeMealValues', {
-        mealId: this.meals[index].id,
+        mealId: this.meals[index]._id,
         title: value,
         description: desc,
         type: this.changedType,
@@ -191,10 +191,10 @@ export class AddMealComponent {
   toggleActive(indexToChange: number) {
     console.log(indexToChange);
 
-    console.log(this.meals[indexToChange].id);
+    console.log(this.meals[indexToChange]._id);
     axios
       .put(BASE_URL + '/meal/changeActiveStatus', {
-        mealid: this.meals[indexToChange].id,
+        mealid: this.meals[indexToChange]._id,
       })
       .then((response) => {
         this.loadMeals();
