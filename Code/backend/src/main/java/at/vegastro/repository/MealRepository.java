@@ -1,6 +1,7 @@
 package at.vegastro.repository;
 
 import at.vegastro.dtos.ChangeMealStatusDto;
+import at.vegastro.dtos.ChangeMealValuesDto;
 import at.vegastro.model.Meal;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -13,8 +14,10 @@ public class MealRepository implements PanacheRepository<Meal> {
         return find("title", title).firstResult();
     }
 
-    public void createRestaurant(Meal meal) {
+    public Meal createMeal(Meal meal) {
+        meal.active = true;
         persist(meal);
+        return meal;
     }
 
     public Meal getMealById(Long id) {
@@ -25,9 +28,18 @@ public class MealRepository implements PanacheRepository<Meal> {
         return listAll();
     }
 
-    public void chnageActive(Long mealid) {
+    public void changeActive(Long mealid) {
         Meal meal = findById(mealid);
         meal.active  = !meal.active;
+        this.getEntityManager().merge(meal);
+    }
+
+    public void changeValues(ChangeMealValuesDto data) {
+        Meal meal = findById(data.id);
+        meal.description = data.description;
+        meal.title = data.title;
+        meal.type = data.type;
+        meal.price = data.price;
         this.getEntityManager().merge(meal);
     }
 }

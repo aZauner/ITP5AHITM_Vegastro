@@ -24,7 +24,7 @@ export class AddMealComponent {
 
   meals = [
     {
-      _id: '',
+      id: '',
       description: '',
       price: '',
       title: '',
@@ -63,7 +63,7 @@ export class AddMealComponent {
   }
 
   submitChanges(index: number, value: string, desc: string, price: string,) {
-    console.log(this.meals[index]._id);
+    console.log(this.meals[index].id);
 
 
     console.log(this.changedType);
@@ -74,7 +74,7 @@ export class AddMealComponent {
 
     axios
       .put(BASE_URL + '/meal/changeMealValues', {
-        mealId: this.meals[index]._id,
+        id: this.meals[index].id,
         title: value,
         description: desc,
         type: this.changedType,
@@ -98,6 +98,7 @@ export class AddMealComponent {
     axios
       .get(BASE_URL + '/restaurant/' + this.id)
       .then((response) => {
+        console.log(response);
         // console.log(response);
         if (response.data.menu.length > 0) {
           for (const meal of response.data.menu) {
@@ -189,12 +190,9 @@ export class AddMealComponent {
   }
 
   toggleActive(indexToChange: number) {
-    console.log(indexToChange);
-
-    console.log(this.meals[indexToChange]._id);
     axios
       .put(BASE_URL + '/meal/changeActiveStatus', {
-        mealid: this.meals[indexToChange]._id,
+        mealId: this.meals[indexToChange].id,
       })
       .then((response) => {
         this.loadMeals();
@@ -202,9 +200,8 @@ export class AddMealComponent {
   }
 
   deleteMeal(id: string) {
-    console.log(id);
     axios
-      .delete(BASE_URL + '/meal/deleteMeal/' + id)
+      .delete(BASE_URL + '/meal/deleteMeal/' + id + "/" + this.id)
       .then((response) => {
         this.loadMeals();
       });
