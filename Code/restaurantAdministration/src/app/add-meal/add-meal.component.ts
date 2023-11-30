@@ -43,11 +43,11 @@ export class AddMealComponent {
 
   changedType = "";
 
-  roundedStarRating=0
+  roundedStarRating = 0
 
   editValues = [{ mealId: '', editable: false }];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -56,39 +56,39 @@ export class AddMealComponent {
     this.loadRatings();
   }
 
-  onChangeType(type: string){
+  onChangeType(type: string) {
     this.changedType = type;
     console.log(this.changedType);
-    
+
   }
 
-  submitChanges( index: number,value: string , desc: string, price: string, ) {
-    console.log(this.meals[index]._id);    
-    
+  submitChanges(index: number, value: string, desc: string, price: string,) {
+    console.log(this.meals[index].id);
+
 
     console.log(this.changedType);
-    if(this.changedType == ""){
-      this.changedType =  this.meals[index].type;
+    if (this.changedType == "") {
+      this.changedType = this.meals[index].type;
     }
-      
+
 
     axios
-      .put(BASE_URL+'/meal/changeMealValues' , {
-        mealId: this.meals[index]._id,
-        title : value,
-        description : desc,
+      .put(BASE_URL + '/meal/changeMealValues', {
+        mealId: this.meals[index].id,
+        title: value,
+        description: desc,
         type: this.changedType,
-        price: price 
-    })
+        price: price
+      })
       .then((response) => {
         console.log("changed");
         this.changedType = ""
-        this.loadMeals();       
+        this.loadMeals();
       });
-    
+
   }
 
-  editMeal(mealIndex: number) {    
+  editMeal(mealIndex: number) {
     this.editValues[mealIndex].editable = !this.editValues[mealIndex].editable;
   }
 
@@ -96,13 +96,13 @@ export class AddMealComponent {
     this.meals = [];
     this.editValues = [];
     axios
-      .get(BASE_URL+'/restaurant/' + this.id)
+      .get(BASE_URL + '/restaurant/' + this.id)
       .then((response) => {
         // console.log(response);
         if (response.data.menu.length > 0) {
           for (const meal of response.data.menu) {
             this.meals.push(meal);
-            this.editValues.push({ mealId: meal._id, editable: false });
+            this.editValues.push({ mealId: meal.id, editable: false });
             // console.log(this.editValues);
           }
         }
@@ -110,19 +110,19 @@ export class AddMealComponent {
   }
 
   loadRatings() {
-    this.ratings = [];    
-    axios.get(BASE_URL+'/rating/byRestaurant/' + this.id).then((response) => {
-            this.ratings = response.data
-            let sumStars = 0;
-            if (response.data.length > 0) {
-              for (const star of response.data) {
-                sumStars += star.stars;
-              }
-              this.roundedStarRating = Math.round((sumStars / response.data.length) * 100) / 100
-            }
-            // console.log(this.ratings);
-            // console.log(this.roundedStarRating);  
-          })
+    this.ratings = [];
+    axios.get(BASE_URL + '/rating/byRestaurant/' + this.id).then((response) => {
+      this.ratings = response.data
+      let sumStars = 0;
+      if (response.data.length > 0) {
+        for (const star of response.data) {
+          sumStars += star.stars;
+        }
+        this.roundedStarRating = Math.round((sumStars / response.data.length) * 100) / 100
+      }
+      // console.log(this.ratings);
+      // console.log(this.roundedStarRating);  
+    })
   }
 
   formBuilder: FormBuilder = new FormBuilder();
@@ -155,11 +155,11 @@ export class AddMealComponent {
     this.createInputs.type = this.firstFormGroup.value.type!;
     this.createInputs.price = this.firstFormGroup.value.price!;
     axios
-      .post(BASE_URL+'/meal/create', this.createInputs)
+      .post(BASE_URL + '/meal/create', this.createInputs)
       .then((response) => {
         axios
-          .put(BASE_URL+'/restaurant/addMealToMenu', {
-            mealid: response.data._id,
+          .put(BASE_URL + '/restaurant/addMealToMenu', {
+            mealid: response.data.id,
             restaurantid: this.id,
           })
           .then((response) => {
@@ -167,7 +167,7 @@ export class AddMealComponent {
             this.loadMeals();
           });
       });
-      this.loadMeals();
+    this.loadMeals();
   }
 
   showCreate() {
@@ -182,7 +182,7 @@ export class AddMealComponent {
     this.showRatingsActive = false;
   }
 
-  showRatingsBox(){
+  showRatingsBox() {
     this.showRatingsActive = !this.showRatingsActive;
     this.showMealsActive = false;
     this.createMealActive = false
@@ -190,22 +190,22 @@ export class AddMealComponent {
 
   toggleActive(indexToChange: number) {
     console.log(indexToChange);
-    
-    console.log(this.meals[indexToChange]._id);    
+
+    console.log(this.meals[indexToChange].id);
     axios
-      .put(BASE_URL+'/meal/changeActiveStatus', {
-        mealid: this.meals[indexToChange]._id,
+      .put(BASE_URL + '/meal/changeActiveStatus', {
+        mealid: this.meals[indexToChange].id,
       })
-      .then((response) => {        
+      .then((response) => {
         this.loadMeals();
       });
   }
 
-  deleteMeal(id: string){
+  deleteMeal(id: string) {
     console.log(id);
     axios
-      .delete(BASE_URL+'/meal/deleteMeal/' + id)
-      .then((response) => {        
+      .delete(BASE_URL + '/meal/deleteMeal/' + id)
+      .then((response) => {
         this.loadMeals();
       });
   }

@@ -27,7 +27,7 @@ export class MapPage {
   ngOnInit() {
 
     //Generate Start map
-    this.geolocation.getCurrentPosition().then((resp) => {  
+    this.geolocation.getCurrentPosition().then((resp) => {
       this.userLocation = {
         lat: resp.coords.latitude,
         lon: resp.coords.longitude,
@@ -86,10 +86,11 @@ export class MapPage {
   static getFavRests() {
     if (!sessionStorage.getItem('favouriteRestaurants') && sessionStorage.getItem('userToken')) {
       axios.get(BASE_URL + '/user/favourites/' + sessionStorage.getItem('userToken')).then((response) => {
+
         let favRestaurants = [];
-        if (response.data.favouriteRestaurants.length > 0) {
-          for (const restaurant of response.data.favouriteRestaurants) {
-            favRestaurants.push(restaurant._id);
+        if (response.data.length > 0) {
+          for (const restaurant of response.data) {
+            favRestaurants.push(restaurant.id);
           }
         }
         sessionStorage.setItem('favouriteRestaurants', JSON.stringify(favRestaurants))
@@ -201,7 +202,7 @@ export class MapPage {
         menu: restaurant.menu,
         fromMarker: true
       }
-      
+
       await this.getAverageStarts(inputs.id).then((starRating) => {
         inputs.stars = starRating
       })

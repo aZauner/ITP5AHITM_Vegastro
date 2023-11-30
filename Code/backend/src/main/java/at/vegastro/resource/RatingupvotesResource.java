@@ -9,7 +9,6 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Path("/ratingupvotes")
@@ -45,8 +44,6 @@ public class RatingupvotesResource {
     @Path("/delete")
     @Produces(MediaType.APPLICATION_JSON)
     public void delete(DeleteRatingUpvoteDto deleteRatingUpvote) {
-        System.out.println(deleteRatingUpvote.ratingId);
-        System.out.println(deleteRatingUpvote.userId);
         ratingupvotesRepository.deleteUpvote(deleteRatingUpvote.ratingId, deleteRatingUpvote.userId);
     }
 }

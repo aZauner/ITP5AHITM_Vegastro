@@ -15,7 +15,6 @@ import { log } from 'console';
 
 export class Comment {
   @Input() inputs = { id: "",comment: "",stars: 0, user: {id: 0}, date: new Date()}
-  @Input() id = 0
 
   @ViewChild(IonModal)
   modal!: IonModal;
@@ -33,14 +32,11 @@ export class Comment {
 
   constructor(public modalController: ModalController, private updateService: UpdateService, private toastController: ToastController, private router: Router){}
 
-  ngOnInit(){     
+  ngOnInit() {     
     this.formattedDate = new Date(this.inputs.date).toLocaleDateString();    
     if (sessionStorage.getItem("userToken")) {
-      console.log(sessionStorage.getItem("userToken"));
       this.loggedIn = true
       if (this.inputs.user.id == parseInt(sessionStorage.getItem("userToken")!)) {
-        console.log(this.inputs);
-
         this.isOwnComment = true;
         this.userStarRating = this.inputs.stars
         this.comment = this.inputs.comment
@@ -110,7 +106,7 @@ export class Comment {
     }).then((response) => {
       this.modal.dismiss(null, 'cancel');
       setTimeout(()=>{
-        this.updateService.setNewUpdate(true); 
+        this.updateService.setNewUpdate(false); 
       } , 300)      
     }) 
   } 

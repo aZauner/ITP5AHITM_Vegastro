@@ -7,6 +7,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @ApplicationScoped
@@ -15,7 +16,7 @@ public class RatingRepository implements PanacheRepository<Rating> {
      UserRepository userRepository;
     
     public List<Rating> findbyUsertoken(Long userId) {
-       return find("user", userRepository.find("id", userId)).list();
+       return find("user.id", userId).list();
     }
 
     public void postRating(Rating rating) {

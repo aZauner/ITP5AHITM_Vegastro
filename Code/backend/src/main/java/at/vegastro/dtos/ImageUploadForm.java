@@ -12,5 +12,4 @@ public class ImageUploadForm {
     @FormParam("name")
     public String name;
 
-    // You can add more form parameters as needed
 }

@@ -60,7 +60,6 @@ public class RestaurantResource {
     @Path("/addMealToMenu")
     @Consumes(MediaType.APPLICATION_JSON)
     public void addMealToMenu(AddMealToRestaurantDto mealData ) {
-        System.out.println(mealData.mealid);
         restaurantRepository.addMealToMenu(mealData.mealid, mealData.restaurantid);
     }
 }

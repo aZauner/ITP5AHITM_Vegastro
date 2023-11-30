@@ -42,8 +42,8 @@ export class ProfilePage implements OnInit {
 
   updateProfileData() {
 
-    axios.put(BASE_URL + '/auth/changeData', {
-      "token": sessionStorage.getItem('userToken'),
+    axios.put(BASE_URL + '/user/update', {
+      "id": sessionStorage.getItem('userToken'),
       "oldPassword": this.userData.oldPassword,
       "newPassword": this.userData.newPassword,
       "confirmedPassword": this.userData.newConfirmedPassword,
@@ -51,9 +51,8 @@ export class ProfilePage implements OnInit {
       "lastname": this.userData.lastname,
       "username": this.userData.username
     }).then((response) => {
-      if (response.data.status != 200) {
-        this.errorMessage = response.data.message;
-
+      if (response.data != null) {
+        this.errorMessage = response.data;
       }
     });
 

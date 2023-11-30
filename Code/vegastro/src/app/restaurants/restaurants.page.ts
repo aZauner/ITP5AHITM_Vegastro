@@ -52,7 +52,7 @@ export class RestaurantsPage {
           bounds.getSouthWest().lng
         )
         .then((response) => {
-          if (response.data.status != 404) {
+          if (response.data.length > 0) {
             if (document.getElementById('restaurantCards')) {
               document.getElementById('restaurantCards')!.innerHTML = "<h1 style='font-size: 4vh;margin: 3.5vh 16px 0 16px;text-align: center;'>T R E F F E R</h1>"
             }

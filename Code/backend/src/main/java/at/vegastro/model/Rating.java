@@ -6,6 +6,7 @@ import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDateTime;
 
+
 @Entity
 public class Rating extends PanacheEntity {
     @ManyToOne
