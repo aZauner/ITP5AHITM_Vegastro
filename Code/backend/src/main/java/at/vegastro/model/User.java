@@ -16,6 +16,6 @@ public class User extends PanacheEntity {
     @Column(unique = true)
     public String email;
     public String password;
-    @OneToMany
+    @ManyToMany
     public List<Restaurant> favouriteRestaurants = new LinkedList<>();
 }

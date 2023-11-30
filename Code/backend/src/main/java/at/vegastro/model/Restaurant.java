@@ -1,5 +1,6 @@
 package at.vegastro.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -15,6 +16,7 @@ public class Restaurant extends PanacheEntity {
     public Double latitude;
     public Double longitude;
     @ManyToOne
+    @JsonIgnore
     public User owner;
 
     public String type;
