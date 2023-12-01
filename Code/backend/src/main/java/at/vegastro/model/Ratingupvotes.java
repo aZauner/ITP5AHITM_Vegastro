@@ -13,4 +13,5 @@ public class Ratingupvotes extends PanacheEntity {
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     public Rating rating;
+    
 }
