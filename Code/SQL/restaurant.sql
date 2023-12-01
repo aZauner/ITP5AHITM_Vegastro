@@ -1,0 +1,2 @@
+INSERT INTO public.restaurant (latitude, longitude, id, image_id, location_id, owner_id, description, restaurantname, type) VALUES (48.2713069, 14.311001800766004, 1, 1, 1, 100, 'Eines der Top Restaurants in Linz für veganes Essen.', 'Food Palace', 'vegan');
+INSERT INTO public.restaurant (latitude, longitude, id, image_id, location_id, owner_id, description, restaurantname, type) VALUES (48.3014748, 14.2922169, 2, 2, 2, 100, 'Gutes Essen zu günstigen Preis. Viele vegetarische Gerichte.', 'Veggie Eat', 'vegetarian');
