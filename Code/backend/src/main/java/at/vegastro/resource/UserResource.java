@@ -74,4 +74,5 @@ public class UserResource {
     public void removeFavRestaurant(FavouriteRestaurantDto data) {
         userRepository.removeFavourite(data);
     }
+
 }

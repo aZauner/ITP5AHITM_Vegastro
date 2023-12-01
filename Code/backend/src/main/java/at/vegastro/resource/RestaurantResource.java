@@ -62,4 +62,10 @@ public class RestaurantResource {
     public void addMealToMenu(AddMealToRestaurantDto mealData ) {
         restaurantRepository.addMealToMenu(mealData.mealid, mealData.restaurantid);
     }
+
+    @GET
+    @Path("/getByOwner/{id}")
+    public List<Restaurant> getByOwner(@PathParam("id") Long id) {
+        return restaurantRepository.list("owner.id", id);
+    }
 }
