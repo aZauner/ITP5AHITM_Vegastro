@@ -85,7 +85,6 @@ export class AddMealComponent {
         this.changedType = ""
         this.loadMeals();
       });
-
   }
 
   editMeal(mealIndex: number) {
