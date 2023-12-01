@@ -54,6 +54,7 @@ public class UserRepository implements PanacheRepository<User> {
         return null;
     }
 
+    
     public void addFavourite(FavouriteRestaurantDto data) {
         User user = findById(data.user_id);
         user.favouriteRestaurants.add(restaurantRepository.findById(data.restaurant_id));
