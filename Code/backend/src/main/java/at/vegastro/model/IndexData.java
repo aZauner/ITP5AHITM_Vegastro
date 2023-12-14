@@ -4,15 +4,17 @@ import at.vegastro.dtos.IndexLocation;
 import at.vegastro.dtos.IndexMenu;
 
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.List;
 
 public class IndexData {
     private String description;
     private String  id;
     private IndexLocation location;
     private String  restaurantName;
-    private IndexMenu menu;
+    private List<IndexMenu> menu;
 
-    public IndexData(String description, String id, IndexLocation location, String restaurantName, IndexMenu menu) {
+    public IndexData(String description, String id, IndexLocation location, String restaurantName, List<IndexMenu> menu) {
         this.description = description;
         this.id = id;
         this.location = location;
@@ -36,13 +38,6 @@ public class IndexData {
         this.id = id;
     }
 
-    public IndexLocation getLocation() {
-        return location;
-    }
-
-    public void setLocation(IndexLocation location) {
-        this.location = location;
-    }
 
     public String getRestaurantName() {
         return restaurantName;
@@ -52,11 +47,19 @@ public class IndexData {
         this.restaurantName = restaurantName;
     }
 
-    public IndexMenu getMenu() {
+    public IndexLocation getLocation() {
+        return location;
+    }
+
+    public void setLocation(IndexLocation location) {
+        this.location = location;
+    }
+
+    public List<IndexMenu> getMenu() {
         return menu;
     }
 
-    public void setMenu(IndexMenu menu) {
+    public void setMenu(List<IndexMenu> menu) {
         this.menu = menu;
     }
 }
