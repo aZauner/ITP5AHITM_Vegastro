@@ -1,6 +1,11 @@
 package at.vegastro.resource;
 
 import at.vegastro.dtos.IndexLocation;
+import at.vegastro.model.Meal;
+import at.vegastro.model.Restaurant;
+import at.vegastro.repository.RestaurantRepository;
+import io.quarkus.scheduler.Scheduled;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -32,11 +37,13 @@ import java.util.List;
 public class SearchResource {
 
      public OpenSearchClient client;
+     public List<Restaurant> previousRestaurants = new LinkedList<>();
 
-    @GET
-    @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
-    public void test() throws IOException {
+     @Inject
+     RestaurantRepository restaurantRepository;
+
+
+    public void init() throws IOException {
         final HttpHost host = new HttpHost("localhost", 9200, "http");
         final BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         //Only for demo purposes. Don't specify your credentials in code.
@@ -54,22 +61,60 @@ public class SearchResource {
         final OpenSearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
         OpenSearchClient client = new org.opensearch.client.opensearch.OpenSearchClient(transport);
         this.client = client;
+        System.out.println(this.client);
     }
 
-    @GET
-    @Path("/indexData")
-    public void indexData() throws IOException {
+    public void bulkData(List<Restaurant> restaurants){
         System.out.println(this.client);
-        List<IndexMenu> menu = new LinkedList<>();
-        menu.add(new IndexMenu(true, "asdf", "asfd", "asdf", "asdf"));
-        IndexData indexData = new IndexData("asdf", "asdf", new IndexLocation("asdf", "asdf", "hsldöf"), "asdf", menu );
-        IndexRequest<IndexData> indexRequest = new IndexRequest.Builder<IndexData>().index("search_index").document(indexData).build();
-        this.client.index(indexRequest);
+        try {
+            for(Restaurant restaurant: restaurants){
+                List<IndexMenu> menu = new LinkedList<>();
+                for (Meal meal: restaurant.menu){
+                    menu.add(new IndexMenu(meal.active, meal.description, meal.price, meal.title, meal.type));
+                }
+                
+                IndexData indexData = new IndexData(restaurant.description, restaurant.id.toString(), new IndexLocation(restaurant.location.city, restaurant.location.plz.toString(), restaurant.location.street), restaurant.restaurantName, menu );
+                IndexRequest<IndexData> indexRequest = new IndexRequest.Builder<IndexData>().index("search_index").document(indexData).build();
+                this.client.index(indexRequest);
+            }
+
+
+        }catch (Exception e){
+            System.out.println( e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    //@GET
+    //@Path("/indexData")
+    @Scheduled(every="10s")
+    public void indexData() throws IOException {
+        init();
+        if (previousRestaurants.size() == 0){
+            previousRestaurants =  restaurantRepository.getAll();
+            this.bulkData(previousRestaurants);
+        }else {
+            List<Restaurant> allRestaurants = new LinkedList<>();
+            allRestaurants = restaurantRepository.getAll();
+            List<Restaurant> restaurantsToAdd = new LinkedList<>();
+            for (Restaurant element : allRestaurants) {
+                if (!previousRestaurants.contains(element)) {
+                    restaurantsToAdd.add(element);
+                }
+            }
+            if (restaurantsToAdd.size() == 0){
+                return;
+            }else {
+                this.bulkData(restaurantsToAdd);
+            }
+        }
+
     }
 
     @GET
     @Path("/searchResult")
-    public void searchForResult() {
+    public void searchForResult()  throws IOException {
+        init();
         try {
             SearchResponse<IndexData> searchResponse = client.search(s -> s.index("search_index"), IndexData.class);
             for (int i = 0; i < searchResponse.hits().hits().size(); i++) {
