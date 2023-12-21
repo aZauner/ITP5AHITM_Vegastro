@@ -15,14 +15,18 @@ public class IndexData {
     private IndexLocation location;
     private String  restaurantName;
     private List<IndexMenu> menu;
+    private Double latitude;
+    private Double longitude;
 
     @JsonCreator
-    public IndexData(@JsonProperty("description") String description,@JsonProperty("id") String id,@JsonProperty("location") IndexLocation location,@JsonProperty("restaurantName") String restaurantName,@JsonProperty("menu") List<IndexMenu> menu) {
+    public IndexData(@JsonProperty("longitude") Double longitude,@JsonProperty("latitude") Double latitude,@JsonProperty("description") String description,@JsonProperty("id") String id,@JsonProperty("location") IndexLocation location,@JsonProperty("restaurantName") String restaurantName,@JsonProperty("menu") List<IndexMenu> menu) {
         this.description = description;
         this.id = id;
         this.location = location;
         this.restaurantName = restaurantName;
         this.menu = menu;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     @JsonCreator
@@ -68,5 +72,21 @@ public class IndexData {
 
     public void setMenu(List<IndexMenu> menu) {
         this.menu = menu;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

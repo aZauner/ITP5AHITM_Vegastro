@@ -72,8 +72,7 @@ public class SearchResource {
                 for (Meal meal: restaurant.menu){
                     menu.add(new IndexMenu(meal.active, meal.description, meal.price, meal.title, meal.type));
                 }
-                
-                IndexData indexData = new IndexData(restaurant.description, restaurant.id.toString(), new IndexLocation(restaurant.location.city, restaurant.location.plz.toString(), restaurant.location.street), restaurant.restaurantName, menu );
+                IndexData indexData = new IndexData(restaurant.longitude,restaurant.latitude ,restaurant.description, restaurant.id.toString(), new IndexLocation(restaurant.location.city, restaurant.location.plz.toString(), restaurant.location.street), restaurant.restaurantName, menu );
                 IndexRequest<IndexData> indexRequest = new IndexRequest.Builder<IndexData>().index("search_index").document(indexData).build();
                 this.client.index(indexRequest);
             }
