@@ -1,5 +1,8 @@
 package at.vegastro.dtos;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class IndexMenu {
     private boolean active;
     private String description;
@@ -7,12 +10,17 @@ public class IndexMenu {
     private String title;
     private String type;
 
-    public IndexMenu(boolean active, String description, String price, String title, String type) {
+    @JsonCreator
+    public IndexMenu(@JsonProperty("active") boolean active,@JsonProperty("description") String description,@JsonProperty("price") String price,@JsonProperty("title") String title,@JsonProperty("type") String type) {
         this.active = active;
         this.description = description;
         this.price = price;
         this.title = title;
         this.type = type;
+    }
+
+    @JsonCreator
+    public IndexMenu() {
     }
 
     public boolean isActive() {

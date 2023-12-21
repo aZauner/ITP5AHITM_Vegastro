@@ -12,6 +12,7 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.opensearch.client.RestClient;
 import org.opensearch.client.RestClientBuilder;
+import org.opensearch.client.json.UnexpectedJsonEventException;
 import org.opensearch.client.json.jackson.JacksonJsonpMapper;
 import org.opensearch.client.opensearch.OpenSearchClient;
 import org.opensearch.client.opensearch.core.IndexRequest;
@@ -36,10 +37,7 @@ public class SearchResource {
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public void test() throws IOException {
-        System.setProperty("javax.net.ssl.trustStore", "src/main/resources/server.keystore");
-        System.setProperty("javax.net.ssl.trustStorePassword", "password");
-
-        final HttpHost host = new HttpHost("https", 443, "357c-193-170-158-243.ngrok.io/");
+        final HttpHost host = new HttpHost("localhost", 9200, "http");
         final BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         //Only for demo purposes. Don't specify your credentials in code.
         credentialsProvider.setCredentials(new AuthScope(host), new UsernamePasswordCredentials("admin", "admin"));
@@ -56,7 +54,6 @@ public class SearchResource {
         final OpenSearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
         OpenSearchClient client = new org.opensearch.client.opensearch.OpenSearchClient(transport);
         this.client = client;
-        System.out.println(this.client);
     }
 
     @GET
@@ -72,10 +69,16 @@ public class SearchResource {
 
     @GET
     @Path("/searchResult")
-    public void searchForResult() throws IOException {
-        SearchResponse<IndexData> searchResponse = client.search(s -> s.index("search_index"), IndexData.class);
-        for (int i = 0; i< searchResponse.hits().hits().size(); i++) {
-            System.out.println(searchResponse.hits().hits().get(i).source());
+    public void searchForResult() {
+        try {
+            SearchResponse<IndexData> searchResponse = client.search(s -> s.index("search_index"), IndexData.class);
+            for (int i = 0; i < searchResponse.hits().hits().size(); i++) {
+                System.out.println(searchResponse.hits().hits().get(i).source().getRestaurantName());
+            }
+        } catch (Exception e) {
+            // Log detailed information about the response causing the error
+            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

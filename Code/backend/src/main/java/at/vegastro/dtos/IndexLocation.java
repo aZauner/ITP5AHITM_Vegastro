@@ -1,14 +1,22 @@
 package at.vegastro.dtos;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class IndexLocation {
     private String city;
     private String plz;
     private String street;
 
-    public IndexLocation(String city, String plz, String street) {
+    @JsonCreator
+    public IndexLocation(@JsonProperty("city") String city,@JsonProperty("plz") String plz,@JsonProperty("street") String street) {
         this.city = city;
         this.plz = plz;
         this.street = street;
+    }
+
+    @JsonCreator
+    public IndexLocation() {
     }
 
     public String getCity() {
