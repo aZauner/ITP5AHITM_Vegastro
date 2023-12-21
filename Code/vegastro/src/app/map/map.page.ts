@@ -101,18 +101,35 @@ export class MapPage {
   updateMarkers() {
     const bounds = MapPage.map.getBounds();
     axios
-      .get(
-        BASE_URL + '/restaurant/getNearPosition/' +
-        bounds.getNorthEast().lat +
-        '/' +
-        bounds.getNorthEast().lng +
-        '/' +
-        bounds.getSouthWest().lat +
-        '/' +
-        bounds.getSouthWest().lng
+      .post("http://localhost:9200/search_index/_search", {      
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "range": {
+                    "latitude": {
+                      "lt": bounds.getNorthEast().lat,
+                      "gt": bounds.getSouthWest().lat,
+                    }
+                  }
+                },
+                {
+                  "range": {
+                    "longitude": {
+                      "lt": bounds.getNorthEast().lng,
+                      "gt": bounds.getSouthWest().lng
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
       )
       .then((response) => {
-        if (response.data.status != 404) {
+        console.log(response);
+        
+        if (response.data.status == 404) {
           for (const marker of this.activeMarkers) {
             MapPage.map.removeLayer(marker);
           }
