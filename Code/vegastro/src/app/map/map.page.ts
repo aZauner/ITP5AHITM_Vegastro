@@ -219,6 +219,7 @@ export class MapPage {
         menu: restaurant.menu,
         fromMarker: true
       }
+      
 
       await this.getAverageStarts(inputs.id).then((starRating) => {
         inputs.stars = starRating
@@ -252,7 +253,7 @@ export class MapPage {
 
     let inputs = {
       id: restaurant.id,
-      image: restaurant.image,
+      image: restaurant.image.id ? restaurant.image.id : restaurant.image,
       restaurantName: restaurant.restaurantName,
       type: restaurant.type,
       stars: 4,
@@ -397,7 +398,6 @@ export class MapPage {
                   axios
                     .get(BASE_URL + '/restaurant/' + restauransBySearch[i]._source.id)
                     .then((response) => {
-                      (response.data);
 
                       this.navigateToRestaurant(response.data);
 
