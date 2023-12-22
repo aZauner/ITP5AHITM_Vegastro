@@ -18,8 +18,12 @@ public class IndexData {
     private Double latitude;
     private Double longitude;
 
+    private String type;
+
+    private Long image;
+
     @JsonCreator
-    public IndexData(@JsonProperty("longitude") Double longitude,@JsonProperty("latitude") Double latitude,@JsonProperty("description") String description,@JsonProperty("id") String id,@JsonProperty("location") IndexLocation location,@JsonProperty("restaurantName") String restaurantName,@JsonProperty("menu") List<IndexMenu> menu) {
+    public IndexData(@JsonProperty("longitude") Double longitude,@JsonProperty("latitude") Double latitude,@JsonProperty("description") String description,@JsonProperty("id") String id,@JsonProperty("location") IndexLocation location,@JsonProperty("restaurantName") String restaurantName,@JsonProperty("menu") List<IndexMenu> menu, @JsonProperty("type") String type, @JsonProperty("image") Long image) {
         this.description = description;
         this.id = id;
         this.location = location;
@@ -27,10 +31,28 @@ public class IndexData {
         this.menu = menu;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.type = type;
+        this.image = image;
     }
 
     @JsonCreator
     public IndexData() {
+    }
+
+    public Long getImage() {
+        return image;
+    }
+
+    public void setImage(Long image) {
+        this.image = image;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getDescription() {
