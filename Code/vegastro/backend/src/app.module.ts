@@ -23,7 +23,7 @@ import { SearchModule } from './search/search.module';
     MealModule,
     RatingModule,
     RatingupvotesModule,
-    SearchModule
+
   ],
   controllers: [AppController],
   providers: [AppService],

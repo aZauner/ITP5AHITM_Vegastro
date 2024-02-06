@@ -135,8 +135,11 @@ export class MapPage {
 
           this.activeMarkers = [];
           if (MapPage.filters.length > 0) {
+
+            
             for (const restaurant of response.data.hits.hits) {
-              if (MapPage.filters.includes(restaurant.type)) {
+              
+              if (MapPage.filters.includes(restaurant._source.type)) {
                 this.addMarker(restaurant._source);
               }
             }
