@@ -41,18 +41,33 @@ export class RestaurantsPage {
       spinner.style.transform = 'translate(-50%,-50%)';
       restaurantCardList.appendChild(spinner)
       axios
-        .get(
-          BASE_URL + '/restaurant/getNearPosition/' +
-          bounds.getNorthEast().lat +
-          '/' +
-          bounds.getNorthEast().lng +
-          '/' +
-          bounds.getSouthWest().lat +
-          '/' +
-          bounds.getSouthWest().lng
+        .post("/search_index/_search", {
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "range": {
+                    "latitude": {
+                      "lt": bounds.getNorthEast().lat,
+                      "gt": bounds.getSouthWest().lat,
+                    }
+                  }
+                },
+                {
+                  "range": {
+                    "longitude": {
+                      "lt": bounds.getNorthEast().lng,
+                      "gt": bounds.getSouthWest().lng
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
         )
         .then((response) => {
-          if (response.data.length > 0) {
+          if (response.data.hits.hits.length > 0) {
             if (document.getElementById('restaurantCards')) {
               document.getElementById('restaurantCards')!.innerHTML = "<h1 style='font-size: 4vh;margin: 3.5vh 16px 0 16px;text-align: center;'>T R E F F E R</h1>"
             }
@@ -60,11 +75,12 @@ export class RestaurantsPage {
               let favRests: [string] = JSON.parse(sessionStorage.getItem('favouriteRestaurants')!);
               if (MapPage.filters.length > 0) {
                 let count = 0;
-                for (const restaurant of response.data) {
+                for (const restaurant1 of response.data.hits.hits) {
+                  let restaurant = restaurant1._source
                   if (MapPage.filters.includes(restaurant.type)) {
                     count++;
                     let desc = restaurant.description ? restaurant.description : "";
-                    service.addDynamicComponent({ id: restaurant.id, image: restaurant.image ? restaurant.image.id : null, restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: favRests.includes(restaurant.id) })
+                    service.addDynamicComponent({ id: restaurant.id, image: restaurant.image, restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: favRests.includes(restaurant.id) })
                   }
                 }
                 if (count == 0 && document.getElementById('restaurantCards')) {
@@ -72,19 +88,21 @@ export class RestaurantsPage {
                   document.getElementById('restaurantCards')!.innerHTML = "<h1 style='margin-top: 75%; text-align: center; font-size: 3vh;'>Keine Treffer gefunden</h1>"
                 }
               } else {
-                for (const restaurant of response.data) {
+                for (const restaurant1 of response.data.hits.hits) {
+                  let restaurant = restaurant1._source
                   let desc = restaurant.description ? restaurant.description : "";
-                  service.addDynamicComponent({ id: restaurant.id, image: restaurant.image ? restaurant.image.id : null, restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: favRests.includes(restaurant.id) })
+                  service.addDynamicComponent({ id: restaurant.id, image: restaurant.image, restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: favRests.includes(restaurant.id) })
                 }
               }
             } else {
               if (MapPage.filters.length > 0) {
                 let count = 0;
-                for (const restaurant of response.data) {
+                for (const restaurant1 of response.data.hits.hits) {
+                  let restaurant = restaurant1._source
                   if (MapPage.filters.includes(restaurant.type)) {
                     count++
                     let desc = restaurant.description ? restaurant.description : "";
-                    service.addDynamicComponent({ id: restaurant.id, image: restaurant.image ? restaurant.image.id : null, restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: false })
+                    service.addDynamicComponent({ id: restaurant.id, image: restaurant.image, restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: false })
                   }
                 }
                 if (count == 0 && document.getElementById('restaurantCards')) {
@@ -92,9 +110,10 @@ export class RestaurantsPage {
                   document.getElementById('restaurantCards')!.innerHTML = "<h1 style='margin-top: 75%; text-align: center; font-size: 3vh;'>Keine Treffer gefunden</h1>"
                 }
               } else {
-                for (const restaurant of response.data) {
+                for (const restaurant1 of response.data.hits.hits) {
+                  let restaurant = restaurant1._source
                   let desc = restaurant.description ? restaurant.description : "";
-                  service.addDynamicComponent({ id: restaurant.id, image: restaurant.image ? restaurant.image.id : null, restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: false })
+                  service.addDynamicComponent({ id: restaurant.id, image: restaurant.image, restaurantName: restaurant.restaurantName, description: desc, type: restaurant.type, stars: Math.floor(Math.random() * 5 + 1), menu: restaurant.menu, isFav: false })
                 }
               }
             }

@@ -101,32 +101,51 @@ export class MapPage {
   updateMarkers() {
     const bounds = MapPage.map.getBounds();
     axios
-      .get(
-        BASE_URL + '/restaurant/getNearPosition/' +
-        bounds.getNorthEast().lat +
-        '/' +
-        bounds.getNorthEast().lng +
-        '/' +
-        bounds.getSouthWest().lat +
-        '/' +
-        bounds.getSouthWest().lng
+      .post("/search_index/_search", {      
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "range": {
+                    "latitude": {
+                      "lt": bounds.getNorthEast().lat,
+                      "gt": bounds.getSouthWest().lat,
+                    }
+                  }
+                },
+                {
+                  "range": {
+                    "longitude": {
+                      "lt": bounds.getNorthEast().lng,
+                      "gt": bounds.getSouthWest().lng
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
       )
       .then((response) => {
-        if (response.data.status != 404) {
+        
+        if (response.data.hits.hits.length > 0) {
           for (const marker of this.activeMarkers) {
             MapPage.map.removeLayer(marker);
           }
 
           this.activeMarkers = [];
           if (MapPage.filters.length > 0) {
-            for (const restaurant of response.data) {
-              if (MapPage.filters.includes(restaurant.type)) {
-                this.addMarker(restaurant);
+
+            
+            for (const restaurant of response.data.hits.hits) {
+              
+              if (MapPage.filters.includes(restaurant._source.type)) {
+                this.addMarker(restaurant._source);
               }
             }
           } else {
-            for (const restaurant of response.data) {
-              this.addMarker(restaurant);
+            for (const restaurant of response.data.hits.hits) {
+              this.addMarker(restaurant._source);
             }
           }
         }
@@ -188,13 +207,14 @@ export class MapPage {
         })
       })
     }
+    
 
     marker.addEventListener('click', async () => {
       this.getFavRestsMem();
 
       let inputs = {
         id: restaurant.id,
-        image: restaurant.image ? restaurant.image.id : null,
+        image: restaurant.image,
         restaurantName: restaurant.restaurantName,
         type: restaurant.type,
         stars: 4,
@@ -202,6 +222,7 @@ export class MapPage {
         menu: restaurant.menu,
         fromMarker: true
       }
+      
 
       await this.getAverageStarts(inputs.id).then((starRating) => {
         inputs.stars = starRating
@@ -235,7 +256,7 @@ export class MapPage {
 
     let inputs = {
       id: restaurant.id,
-      image: restaurant.image ? restaurant.image.id : null,
+      image: restaurant.image.id ? restaurant.image.id : restaurant.image,
       restaurantName: restaurant.restaurantName,
       type: restaurant.type,
       stars: 4,
@@ -296,10 +317,68 @@ export class MapPage {
         }
         let list = document.createElement('ion-list');
 
-        axios.post('http://localhost:3000/search/searchByKeyword', { keyword: this.address })
+        axios.post('/search_index/_search', {
+          "query": {
+            "bool": {
+              "should": [
+                {
+                  "multi_match": {
+                    "query": this.address,
+                    "fields": ["restaurantName"],
+                    "slop": 1
+                  }
+                },
+                {
+                  "multi_match": {
+                    "query": this.address,
+                    "fields": ["description"],
+                    "slop": 1
+                  }
+                },
+                {
+                  "multi_match": {
+                    "query": this.address,
+                    "fields": ["location.city"],
+                    "slop": 1
+                  }
+                },
+                {
+                  "multi_match": {
+                    "query": this.address,
+                    "fields": ["location.plz"],
+                    "slop": 1
+                  }
+                },
+                {
+                  "multi_match": {
+                    "query": this.address,
+                    "fields": ["location.street"],
+                    "slop": 1
+                  }
+                },
+                {
+                  "multi_match": {
+                    "query": this.address,
+                    "fields": ["menu.title"],
+                    "slop": 1
+                  }
+                },
+                {
+                  "multi_match": {
+                    "query": this.address,
+                    "fields": ["menu.description"],
+                    "slop": 1
+                  }
+                }
+              ],
+              "minimum_should_match": 2
+            }
+          }
+        })
           .then((response) => {
-            if (response.data.length >= 1) {
-              let restauransBySearch = response.data;
+            if (response.data.hits.hits.length >= 1) {
+              
+              let restauransBySearch = response.data.hits.hits;
               let restaurantDiv = document.createElement("div");
               let label = document.createElement('label');
               label.innerText = "Restaurants";
@@ -313,16 +392,15 @@ export class MapPage {
               for (let i = 0; i < restauransBySearch.length; i++) {
                 let item = document.createElement('ion-item');
                 let label = document.createElement('p');
-                let text = restauransBySearch[i].restaurant.restaurantName;
+                let text = restauransBySearch[i]._source.restaurantName;
 
                 label.innerText = text;
 
                 item.appendChild(label);
                 item.addEventListener('click', () => {
                   axios
-                    .get(BASE_URL + '/restaurant/' + restauransBySearch[i].restaurant.id)
+                    .get(BASE_URL + '/restaurant/' + restauransBySearch[i]._source.id)
                     .then((response) => {
-                      (response.data);
 
                       this.navigateToRestaurant(response.data);
 

@@ -58,6 +58,9 @@ export class RestaurantCard {
   inputs: any = this.defaultInputs;
 
   constructor(private router: Router) {
+    setTimeout(() => {
+      console.log(this.inputs);
+    },1000)
   }  
 
   openDetails() {
