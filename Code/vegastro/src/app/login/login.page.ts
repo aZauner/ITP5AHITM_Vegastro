@@ -14,7 +14,7 @@ export class LoginPage {
   mailvalid: any;
   foundUser: boolean = true;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private keycloakService:KeycloakService) {
     this.login = this.formBuilder.group({
       email: ['', Validators.email],
       password: ['', Validators.minLength(2)],
@@ -46,6 +46,15 @@ export class LoginPage {
 
   executeLogin() {
     let loginData = this.login.value;
+
+    this.keycloakService.getAccessToken().subscribe((data: any) =>{
+      let accessToken = data.access_token;
+      console.log(accessToken)
+      this.keycloakService.getUserToken(loginData.email, loginData.password, accessToken).subscribe((data:any)=>{
+        console.log(data.access_token)
+          sessionStorage.setItem("userJwtToken", data.access_token)
+        })
+    })
 
     axios.post(BASE_URL+'/user/login', { email: loginData.email, password: loginData.password })
       .then((response) => {

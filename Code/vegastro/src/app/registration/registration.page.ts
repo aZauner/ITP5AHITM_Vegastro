@@ -77,9 +77,9 @@ export class RegistrationPage {
       console.log(accessToken)
       this.keycloakService.createUser(accessToken, registrationData.username, registrationData.email, registrationData.firstName, registrationData.lastName, registrationData.password).subscribe((data) =>{
         console.log(data)
-        this.keycloakService.getUserToken("testuser2", "testpassword", accessToken).subscribe((data)=>{
-          console.log(data)
-        })
+        // this.keycloakService.getUserToken("testuser2", "testpassword", accessToken).subscribe((data)=>{
+        //   console.log(data)
+        // })
       })
 
     })

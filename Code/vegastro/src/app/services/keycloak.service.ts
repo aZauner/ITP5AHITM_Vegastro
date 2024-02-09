@@ -12,7 +12,7 @@ export class KeycloakService {
   createUser(token: string, username : string, email: string, firstName: string, lastName: string, password: string){
 
     let registrationData = {
-      "username": username,
+      "username": email,
       "email": email,
       "firstName": firstName,
       "lastName": lastName,
@@ -50,18 +50,17 @@ export class KeycloakService {
 
   }
 
-  getUserToken(username: string, password:string , token:string){
+  getUserToken(email: string, password:string , token:string){
     let body = new HttpParams()
       .set('client_id', 'vegastro')
       .set('client_secret', 'dUcuXkSV6dV1oNl6Edah2gXCCmCVNVKh')
       .set('grant_type', 'password')
-      .set('username', username)
+      .set('username', email)
       .set('password', password);
 
-    return this.http.post( "/realms/vegastroRealm/protocol/openid-connect/token", body.toString(), {
+    return this.http.post( "/realms/vegastroRealm/protocol/openid-connect/token", body.toString(),{
       headers: new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
-        .set('authorization', "Bearer "+token)
     })
   }
 }
