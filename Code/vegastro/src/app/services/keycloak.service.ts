@@ -63,4 +63,20 @@ export class KeycloakService {
         .set('Content-Type', 'application/x-www-form-urlencoded')
     })
   }
+
+  getRole(name : string, token:string){
+    return this.http.get( "/admin/realms/vegastroRealm/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9/roles/"+ name, {
+      headers: new HttpHeaders()
+        .set('authorization', "Bearer "+token)
+    })
+  }
+
+  mapRole(roleData:any, userId: string, token:string){
+    let body = [roleData]
+
+    return this.http.post( "/admin/realms/vegastroRealm/users/"+ userId +"/role-mappings/clients/6e105bf8-def4-474e-9802-2c2ab869a5b9", body, {
+      headers: new HttpHeaders()
+        .set('authorization', "Bearer "+token)
+    })
+  }
 }

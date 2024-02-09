@@ -10,12 +10,16 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.util.List;
 import java.util.Optional;
 
 @Path("/meal")
 public class MealResource {
+
+    @Inject
+    JsonWebToken jsonWebToken;
 
     @Inject
     MealRepository mealRepository;

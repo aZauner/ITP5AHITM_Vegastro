@@ -77,9 +77,23 @@ export class RegistrationPage {
       console.log(accessToken)
       this.keycloakService.createUser(accessToken, registrationData.username, registrationData.email, registrationData.firstName, registrationData.lastName, registrationData.password).subscribe((data) =>{
         console.log(data)
-        // this.keycloakService.getUserToken("testuser2", "testpassword", accessToken).subscribe((data)=>{
-        //   console.log(data)
-        // })
+        this.keycloakService.getUserToken(registrationData.email, registrationData.password, accessToken).subscribe((data:any)=>{
+          let jwtToken = data.access_token
+
+          var base64Url = jwtToken.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join(''));
+
+          jwtToken = JSON.parse(jsonPayload) ;
+
+          this.keycloakService.getRole("default_role", accessToken).subscribe((data)=>{
+            let roledata = data;
+
+            this.keycloakService.mapRole(roledata, jwtToken.sub, accessToken).subscribe()
+          })
+        })
       })
 
     })
