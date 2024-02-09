@@ -8,6 +8,8 @@ import { Platform } from '@ionic/angular';
 import axios from 'axios';
 import { NavigationExtras, Router } from '@angular/router';
 import { BASE_URL } from '../constants';
+import {KeycloakService} from "../services/keycloak.service";
+import {log} from "console";
 
 @Component({
   selector: 'map',
@@ -23,7 +25,11 @@ export class MapPage {
   fixZoomLevel = 14;
   static filters: string[] = []
 
-  constructor(protected platform: Platform, private geolocation: Geolocation, private router: Router) { }
+  constructor(protected platform: Platform, private geolocation: Geolocation, private router: Router, private keycloakService:KeycloakService) {
+    this.keycloakService.getAccessToken().subscribe((data) =>{
+      console.log(data)
+    })
+  }
   ngOnInit() {
 
     //Generate Start map
@@ -101,7 +107,7 @@ export class MapPage {
   updateMarkers() {
     const bounds = MapPage.map.getBounds();
     axios
-      .post("/search_index/_search", {      
+      .post("/search_index/_search", {
           "query": {
             "bool": {
               "must": [
@@ -127,7 +133,7 @@ export class MapPage {
         }
       )
       .then((response) => {
-        
+
         if (response.data.hits.hits.length > 0) {
           for (const marker of this.activeMarkers) {
             MapPage.map.removeLayer(marker);
@@ -136,9 +142,9 @@ export class MapPage {
           this.activeMarkers = [];
           if (MapPage.filters.length > 0) {
 
-            
+
             for (const restaurant of response.data.hits.hits) {
-              
+
               if (MapPage.filters.includes(restaurant._source.type)) {
                 this.addMarker(restaurant._source);
               }
@@ -207,7 +213,7 @@ export class MapPage {
         })
       })
     }
-    
+
 
     marker.addEventListener('click', async () => {
       this.getFavRestsMem();
@@ -222,7 +228,7 @@ export class MapPage {
         menu: restaurant.menu,
         fromMarker: true
       }
-      
+
 
       await this.getAverageStarts(inputs.id).then((starRating) => {
         inputs.stars = starRating
@@ -377,7 +383,7 @@ export class MapPage {
         })
           .then((response) => {
             if (response.data.hits.hits.length >= 1) {
-              
+
               let restauransBySearch = response.data.hits.hits;
               let restaurantDiv = document.createElement("div");
               let label = document.createElement('label');
