@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import axios from 'axios';
 import { BASE_URL } from '../constants';
+import {KeycloakService} from "../services/keycloak.service";
 @Component({
   selector: 'login',
   templateUrl: 'login.page.html',
@@ -45,6 +46,7 @@ export class LoginPage {
 
   executeLogin() {
     let loginData = this.login.value;
+
     axios.post(BASE_URL+'/user/login', { email: loginData.email, password: loginData.password })
       .then((response) => {
         if (response.data.status != 404) {

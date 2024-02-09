@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {ValidatorFn} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -8,26 +9,26 @@ export class KeycloakService {
 
   constructor(private http : HttpClient) { }
 
-  createUser(token : string){
-    let testData = {
-      "username": "testuser2",
-      "email": "testuser@example2.com",
+  createUser(token: string, username : string, email: string, firstName: string, lastName: string, password: string){
+
+    let registrationData = {
+      "username": username,
+      "email": email,
+      "firstName": firstName,
+      "lastName": lastName,
       "enabled": true,
       "credentials": [
-      {
-        "type": "password",
-        "value": "testpassword",
-        "temporary": false
-      }
-    ],
-      "clientRoles": {
-      "client_id": ["admin_role"]
-    }
+        {
+          "type": "password",
+          "value": password,
+          "temporary": false
+        }
+      ],
     }
 
-    console.log(testData)
+    console.log(registrationData)
 
-    return this.http.post("/admin/realms/vegastroRealm/users", testData, {
+    return this.http.post("/admin/realms/vegastroRealm/users", registrationData, {
       headers: new HttpHeaders()
         .set('authorization', "Bearer "+token)
     })

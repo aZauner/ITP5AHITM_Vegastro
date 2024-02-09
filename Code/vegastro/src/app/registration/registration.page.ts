@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import axios from 'axios';
 import { BASE_URL } from '../constants';
+import {KeycloakService} from "../services/keycloak.service";
 
 @Component({
   selector: 'registration',
@@ -14,7 +15,7 @@ export class RegistrationPage {
   mailvalid: any;
   mailUsed: boolean = true;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private keycloakService:KeycloakService) {
     this.registration = this.formBuilder.group({
       firstName: ['', Validators.minLength(1)],
       lastName: ['', Validators.minLength(1)],
@@ -70,13 +71,27 @@ export class RegistrationPage {
 
   executeLogin() {
     let registrationData = this.registration.value;
+
+    this.keycloakService.getAccessToken().subscribe((data: any) =>{
+      let accessToken = data.access_token;
+      console.log(accessToken)
+      this.keycloakService.createUser(accessToken, registrationData.username, registrationData.email, registrationData.firstName, registrationData.lastName, registrationData.password).subscribe((data) =>{
+        console.log(data)
+        this.keycloakService.getUserToken("testuser2", "testpassword", accessToken).subscribe((data)=>{
+          console.log(data)
+        })
+      })
+
+    })
+
+
     axios.post(BASE_URL+'/user/register', { firstname: registrationData.firstName,
       lastname: registrationData.lastName,
       username: registrationData.username,
       email: registrationData.email,
       password: registrationData.password })
       .then((response) => {
-        if (response.data.status != 404) {          
+        if (response.data.status != 404) {
           this.mailUsed = true;
           this.router.navigate(['login']);
         } else {

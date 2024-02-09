@@ -25,18 +25,8 @@ export class MapPage {
   fixZoomLevel = 14;
   static filters: string[] = []
 
-  constructor(protected platform: Platform, private geolocation: Geolocation, private router: Router, private keycloakService:KeycloakService) {
-    this.keycloakService.getAccessToken().subscribe((data: any) =>{
-      let accessToken = data.access_token;
-      console.log(accessToken)
-      this.keycloakService.createUser(accessToken).subscribe((data) =>{
-        console.log(data)
-        this.keycloakService.getUserToken("testuser2", "testpassword", accessToken).subscribe((data)=>{
-          console.log(data)
-        })
-      })
+  constructor(protected platform: Platform, private geolocation: Geolocation, private router: Router) {
 
-    })
   }
   ngOnInit() {
 
