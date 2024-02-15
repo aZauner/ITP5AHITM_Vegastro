@@ -37,7 +37,7 @@ export class KeycloakService {
   getAccessToken(){
     let body = new HttpParams()
       .set('client_id', 'vegastro')
-      .set('client_secret', 'dUcuXkSV6dV1oNl6Edah2gXCCmCVNVKh')
+      .set('client_secret', '82ehw2b7lSalhr325HYQskdDod125NeO')
       .set('grant_type', 'client_credentials');
 
     return this.http.post( "/realms/vegastroRealm/protocol/openid-connect/token", body.toString(), {
@@ -53,7 +53,7 @@ export class KeycloakService {
   getUserToken(email: string, password:string , token:string){
     let body = new HttpParams()
       .set('client_id', 'vegastro')
-      .set('client_secret', 'dUcuXkSV6dV1oNl6Edah2gXCCmCVNVKh')
+      .set('client_secret', '82ehw2b7lSalhr325HYQskdDod125NeO')
       .set('grant_type', 'password')
       .set('username', email)
       .set('password', password);
