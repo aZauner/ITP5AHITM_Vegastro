@@ -18,8 +18,7 @@ import java.util.Optional;
 @Path("/meal")
 public class MealResource {
 
-    @Inject
-    JsonWebToken jsonWebToken;
+
 
     @Inject
     MealRepository mealRepository;

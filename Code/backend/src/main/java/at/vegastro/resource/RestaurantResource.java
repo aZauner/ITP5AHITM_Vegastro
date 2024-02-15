@@ -4,12 +4,14 @@ import at.vegastro.dtos.AddMealToRestaurantDto;
 import at.vegastro.model.Restaurant;
 import at.vegastro.model.User;
 import at.vegastro.repository.RestaurantRepository;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.UriInfo;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.net.URI;
 import java.util.List;
@@ -19,6 +21,9 @@ public class RestaurantResource {
 
     @Inject
     RestaurantRepository restaurantRepository;
+
+    @Inject
+    JsonWebToken jsonWebToken;
 
     @GET
     @Path("/{id}")
