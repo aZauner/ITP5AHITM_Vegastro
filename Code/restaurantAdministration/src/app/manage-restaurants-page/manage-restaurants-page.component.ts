@@ -9,18 +9,20 @@ import { BASE_URL } from '../components';
 })
 export class ManageRestaurantsPageComponent {
 
-  restaurants = [{id: 0, restaurantName: "" , location: {city : "" , street: "", housenumber: 0}}] 
+  restaurants = [{id: 0, restaurantName: "" , location: {city : "" , street: "", housenumber: 0}}]
 
   ngOnInit(){
     this.getUsersRestaurants()
     // setInterval( ()=>{
     //   console.log(this.restaurants)}, 1000);
-    // ;    
+    // ;
   }
 
   getUsersRestaurants() {
     axios
-      .get(BASE_URL+'/restaurant/getByOwner/' + sessionStorage.getItem("userToken"))
+      .get(BASE_URL+'/restaurant/getByOwner/' + sessionStorage.getItem("userToken"), {headers: {
+      'Authorization': `Basic ${sessionStorage.getItem("userJwtToken")}`
+    }})
       .then( (response) => {
         console.log(response);
         this.restaurants = response.data

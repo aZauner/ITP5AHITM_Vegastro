@@ -35,6 +35,7 @@ public class RestaurantResource {
 
     @Transactional
     @POST
+    @RolesAllowed({"admin_role"})
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
     public void createRestaurant(Restaurant restaurant) {
