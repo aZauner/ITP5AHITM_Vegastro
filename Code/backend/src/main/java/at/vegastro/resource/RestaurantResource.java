@@ -1,9 +1,14 @@
 package at.vegastro.resource;
 
 import at.vegastro.dtos.AddMealToRestaurantDto;
+import at.vegastro.model.JwtPayload;
 import at.vegastro.model.Restaurant;
 import at.vegastro.model.User;
 import at.vegastro.repository.RestaurantRepository;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -13,7 +18,9 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.UriInfo;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
+import java.io.IOException;
 import java.net.URI;
+import java.util.Base64;
 import java.util.List;
 
 @Path("/restaurant")
@@ -35,10 +42,10 @@ public class RestaurantResource {
 
     @Transactional
     @POST
-    @RolesAllowed({"admin_role"})
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
     public void createRestaurant(Restaurant restaurant) {
+
         restaurantRepository.createRestaurant(restaurant);
     }
 
@@ -71,7 +78,15 @@ public class RestaurantResource {
 
     @GET
     @Path("/getByOwner/{id}")
-    public List<Restaurant> getByOwner(@PathParam("id") Long id) {
-        return restaurantRepository.list("owner.id", id);
+    public List<Restaurant> getByOwner(@PathParam("id") Long id, @HeaderParam("Authorization") String token) throws JsonProcessingException {
+        String[] chunks = token.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String payload = new String(decoder.decode(chunks[1]));
+        Gson g = new Gson();
+        JwtPayload jwtPayload = g.fromJson(payload, JwtPayload.class);
+        if(jwtPayload.getResource_access().get("vegastro").getRoles().get(0) == "admin_role") {
+            return restaurantRepository.list("owner.id", id);
+        }
+        return null;
     }
 }
