@@ -79,7 +79,7 @@ export class AddMealComponent {
         description: desc,
         type: this.changedType,
         price: price
-      })
+      }, {headers:{"Authorization": "Bearer "+sessionStorage.getItem("userJwtToken")}})
       .then((response) => {
         console.log("changed");
         this.changedType = ""
@@ -121,7 +121,7 @@ export class AddMealComponent {
         this.roundedStarRating = Math.round((sumStars / response.data.length) * 100) / 100
       }
       // console.log(this.ratings);
-      // console.log(this.roundedStarRating);  
+      // console.log(this.roundedStarRating);
     })
   }
 
@@ -155,13 +155,13 @@ export class AddMealComponent {
     this.createInputs.type = this.firstFormGroup.value.type!;
     this.createInputs.price = this.firstFormGroup.value.price!;
     axios
-      .post(BASE_URL + '/meal/create', this.createInputs)
+      .post(BASE_URL + '/meal/create', this.createInputs, {headers:{"Authorization": "Bearer "+sessionStorage.getItem("userJwtToken")}})
       .then((response) => {
         axios
           .put(BASE_URL + '/restaurant/addMealToMenu', {
             mealid: response.data.id,
             restaurantid: this.id,
-          })
+          }, {headers:{"Authorization": "Bearer "+sessionStorage.getItem("userJwtToken")}})
           .then((response) => {
             // console.log(response);
             this.loadMeals();
@@ -192,7 +192,7 @@ export class AddMealComponent {
     axios
       .put(BASE_URL + '/meal/changeActiveStatus', {
         mealId: this.meals[indexToChange].id,
-      })
+      }, {headers:{"Authorization": "Bearer "+sessionStorage.getItem("userJwtToken")}})
       .then((response) => {
         this.loadMeals();
       });
@@ -200,7 +200,7 @@ export class AddMealComponent {
 
   deleteMeal(id: string) {
     axios
-      .delete(BASE_URL + '/meal/deleteMeal/' + id + "/" + this.id)
+      .delete(BASE_URL + '/meal/deleteMeal/' + id + "/" + this.id, {headers:{"Authorization": "Bearer "+sessionStorage.getItem("userJwtToken")}})
       .then((response) => {
         this.loadMeals();
       });

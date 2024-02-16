@@ -15,6 +15,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
@@ -44,9 +45,12 @@ public class RestaurantResource {
     @POST
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
-    public void createRestaurant(Restaurant restaurant) {
-
-        restaurantRepository.createRestaurant(restaurant);
+    public Response createRestaurant(Restaurant restaurant, @HeaderParam("Authorization") String token) {
+        if(JwtPayload.tokenGranted(token)) {
+            restaurantRepository.createRestaurant(restaurant);
+            return Response.ok().build();
+        }
+        return Response.status(401).build();
     }
 
     @GET
@@ -65,28 +69,27 @@ public class RestaurantResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Restaurant> getAll() {
         return restaurantRepository.getAll();
-
     }
     
     @Transactional
     @PUT
     @Path("/addMealToMenu")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addMealToMenu(AddMealToRestaurantDto mealData ) {
-        restaurantRepository.addMealToMenu(mealData.mealid, mealData.restaurantid);
+    public Response addMealToMenu(AddMealToRestaurantDto mealData, @HeaderParam("Authorization") String token) {
+        if(JwtPayload.tokenGranted(token)) {
+            restaurantRepository.addMealToMenu(mealData.mealid, mealData.restaurantid);
+            return Response.ok().build();
+        }
+        return Response.status(401).build();
     }
 
     @GET
     @Path("/getByOwner/{id}")
     public List<Restaurant> getByOwner(@PathParam("id") Long id, @HeaderParam("Authorization") String token) throws JsonProcessingException {
-        String[] chunks = token.split("\\.");
-        Base64.Decoder decoder = Base64.getUrlDecoder();
-        String payload = new String(decoder.decode(chunks[1]));
-        Gson g = new Gson();
-        JwtPayload jwtPayload = g.fromJson(payload, JwtPayload.class);
-        if(jwtPayload.getResource_access().get("vegastro").getRoles().get(0) == "admin_role") {
+        if(JwtPayload.tokenGranted(token)) {
             return restaurantRepository.list("owner.id", id);
         }
         return null;
     }
+
 }

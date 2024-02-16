@@ -13,9 +13,6 @@ export class ManageRestaurantsPageComponent {
 
   ngOnInit(){
     this.getUsersRestaurants()
-    // setInterval( ()=>{
-    //   console.log(this.restaurants)}, 1000);
-    // ;
   }
 
   getUsersRestaurants() {

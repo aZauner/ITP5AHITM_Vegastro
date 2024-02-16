@@ -68,7 +68,7 @@ export class CreateRestaurantPageComponent {
     this.createInputs.type = this.firstFormGroup.value.type!;
 
     this.createInputs.owner = {
-        id: Number(sessionStorage.getItem('userToken')!) 
+        id: Number(sessionStorage.getItem('userToken')!)
     } ;
     this.addrSearch(
       this.location.street +
@@ -107,16 +107,16 @@ export class CreateRestaurantPageComponent {
 
 
     await axios
-      .post(BASE_URL + '/image', this.formData)
+      .post(BASE_URL + '/image', this.formData, {headers:{"Authorization": "Bearer "+sessionStorage.getItem("userJwtToken")}})
       .then((response) => {
-        this.createInputs.image = {id: response.data}    
+        this.createInputs.image = {id: response.data}
       });
 
       console.log(this.createInputs);
-      
+
 
     axios
-      .post(BASE_URL + '/restaurant/create', this.createInputs)
+      .post(BASE_URL + '/restaurant/create', this.createInputs, {headers:{"Authorization": "Bearer "+sessionStorage.getItem("userJwtToken")}})
       .then(function (response) {
       });
   }
