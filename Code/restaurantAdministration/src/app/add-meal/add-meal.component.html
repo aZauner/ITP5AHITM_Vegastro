@@ -37,7 +37,7 @@
         <table>
             <tr *ngFor="let meal of meals; let i = index" class="meal">
                 <div>
-                    
+
                     <form class="form-meals" (submit)="submitChanges(i, title.value, desc.value, price.value)">
                         <td><p [className]="meals[i].active ? 'active' : 'inactive'">Titel:</p>
                         <input  [className]="meals[i].active ? 'active' : 'inactive'" type="text" #title
@@ -67,17 +67,17 @@
                                 <p class="activeBtn" (click)="editMeal(i)">Bearbeiten</p>
                                 <button  class="button-submit" *ngIf="editValues[i].editable" type="submit">Submit</button>
                             </div>
-                            
+
                             <p class="activeBtn" *ngIf="meals[i].active" (click)="toggleActive(i)">Deaktivieren</p>
                             <p class="activeBtn" *ngIf="!meals[i].active" (click)="toggleActive(i)">Aktivieren</p>
-                            <p class="activeBtn" (click)="deleteMeal(meal._id)">Löschen</p>
+                            <p class="activeBtn" (click)="deleteMeal(meal.id)">Löschen</p>
                         </td>
                     </form>
                 </div>
             </tr>
         </table>
     </div>
-    
+
 </div>
     <div class="ratingBox">
         <p class="ratingHeadline">Deine Durchschnittliche Sternebewertung </p>
