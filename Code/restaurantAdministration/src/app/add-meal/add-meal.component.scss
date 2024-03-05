@@ -5,13 +5,13 @@ form {
 #inner-content{
   display: flex;
   flex-direction: row;
-  
+
 }
 .add-meal-form{
   width: 20vw;
 }
 .activeBtn{
-  
+
   color: rgb(10, 44, 18);
   border-bottom: 1px solid rgb(10, 44, 18);
 }
@@ -36,7 +36,7 @@ input{
   background: rgb(45, 102, 51);
 }
 .flex.active {
- 
+
   border-bottom:solid 1px rgb(45, 102, 51);
 }
 /* Stile für die Mahlzeitenbox */
@@ -71,6 +71,7 @@ mat-icon{
 .commentBox {
   border: 1px solid #ccc;
   padding: 10px;
+  max-width: 75vw;
   margin-top: 10px;
 }
 
