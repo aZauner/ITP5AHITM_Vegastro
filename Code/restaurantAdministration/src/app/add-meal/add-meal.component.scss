@@ -8,12 +8,27 @@ form {
 
 }
 .add-meal-form{
-  width: 20vw;
+  width: 50vw;
+  margin: 0 auto;
+}
+mat-form-field{
+  width: 50vw;
 }
 .activeBtn{
+  max-height: 20px;
+  background-color: #235025;
+  color: white;
+  padding: 0.5vw;
+  margin:  0.5vw;
+  text-align: center;
+  border-radius: 5px;
+}
 
-  color: rgb(10, 44, 18);
-  border-bottom: 1px solid rgb(10, 44, 18);
+.edit-btns{
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  flex-direction: row;
 }
 #contentBox{
   width: 83vw;
@@ -32,8 +47,12 @@ input{
 }
 .button-submit{
   border: none;
+
+  background-color: #235025;
   color: white;
-  background: rgb(45, 102, 51);
+  padding: 0.5vw;
+  text-align: center;
+  border-radius: 5px;
 }
 .flex.active {
 
@@ -71,8 +90,9 @@ mat-icon{
 .commentBox {
   border: 1px solid #ccc;
   padding: 10px;
-  max-width: 75vw;
   margin-top: 10px;
+  max-width: 75vw;
+  overflow-x: hidden;
 }
 
 .date {
@@ -80,16 +100,39 @@ mat-icon{
 }
 
 table{
-  width: 100%;
+  width: 80vw;
+  margin: 2vw 1.5vw;
 }
 
 td{
-  padding: 3px 0.5vw;
-
+padding: 3px;
 }
 
 tr{
-  width: 100%;
   border-radius: 5px;
-  background: rgb(246, 246, 246);
+  margin-top: 1vw;
+  background: #f3f3f3;
+}
+.nav-btns{
+  width: 83vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 10px 15px -6px rgba(176,176,176,1);
+  -moz-box-shadow: 0px 10px 15px -6px rgba(176,176,176,1);
+  box-shadow: 0px 10px 15px -6px rgba(176,176,176,1);  margin-bottom: 3vh;
+}
+.nav-btns button{
+  background: none;
+  text-decoration: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5vw;
+  margin: 0.5vw 2vw;
+  transition: all 0.5s;
+
+}
+.nav-btns button:hover {
+  color:gray;
 }

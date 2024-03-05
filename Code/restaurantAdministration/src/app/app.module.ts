@@ -20,7 +20,6 @@ import { ManageRestaurantsPageComponent } from './manage-restaurants-page/manage
 import { AddMealComponent } from './add-meal/add-meal.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { KontoComponent } from './konto/konto.component';
-import {HttpClientModule} from "@angular/common/http";
 
 const appRoutes: Routes = [
   {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
@@ -58,8 +57,7 @@ const appRoutes: Routes = [
     MatIconModule,
     MatButtonModule,
     FormsModule,
-    MatStepperModule,
-    HttpClientModule
+    MatStepperModule
   ],
   providers: [AuthGuardService],
   bootstrap: [AppComponent]

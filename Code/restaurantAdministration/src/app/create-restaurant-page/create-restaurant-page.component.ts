@@ -20,7 +20,7 @@ export class CreateRestaurantPageComponent {
   formData = new FormData()
   noValidLoc = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   firstFormGroup = this.formBuilder.group({
     restaurantName: ['', Validators.minLength(2)],
@@ -38,17 +38,17 @@ export class CreateRestaurantPageComponent {
   isLinear = true;
 
   hide = true;
-  types = ['vegan', 'vegetarian'];
+  types = ['vegan',  'vegetarian'];
   location = { street: '', housenumber: '', plz: '', city: '', floor: '' };
   createInputs = {
     restaurantName: '',
     latitude: 0,
     longitude: 0,
-    owner: {},
+    owner: '',
     type: '',
     description: '',
     location: { city: '', plz: '', street: '', housenumber: '', floor: '' },
-    image: {}
+    image: ''
   };
 
 
@@ -64,20 +64,18 @@ export class CreateRestaurantPageComponent {
     this.createInputs.location = this.location;
     this.createInputs.location.floor = this.secondFormGroup.value.floor!;
     this.createInputs.description = this.firstFormGroup.value.description!;
-    this.createInputs.restaurantName = this.firstFormGroup.value.restaurantName!;
+    this.createInputs.restaurantName =  this.firstFormGroup.value.restaurantName!;
     this.createInputs.type = this.firstFormGroup.value.type!;
 
-    this.createInputs.owner = {
-        id: Number(sessionStorage.getItem('userToken')!)
-    } ;
+    this.createInputs.owner = sessionStorage.getItem('userToken')!;
     this.addrSearch(
       this.location.street +
-      ' ' +
-      this.location.housenumber +
-      ' ' +
-      this.location.plz +
-      ' ' +
-      this.location.city
+        ' ' +
+        this.location.housenumber +
+        ' ' +
+        this.location.plz +
+        ' ' +
+        this.location.city
     );
   }
 
@@ -85,16 +83,16 @@ export class CreateRestaurantPageComponent {
     axios
       .get(
         'https://nominatim.openstreetmap.org/search?format=json&limit=3&q=' +
-        address
+          address
       )
-      .then((response) => {
+      .then((response) => { 
         if (response.data.length > 0) {
           this.createInputs.latitude = Number.parseFloat(response.data[0].lat);
           this.createInputs.longitude = Number.parseFloat(response.data[0].lon);
           this.postRestaurant();
           this.noValidLoc = false
           this.router.navigateByUrl('/dashboard')
-
+          
         } else {
           this.noValidLoc = true
 
@@ -104,20 +102,21 @@ export class CreateRestaurantPageComponent {
   }
 
   async postRestaurant() {
-
-
+  
+    
     await axios
-      .post(BASE_URL + '/image', this.formData, {headers:{"Authorization": "Bearer "+sessionStorage.getItem("userJwtToken")}})
+      .post(BASE_URL+'/image', this.formData)
       .then((response) => {
-        this.createInputs.image = {id: response.data}
+        this.createInputs.image = response.data._id
       });
 
-      console.log(this.createInputs);
-
-
+    
+      
     axios
-      .post(BASE_URL + '/restaurant/create', this.createInputs, {headers:{"Authorization": "Bearer "+sessionStorage.getItem("userJwtToken")}})
+      .post(BASE_URL+'/restaurant/create', this.createInputs)
       .then(function (response) {
+        console.log(response);
+        
       });
   }
 }
