@@ -16,7 +16,7 @@ import { BASE_URL } from '../components';
   styleUrls: ['./add-meal.component.scss'],
 })
 export class AddMealComponent {
-
+  idshow=1;
   id = '';
   createMealActive = false;
   showMealsActive = false;
@@ -32,7 +32,9 @@ export class AddMealComponent {
       active: true,
     },
   ];
-
+show(id: number){
+  this.idshow = id;
+}
   ratings = [
     {
       stars: 0,
@@ -59,18 +61,18 @@ export class AddMealComponent {
   onChangeType(type: string){
     this.changedType = type;
     console.log(this.changedType);
-    
+
   }
 
   submitChanges( index: number,value: string , desc: string, price: string, ) {
-    console.log(this.meals[index]._id);    
-    
+    console.log(this.meals[index]._id);
+
 
     console.log(this.changedType);
     if(this.changedType == ""){
       this.changedType =  this.meals[index].type;
     }
-      
+
 
     axios
       .put(BASE_URL+'/meal/changeMealValues' , {
@@ -78,17 +80,17 @@ export class AddMealComponent {
         title : value,
         description : desc,
         type: this.changedType,
-        price: price 
+        price: price
     })
       .then((response) => {
         console.log("changed");
         this.changedType = ""
-        this.loadMeals();       
+        this.loadMeals();
       });
-    
+
   }
 
-  editMeal(mealIndex: number) {    
+  editMeal(mealIndex: number) {
     this.editValues[mealIndex].editable = !this.editValues[mealIndex].editable;
   }
 
@@ -110,7 +112,7 @@ export class AddMealComponent {
   }
 
   loadRatings() {
-    this.ratings = [];    
+    this.ratings = [];
     axios.get(BASE_URL+'/rating/byRestaurant/' + this.id).then((response) => {
             this.ratings = response.data
             let sumStars = 0;
@@ -121,7 +123,7 @@ export class AddMealComponent {
               this.roundedStarRating = Math.round((sumStars / response.data.length) * 100) / 100
             }
             // console.log(this.ratings);
-            // console.log(this.roundedStarRating);  
+            // console.log(this.roundedStarRating);
           })
   }
 
@@ -190,13 +192,13 @@ export class AddMealComponent {
 
   toggleActive(indexToChange: number) {
     console.log(indexToChange);
-    
-    console.log(this.meals[indexToChange]._id);    
+
+    console.log(this.meals[indexToChange]._id);
     axios
       .put(BASE_URL+'/meal/changeActiveStatus', {
         mealid: this.meals[indexToChange]._id,
       })
-      .then((response) => {        
+      .then((response) => {
         this.loadMeals();
       });
   }
@@ -205,7 +207,7 @@ export class AddMealComponent {
     console.log(id);
     axios
       .delete(BASE_URL+'/meal/deleteMeal/' + id)
-      .then((response) => {        
+      .then((response) => {
         this.loadMeals();
       });
   }

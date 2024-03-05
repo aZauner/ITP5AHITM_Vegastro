@@ -1,6 +1,11 @@
 <div id="contentBox">
-    <div id="inner-content">
-    <form class="add-meal-form" [formGroup]="firstFormGroup">
+  <div class="nav-btns">
+  <button (click)="show(0)">Gericht erstellen</button>
+  <button (click)="show(1)">Gerichte</button>
+  <button (click)="show(2)">Bewertungen</button>
+  </div>
+  <div id="inner-content">
+    <form class="add-meal-form" *ngIf="idshow == 0" [formGroup]="firstFormGroup">
         <div class="wrapper">
             <mat-form-field class="example-full-width">
                 <mat-label>Titel</mat-label>
@@ -13,7 +18,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="fill">
-                <mat-label>Meal Type</mat-label>
+                <mat-label>Gericht Typ</mat-label>
                 <mat-select required formControlName="type">
                     <mat-option *ngFor="let typ of types" [value]="typ">
                         {{typ}}
@@ -33,11 +38,11 @@
         </div>
     </form>
 
-    <div class="mealsBox">
+    <div class="mealsBox" *ngIf="idshow == 1">
         <table>
             <tr *ngFor="let meal of meals; let i = index" class="meal">
-                <div>
-                    
+                <div >
+
                     <form class="form-meals" (submit)="submitChanges(i, title.value, desc.value, price.value)">
                         <td><p [className]="meals[i].active ? 'active' : 'inactive'">Titel:</p>
                         <input  [className]="meals[i].active ? 'active' : 'inactive'" type="text" #title
@@ -49,12 +54,12 @@
                        <input [className]="meals[i].active ? 'active' : 'inactive'" type="number" #price
                                 [disabled]="!editValues[i].editable" value="{{meal.price}}"></td>
                         <td *ngIf="!editValues[i].editable">
-                            <p [className]="meals[i].active ? 'active' : 'inactive'">Meal Type:</p>
+                            <p [className]="meals[i].active ? 'active' : 'inactive'">Gericht Typ:</p>
                             <input [className]="meals[i].active ? 'active' : 'inactive'" #type
                                 [disabled]="!editValues[i].editable" value="{{meal.type}}">
                         </td>
                         <td *ngIf="editValues[i].editable">
-                            <p [className]="meals[i].active ? 'active' : 'inactive'">Meal Type:</p>
+                            <p [className]="meals[i].active ? 'active' : 'inactive'">Gericht Typ:</p>
                             <select #type (change)="onChangeType(type.value)"
                                 [className]="meals[i].active ? 'active' : 'inactive'">
                                 <option *ngFor="let typ of types" [value]="typ">
@@ -62,24 +67,25 @@
                                 </option>
                             </select>
                         </td>
-                        <td>
-                            <div [className]="meals[i].active ? 'active' : 'inactive'" class="flex">
-                                <p class="activeBtn" (click)="editMeal(i)">Bearbeiten</p>
-                                <button  class="button-submit" *ngIf="editValues[i].editable" type="submit">Submit</button>
-                            </div>
-                            
-                            <p class="activeBtn" *ngIf="meals[i].active" (click)="toggleActive(i)">Deaktivieren</p>
-                            <p class="activeBtn" *ngIf="!meals[i].active" (click)="toggleActive(i)">Aktivieren</p>
-                            <p class="activeBtn" (click)="deleteMeal(meal._id)">Löschen</p>
-                        </td>
+
                     </form>
                 </div>
+              <td>  <div [className]="meals[i].active ? 'active' : 'inactive'" class="flex">
+                <p class="activeBtn" *ngIf="!editValues[i].editable"(click)="editMeal(i)">Bearbeiten</p>
+                <p class="activeBtn" *ngIf="editValues[i].editable" (click)="editMeal(i)">Abbrechen</p>
+
+                <p  class="activeBtn" *ngIf="editValues[i].editable" type="submit">Speichern</p>
+              </div></td>
+
+              <td> <p class="activeBtn" *ngIf="meals[i].active" (click)="toggleActive(i)">Deaktivieren</p>
+                <p class="activeBtn" *ngIf="!meals[i].active" (click)="toggleActive(i)">Aktivieren</p></td>
+              <td><p class="activeBtn" (click)="deleteMeal(meal._id)">Löschen</p></td>
             </tr>
         </table>
     </div>
-    
+
 </div>
-    <div class="ratingBox">
+    <div class="ratingBox" *ngIf="idshow == 2">
         <p class="ratingHeadline">Deine Durchschnittliche Sternebewertung </p>
 
         <ng-template [ngIf]="roundedStarRating < 0.5">
