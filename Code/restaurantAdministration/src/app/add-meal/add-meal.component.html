@@ -1,9 +1,6 @@
-<body>
-    <button class="mainBtn" (click)="showCreate()">create new meal</button>
-    <button class="mainBtn" (click)="showMeals()">Show Meals</button>
-    <button class="mainBtn" (click)="showRatingsBox()">Show Comments</button>
-
-    <form [formGroup]="firstFormGroup" [hidden]="!createMealActive">
+<div id="contentBox">
+    <div id="inner-content">
+    <form class="add-meal-form" [formGroup]="firstFormGroup">
         <div class="wrapper">
             <mat-form-field class="example-full-width">
                 <mat-label>Titel</mat-label>
@@ -22,135 +19,151 @@
                         {{typ}}
                     </mat-option>
                 </mat-select>
-            </mat-form-field> 
-            
+            </mat-form-field>
+
             <mat-form-field class="example-full-width">
                 <mat-label>Preis</mat-label>
                 <input formControlName="price" matInput placeholder="1.70" required>
             </mat-form-field>
         </div>
-        <div class="wrapper">
-            <div>
-                <button class="loginBtn" [disabled]="!firstFormGroup.valid" (click)="create()" mat-stroked-button>Gericht
-                    erstellen</button>
-    
-            </div>
+        <div>
+            <button class="loginBtn" [disabled]="!firstFormGroup.valid" (click)="create()" mat-stroked-button>Gericht
+                erstellen</button>
+
         </div>
     </form>
-    
-    <div class="mealsBox" [hidden]="!showMealsActive">
-        <div *ngFor="let meal of meals;  let i = index" id="meal" >
-            <form (submit)="submitChanges( i, title.value , desc.value, price.value)">
-                <p [className]="meals[i].active ? 'active' : 'inactive'">Titel: <input [className]="meals[i].active ? 'active' : 'inactive'" type="text" #title [disabled]="!editValues[i].editable" value="{{meal.title}}"></p>
-                <p [className]="meals[i].active ? 'active' : 'inactive'">Beschreibung: <input [className]="meals[i].active ? 'active' : 'inactive'"type="text" #desc [disabled]="!editValues[i].editable" value="{{meal.description}}"></p>
-                <p [className]="meals[i].active ? 'active' : 'inactive'">Preis: <input [className]="meals[i].active ? 'active' : 'inactive'"type="number" #price [disabled]="!editValues[i].editable" value="{{meal.price}}">€</p>
-                <p *ngIf="!editValues[i].editable" [className]="meals[i].active ? 'active' : 'inactive'">Meal Type: <input [className]="meals[i].active ? 'active' : 'inactive'" #price [disabled]="!editValues[i].editable" value="{{meal.type}}"></p>
-                
-                <div class="flex">
-                    <p *ngIf="editValues[i].editable" [className]="meals[i].active ? 'active' : 'inactive'">Meal Type:</p>
-                    <select #type (change)="onChangeType(type.value)" [className]="meals[i].active ? 'active' : 'inactive'" *ngIf="editValues[i].editable" >
-                        <option *ngFor="let typ of types" [value]="typ">
-                            {{typ}}
-                        </option>
-                    </select>
-                </div>
-                    
-                <div [className]="meals[i].active ? 'active' : 'inactive'"class="flex">
-                    <p (click)="editMeal(i)">Bearbeiten</p>
-                    <button *ngIf="editValues[i].editable" type="submit" >Submit</button>
-                </div>                
-                <p class="activeBtn" *ngIf="meals[i].active" (click)="toggleActive(i)">Deaktivieren</p> 
-                <p class="activeBtn" *ngIf="!meals[i].active" (click)="toggleActive(i)">Aktivieren</p>
-                <p class="activeBtn" (click)="deleteMeal(meal._id)">Löschen</p>
-            </form>                
-        </div>
-    </div>
 
-    <div class="ratingBox"  [hidden]="!showRatingsActive">
+    <div class="mealsBox">
+        <table>
+            <tr *ngFor="let meal of meals; let i = index" class="meal">
+                <div>
+                    
+                    <form class="form-meals" (submit)="submitChanges(i, title.value, desc.value, price.value)">
+                        <td><p [className]="meals[i].active ? 'active' : 'inactive'">Titel:</p>
+                        <input  [className]="meals[i].active ? 'active' : 'inactive'" type="text" #title
+                                [disabled]="!editValues[i].editable" value="{{meal.title}}"></td>
+                                <td> <p [className]="meals[i].active ? 'active' : 'inactive'">Beschreibung:</p>
+                        <input style="width: auto;"[className]="meals[i].active ? 'active' : 'inactive'" type="text" #desc
+                                [disabled]="!editValues[i].editable" value="{{meal.description}}"></td>
+                                <td> <p [className]="meals[i].active ? 'active' : 'inactive'">Preis:</p>
+                       <input [className]="meals[i].active ? 'active' : 'inactive'" type="number" #price
+                                [disabled]="!editValues[i].editable" value="{{meal.price}}"></td>
+                        <td *ngIf="!editValues[i].editable">
+                            <p [className]="meals[i].active ? 'active' : 'inactive'">Meal Type:</p>
+                            <input [className]="meals[i].active ? 'active' : 'inactive'" #type
+                                [disabled]="!editValues[i].editable" value="{{meal.type}}">
+                        </td>
+                        <td *ngIf="editValues[i].editable">
+                            <p [className]="meals[i].active ? 'active' : 'inactive'">Meal Type:</p>
+                            <select #type (change)="onChangeType(type.value)"
+                                [className]="meals[i].active ? 'active' : 'inactive'">
+                                <option *ngFor="let typ of types" [value]="typ">
+                                    {{typ}}
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <div [className]="meals[i].active ? 'active' : 'inactive'" class="flex">
+                                <p class="activeBtn" (click)="editMeal(i)">Bearbeiten</p>
+                                <button  class="button-submit" *ngIf="editValues[i].editable" type="submit">Submit</button>
+                            </div>
+                            
+                            <p class="activeBtn" *ngIf="meals[i].active" (click)="toggleActive(i)">Deaktivieren</p>
+                            <p class="activeBtn" *ngIf="!meals[i].active" (click)="toggleActive(i)">Aktivieren</p>
+                            <p class="activeBtn" (click)="deleteMeal(meal._id)">Löschen</p>
+                        </td>
+                    </form>
+                </div>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+    <div class="ratingBox">
         <p class="ratingHeadline">Deine Durchschnittliche Sternebewertung </p>
-              
+
         <ng-template [ngIf]="roundedStarRating < 0.5">
-            <mat-icon class="starOff" >star_border</mat-icon>
+            <mat-icon class="starOff">star_border</mat-icon>
         </ng-template>
         <ng-template [ngIf]="roundedStarRating >= 1" [ngIfElse]="halfStar">
-            <mat-icon class="starOn" >star</mat-icon>
+            <mat-icon class="starOn">star</mat-icon>
         </ng-template>
-        <ng-template #halfStar>                    
-                <mat-icon *ngIf="roundedStarRating >= 0.5 && roundedStarRating < 1" class="starOn" >star_half</mat-icon> 
+        <ng-template #halfStar>
+            <mat-icon *ngIf="roundedStarRating >= 0.5 && roundedStarRating < 1" class="starOn">star_half</mat-icon>
         </ng-template>
         <ng-template [ngIf]="roundedStarRating < 1.5">
-            <mat-icon class="starOff" >star_border</mat-icon>
-        </ng-template> 
+            <mat-icon class="starOff">star_border</mat-icon>
+        </ng-template>
         <ng-template [ngIf]="roundedStarRating >= 2" [ngIfElse]="halfStar1">
-            <mat-icon class="starOn" >star</mat-icon>
+            <mat-icon class="starOn">star</mat-icon>
         </ng-template>
         <ng-template #halfStar1>
-                <mat-icon *ngIf="roundedStarRating >= 1.5 && roundedStarRating < 2" class="starOn" >star_half</mat-icon>                                  
+            <mat-icon *ngIf="roundedStarRating >= 1.5 && roundedStarRating < 2" class="starOn">star_half</mat-icon>
         </ng-template>
         <ng-template [ngIf]="roundedStarRating < 2.5">
-            <mat-icon class="starOff" >star_border</mat-icon>
-        </ng-template> 
+            <mat-icon class="starOff">star_border</mat-icon>
+        </ng-template>
         <ng-template [ngIf]="roundedStarRating >= 3" [ngIfElse]="halfStar2">
-            <mat-icon class="starOn" >star</mat-icon>
+            <mat-icon class="starOn">star</mat-icon>
         </ng-template>
         <ng-template #halfStar2>
-                <mat-icon *ngIf="roundedStarRating >= 2.5 && roundedStarRating < 3" class="starOn" >star_half</mat-icon>
-        </ng-template>                
+            <mat-icon *ngIf="roundedStarRating >= 2.5 && roundedStarRating < 3" class="starOn">star_half</mat-icon>
+        </ng-template>
         <ng-template [ngIf]="roundedStarRating < 3.5">
-            <mat-icon class="starOff" >star_border</mat-icon>
+            <mat-icon class="starOff">star_border</mat-icon>
         </ng-template>
         <ng-template [ngIf]="roundedStarRating >= 4" [ngIfElse]="halfStar3">
-            <mat-icon class="starOn" >star</mat-icon>
+            <mat-icon class="starOn">star</mat-icon>
         </ng-template>
-        <ng-template #halfStar3>                    
-                <mat-icon *ngIf="roundedStarRating >= 3.5 && roundedStarRating < 4" class="starOn" >star_half</mat-icon>                                 
+        <ng-template #halfStar3>
+            <mat-icon *ngIf="roundedStarRating >= 3.5 && roundedStarRating < 4" class="starOn">star_half</mat-icon>
         </ng-template>
         <ng-template [ngIf]="roundedStarRating < 4.5">
-            <mat-icon class="starOff" >star_border</mat-icon>
+            <mat-icon class="starOff">star_border</mat-icon>
         </ng-template>
         <ng-template [ngIf]="roundedStarRating >= 5" [ngIfElse]="halfStar4">
-            <mat-icon class="starOn" >star</mat-icon>
+            <mat-icon class="starOn">star</mat-icon>
         </ng-template>
-        <ng-template #halfStar4>                    
-                <mat-icon *ngIf="roundedStarRating >= 4.5" class="starOn" >star_half</mat-icon>                                  
-        </ng-template> 
+        <ng-template #halfStar4>
+            <mat-icon *ngIf="roundedStarRating >= 4.5" class="starOn">star_half</mat-icon>
+        </ng-template>
 
         <p>{{roundedStarRating}}</p>
 
-        <div *ngFor="let rating of ratings" class="commentBox">            
+        <div *ngFor="let rating of ratings" class="commentBox">
             <div class="starBox">
-                <ng-template [ngIf]="rating.stars >= 1" >
-                    <mat-icon class="starOn" >star</mat-icon>
+                <ng-template [ngIf]="rating.stars >= 1">
+                    <mat-icon class="starOn">star</mat-icon>
                 </ng-template>
                 <ng-template [ngIf]="rating.stars >= 2" [ngIfElse]="halfStar">
-                    <mat-icon class="starOn" >star</mat-icon>
+                    <mat-icon class="starOn">star</mat-icon>
                 </ng-template>
-                <ng-template #halfStar>                    
-                        <mat-icon class="starOff" >star_border</mat-icon> 
+                <ng-template #halfStar>
+                    <mat-icon class="starOff">star_border</mat-icon>
                 </ng-template>
                 <ng-template [ngIf]="rating.stars >= 3" [ngIfElse]="halfStar">
-                    <mat-icon class="starOn" >star</mat-icon>
+                    <mat-icon class="starOn">star</mat-icon>
                 </ng-template>
-                <ng-template #halfStar>                    
-                        <mat-icon class="starOff" >star_border</mat-icon> 
+                <ng-template #halfStar>
+                    <mat-icon class="starOff">star_border</mat-icon>
                 </ng-template>
                 <ng-template [ngIf]="rating.stars >= 4" [ngIfElse]="halfStar">
-                    <mat-icon class="starOn" >star</mat-icon>
+                    <mat-icon class="starOn">star</mat-icon>
                 </ng-template>
-                <ng-template #halfStar>                    
-                        <mat-icon class="starOff" >star_border</mat-icon> 
+                <ng-template #halfStar>
+                    <mat-icon class="starOff">star_border</mat-icon>
                 </ng-template>
                 <ng-template [ngIf]="rating.stars >= 5" [ngIfElse]="halfStar">
-                    <mat-icon class="starOn" >star</mat-icon>
+                    <mat-icon class="starOn">star</mat-icon>
                 </ng-template>
-                <ng-template #halfStar>                    
-                        <mat-icon class="starOff" >star_border</mat-icon> 
+                <ng-template #halfStar>
+                    <mat-icon class="starOff">star_border</mat-icon>
                 </ng-template>
 
                 <p class="date"> | {{rating.date | date : 'd.MM.Y'}}</p>
-            </div>                
+            </div>
 
             <p>{{rating.comment}}</p>
         </div>
     </div>
-</body> 
+</div>

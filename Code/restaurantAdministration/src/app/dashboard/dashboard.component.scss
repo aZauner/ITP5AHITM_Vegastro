@@ -2,41 +2,12 @@
     display: flex;
     flex-direction: row;
     width: 83vw;
-    margin-top: 28vh;
     height: 30vh;
-    justify-content: center;
+    padding: 1vw;
 }
-
-.linkElement {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: rgb(245, 245, 245);
-    border-radius: 20px;
-    margin: 0 5vw;
-    width: 15vw;
-    height: 15vw;
-    padding: 3vw;
-    align-items: center;
-    -webkit-box-shadow: 3px 3px 16px -8px rgba(0, 0, 0, 0.51);
-    -moz-box-shadow: 3px 3px 16px -8px rgba(0, 0, 0, 0.51);
-    box-shadow: 3px 3px 16px -8px rgba(0, 0, 0, 0.51);
-    cursor: pointer;
+app-create-restaurant-page{
+    width: 40vw;
 }
-
-.linkElement mat-icon {
-    font-size: 8vw;
-    width: fit-content;
-    height: fit-content;
+app-manage-restaurants-page{
+    width: 40vw;
 }
-
-.linkElement p {
-    text-align: center;
-    color: rgb(30, 91, 3);
-    font-size: 1.2vw;
-}
-
-//  .linkElement:hover {
-//     cursor: pointer;
-//  }
