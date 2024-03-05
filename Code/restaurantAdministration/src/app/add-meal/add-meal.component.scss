@@ -1,158 +1,94 @@
-body{
-    margin: 0;
-    padding: 0;    
-    height: fit-content;
-  }
-  .activeBtn{
-    background: none;
-    width: 7vw;
-    border: none;
-    position: relative;
-    left: 80%;
-    color:rgb(54, 111, 41);
-  }
-  .mainBtn{
-    background-color: rgb(54, 111, 41);
-    color: white;
-    padding: 2vh;
-    margin-left: 5vw;
-    font-size: 1rem;
-    margin-top: 2vh;
-    border: none;
-    border-radius: 10px;
-  }
-  .wrapper{
-    margin-left: auto;
-    margin-right: auto;
-    width: 60vw; 
-  }
-  p{
-     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
-  }
-   .active{
-   }
-   .inactive{
-    opacity: 0.5;
-   }
-  .formBox{
-    background-color: white;
-    width: 60vw;
-    border-radius: 3vh;
-    padding: 2vh;
-  }
-  
-  .example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
-  
-  .example-right-align {
-    text-align: right;
-  }
-  
-  input.example-right-align::-webkit-outer-spin-button,
-  input.example-right-align::-webkit-inner-spin-button {
-    display: none;
-  }
-  
-  input.example-right-align {
-    -moz-appearance: textfield;
-  }
-  
-  .formBox{
-    display: flex;
-    flex-direction: column;
-  }
-  
-  mat-form-field{
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-  }
-  
-  .loginBtn{
-    width: 20vw;
-  }
-
-.mealsBox{
-    height: 10vh;
-    width: 80vw;    
-  }
-
-.starOn{
-  color: #48A734;
+/* Stile für das Formular */
+form {
+  width: 100%;
 }
-
-.starOff {
-  color: grey;
-}
-
-.commentBox{
-    padding: 1%;
-    -webkit-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
-    -moz-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
-    box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);    
-    box-sizing: border-box;
-    border-width: 0.1vh;
-    border-radius: 0.3 vh;
-    margin-top: 2vh;
-}
-
-.ratingHeadline{
-  font-size: 3vh;
-}
-
-.ratingBox{
-    font-family: "Comfortaa";
-    width: 70vw;
-    margin-left: 8vw;
-    margin-top: 5vh;
-    padding: 1%;
-    -webkit-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
-    -moz-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
-    box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);    
-    box-sizing: border-box;
-    border-width: 0.1vh;
-    border-radius: 0.3 vh;
-    overflow: scroll;
-    height: 80vh;
-}
-
-#meal{
-  width: 40vw;
-  margin: 2vh; 
-  padding: 2%;   
-  border-width: 0.1vh;
-  border-radius: 20px;
-  -webkit-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
-  -moz-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
-  box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);    
-  box-sizing: border-box;
-}
-
-.flex{
+#inner-content{
   display: flex;
-  justify-content: space-around;
-  width: 30%;
+  flex-direction: row;
+  
 }
-  .restaurantInputs:disabled{
-    border-color: transparent;
-    background: none;
-    border-bottom: 1px solid rgb(208, 207, 207);
-    color:rgb(208, 207, 207);
-  }
+.add-meal-form{
+  width: 20vw;
+}
+.activeBtn{
+  
+  color: rgb(10, 44, 18);
+  border-bottom: 1px solid rgb(10, 44, 18);
+}
+#contentBox{
+  width: 83vw;
+  display: flex;
+  flex-direction: column;
+}
+.form-meals{
+  display: flex;
+  flex-direction: row;
+}
+input{
+  width: 10vw;
+  border: none;
+  color: rgb(45, 102, 51);
+  background: none;
+}
+.button-submit{
+  border: none;
+  color: white;
+  background: rgb(45, 102, 51);
+}
+.flex.active {
+ 
+  border-bottom:solid 1px rgb(45, 102, 51);
+}
+/* Stile für die Mahlzeitenbox */
+.mealsBox {
+  width: 30vw;
+  margin: 0;
+}
 
-  .starBox{
-    display: flex;
-    text-align: center;
-  }
+.mealsBox .meal {
+  width: 100%;
+  margin-bottom: 20px;
+}
 
-  .date{
-    margin: 0%;
-    padding: 0%;
-  }
+.meal p {
+}
+mat-icon{
+  color: rgb(45, 102, 51);
+
+}
+/* Stile für die Bewertungsbox */
+.ratingBox {
+  width: 100%;
+  padding: 10vh 10px;
+  margin: 0 auto;
+}
+
+.ratingHeadline {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.commentBox {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.date {
+  margin-left: auto;
+}
+
+table{
+  width: 100%;
+}
+
+td{
+  padding: 3px 0.5vw;
+
+}
+
+tr{
+  width: 100%;
+  border-radius: 5px;
+  background: rgb(246, 246, 246);
+}

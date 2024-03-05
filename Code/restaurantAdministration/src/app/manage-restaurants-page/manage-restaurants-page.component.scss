@@ -1,56 +1,48 @@
-.restaurnatBox{
-    width: 60vw;
-    margin-left: auto;
-    margin-right: auto;
+.restaurant-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .restaurantItem {
+    width: 100%;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-}
+  }
+  h1{
+        text-align: center;
+        padding: 1vw;
+        border-bottom: solid 1.5px #235025;
 
-.restaurantItem{
-    margin: 2vh;
-    width: 25vw;
-    border-width: 0.1vh;
-    border-radius: 20px;
-    -webkit-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
-    -moz-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
-    box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);    
-    box-sizing: border-box;
-
-}
-.innerContent{
-    padding-left: 5vw;
-}
-button{
-    font-size: 1rem;
-    margin: 1vw;
-    color:rgb(42, 116, 17);
-    border: none;
-    padding: 0;
-    background: none;
-    transition: border-bottom 0.5s;
-    border-bottom: white solid 1px;
-    cursor: pointer;
-}
-
-button:hover{
-    border-bottom: rgb(42, 116, 17) solid 1px;
-}
-
-.restaurantName{
-    width: 100%;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    padding: 0.5vh 0;
-    background-color: rgb(42, 116, 17);
+  }
+  .restaurant-details {
+    flex-grow: 1;
+  }
+  
+  .restaurant-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .edit-button {
+    background-color: #235025;
     color: white;
+    border: none;
+    padding: 8px 12px;
     text-align: center;
-}
-h1{
-    width: 87vw;
-    text-align: center;
-    padding: 1vh;
-    -webkit-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
--moz-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
-box-shadow: 3px 3px 16px -8px rgba(0,0,0,0.51);
-}
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .edit-button:hover {
+    background-color: #45a049;
+  }
+  

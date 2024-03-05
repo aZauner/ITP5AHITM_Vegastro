@@ -1,19 +1,18 @@
-body{
-    margin: 0;
-    padding: 0;    
-    height: fit-content;
-  }
-  
+
+h1{
+  text-align: center;
+  padding: 1vw;
+  border-bottom: solid 1.5px #235025;
+}
   .wrapper{
     margin-left: auto;
     margin-right: auto;
-    width: 60vw; 
+    width: 30vw;
   }
 
     
   .formBox{
     background-color: white;
-    width: 60vw;
     border-radius: 3vh;
     padding: 2vh;
   }
@@ -52,7 +51,6 @@ body{
   }
   
   .loginBtn{
-    width: 20vw;
   }
   
   button{
