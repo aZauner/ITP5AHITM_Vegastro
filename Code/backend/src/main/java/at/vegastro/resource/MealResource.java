@@ -39,8 +39,11 @@ public class MealResource {
     @POST
     @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Meal createMeal(Meal meal) {
-        return mealRepository.createMeal(meal);
+    public Meal createMeal(Meal meal, @HeaderParam("Authorization") String token) {
+        if(JwtPayload.tokenGranted(token)) {
+            return mealRepository.createMeal(meal);
+        }
+        return null;
     }
 
     @GET
@@ -60,22 +63,28 @@ public class MealResource {
     @DELETE
     @Path("/deleteMeal/{mealId}/{restaurantId}")
     @Transactional
-    public Response delete(@PathParam("mealId") Long mealId, @PathParam("restaurantId") Long restaurantId) {
-        Restaurant restaurant = restaurantRepository.findById(restaurantId);
-        Optional<Meal> result = restaurant.menu.stream()
-                .filter(obj -> obj.id.equals(mealId))
-                .findFirst();
-        restaurant.menu.remove(result.get());
-        return Response.ok().build();
+    public Response delete(@PathParam("mealId") Long mealId, @PathParam("restaurantId") Long restaurantId, @HeaderParam("Authorization") String token) {
+        if(JwtPayload.tokenGranted(token)) {
+            Restaurant restaurant = restaurantRepository.findById(restaurantId);
+            Optional<Meal> result = restaurant.menu.stream()
+                    .filter(obj -> obj.id.equals(mealId))
+                    .findFirst();
+            restaurant.menu.remove(result.get());
+            return Response.ok().build();
+        }
+        return Response.status(401).build();
     }
 
     @Transactional
     @PUT
     @Path("/changeActiveStatus")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response changeActive(ChangeMealStatusDto changeMealStatusValues) {
-        mealRepository.changeActive(changeMealStatusValues.mealId);
-        return Response.ok().build();
+    public Response changeActive(ChangeMealStatusDto changeMealStatusValues, @HeaderParam("Authorization") String token) {
+        if(JwtPayload.tokenGranted(token)) {
+            mealRepository.changeActive(changeMealStatusValues.mealId);
+            return Response.ok().build();
+        }
+        return Response.status(401).build();
     }
 
 
@@ -83,8 +92,11 @@ public class MealResource {
     @Transactional
     @Path("/changeMealValues")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response changeMealValues(ChangeMealValuesDto changeMealStatusValues) {
-        mealRepository.changeValues(changeMealStatusValues);
-        return Response.ok().build();
+    public Response changeMealValues(ChangeMealValuesDto changeMealStatusValues, @HeaderParam("Authorization") String token) {
+        if(JwtPayload.tokenGranted(token)) {
+            mealRepository.changeValues(changeMealStatusValues);
+            return Response.ok().build();
+        }
+        return Response.status(401).build();
     }
 }

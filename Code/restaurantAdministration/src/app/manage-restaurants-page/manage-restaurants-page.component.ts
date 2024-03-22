@@ -17,12 +17,10 @@ export class ManageRestaurantsPageComponent {
 
   getUsersRestaurants() {
     axios
-      .get(BASE_URL + '/restaurant/getByOwner/' + sessionStorage.getItem("userToken"), {
-        headers: {
-          'Authorization': `Basic ${sessionStorage.getItem("userJwtToken")}`
-        }
-      })
-      .then((response) => {
+      .get(BASE_URL+'/restaurant/getByOwner/' + sessionStorage.getItem("userToken"), {headers: {
+      'Authorization': `Basic ${sessionStorage.getItem("userJwtToken")}`
+    }})
+      .then( (response) => {
         console.log(response);
         this.restaurants = response.data
       });
