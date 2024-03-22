@@ -52,25 +52,28 @@ export class RegistrationComponent {
     this.keycloakService.getAccessToken().subscribe((data: any) =>{
       let accessToken = data.access_token;
       console.log(accessToken)
-      this.keycloakService.createUser(accessToken, this.user.username, this.user.email, this.user.firstname, this.user.lastname, this.user.password).subscribe((data) =>{
+      this.keycloakService.createUser(accessToken, this.user.username, this.user.email, this.user.firstname, this.user.lastname, this.user.password).subscribe((data:any) =>{
         console.log(data)
-        this.keycloakService.getUserToken(this.user.email, this.user.password, accessToken).subscribe((data:any)=>{
-          let jwtToken = data.access_token
 
-          var base64Url = jwtToken.split('.')[1];
-          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-          var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-          }).join(''));
+        //TODO!!!!
+        // this.keycloakService.getUserToken(this.user.email, this.user.password, accessToken).subscribe((data:any)=>{
+        //   let jwtToken = data.access_token
+        //
+        //   var base64Url = jwtToken.split('.')[1];
+        //   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        //   var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        //     return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        //   }).join(''));
+        //
+        //   jwtToken = JSON.parse(jsonPayload) ;
 
-          jwtToken = JSON.parse(jsonPayload) ;
 
-          this.keycloakService.getRole("admin_role", accessToken).subscribe((data)=>{
-            let roledata = data;
-
-            this.keycloakService.mapRole(roledata, jwtToken.sub, accessToken).subscribe()
-          })
-        })
+          // this.keycloakService.getRole("admin_role", accessToken).subscribe((data)=>{
+          //   let roledata = data;
+          //
+          //   this.keycloakService.mapRole(roledata, jwtToken.sub, accessToken).subscribe()
+          // })
+        // })
       })
 
     })
