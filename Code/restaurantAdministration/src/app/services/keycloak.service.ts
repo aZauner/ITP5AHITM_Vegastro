@@ -34,6 +34,24 @@ export class KeycloakService {
     })
   }
 
+  getUserId(email:string, token: string) {
+    return this.http.get( "/admin/realms/vegastroRealm/users?email=" + email, {
+      headers: new HttpHeaders()
+        .set('Authorization', 'Bearer ' + token)
+    })
+  }
+
+  verifyEmail(id:string) {
+    this.getAccessToken().subscribe((data:any)=>{
+      console.log(data.access_token)
+      this.http.put( "/admin/realms/vegastroRealm/users/"+id+"/send-verify-email", {},{
+        headers: new HttpHeaders()
+          .set('Authorization', 'Bearer ' + data.access_token)
+      }).subscribe()
+    })
+
+  }
+
   getAccessToken(){
     let body = new HttpParams()
       .set('client_id', 'vegastro')

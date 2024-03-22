@@ -55,6 +55,10 @@ export class RegistrationComponent {
       this.keycloakService.createUser(accessToken, this.user.username, this.user.email, this.user.firstname, this.user.lastname, this.user.password).subscribe((data:any) =>{
         console.log(data)
 
+        this.keycloakService.getUserId(this.user.email, accessToken).subscribe((data:any)=>{
+          console.log(data[0].id)
+          this.keycloakService.verifyEmail(data[0].id)
+        })
         //TODO!!!!
         // this.keycloakService.getUserToken(this.user.email, this.user.password, accessToken).subscribe((data:any)=>{
         //   let jwtToken = data.access_token
@@ -85,6 +89,8 @@ export class RegistrationComponent {
 
       });
   }
+
+
 
 
 
