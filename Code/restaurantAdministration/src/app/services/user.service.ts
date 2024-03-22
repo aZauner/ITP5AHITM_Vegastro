@@ -13,11 +13,11 @@ export class UserService {
 
   logIn(loginData: {mail:string, password:string}) {
     sessionStorage.clear()
-    //let loginData = this.login.value;
     axios.post(BASE_URL+'/user/login', { email: loginData.mail, password: loginData.password })
       .then((response) => {
-        if (response.data.status != 404) {
-          console.log(response.data);          
+        console.log(response)
+        if (response.data != "") {
+          console.log(response.data);
           sessionStorage.setItem("userToken",  response.data);
           this.foundUser = true;
           this.router.navigate(['/dashboard']);

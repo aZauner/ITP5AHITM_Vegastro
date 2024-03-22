@@ -45,12 +45,9 @@ public class RestaurantResource {
     @POST
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createRestaurant(Restaurant restaurant, @HeaderParam("Authorization") String token) {
-        if(JwtPayload.tokenGranted(token)) {
-            restaurantRepository.createRestaurant(restaurant);
-            return Response.ok().build();
-        }
-        return Response.status(401).build();
+    public Response createRestaurant(Restaurant restaurant) {
+        restaurantRepository.createRestaurant(restaurant);
+        return Response.ok().build();
     }
 
     @GET
@@ -75,21 +72,15 @@ public class RestaurantResource {
     @PUT
     @Path("/addMealToMenu")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addMealToMenu(AddMealToRestaurantDto mealData, @HeaderParam("Authorization") String token) {
-        if(JwtPayload.tokenGranted(token)) {
-            restaurantRepository.addMealToMenu(mealData.mealid, mealData.restaurantid);
-            return Response.ok().build();
-        }
-        return Response.status(401).build();
+    public Response addMealToMenu(AddMealToRestaurantDto mealData) {
+        restaurantRepository.addMealToMenu(mealData.mealid, mealData.restaurantid);
+        return Response.ok().build();
     }
 
     @GET
     @Path("/getByOwner/{id}")
-    public List<Restaurant> getByOwner(@PathParam("id") Long id, @HeaderParam("Authorization") String token) throws JsonProcessingException {
-        if(JwtPayload.tokenGranted(token)) {
-            return restaurantRepository.list("owner.id", id);
-        }
-        return null;
+    public List<Restaurant> getByOwner(@PathParam("id") Long id) throws JsonProcessingException {
+        return restaurantRepository.list("owner.id", id);
     }
 
 }

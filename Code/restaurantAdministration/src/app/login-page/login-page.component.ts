@@ -35,7 +35,6 @@ export class LoginPageComponent {
     this.keycloakService.getAccessToken().subscribe((data: any) =>{
       let accessToken = data.access_token;
       this.keycloakService.getUserToken(this.login.value.mail, this.login.value.password, accessToken).subscribe((data:any)=>{
-        console.log(data.access_token)
         sessionStorage.setItem("userJwtToken", data.access_token)
       })
     })

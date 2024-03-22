@@ -20,16 +20,13 @@ public class ImageResource {
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Transactional
-    public Long uploadImage(@MultipartForm ImageUploadForm form, @HeaderParam("Authorization") String token) {
-        if(JwtPayload.tokenGranted(token)) {
-            Image imageEntity = new Image();
-            imageEntity.imageName = form.name;
-            imageEntity.imageData = form.data;
-            imageEntity.persist();
-            System.out.println(imageEntity.id);
-            return imageEntity.id;
-        }
-        return null;
+    public Long uploadImage(@MultipartForm ImageUploadForm form) {
+        Image imageEntity = new Image();
+        imageEntity.imageName = form.name;
+        imageEntity.imageData = form.data;
+        imageEntity.persist();
+        System.out.println(imageEntity.id);
+        return imageEntity.id;
     }
 
     @GET

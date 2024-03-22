@@ -41,7 +41,6 @@ public class UserRepository implements PanacheRepository<User> {
                     loginData.password.getBytes(StandardCharsets.UTF_8));
             String hashedPassword = new String(Hex.encode(hash));
 
-
             if (user.password.equals(hashedPassword)){
                 return user.id;
             }else {
